@@ -1,6 +1,14 @@
-node_modules/
-bower_components/
 *.log
 
-build/
-dist/
+
+# server dependencies
+
+
+# client dependencies
+client/bower_components/
+
+# config vars
+.env
+
+# production folders
+
