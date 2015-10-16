@@ -1,0 +1,14 @@
+<div id='signin'>
+  <div class='content'>
+    <h1>Sign In</h1>
+    <form name='signinForm' ng-submit='signin()' novalidate>
+      <input type='text' ng-model='user.email' required />
+      <input type='password' ng-model='user.password' required />
+      <input type='checkbox' ng-model='user.remember' required />
+      <button>Sign in</button>
+      <div class='spinner'></div>
+    </form>
+    <a ui-sref='signup'>Sign up</div>
+    <div class='error' ng-show='error'> {{error}}</div>
+  </div>
+</div>
