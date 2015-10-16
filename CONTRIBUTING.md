@@ -2,7 +2,7 @@
 
 ## General Workflow
 
-1. Fork the repo
+1. Clone the repo
 1. Cut a namespaced feature branch from master
   - bug/...
   - feat/...
@@ -28,12 +28,12 @@
 
 ## Detailed Workflow
 
-### Fork the repo
+### Clone the repo
 
-Use github’s interface to make a fork of the repo, then add that repo as an upstream remote:
+Use github’s interface to clone the repo:
 
 ```
-git remote add upstream https://github.com/hackreactor-labs/<NAME_OF_REPO>.git
+git clone https://github.com/voracious-harpsichord/voracious-harpsichord.git
 ```
 
 ### Cut a namespaced feature branch from master
@@ -87,7 +87,7 @@ changes to the master branch into yours by running this command
 from your branch:
 
 ```bash
-git pull --rebase upstream master
+git pull --rebase origin master
 ```
 
 This will start the rebase process. You must commit all of your changes
@@ -141,13 +141,13 @@ Thanks for contributing!
 ### Guidelines
 
 1. Uphold the current code standard:
-    - Keep your code [DRY][].
-    - Apply the [boy scout rule][].
+    - Keep your code DRY.
+    - Apply the boy scout rule.
     - Follow [STYLE-GUIDE.md](STYLE-GUIDE.md)
-1. Run the [tests][] before submitting a pull request.
+1. Run the tests before submitting a pull request.
 1. Tests are very, very important. Submit tests if your pull request contains
    new, testable behavior.
-1. Your pull request is comprised of a single ([squashed][]) commit.
+1. Your pull request is comprised of a single squashed commit.
 
 ## Checklist:
 
