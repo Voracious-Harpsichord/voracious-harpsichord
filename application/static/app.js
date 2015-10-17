@@ -1,4 +1,4 @@
-var app = angular.module('beautystack', 
+var app = angular.module('beautystack',
   ['beautystack.services', 'beautystack.home', 'beautystack.auth', 'beautystack.product', 'beautystack.stash', 'ui.router']);
 
 app.config(['$stateProvider', '$urlRouterProvider',
@@ -98,4 +98,4 @@ app.config(['$stateProvider', '$urlRouterProvider',
 
       $urlRouterProvider.otherwise('/');
 
-  }])
+  }]);
