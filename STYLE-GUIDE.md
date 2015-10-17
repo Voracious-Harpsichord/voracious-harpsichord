@@ -190,7 +190,7 @@ When writing any block of code that is logically subordinate to the line immedia
     ```
 
 
-### Semicolons
+### Javascript Semicolons
 
 * Don't forget semicolons at the end of lines
 
