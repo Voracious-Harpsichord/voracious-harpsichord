@@ -1,13 +1,13 @@
 [![Stories in Ready](https://badge.waffle.io/Voracious-Harpsichord/voracious-harpsichord.png?label=ready&title=Ready)](https://waffle.io/Voracious-Harpsichord/voracious-harpsichord)
-# Project Name
+# Beauty Stack
 
-> Pithy project description
+> A dashboard for your beauty products
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Cynthia Chen, Laura Weaver
+  - __Scrum Master__: JT Knox
+  - __Development Team Members__: Cynthia Chen, JT Knox, Michael Sova, Laura Weaver
 
 ## Table of Contents
 
@@ -25,11 +25,10 @@
 
 ## Requirements
 
-- Node 0.10.x
-- Redis 2.6.x
+- Python 3.4.x
 - Postgresql 9.1.x
-- etc
-- etc
+- Bower
+- 
 
 ## Development
 
@@ -39,13 +38,12 @@ From within the root directory:
 
 ```sh
 sudo npm install -g bower
-npm install
 bower install
 ```
 
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
+View the project roadmap [here](https://github.com/Voracious-Harpsichord/voracious-harpsichord/issues)
 
 
 ## Contributing
