@@ -6,16 +6,42 @@ from flask import jsonify
 
 # Stub functions for testing endpoints
 def signup(username,password,method):
-	return jsonify(username=username,password=password,method=method)
+    return jsonify(username=username,password=password,method=method)
 def login(username,password,method):
-	return jsonify(username=username,password=password,method=method)
+    return jsonify(username=username,password=password,method=method)
 
-# Write a new entry into the users table and return newly created user_id
+# Write a new entry into the users table
 def make_new_user(username, password):
+    # hash password
 
-# verify_user - Verify that user exists in user table, returning true or false
+    # make new user entry
 
-# create_session - Add a sessions cookie on to the
+    # add new user entry to the table
 
-# destroy_session - Remove the sessions
+# Verify that user exists in user table, returning true or false
+def verify_user(username, password):
+    # lookup user by user name
+        #retrun false if user does not exist
+
+    # compare (hashed) input password to hashed value stored in table
+
+    # return true or false for the passwords matching
+
+# Get user id from username
+def get_user_id(username):
+    # lookup user in table by username
+
+    # return user id of user
+
+# Add a sessions cookie on to the
+def create_session(response):
+    #Attach session-cookie to response
+
+# Verify that request has session-cookie to continue
+def verify_session(request):
+    #Check for session-cookie and return true or false
+
+# Remove the sessions
+def destroy_session(response):
+    # Destory session-cookie
 
