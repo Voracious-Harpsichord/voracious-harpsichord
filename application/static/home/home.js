@@ -1,4 +1,4 @@
-angular.module('.home', [])
+angular.module('beautystack.home', [])
 
 .controller('HomeController', function ($scope) {
 
