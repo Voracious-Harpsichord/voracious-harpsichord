@@ -1,28 +1,27 @@
 var stash = angular.module('beautystack.stash', []);
 
-stash.controller('StashController', ['$scope', 'Products', 'Spinner', 
-  function($scope, Products, Spinner) {
-    $scope.stash = {};
+stash.controller('StashController', ['$scope', 'Products',
+  function($scope, Products) {
+    $scope.products = {};
+    $scope.product = {};
 
     $scope.getAll = function() {
-      //Create and start spinner
-      var spinner = Spinner.create();
-      spinner.spin(document.querySelector('.stash-spinner'));
 
-      //Invoke entries factory get all method
-      Products.getAll()
+      //Invoke getAllProducts function from Products factory
+      Products.getAllProducts()
       .then(function(resp) {
-        spinner.stop();
         $scope.products = resp;
+        console.log('Fetching products');
       })
       .catch(function(err) {
-        console.log('Error with getting stack:', err);
+        console.error('Error with getting products:', err);
       });
     };
 
     $scope.addProduct = function() {
-      Products.add();
-      $scope.product = {};    
-    }
+      Products.addProduct(JSON.stringify($scope.product));
+      console.log('Product added');
+      $scope.product = {};
+    };
   }
 ]);
