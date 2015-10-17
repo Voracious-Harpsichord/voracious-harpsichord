@@ -19,7 +19,6 @@ Bower(app)
 #handle api calls
 import db_controller.user_controller as user_controller
 import db_controller.product_controller as product_controller
-import db_controller.user_product_controller as user_product_controller
 @app.route('/api/user',methods=['POST'])
 def user():
     if request.headers['Content-Type'] == 'application/json':
@@ -50,7 +49,7 @@ def userProducts():
     method = request.method 
     json = request.get_json()
     product = json['product']
-    return user_product_controller.User_product_controller(user_id,product,method)
+    return product_controller.Product_controller(product,method)
 
 @app.route('/api/products/<product_id>',methods=['GET'])
 def products():
