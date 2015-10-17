@@ -55,12 +55,11 @@ When writing any block of code that is logically subordinate to the line immedia
     * When a line opens a block, the next line starts 4 spaces further in than the line that opened
 
         ```python
-        // good:
+        # good:
         if condition:
             action()
         
-
-        // bad:
+        # bad:
         if condition:
           action();
         ```
@@ -110,10 +109,29 @@ When writing any block of code that is logically subordinate to the line immedia
     // bad:
     var array = ['cat', 'dog', 'fish'];
     ```
-#### Javascript Variable
+
+#### Language Specific
+
+* Javascript: Use camelCase with a leading lowercase letter (except for constructors)
+
+  ```javascript
+  var goodName;
+  var badname;
+  var AnotherBadName;
+  ```
+  
+  ```python  
+
+* Python: Use undescores with all lowercase words
+
+  ```python
+  good_name
+  badname
+  stillABadName
+  ```
 
 
-#### Language constructs 
+#### Javascript Language constructs 
 
 * Do not use `for...in` statements with the intent of iterating over a list of numeric keys. Use a for-with-semicolons statement in stead.
 
