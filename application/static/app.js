@@ -1,5 +1,11 @@
-var app = angular.module('beautystack',
-  ['beautystack.services', 'beautystack.home', 'beautystack.auth', 'beautystack.product', 'beautystack.stash', 'ui.router']);
+var app = angular.module('beautystack',[
+  'beautystack.services', 
+  'beautystack.home', 
+  'beautystack.product', 
+  'beautystack.auth', 
+  'beautystack.stash', 
+  'ui.router'
+]);
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
@@ -47,7 +53,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
       },
       'page': {
         templateUrl: 'product/product.html',
-        controller: 'productController'
+        controller: 'ProductController'
       }
     },
     data: {
