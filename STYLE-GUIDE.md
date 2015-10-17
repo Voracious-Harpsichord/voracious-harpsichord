@@ -122,7 +122,7 @@ When writing any block of code that is logically subordinate to the line immedia
   
   ```python  
 
-* Python: Use undescores with all lowercase words
+* Python: Use underscores with all lowercase words
 
   ```python
   good_name
