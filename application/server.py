@@ -10,7 +10,7 @@ def send_js():
 #serve client dependecies
 @app.route('/bower_components/<path:path>')
 def send_dependencies(path):
-    return send_from_directory('/client/bower_components', path)
+    return send_from_directory('/static/bower_components', path)
 
 #handle api calls
 import db_controller.user_controller as user_controller
