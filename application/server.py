@@ -4,6 +4,12 @@ from flask.ext.bower import Bower
 # set the project root directory as the static folder, you can set others.
 app = Flask(__name__, static_url_path='')
 
+# make db and configure path
+from flask.ext.sqlalchemy import SQLAlchemy
+from config import SQLALCHEMY_DATABASE_URI 
+db = SQLAlchemy(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI 
+# 
 @app.route('/')
 def send_js():
     return send_from_directory('static', 'index.html')
