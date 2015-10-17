@@ -7,12 +7,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
     //Parent state of home; load home.html, set controller
     url: '/',
     views: {
-      nav: {
-        templateUrl: './nav/nav.html',
+      'nav': {
+        templateUrl: 'nav/nav.html',
         controller: 'AuthController'
       },
-      page: {
-        templateUrl: './home/home.html',
+      'page': {
+        templateUrl: 'home/home.html',
         controller: 'HomeController'
       }
     },
@@ -24,12 +24,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider.state('stash', {
     url: '/stash',
     views: {
-      nav: {
-        templateUrl: './nav/nav.html',
+      'nav': {
+        templateUrl: 'nav/nav.html',
         controller: 'AuthController'
       },
-      page: {
-        templateUrl: './stash/stash.html',
+      'page': {
+        templateUrl: 'stash/stash.html',
         controller: 'stashController'
       }
     },
@@ -41,12 +41,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider.state('product', {
     url: '/product',
     views: {
-      nav: {
-        templateUrl: './nav/nav.html',
+      'nav': {
+        templateUrl: 'nav/nav.html',
         controller: 'AuthController'
       },
-      page: {
-        templateUrl: './product/product.html',
+      'page': {
+        templateUrl: 'product/product.html',
         controller: 'productController'
       }
     },
@@ -58,8 +58,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider.state('signin', {
     url: '/signin',
     views: {
-      page: {
-        templateUrl: './auth/signin.html',
+      'page': {
+        templateUrl: 'auth/signin.html',
         controller: 'AuthController'
       }
     },
@@ -71,8 +71,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider.state('signup', {
     url: '/signup',
     views: {
-      page: {
-        templateUrl: './auth/signup.html',
+      'page': {
+        templateUrl: 'auth/signup.html',
         controller: 'AuthController'
       }
     },
@@ -82,17 +82,17 @@ app.config(function($stateProvider, $urlRouterProvider) {
   });
 
   $urlRouterProvider.otherwise('/');
-}])
+})
 
 app.run(function($rootScope, $location, $state, Auth) {
   //Listens to state change and determines if user is authenticated
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
     //If state requires authentication and user is not authenticated
-    if (toState.data.requireLogin && !Auth.isAuth() {
+    if (toState.data.requireLogin && !Auth.isAuth()) {
       //Prevent state transition from happening
       event.preventDefault();
       //Transition state to home page
       $state.transitionTo('home');
-    })
+    }
   })
 })
