@@ -21,7 +21,7 @@ def make_new_user(username, password):
 # Verify that user exists in user table, returning true or false
 def verify_user(username, password):
     # lookup user by user name
-        #retrun false if user does not exist
+        #return false if user does not exist
 
     # compare (hashed) input password to hashed value stored in table
 
