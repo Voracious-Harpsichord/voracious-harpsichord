@@ -17,16 +17,18 @@ Once the project moves into development, the press release can be used as a touc
  -->
  
 ## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
+  > BeautyStack
 
 ## Sub-Heading ##
-  > A dashboard to keep track of your beauty products.
+  > 
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  > BeautyStack gives user a tool to catalog their product, view tutorials and info specific
+    to their beauty database. The site also allows user to view and follow the products of their friends.
 
 ## Problem ##
-  > There is currently not a good way to digitally catalog one's beauty products. 
+  > There is currently not a good way to digitally catalog one's products nor is there a centralized 
+    system to contextualize your products with others.
 
 ## Solution ##
   > Our product enables users to digitally keep track of their beauty products, search for information (i.e. reviews, ingredients, etc...) about products, and share information about products they own.
