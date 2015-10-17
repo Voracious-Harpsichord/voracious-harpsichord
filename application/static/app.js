@@ -36,7 +36,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
       },
       'page': {
         templateUrl: 'stash/stash.html',
-        controller: 'stashController'
+        controller: 'StashController'
       }
     },
     data: {
