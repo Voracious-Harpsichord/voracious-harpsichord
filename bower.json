@@ -1,0 +1,21 @@
+{
+  "name": "BeautyStack",
+  "version": "0.0.0",
+  "authors": ["Cynthia Chen","JT Knox", "Michael Sova", "Laura Weaver"],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "bower_components",
+    "client/lib"
+  ],
+  "dependencies": {
+    "angular": "~1.3.16",
+    "angular-route": "~1.3.16",
+    "angular-mocks": "~1.3.16",
+    "angular-ui-router": "~0.2.15",
+    "bootstrap": "~3.3.5",
+    "bower": "*",
+    "d3": "~3.5.6",
+    "jquery": "~2.1.4"
+  }
+}

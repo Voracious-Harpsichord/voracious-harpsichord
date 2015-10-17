@@ -20,7 +20,7 @@ Once the project moves into development, the press release can be used as a touc
   > BeautyStack
 
 ## Sub-Heading ##
-  > 
+  > Connect with your products.
 
 ## Summary ##
   > BeautyStack gives user a tool to catalog their product, view tutorials and info specific
@@ -34,13 +34,14 @@ Once the project moves into development, the press release can be used as a touc
   > Our product enables users to digitally keep track of their beauty products, search for information (i.e. reviews, ingredients, etc...) about products, and share information about products they own.
 
 ## Quote from You ##
-  > BeautyStack is what every woman has been wanting since mascara was invented.
+  > BeautyStack gives me a forum to find new products and grow understanding of the products I own.
 
 ## How to Get Started ##
-  > To get started on BeautyStack, just sign up and create an account. Then you can start adding products you own to your collection
+  > To get started on BeautyStack, just sign up and create an account, then you can start adding products to  your collection.
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  > I love sharing my skincare with friends. BeautyStack gives me a social medium to discuss the products
+    I am excited about.
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+  > Join BeautyStack, a platform for you to connect with your products and people who love them.

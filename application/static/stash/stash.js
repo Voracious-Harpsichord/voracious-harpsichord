@@ -23,8 +23,6 @@ stash.controller('StashController', ['$scope', 'Products', 'Spinner',
     $scope.addProduct = function() {
       Products.add();
       $scope.product = {};    
-      })
     }
-
-
-  }]);
+  }
+]);
