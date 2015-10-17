@@ -19,6 +19,3 @@ insert_final_newline = true
 
 [*.md]
 trim_trailing_whitespace = false
-
-# Dependency directorys
-application/static/bower_components/

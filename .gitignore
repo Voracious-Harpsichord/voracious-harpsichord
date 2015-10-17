@@ -7,8 +7,8 @@
 # server dependencies
 
 
-# client dependencies
-client/bower_components/
+# Dependency directorys
+application/static/bower_components/
 
 # config vars
 .env
