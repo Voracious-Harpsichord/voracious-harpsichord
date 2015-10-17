@@ -1,5 +1,7 @@
 ### Indentation
 
+#### Javascript Indentation
+
 When writing any block of code that is logically subordinate to the line immediately before and after it, that block should be indented two spaces more than the surrounding lines
 
 * Do not put any tab characters anywhere in your code. You would do best to stop pressing the tab key entirely.
@@ -44,6 +46,35 @@ When writing any block of code that is logically subordinate to the line immedia
 
     * use sublime's arrow collapsing as a guide. do the collapsing lines seem like they should be 'contained' by the line with an arrow on it?
 
+#### Python Indentation
+
+When writing any block of code that is logically subordinate to the line immediately before and after it, that block should be indented two spaces more than the surrounding lines
+
+* Do not put any tab characters anywhere in your code. You would do best to stop pressing the tab key entirely.
+* Increase the indent level for all blocks by two extra spaces
+    * When a line opens a block, the next line starts 4 spaces further in than the line that opened
+
+        ```python
+        // good:
+        if condition:
+            action()
+        
+
+        // bad:
+        if condition:
+          action();
+        ```
+
+    * No two lines should ever have more or less than 4 spaces difference in their indentation. Any number of mistakes in the above rules could lead to this, but one example would be:
+
+        ```javascript
+        // bad:
+        transmogrify:
+            more:
+              less()
+        ```
+
+    * use sublime's arrow <col></col>llapsing as a guide. do the collapsing lines seem like they should be 'contained' by the line with an arrow on it?
 
 ### Variable names
 
@@ -79,9 +110,10 @@ When writing any block of code that is logically subordinate to the line immedia
     // bad:
     var array = ['cat', 'dog', 'fish'];
     ```
+#### Javascript Variable
 
 
-### Language constructs
+#### Language constructs 
 
 * Do not use `for...in` statements with the intent of iterating over a list of numeric keys. Use a for-with-semicolons statement in stead.
 
