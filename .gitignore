@@ -1,6 +1,8 @@
 *.log
 *.DS_Store
 
+#compiled python files
+*.pyc
 
 # server dependencies
 
