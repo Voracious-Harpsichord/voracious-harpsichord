@@ -1,4 +1,5 @@
 from flask import Flask, request, send_from_directory, jsonify
+from flask.ext.bower import Bower
 
 # set the project root directory as the static folder, you can set others.
 app = Flask(__name__, static_url_path='')
@@ -7,10 +8,7 @@ app = Flask(__name__, static_url_path='')
 def send_js():
     return send_from_directory('static', 'index.html')
 
-#serve client dependecies
-@app.route('/bower_components/<path:path>')
-def send_dependencies(path):
-    return send_from_directory('/static/bower_components', path)
+Bower(app)
 
 #handle api calls
 import db_controller.user_controller as user_controller
@@ -57,4 +55,4 @@ def products():
 
 #start server
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

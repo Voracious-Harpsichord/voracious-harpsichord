@@ -3,20 +3,23 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles/styles.css">
+    <title>Beauty Stack</title>
+  </head>
+  <body>
+    <h2>Beauty Stack</h2>
+    <!-- Dependencies -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-mocks/angular-mocks.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="bower_components/d3/d3.js"></script>
-    <title>Beauty Stack</title>
-  </head>
-  <body>
+
     <div ui-view="nav"></div>
     <div ui-view="page"></div>
 
-    <script src="services/services.js"></script>
     <script src="home/home.js"></script>
     <script src="auth/auth.js"></script>
+    <script src="services/services.js"></script>
     <script src="stash/stash.js"></script>
     <script src="product/product.js"></script>
     <script src="app.js"></script>
