@@ -2,9 +2,9 @@
   <div class='content'>
     <h1>Sign In</h1>
     <form name='signinForm' ng-submit='signin()' novalidate>
-      <input type='text' ng-model='user.email' required />
-      <input type='password' ng-model='user.password' required />
-      <input type='checkbox' ng-model='user.remember' required />
+      <input type='text' ng-model='user.email' placeholder='Email address' required />
+      <input type='password' ng-model='user.password' placeholder = 'password' required />
+      <input type='checkbox' ng-model='user.remember' required /><span>Remember Me</span>
       <button>Sign in</button>
       <div class='spinner'></div>
     </form>
