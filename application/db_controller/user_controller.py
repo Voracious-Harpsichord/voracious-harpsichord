@@ -17,6 +17,7 @@ def make_new_user(username, password):
     # make new user entry
 
     # add new user entry to the table
+    return None
 
 # Verify that user exists in user table, returning true or false
 def verify_user(username, password):
@@ -26,22 +27,27 @@ def verify_user(username, password):
     # compare (hashed) input password to hashed value stored in table
 
     # return true or false for the passwords matching
+    return None
 
 # Get user id from username
 def get_user_id(username):
     # lookup user in table by username
 
     # return user id of user
+    return None
 
 # Add a sessions cookie on to the
 def create_session(response):
     #Attach session-cookie to response
+    return None
 
 # Verify that request has session-cookie to continue
 def verify_session(request):
     #Check for session-cookie and return true or false
+    return None
 
 # Remove the sessions
 def destroy_session(response):
     # Destory session-cookie
+    return None
 
