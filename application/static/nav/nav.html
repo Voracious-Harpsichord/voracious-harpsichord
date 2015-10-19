@@ -1,22 +1,20 @@
 <div ng-controller='AuthController' ng-switch on='loginStatus'>
-    <nav ng-switch-when='false'>
-        <img ng-src="/photos/homePhoto.jpg" alt="Description"/>
-        <ul>
-            <li ui-sref='home'>Beauty Stack</li>
-            <li>Search</li>
-            <li>About</li>
-            <li ui-sref='signin'>Sign Up</li>
-            <li ui-login='signin'>Log In</li>
-        </ul>
+    <nav class='homeNoAuth' ng-switch-when='false'>
+        <span id='homeLogo' ui-sref='home'>Beauty Stack</span>
+        <span id='navigation'>
+            <span>Search</span>
+            <span>About</span>
+            <span ui-sref='signup'>Sign Up</span>
+            <span ui-sref='signin'>Log In</span>
+        </span>
     </nav>
-    <nav ng-switch-when='true'>
-        <ul>
-            <li ui-sref='home'>Beauty Stack</li>
-            <li>Search</li>
-            <li ui-sref='profile'>Your Stack</li>
-            <li ui-sref='home'>Discover</li>
-            <li>Hi, {{user.name}}!</li>
-            
-        </ul>
+    <nav class='homePostAuth' ng-switch-when='true'>
+        <span  id='homeLogo' ui-sref='home'>Beauty Stack</span>
+        <span id='navigation'>    
+            <span>Search</span>
+            <span ui-sref='profile'>Your Stack</span>
+            <span ui-sref='home'>Discover</span>
+            <span>Hi, {{user.name}}!</span>
+        </span>
     </nav>
 </div>

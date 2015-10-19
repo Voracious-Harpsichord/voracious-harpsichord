@@ -1,3 +1,5 @@
-<div ng-controller="HomeController">
-    <h1></h1>
+<div>
+    <ul infinite-scroll='loadMore()' infinite-scroll-distance='2'>
+        <li ng-repeat="i in items">{{i}}</li>
+    </ul>
 </div>

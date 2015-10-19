@@ -1,5 +1,13 @@
-angular.module('beautystack.home', [])
+var home = angular.module('beautystack.home', ['infinite-scroll'])
 
-.controller('HomeController', function ($scope) {
-    console.log('here')
-});
+home.controller('HomeController', function($scope){
+    $scope.items = [];
+    $scope.counter = 0;
+
+    $scope.loadMore = function () {
+        for (var i = 0; i < 15; i++) {
+            $scope.items.push(++$scope.counter);
+        };
+    }
+    $scope.loadMore();
+}); 
