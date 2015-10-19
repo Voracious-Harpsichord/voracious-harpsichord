@@ -1,24 +1,26 @@
 from flask import Flask, request, send_from_directory, jsonify
 from flask.ext.bower import Bower
+from flask.ext.bcrypt import Bcrypt
+from flask.ext.sqlalchemy import SQLAlchemy
+from config import SQLALCHEMY_DATABASE_URI 
+#db controllers
+from db_controller import user_controller
+from db_controller import product_controller
 
 # set the project root directory as the static folder, you can set others.
 app = Flask(__name__, static_url_path='')
-
+ 
+bower = Bower(app)
+bcrypt = Bcrypt(app)
 # make db and configure path
-from flask.ext.sqlalchemy import SQLAlchemy
-from config import SQLALCHEMY_DATABASE_URI 
 db = SQLAlchemy(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI 
-# 
+
 @app.route('/')
 def send_js():
     return send_from_directory('static', 'index.html')
 
-Bower(app)
 
-#handle api calls
-import db_controller.user_controller as user_controller
-import db_controller.product_controller as product_controller
 @app.route('/api/user',methods=['POST'])
 def user():
     if request.headers['Content-Type'] == 'application/json':
