@@ -1,8 +1,11 @@
-from flask import jsonify
-#import sqlalchemy
+
+from flask import Flask
+from flask import jsonify #this may not be needed
 #import Bcrypt for hashing
-#import httpAuth for creating session cookies
+from server import bcrypt
 #import users model
+from db_models import models
+User = models.User
 
 # Stub functions for testing endpoints
 def signup(username,password,method):
@@ -13,8 +16,10 @@ def login(username,password,method):
 # Write a new entry into the users table
 def make_new_user(username, password):
     # hash password
+    hashed = bcrypt.generate_password_hash()
 
     # make new user entry
+
 
     # add new user entry to the table
     return None
