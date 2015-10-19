@@ -14,19 +14,37 @@ body {
 }
 
 .homePostAuth {
-
+    color: white;
+    background-size: cover;
+    background-image: url("/photos/homePhoto.jpg");
+    height: 80px;
+    opacity: 0.8;
 }
 
 #homeLogo {
     float: left;
+    padding-left:25px;
+}
+
+.search {
+    float: left;
+    width: 500px;
+    padding-left: 25px;
+    padding-top: 25px;
 }
 
 #navigation {
     float: right;
 }
 
-.feed {
+.navElement {
+    font-size: 150%;
+    padding-top: 25px;
+    padding-right: 25px;
+}
 
+.feed {
+    padding-top: 100px;
 }
 
 .feedItem {

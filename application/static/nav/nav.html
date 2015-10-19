@@ -1,6 +1,7 @@
-<div ng-controller='AuthController' ng-switch on='loginStatus'>
+<div role='navigation' class='navbar-fixed-top' ng-switch on='loginStatus'>
+    <!-- Navigation bar for not authenticated users -->
     <nav class='homeNoAuth' ng-switch-when='false'>
-        <span id='homeLogo' ui-sref='home'>Beauty Stack</span>
+        <h1 id='homeLogo' ui-sref='home'>BeautyStack</h1>
         <span id='navigation'>
             <span>Search</span>
             <span>About</span>
@@ -8,13 +9,24 @@
             <span ui-sref='signin'>Log In</span>
         </span>
     </nav>
+    <!-- Navigation bar for logged in user -->
     <nav class='homePostAuth' ng-switch-when='true'>
-        <span  id='homeLogo' ui-sref='home'>Beauty Stack</span>
+        <h1  id='homeLogo' ui-sref='home'>BeautyStack</h1>
+            <span class="search input-group">
+                <input type="text" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    </button>
+                </span>
+            </span>
         <span id='navigation'>    
-            <span>Search</span>
-            <span ui-sref='profile'>Your Stack</span>
-            <span ui-sref='home'>Discover</span>
-            <span>Hi, {{user.name}}!</span>
+            <!-- <span class='navElement'>Hi, {{user.name}}!</span> -->
+            <!-- Hard coded name for visual design -->
+            <span class='navElement'>Hi, Laura!</span>
+            <span class='navElement' ui-sref='profile'>Your Stack</span>
+            <span  class='navElement' ui-sref='home'>Discover</span>
+            <span class='navElement glyphicon glyphicon-star-empty' ui-sref='wishlist'></span>
         </span>
     </nav>
 </div>
