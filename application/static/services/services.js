@@ -13,7 +13,7 @@ angular.module('beautystack.services', [])
     //Send GET request to /userProducts/:user_id
     return $http({
       method: 'GET',
-      url: '/userProducts/' + userid,
+      url: '/api/userProducts/' + userid,
       headers: {'x-access-token': $window.localstorage.getItem('beauty')}
     })
     .then(function(resp) {
@@ -31,8 +31,11 @@ angular.module('beautystack.services', [])
     //Send POST request to /userProducts/:user_id
     return $http({
       method: 'POST',
-      url: '/userProducts/' + userid,
-      headers: {'x-access-token': $window.localstorage.getItem('beauty')},
+      url: '/api/userProducts/' + userid,
+      headers: {
+        'x-access-token': $window.localstorage.getItem('beauty'),
+        'Content-Type': 'application/json'
+      },
       data: product
     });
   };
@@ -47,8 +50,11 @@ angular.module('beautystack.services', [])
     //Send PUT request to /userProducts/:user_id
     return $http({
       method: 'PUT',
-      url: '/userProducts/' + userid,
-      headers: {'x-access-token': $window.localstorage.getItem('beauty')},
+      url: '/api/userProducts/' + userid,
+      headers: {
+        'x-access-token': $window.localstorage.getItem('beauty'),
+        'Content-Type': 'application/json'
+      },
       data: product
     });
   };
@@ -66,7 +72,8 @@ angular.module('beautystack.services', [])
   var signup = function(user) {
     return $http({
       method: 'POST',
-      url: '/newUser',
+      url: '/api/newUser',
+      headers: {'Content-Type': 'application/json'},
       data: user
     })
     .then(function(resp) {
@@ -78,7 +85,8 @@ angular.module('beautystack.services', [])
   var signin = function(user) {
     return $http({
       method: 'POST',
-      url: '/users',
+      url: '/api/user',
+      headers: {'Content-Type': 'application/json'},
       data: user
     })
     .then(function(resp) {
