@@ -25,34 +25,42 @@ def send_index():
 def user():
     body = request.get_json()
     #if user is in database
-    if user_controller.verify_user(body.username, body.password):
+    if user_controller.verify_user(body['username'], body['password']):
         #make response
-        response = jsonify(data={'userid': user_controller.get_user_id(body.username)})
+        response = jsonify(code=200, data={'userid': user_controller.get_user_id(body['username'])})
         #add session-cookie to response
         user_controller.create_session(response)
-        #return user object with a 201
-        return response, 200
+        #return user object with a 200
+        return response
     #return 401 if auth failed
     else:
-        return 401
+        return jsonify(code=401, data='Authentication Error')
 
 @app.route('/api/newUser',methods=['POST'])
 def newUser():
     body = request.get_json()
     print(body)
+    for prop in body:
+        print(prop)
     #if user is not already in db
-    if not user_controller.user_exists(body.username):
+        print('made it 1')
+    if not user_controller.user_exists(body['username']):
+        print('made it 5 True')
         #add user to db
-        user_controller.make_new_user(body.username, body.password)
+        user_controller.make_new_user(body['username'], body['password'])
+        print('made it 6')
         #make response
-        response = jsonify(data={'userid': user_controller.get_user_id(body.username)})
+        response = jsonify(code=201, data={'userid': user_controller.get_user_id(body['username'])})
+        print('made it 7')
         #add session-cooker to response
         user_controller.create_session(response)
         #return user object witha 201
-        return response, 201
+        print('made it 8')
+        return response
     #else return a 302 for Found
     else:
-        return 302
+        print('made it 5 False')
+        return jsonify(code=301, data='Username already exists')
 
 
 @app.route('/api/userProducts/<user_id>',methods=['GET','POST','PUT','DELETE'])

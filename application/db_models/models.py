@@ -12,6 +12,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
 engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
 
 session = sessionmaker(bind=engine)()
+session._model_changes = {}
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -53,4 +54,6 @@ class User_product(db.Model):
 
     def __repr__(self):
         return '<User %r>' % self.username
+
+db.create_all()
 

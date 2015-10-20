@@ -39,11 +39,16 @@ def verify_user(username, password):
 # Verify that user exists in user table, returning true or false
 def user_exists(username):
     # lookup user by user name
-    user = session.query(User).filter(User.username == username).one()
+    print('made it 2')
+    user = session.query(User).filter(User.username == username)
+    print('made it 3')
     #return if user exists
-    if not user:
+    print ('user:', user)
+    if not session.query(User).filter(User.username == username).count() > 0:
+        print('made it 4 False')
         return False
     else:
+        print('made it 4 True')
         return True
 
 # Get user id from username
