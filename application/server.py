@@ -27,14 +27,14 @@ def user():
     #if user is in database
     if user_controller.verify_user(body['username'], body['password']):
         #make response
-        response = jsonify(code=200, data={'userid': user_controller.get_user_id(body['username'])})
+        response = jsonify(status=200, data={'userid': user_controller.get_user_id(body['username'])})
         #add session-cookie to response
         user_controller.create_session(response)
         #return user object with a 200
         return response
     #return 401 if auth failed
     else:
-        return jsonify(code=401, data='Authentication Error')
+        return jsonify(status=401, data='Authentication Error')
 
 @app.route('/api/newUser',methods=['POST'])
 def newUser():
@@ -50,7 +50,7 @@ def newUser():
         user_controller.make_new_user(body['username'], body['password'])
         print('made it 6')
         #make response
-        response = jsonify(code=201, data={'userid': user_controller.get_user_id(body['username'])})
+        response = jsonify(status=201, data={'userid': user_controller.get_user_id(body['username'])})
         print('made it 7')
         #add session-cooker to response
         user_controller.create_session(response)
@@ -60,7 +60,7 @@ def newUser():
     #else return a 302 for Found
     else:
         print('made it 5 False')
-        return jsonify(code=301, data='Username already exists')
+        return jsonify(status=301, data='Username already exists')
 
 
 @app.route('/api/userProducts/<user_id>',methods=['GET','POST','PUT','DELETE'])

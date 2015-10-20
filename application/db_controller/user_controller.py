@@ -44,12 +44,12 @@ def user_exists(username):
     print('made it 3')
     #return if user exists
     print ('user:', user)
-    if not session.query(User).filter(User.username == username).count() > 0:
-        print('made it 4 False')
-        return False
-    else:
+    if session.query(User).filter(User.username == username).count() > 0:
         print('made it 4 True')
         return True
+    else:
+        print('made it 4 False')
+        return False
 
 # Get user id from username
 def get_user_id(username):
