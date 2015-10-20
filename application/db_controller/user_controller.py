@@ -3,9 +3,8 @@ from flask import Flask
 #import Bcrypt for hashing
 from server import bcrypt
 #import users model
-from db_models import models
-session = models.session
-User = models.User
+from db_models.initialze import session
+from db_models.users import User
 
 
 # Stub functions for testing endpoints

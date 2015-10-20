@@ -1,9 +1,7 @@
 from flask import Flask
 #import users model
-from db_models import models
-session = models.session
-Product = models.Product
-User_product = models.User_product
+from db_models.initialze import session
+from db_models.products import Product, User_product
 
 #Get a list of product by user_id
 def get_products_by_user_id(user_id):
@@ -41,14 +39,14 @@ def add_product_to_products(product_name, product_brand):
     return dict(session.query(Product).order_by(Prdocut.id.desc()).first())
 
 #Create a relationship between user and product
-def add_product_to_user(user_id, product_id):
+def add_user_to_product(user_id, product_id):
     #Add user and product to user/products
-    session.add(User_Product(user_id, product_id))
+    session.add(User_product(user_id, product_id))
     #return the product that whole product
     return dict(session.query(Product).filter(Product.id == product_id).one())
 
 #Delete a relationship between user and product
-def remove_product_from_user(product_user_id):
-    db.session.delete(session.query(User_Product).filter(Product_user.id == product_user_id).one())
+def remove_user_from_product(user_product_id):
+    db.session.delete(session.query(User_product).filter(User_product.id == product_user_id).one())
     db.session.commit()
     return None
