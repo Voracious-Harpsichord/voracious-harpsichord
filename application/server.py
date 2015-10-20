@@ -39,6 +39,7 @@ def user():
 @app.route('/api/newUser',methods=['POST'])
 def newUser():
     body = request.get_json()
+    print(body)
     #if user is not already in db
     if not user_controller.user_exists(body.username):
         #add user to db
