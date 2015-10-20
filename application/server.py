@@ -5,13 +5,9 @@ from flask.ext.bcrypt import Bcrypt
 from db_controller import user_controller as u_ctrl
 from db_controller import product_controller as p_ctrl
 
-
-from sqlalchemy import Column, String, Integer, ForeignKey
-from sqlalchemy.ext.declarative import declarative_base
-
 # set the project root directory as the static folder, you can set others.
 app = Flask(__name__, static_url_path='')
- 
+
 bower = Bower(app)
 bcrypt = Bcrypt(app)
 # make db and configure path
@@ -91,9 +87,9 @@ def products(product_id):
     #lookup product in db
     if p_ctrl.verify_product_by_id(product_id):
     #repsond with product info and 200
-        return jsonify(product_controller(get_product_by_product_id(product_id))), 200
+        return jsonify(p_ctrl.get_product_by_product_id(product_id)), 200
     #or 404
-    else :
+    else:
         return "Product Not Found", 404
 
 #start server
