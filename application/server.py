@@ -1,59 +1,69 @@
-from flask import Flask, request, send_from_directory, jsonify
+from flask import Flask, request, send_from_directory, jsonify, make_response
 from flask.ext.bower import Bower
+from flask.ext.bcrypt import Bcrypt
+#db controllers
+from db_controller import user_controller
+from db_controller import product_controller
+
+
+from sqlalchemy import Column, String, Integer, ForeignKey
+from sqlalchemy.ext.declarative import declarative_base
 
 # set the project root directory as the static folder, you can set others.
 app = Flask(__name__, static_url_path='')
-
+ 
+bower = Bower(app)
+bcrypt = Bcrypt(app)
 # make db and configure path
-from flask.ext.sqlalchemy import SQLAlchemy
-from config import SQLALCHEMY_DATABASE_URI 
-db = SQLAlchemy(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI 
-# 
+
 @app.route('/')
-def send_js():
+def send_index():
     return send_from_directory('static', 'index.html')
 
-Bower(app)
 
-#handle api calls
-import db_controller.user_controller as user_controller
-import db_controller.product_controller as product_controller
-import db_controller.user_product_controller as user_product_controller
 @app.route('/api/user',methods=['POST'])
 def user():
-    if request.headers['Content-Type'] == 'application/json':
-        method = request.method 
-        json = request.get_json()
-        username = json['username']
-        password = json['password']
-        # the controller should handle errors 
-        # the controller should handle different methods
-        # use different user controller
-    return user_controller.login(username,password,method)
+    body = request.get_json()
+    #if user is in database
+    if user_controller.verify_user(body['username'], body['password']):
+        #make response
+        response = jsonify({'userid': user_controller.get_user_id(body['username'])})
+        #add session-cookie to response
+        user_controller.create_session(response)
+        #return user object with a 200
+        return response, 200
+    #return 401 if auth failed
+    else:
+        return 'Authentication Error', 401
 
 @app.route('/api/newUser',methods=['POST'])
 def newUser():
-    # we only use JSON! :)
-    if request.headers['Content-Type'] == 'application/json':
-        method = request.method 
-        json = request.get_json()
-        username = json['username']
-        password = json['password']
-        # the controller should handle errors 
-        # the controller should handle different methods
-        return user_controller.signup(username,password,method)
+    body = request.get_json()
+    #if user is not already in db
+    if not user_controller.user_exists(body['username']):
+        #add user to db
+        user_controller.make_new_user(body['username'], body['password'])
+        #make response
+        response = jsonify({'userid': user_controller.get_user_id(body['username'])})
+        #add session-cooker to response
+        user_controller.create_session(response)
+        #return user object witha 201
+        return response, 201
+    #else return a 302 for Found
+    else:
+        return 'Username already exists', 301
+
 
 @app.route('/api/userProducts/<user_id>',methods=['GET','POST','PUT','DELETE'])
-def userProducts():
+def userProducts(user_id):
     # user id is available from the query parameter
     method = request.method 
     json = request.get_json()
     product = json['product']
-    return user_product_controller.User_product_controller(user_id,product,method)
+    return product_controller.Product_controller(product,method)
 
 @app.route('/api/products/<product_id>',methods=['GET'])
-def products():
+def products(product_id):
     method = request.method 
     json = request.get_json()
     product = json['product']
