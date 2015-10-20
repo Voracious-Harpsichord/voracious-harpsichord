@@ -1,9 +1,20 @@
 angular.module('beautystack.auth', [])
 
-.controller('AuthController', function($scope, $window, $state, Auth) {
+.controller('AuthController', function($scope, $window, $state, Auth, $document) {
 
     $scope.user = {};
     $scope.loginStatus = false;
+
+    var wnd = $window;
+    var doc = $document[0];
+
+    $scope.showNav = false;
+    wnd.onscroll = function () {
+        var scrollY = wnd.scrollY
+            || doc.documentElement.scrollTop
+            || doc.body.scrollTop;
+        $scope.showNav = scrollY <= 800;
+    };
     
     $scope.signup = function() {
       //Invoke signup function from Auth factory

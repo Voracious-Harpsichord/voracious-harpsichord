@@ -6,27 +6,56 @@ body {
 
 .homeNoAuth {
     color: white;
-    background-image: url("/photos/homePhoto.jpg");
-    background-size: cover;
-    height: 600px;
-    background-attachment: fixed;
-    opacity: 0.8;
 }
 
 .homePostAuth {
+    color: white;
+    background-size: cover;
+    background-image: url("/photos/homePhoto.jpg");
+    height: 80px;
+    opacity: 0.8;
+}
 
+.homeImage {
+    background-image: url("/photos/homePhoto.jpg");
+    background-size: cover;
+    height: 600px;
+    opacity: 0.8;
 }
 
 #homeLogo {
     float: left;
+    padding-left:25px;
 }
 
-#navigation {
+.searchFocal {
+    width: 500px;
+    display: block;
+    margin-left: 460px;
+    margin-right: auto;
+    padding-top: 375px;
+}
+
+.nav {
+    background-color: #000000;
+}
+
+.search {
+    float: left;
+    width: 500px;
+    padding-left: 25px;
+    padding-top: 25px;
+}
+
+.navElement {
+    font-size: 150%;
+    padding-top: 25px;
+    padding-right: 25px;
     float: right;
 }
 
 .feed {
-
+    padding-top: 100px;
 }
 
 .feedItem {
