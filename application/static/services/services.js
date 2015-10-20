@@ -5,16 +5,16 @@ angular.module('beautystack.services', [])
   //Get all products for user
   var getAllProducts = function() {
     //Get userid from local storage
-    var userid = $window.localstorage.getItem('beauty.userid');
-    if (!userid) {
-      return;
-    }
+    // var userid = $window.localstorage.getItem('beauty.userid');
+    // if (!userid) {
+    //   return;
+    // }
 
     //Send GET request to /userProducts/:user_id
     return $http({
       method: 'GET',
-      url: '/userProducts/' + userid,
-      headers: {'x-access-token': $window.localstorage.getItem('beauty')}
+      url: '/api/userProducts/' + '1',
+      // headers: {}
     })
     .then(function(resp) {
       return resp.data;
@@ -24,37 +24,46 @@ angular.module('beautystack.services', [])
   //Add a product to user's stash
   var addProduct = function(product) {
     //Get userid from local storage
-    var userid = $window.localstorage.getItem('beauty.userid');
-    if (!userid) {
-      return;
-    }
+    // var userid = $window.localstorage.getItem('beauty.userid');
+    // if (!userid) {
+    //   return;
+    // }
     //Send POST request to /userProducts/:user_id
     return $http({
       method: 'POST',
-      url: '/userProducts/' + userid,
-      headers: {'x-access-token': $window.localstorage.getItem('beauty')},
+      url: '/api/userProducts/' + '1',
+      headers: {
+        // 'x-access-token': $window.localstorage.getItem('beauty'),
+        'Content-Type': 'application/json'
+      },
       data: product
+    })
+    .then(function(resp) {
+      return resp.data;
     });
   };
 
   //Update a product in user's stash
   var updateProduct = function(product, newStatus) {
     //Get userid from local storage
-    var userid = $window.localstorage.getItem('beauty.userid');
-    if (!userid) {
-      return;
-    }
+    // var userid = $window.localstorage.getItem('beauty.userid');
+    // if (!userid) {
+    //   return;
+    // }
     //Send PUT request to /userProducts/:user_id
     return $http({
       method: 'PUT',
-      url: '/userProducts/' + userid,
-      headers: {'x-access-token': $window.localstorage.getItem('beauty')},
+      url: '/api/userProducts/' + userid,
+      headers: {
+        'x-access-token': $window.localstorage.getItem('beauty'),
+        'Content-Type': 'application/json'
+      },
       data: product
     });
   };
 
   return {
-    getAll: getAll,
+    getAllProducts: getAllProducts,
     addProduct: addProduct,
     updateProduct: updateProduct
   };
@@ -66,7 +75,8 @@ angular.module('beautystack.services', [])
   var signup = function(user) {
     return $http({
       method: 'POST',
-      url: '/newUser',
+      url: '/api/newUser',
+      headers: {'Content-Type': 'application/json'},
       data: user
     })
     .then(function(resp) {
@@ -78,7 +88,8 @@ angular.module('beautystack.services', [])
   var signin = function(user) {
     return $http({
       method: 'POST',
-      url: '/users',
+      url: '/api/user',
+      headers: {'Content-Type': 'application/json'},
       data: user
     })
     .then(function(resp) {
@@ -88,7 +99,8 @@ angular.module('beautystack.services', [])
 
   //Check if beauty object is in local storage
   var isAuth = function() {
-    return !!$window.localstorage.getItem('beauty');
+    return true;
+    // return !!$window.localstorage.getItem('beauty');
   };
 
   return {

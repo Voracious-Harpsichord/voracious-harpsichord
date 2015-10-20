@@ -1,9 +1,9 @@
 var app = angular.module('beautystack',[
-  'beautystack.services', 
-  'beautystack.home', 
-  'beautystack.product', 
-  'beautystack.auth', 
-  'beautystack.stash', 
+  'beautystack.services',
+  'beautystack.home',
+  'beautystack.product',
+  'beautystack.auth',
+  'beautystack.stash',
   'ui.router'
 ]);
 
@@ -25,7 +25,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     data: {
       requireLogin: false
     }
-  })
+  });
 
   $stateProvider.state('stash', {
     url: '/stash',
@@ -42,7 +42,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     data: {
       requireLogin: true
     }
-  })
+  });
 
   $stateProvider.state('product', {
     url: '/product',
@@ -59,7 +59,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     data: {
       requireLogin: false
     }
-  })
+  });
 
   $stateProvider.state('signin', {
     url: '/signin',
@@ -72,7 +72,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     data: {
       requireLogin: false
     }
-  })
+  });
 
   $stateProvider.state('signup', {
     url: '/signup',
@@ -88,7 +88,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
   });
 
   $urlRouterProvider.otherwise('/');
-})
+});
 
 app.run(function($rootScope, $location, $state, Auth) {
   //Listens to state change and determines if user is authenticated
@@ -100,5 +100,5 @@ app.run(function($rootScope, $location, $state, Auth) {
       //Transition state to home page
       $state.transitionTo('home');
     }
-  })
-})
+  });
+});

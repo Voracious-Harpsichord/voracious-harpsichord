@@ -1,7 +1,6 @@
 angular.module('beautystack.auth', [])
 
-.controller('AuthController', ['$scope', '$window', '$state', 'Auth',
-  function($scope, $window, $state, Auth) {
+.controller('AuthController', function($scope, $window, $state, Auth) {
 
     $scope.user = {};
     $scope.loginStatus = false;
@@ -9,12 +8,15 @@ angular.module('beautystack.auth', [])
     $scope.signup = function() {
       //Invoke signup function from Auth factory
       Auth.signup($scope.user)
-      .then(function(userid) {
+      .then(function(userid, name) {
+        //Change loginStatus to true
         $scope.loginStatus = true;
         //Store userid in local storage
         $window.localStorage.setItem('beauty.userid', userid);
+        //Assign name property on user object
+        $scope.user.name = name;
         //Transition to stash page
-        $state.transitionTo('stash');
+        $state.transitionTo('home');
       })
       .catch(function(error) {
         console.error(error);
@@ -24,13 +26,16 @@ angular.module('beautystack.auth', [])
 
     $scope.signin = function() {
       //Invoke signin function from Auth factory
-      Auth.signin($scope.user)
+      Auth.signin($scope.user, name)
       .then(function(userid) {
+        //Change loginStatus to true
         $scope.loginStatus = true;
         //Store userid in local storage
         $window.localStorage.setItem('beauty.userid', userid);
+        //Assign name property on user object
+        $scope.user.name = name;
         //Transition to stash page
-        $state.transitionTo('stash');
+        $state.transitionTo('home');
       })
       .catch(function(error) {
         console.error(error);
@@ -39,11 +44,11 @@ angular.module('beautystack.auth', [])
     };
 
     $scope.signout = function() {
+      //Change loginStatus to false
+      $scope.loginStatus = false;
       //Remove userid stored in local storage
-      $scope.loginStatus = false; 
       $window.localStorage.removeItem('beauty.userid', userid);
       //Transition to home page
       $state.transitionTo('home');
-    }
-  }
-])
+    };
+});

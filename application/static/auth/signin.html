@@ -2,13 +2,13 @@
   <div class='content'>
     <h1>Sign In</h1>
     <form name='signinForm' ng-submit='signin()' novalidate>
-      <input type='text' ng-model='user.email' placeholder='Email address' required />
+      <input type='text' ng-model='user.username' placeholder='Email address' required />
       <input type='password' ng-model='user.password' placeholder = 'password' required />
-      <input type='checkbox' ng-model='user.remember' required /><span>Remember Me</span>
+      <!-- <input type='checkbox' ng-model='user.remember' required /><span>Remember me</span> -->
       <button>Sign in</button>
       <div class='spinner'></div>
     </form>
-    <a ui-sref='signup'>Sign up</div>
+    <a ui-sref='signup'>Sign up</a>
     <div class='error' ng-show='error'> {{error}}</div>
   </div>
 </div>
