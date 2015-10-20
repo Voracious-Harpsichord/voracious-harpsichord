@@ -14,13 +14,13 @@ def get_products_by_user_id(user_id):
     #for each product_id in query, push a dictionary into the results
     results = []
     for p in product_ids:
-        results.push(dict(session.query(Product).filter(Product.id == p.product_id).one()))
+        results.append(dict(session.query(Product).filter(Product.id == p.product_id).one()))
     #return the results 
     return results
 
 #Get a product by product_id
 def get_product_by_product_id(product_id):
-    return session.query(Product).filter(Product.id == product_id).one()
+    return dict(session.query(Product).filter(Product.id == product_id).one())
 
 #Verify if a product exists by name and brand and return the product_id or None
 def verify_product_by_name_and_brand(product_name, product_brand):
