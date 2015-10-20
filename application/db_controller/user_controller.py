@@ -1,6 +1,5 @@
 
 from flask import Flask
-from flask import jsonify #this may not be needed
 #import Bcrypt for hashing
 from server import bcrypt
 secret = 'secret'
@@ -37,11 +36,26 @@ def verify_user(username, password):
     # return true or false for the passwords matching
     return bcrypt.check_password_hash(user.pw_hash, password)
 
+# Verify that user exists in user table, returning true or false
+def user_exists(username):
+    # lookup user by user name
+    user = session.query(User).filter(User.username == username).one()
+    #return if user exists
+    if not user:
+        return False
+    else:
+        return True
+
 # Get user id from username
 def get_user_id(username):
     # lookup user in table by usernamed
     # return user id of user
     return session.query(User).filter(User.username == username).one().id
+
+def get_user_obj(id):
+    # lookup user in table by usernamed
+    # return user id of user
+    return session.query(User).filter(User.id == id).one()
 
 # Add a sessions cookie on to the
 def create_session(response):

@@ -1,4 +1,4 @@
-from flask import Flask, request, send_from_directory, jsonify
+from flask import Flask, request, send_from_directory, jsonify, make_response
 from flask.ext.bower import Bower
 from flask.ext.bcrypt import Bcrypt
 #db controllers
@@ -17,33 +17,42 @@ bcrypt = Bcrypt(app)
 # make db and configure path
 
 @app.route('/')
-def send_js():
+def send_index():
     return send_from_directory('static', 'index.html')
 
 
 @app.route('/api/user',methods=['POST'])
 def user():
-    if request.headers['Content-Type'] == 'application/json':
-        method = request.method 
-        json = request.get_json()
-        username = json['username']
-        password = json['password']
-        # the controller should handle errors 
-        # the controller should handle different methods
-        # use different user controller
-    return user_controller.login(username,password,method)
+    body = request.get_json()
+    #if user is in database
+    if user_controller.verify_user(body.username, body.password):
+        #make response
+        response = jsonify(data={'userid': user_controller.get_user_id(body.username)})
+        #add session-cookie to response
+        user_controller.create_session(response)
+        #return user object with a 201
+        return response, 200
+    #return 401 if auth failed
+    else:
+        return 401
 
 @app.route('/api/newUser',methods=['POST'])
 def newUser():
-    # we only use JSON! :)
-    if request.headers['Content-Type'] == 'application/json':
-        method = request.method 
-        json = request.get_json()
-        username = json['username']
-        password = json['password']
-        # the controller should handle errors 
-        # the controller should handle different methods
-        return user_controller.signup(username,password,method)
+    body = request.get_json()
+    #if user is not already in db
+    if not user_controller.user_exists(body.username):
+        #add user to db
+        user_controller.make_new_user(body.username, body.password)
+        #make response
+        response = jsonify(data={'userid': user_controller.get_user_id(body.username)})
+        #add session-cooker to response
+        user_controller.create_session(response)
+        #return user object witha 201
+        return response, 201
+    #else return a 302 for Found
+    else:
+        return 302
+
 
 @app.route('/api/userProducts/<user_id>',methods=['GET','POST','PUT','DELETE'])
 def userProducts(user_id):
