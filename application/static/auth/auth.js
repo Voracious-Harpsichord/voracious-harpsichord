@@ -3,7 +3,7 @@ angular.module('beautystack.auth', [])
 .controller('AuthController', function($scope, $window, $state, Auth, $document) {
 
     $scope.user = {};
-    $scope.loginStatus = false;
+    $scope.loginStatus = true;
 
     var wnd = $window;
     var doc = $document[0];
