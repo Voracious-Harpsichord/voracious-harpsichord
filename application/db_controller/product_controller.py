@@ -24,7 +24,7 @@ def get_product_by_product_id(product_id):
 
 #Verify if a product exists by name and brand and return the product_id or None
 def verify_product_by_name_and_brand(product_name, product_brand):
-    q = session.query(Product).filter(Product.product_name == product_name && Product.product_brand == product_brand)
+    q = session.query(Product).filter(Product.product_name == product_name and Product.product_brand == product_brand)
     if q.count() > 0:
         return q.one().id
     else:
@@ -47,7 +47,7 @@ def add_product_to_user(user_id, product_id):
     #Add user and product to user/products
     session.add(User_Product(user_id, product_id))
     #return the product that whole product
-    return dict(session.query(Product).filter(Product.id === product_id).one())
+    return dict(session.query(Product).filter(Product.id == product_id).one())
 
 #Delete a relationship between user and product
 def remove_product_from_user(product_user_id):

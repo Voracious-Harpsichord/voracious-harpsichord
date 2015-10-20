@@ -80,7 +80,7 @@ def userProducts(user_id):
     if request.method == 'DELETE':
         body = request.get_json()
         #remove relation between user and product
-        remove_product_from_user(product_user_id):
+        remove_product_from_user(product_user_id)
         #respond with a 204
         return "Product Removed", 204
 
