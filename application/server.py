@@ -25,42 +25,36 @@ def send_index():
 def user():
     body = request.get_json()
     #if user is in database
+    print('made it here 1')
     if user_controller.verify_user(body['username'], body['password']):
+        print('made it here 5 True')
         #make response
-        response = jsonify(status=200, data={'userid': user_controller.get_user_id(body['username'])})
+        response = jsonify({'userid': user_controller.get_user_id(body['username'])})
         #add session-cookie to response
         user_controller.create_session(response)
         #return user object with a 200
-        return response
+        return response, 200
     #return 401 if auth failed
     else:
-        return jsonify(status=401, data='Authentication Error')
+        print('made it here 5 False')
+        return 'Authentication Error', 401
 
 @app.route('/api/newUser',methods=['POST'])
 def newUser():
     body = request.get_json()
-    print(body)
-    for prop in body:
-        print(prop)
     #if user is not already in db
-        print('made it 1')
     if not user_controller.user_exists(body['username']):
-        print('made it 5 True')
         #add user to db
         user_controller.make_new_user(body['username'], body['password'])
-        print('made it 6')
         #make response
-        response = jsonify(status=201, data={'userid': user_controller.get_user_id(body['username'])})
-        print('made it 7')
+        response = jsonify({'userid': user_controller.get_user_id(body['username'])})
         #add session-cooker to response
         user_controller.create_session(response)
         #return user object witha 201
-        print('made it 8')
-        return response
+        return response, 201
     #else return a 302 for Found
     else:
-        print('made it 5 False')
-        return jsonify(status=301, data='Username already exists')
+        return 'Username already exists', 301
 
 
 @app.route('/api/userProducts/<user_id>',methods=['GET','POST','PUT','DELETE'])

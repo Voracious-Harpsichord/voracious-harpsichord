@@ -2,7 +2,6 @@
 from flask import Flask
 #import Bcrypt for hashing
 from server import bcrypt
-secret = 'secret'
 #import users model
 from db_models import models
 session = models.session
@@ -18,7 +17,7 @@ def login(username,password,method):
 # Write a new entry into the users table
 def make_new_user(username, password):
     # hash password
-    hashed = bcrypt.generate_password_hash(secret)
+    hashed = bcrypt.generate_password_hash(password)
     # make new user entry
     # add new user entry to the table
     session.add(User(username, hashed))
@@ -39,16 +38,11 @@ def verify_user(username, password):
 # Verify that user exists in user table, returning true or false
 def user_exists(username):
     # lookup user by user name
-    print('made it 2')
     user = session.query(User).filter(User.username == username)
-    print('made it 3')
     #return if user exists
-    print ('user:', user)
     if session.query(User).filter(User.username == username).count() > 0:
-        print('made it 4 True')
         return True
     else:
-        print('made it 4 False')
         return False
 
 # Get user id from username
