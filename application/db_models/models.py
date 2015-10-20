@@ -48,7 +48,7 @@ class User_product(db.Model):
     product_id = db.Column(db.Integer,db.ForeignKey('user.id'))
     user_id = db.Column(db.Integer,db.ForeignKey('product.id'))
 
-    def __init__(self, username, email):
+    def __init__(self, product_id, user_id):
         return None
 
     def __repr__(self):
