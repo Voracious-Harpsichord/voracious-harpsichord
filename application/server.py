@@ -25,9 +25,7 @@ def send_index():
 def user():
     body = request.get_json()
     #if user is in database
-    print('made it here 1')
     if user_controller.verify_user(body['username'], body['password']):
-        print('made it here 5 True')
         #make response
         response = jsonify({'userid': user_controller.get_user_id(body['username'])})
         #add session-cookie to response
@@ -36,7 +34,6 @@ def user():
         return response, 200
     #return 401 if auth failed
     else:
-        print('made it here 5 False')
         return 'Authentication Error', 401
 
 @app.route('/api/newUser',methods=['POST'])
