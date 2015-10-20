@@ -1,8 +1,8 @@
 var app = angular.module('beautystack',[
-  'beautystack.services',
-  'beautystack.home',
-  'beautystack.product',
-  'beautystack.auth',
+  'beautystack.services', 
+  'beautystack.home', 
+  'beautystack.product', 
+  'beautystack.auth', 
   'beautystack.stash',
   'ui.router'
 ]);

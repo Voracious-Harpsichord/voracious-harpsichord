@@ -6,11 +6,6 @@ body {
 
 .homeNoAuth {
     color: white;
-    background-image: url("/photos/homePhoto.jpg");
-    background-size: cover;
-    height: 600px;
-    background-attachment: fixed;
-    opacity: 0.8;
 }
 
 .homePostAuth {
@@ -21,9 +16,28 @@ body {
     opacity: 0.8;
 }
 
+.homeImage {
+    background-image: url("/photos/homePhoto.jpg");
+    background-size: cover;
+    height: 600px;
+    opacity: 0.8;
+}
+
 #homeLogo {
     float: left;
     padding-left:25px;
+}
+
+.searchFocal {
+    width: 500px;
+    display: block;
+    margin-left: 460px;
+    margin-right: auto;
+    padding-top: 375px;
+}
+
+.nav {
+    background-color: #000000;
 }
 
 .search {
@@ -33,14 +47,11 @@ body {
     padding-top: 25px;
 }
 
-#navigation {
-    float: right;
-}
-
 .navElement {
     font-size: 150%;
     padding-top: 25px;
     padding-right: 25px;
+    float: right;
 }
 
 .feed {
