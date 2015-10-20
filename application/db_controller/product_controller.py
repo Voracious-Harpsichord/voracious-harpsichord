@@ -1,6 +1,4 @@
 from flask import Flask
-#import Bcrypt for hashing
-from server import bcrypt
 #import users model
 from db_models import models
 session = models.session
