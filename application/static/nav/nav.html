@@ -1,4 +1,5 @@
-<div role='navigation' ng-switch on='loginStatus'>
+<div ng-switch on='loginStatus'>
+
     <!-- Navigation bar for not authenticated users -->
     <div class='homeImage' ng-switch-when='false'>
         <nav class='homeNoAuth'>
@@ -34,9 +35,16 @@
             </span>
         </nav>
     </div>
+
     <!-- Navigation bar for logged in user -->
-    <nav class='homePostAuth' class='navbar-fixed-top' ng-switch-when='true'>
+    <nav class='homePostAuth navbar navbar-fixed-top' ng-switch-when='true'>
         <h1  id='homeLogo' ui-sref='home'>BeautyStack</h1>
+        <!-- <span class='navElement'>Hi, {{user.name}}!</span> -->
+        <!-- Hard coded name for visual design -->
+        <span class='navElement glyphicon glyphicon-star-empty' ui-sref='wishlist'></span>
+        <span  class='navElement' ui-sref='home'>Discover</span>
+        <span class='navElement' ui-sref='profile'>Your Stack</span>
+        <span class='navElement'>Hi, Laura!</span>
         <span class="search input-group">
             <input type="text" class="form-control" placeholder="Search for...">
             <span class="input-group-btn">
@@ -45,11 +53,5 @@
                 </button>
             </span>
         </span>
-        <!-- <span class='navElement'>Hi, {{user.name}}!</span> -->
-        <!-- Hard coded name for visual design -->
-        <span class='navElement'>Hi, Laura!</span>
-        <span class='navElement' ui-sref='profile'>Your Stack</span>
-        <span  class='navElement' ui-sref='home'>Discover</span>
-        <span class='navElement glyphicon glyphicon-star-empty' ui-sref='wishlist'></span>
     </nav>
 </div>
