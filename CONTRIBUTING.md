@@ -16,7 +16,7 @@
   - (cleanup) ...
   - (test) ...
   - (doc) ...
-1. When you've finished with your fix or feature, Rebase upstream changes into your branch. submit a [pull request][]
+1. When you've finished with your fix or feature, Rebase changes into your branch. submit a [pull request][]
    directly to master. Include a description of your changes.
 1. Your pull request will be reviewed by another maintainer. The point of code
    reviews is to help keep the codebase clean and of high quality and, equally
@@ -32,36 +32,26 @@
 
 Use github’s interface to clone the repo:
 
-```
+``` bash
 git clone https://github.com/voracious-harpsichord/voracious-harpsichord.git
 ```
 
 ### Cut a namespaced feature branch from master
 
 Your branch should follow this naming convention:
-  - bug/...
-  - feat/...
-  - test/...
-  - doc/...
-  - refactor/...
+  - iss#<num> (for small bug fixes or patches)
+  - new-feature-description (for large new features)
 
-These commands will help you do this:
-
-``` bash
 
 # Creates your branch and brings you there
+``` bash
 git checkout -b `your-branch-name`
 ```
 
 ### Make commits to your feature branch. 
 
-Prefix each commit like so
-  - (feat) Added a new feature
-  - (fix) Fixed inconsistent tests [Fixes #0]
-  - (refactor) ...
-  - (cleanup) ...
-  - (test) ...
-  - (doc) ...
+Prefix final (before merging )commit messages like so
+  - [close #<num>] Description of change made.
 
 Make changes and commits on your branch, and make sure that you
 only make changes that are relevant to this branch. If you find
@@ -79,10 +69,10 @@ changes.
   be a blank line and then a more detailed description of the commit. This can be
   as detailed as you want, so dig into details here and keep the first line short.
 
-### Rebase upstream changes into your branch
+### Rebase changes into your branch
 
 Once you are done making changes, you can begin the process of getting
-your code merged into the main repo. Step 1 is to rebase upstream
+your code merged into the main repo. Step 1 is to rebase
 changes to the master branch into yours by running this command
 from your branch:
 
@@ -92,7 +82,7 @@ git pull --rebase origin master
 
 This will start the rebase process. You must commit all of your changes
 before doing this. If there are no conflicts, this should just roll all
-of your changes back on top of the changes from upstream, leading to a
+of your changes back on top of the changes, leading to a
 nice, clean, linear commit history.
 
 If there are conflicting changes, git will start yelling at you part way
@@ -100,7 +90,7 @@ through the rebasing process. Git will pause rebasing to allow you to sort
 out the conflicts. You do this the same way you solve merge conflicts,
 by checking all of the files git says have been changed in both histories
 and picking the versions you want. Be aware that these changes will show
-up in your pull request, so try and incorporate upstream changes as much
+up in your pull request, so try and incorporate changes as much
 as possible.
 
 You pick a file by `git add`ing it - you do not make commits during a
@@ -122,13 +112,19 @@ you get here again and nothing is broken and all the tests pass.
 
 ### Make a pull request
 
-Make a clear pull request from your fork and branch to the upstream master
+Send changes to your remote branch with
+
+```bash
+git push origin HEAD
+```
+
+From github, make a clear pull request from your branch to the organization's master
 branch, detailing exactly what changes you made and what feature this
 should add. The clearer your pull request is the faster you can get
 your changes incorporated into this repo.
 
 At least one other person MUST give your changes a code review, and once
-they are satisfied they will merge your changes into upstream. Alternatively,
+they are satisfied they will merge your changes. Alternatively,
 they may have some requested changes. You should make more commits to your
 branch to fix these, then follow this process again from rebasing onwards.
 
@@ -156,12 +152,12 @@ This is just to help you organize your process
 - [ ] Did I cut my work branch off of master (don't cut new branches from existing feature brances)?
 - [ ] Did I follow the correct naming convention for my branch?
 - [ ] Is my branch focused on a single main change?
- - [ ] Do all of my changes directly relate to this change?
-- [ ] Did I rebase the upstream master branch after I finished all my
+- [ ] Do all of my changes directly relate to this change?
+- [ ] Did I rebase from the origin master branch after I finished all my
   work?
 - [ ] Did I write a clear pull request message detailing what changes I made?
 - [ ] Did I get a code review?
- - [ ] Did I make any requested changes from that code review?
+- [ ] Did I make any requested changes from that code review?
 
 If you follow all of these guidelines and make good changes, you should have
 no problem getting your changes merged in.
