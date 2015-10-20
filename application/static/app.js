@@ -102,3 +102,16 @@ app.run(function($rootScope, $location, $state, Auth) {
     }
   });
 });
+
+app.directive("scroll", function ($window) {
+    return function(scope, element, attrs) {
+        angular.element($window).bind("scroll", function() {
+             if (this.pageYOffset >= 400) {
+                 scope.showContent = true;
+             } else {
+                 scope.showContent = false;
+             }
+            scope.$apply();
+        });
+    };
+});

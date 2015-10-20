@@ -3,18 +3,7 @@ angular.module('beautystack.auth', [])
 .controller('AuthController', function($scope, $window, $state, Auth, $document) {
 
     $scope.user = {};
-    $scope.loginStatus = true;
-
-    var wnd = $window;
-    var doc = $document[0];
-
-    $scope.showNav = false;
-    wnd.onscroll = function () {
-        var scrollY = wnd.scrollY
-            || doc.documentElement.scrollTop
-            || doc.body.scrollTop;
-        $scope.showNav = scrollY <= 800;
-    };
+    $scope.loginStatus = false;
     
     $scope.signup = function() {
       //Invoke signup function from Auth factory
@@ -62,4 +51,6 @@ angular.module('beautystack.auth', [])
       //Transition to home page
       $state.transitionTo('home');
     };
-});
+})
+
+
