@@ -1,17 +1,28 @@
-from server import db
+from server import app
+from flask.ext.sqlalchemy import SQLAlchemy
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from config import SQLALCHEMY_DATABASE_URI
+
+db = SQLAlchemy(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI 
+
+# an Engine, which the Session will use for connection
+# resources
+engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
+
+session = sessionmaker(bind=engine)()
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
-    email = db.Column(db.String(120), unique=True)
-    password = db.Column(db.String(120))
+    pw_hash = db.Column(db.String(120))
     # set up relationship one to many relationship between User and User_product
     user_products = db.relationship('User_product',backref='user',lazy='dynamic')
 
-    def __init__(self, username, email):
+    def __init__(self, username, pw_hash):
         self.username = username
-        self.email = email
-        self.password = password
+        self.pw_hash = pw_hash
 
     def __repr__(self):
         return '<User %r>' % self.username

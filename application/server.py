@@ -1,11 +1,13 @@
 from flask import Flask, request, send_from_directory, jsonify
 from flask.ext.bower import Bower
 from flask.ext.bcrypt import Bcrypt
-from flask.ext.sqlalchemy import SQLAlchemy
-from config import SQLALCHEMY_DATABASE_URI 
 #db controllers
 from db_controller import user_controller
 from db_controller import product_controller
+
+
+from sqlalchemy import Column, String, Integer, ForeignKey
+from sqlalchemy.ext.declarative import declarative_base
 
 # set the project root directory as the static folder, you can set others.
 app = Flask(__name__, static_url_path='')
@@ -13,8 +15,6 @@ app = Flask(__name__, static_url_path='')
 bower = Bower(app)
 bcrypt = Bcrypt(app)
 # make db and configure path
-db = SQLAlchemy(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI 
 
 @app.route('/')
 def send_js():
@@ -46,7 +46,7 @@ def newUser():
         return user_controller.signup(username,password,method)
 
 @app.route('/api/userProducts/<user_id>',methods=['GET','POST','PUT','DELETE'])
-def userProducts():
+def userProducts(user_id):
     # user id is available from the query parameter
     method = request.method 
     json = request.get_json()
@@ -54,7 +54,7 @@ def userProducts():
     return product_controller.Product_controller(product,method)
 
 @app.route('/api/products/<product_id>',methods=['GET'])
-def products():
+def products(product_id):
     method = request.method 
     json = request.get_json()
     product = json['product']
