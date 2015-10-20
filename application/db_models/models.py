@@ -35,7 +35,7 @@ class Product(db.Model):
     # set up relationship one to many relationship between Product and User_product
     user_products = db.relationship('User_product',backref='product',lazy='dynamic')
 
-    def __init__(self, product_name,brand_name):
+    def __init__(self, product_name, brand_name):
         self.product_name = product_name
         self.brand_name = brand_name
 

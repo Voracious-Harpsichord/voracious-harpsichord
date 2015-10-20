@@ -56,18 +56,29 @@ def newUser():
 
 @app.route('/api/userProducts/<user_id>',methods=['GET','POST','PUT','DELETE'])
 def userProducts(user_id):
-    # user id is available from the query parameter
-    method = request.method 
-    json = request.get_json()
-    product = json['product']
-    return product_controller.Product_controller(product,method)
+    #GET
+        #lookup all products for in users collection
+        #respond array of products and a 200
+    #POST
+        #check if product is already in DB
+            #Add product if not
+        #create db realtionship between user and product
+        #respond with created product and 201
+    #PUT
+        #update information about product
+        #respond with updated product and 201
+
+    #DELETE
+        #remove relation between user and product
+        #respond with a 204
+
+
 
 @app.route('/api/products/<product_id>',methods=['GET'])
 def products(product_id):
-    method = request.method 
-    json = request.get_json()
-    product = json['product']
-    return product_controller.Product_controller(product,method)
+    #lookup product in db
+    #repsond with product info and 200
+    #or 404
 
 #start server
 if __name__ == "__main__":
