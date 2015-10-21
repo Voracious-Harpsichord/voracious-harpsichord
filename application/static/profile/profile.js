@@ -1,6 +1,6 @@
-var stash = angular.module('beautystack.stash', []);
+var stash = angular.module('beautystack.profile', []);
 
-stash.controller('StashController', function ($scope, Products) {
+stash.controller('ProfileController', function ($scope, Products) {
     $scope.newProduct = '';
     $scope.user = {};
 
