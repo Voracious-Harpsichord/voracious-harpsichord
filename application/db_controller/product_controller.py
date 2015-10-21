@@ -13,17 +13,19 @@ from db_models.products import Product, User_product
 #Get a list of product by user_id
 def get_products_by_user_id(user_id):
     #query User_product for the matching user_id
-    product_ids = session.query(User_product).filter(User_product.user_id == user_id)
+    product_ids = session.query(User_product).filter(User_product.user_id == user_id).all()
     #for each product_id in query, push a dictionary into the results
     results = []
     for p in product_ids:
-        results.append(dict(session.query(Product).filter(Product.id == p.product_id).one()))
-    #return the results 
+        user_product = session.query(Product).filter(Product.id == p.product_id).one()
+        results.append({'product_id': user_product.id, 'brand_name': user_product.product_brand, 'product_name': user_product.product_name}
+)
+    #return the results
     return results
 
 #Get a product by product_id
 def get_product_by_product_id(product_id):
-    return dict(session.query(Product).filter(Product.id == product_id).one())
+    return session.query(Product).filter(Product.id == product_id).one()
 
 #Verify if a product exists by name and brand and return the product_id or None
 def verify_product_by_name_and_brand(product_name, product_brand):
@@ -39,7 +41,7 @@ def verify_product_by_id(product_id):
 
 #Add a product to the product table and return the newly created product
 def add_product_to_products(product_name, product_brand):
-    #Add product to Prodcut Table
+    #Add product to Product Table
     session.add(Product(product_name, product_brand))
     session.commit()
     #Return most recently created product
@@ -48,14 +50,11 @@ def add_product_to_products(product_name, product_brand):
 #Create a relationship between user and product
 def add_user_to_product(user_id, product_id):
     #Add user and product to user/products
-    session.add(User_product(user_id, product_id))
+    session.add(User_product(int(user_id), int(product_id)))
     session.commit()
     new_product = session.query(Product).filter(Product.id == product_id).one()
-    result = {}
-    for p in new_product:
-        result[p] = new_product[p]
-    #return the product that whole product
-    return result
+    #return the new product from Products table
+    return {'product_id': new_product.id, 'brand_name': new_product.product_brand, 'product_name': new_product.product_name}
 
 #Delete a relationship between user and product
 def remove_user_from_product(user_product_id):
