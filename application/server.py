@@ -67,7 +67,6 @@ def userProducts(user_id):
     if request.method == 'GET':
         #lookup all products for in users collection
         response = jsonify(userProducts=p_ctrl.get_products_by_user_id(user_id))
-        print('>>>>>>>>>>>>>>>', response)
         #respond array of products and a 200
         return response, 200
     
