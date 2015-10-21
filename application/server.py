@@ -66,7 +66,8 @@ def userProducts(user_id):
     #GET
     if request.method == 'GET':
         #lookup all products for in users collection
-        response = jsonify(p_ctrl.get_products_by_user_id(user_id))
+        response = jsonify(userProducts=p_ctrl.get_products_by_user_id(user_id))
+        print('>>>>>>>>>>>>>>>', response)
         #respond array of products and a 200
         return response, 200
     
@@ -80,7 +81,6 @@ def userProducts(user_id):
             product_id = p_ctrl.add_product_to_products(body['product_name'], body['brand_name'])
         #create db relationship between user and product
         response = jsonify(p_ctrl.add_user_to_product(user_id, product_id))
-        print('>>>>>>>>>>>>>>>>>>>>>>>', response)
         #respond with created product and 201
         return response, 201
 
