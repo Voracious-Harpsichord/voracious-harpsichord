@@ -19,25 +19,30 @@
 1. [Team](#team)
 1. [Contributing](#contributing)
 
-## Usage
-
-> Some usage instructions
 
 ## Requirements
 
 - Python 3.4.x
 - Postgresql 9.1.x
 - Bower
-- 
 
 ## Development
+
+To run locally:
+(from *application* folder)
+
+```bash
+python3 server.py
+```
+
+Go to `localhost:5000`
 
 ### Installing Dependencies
 
 From within the root directory:
 
-```sh
-sudo npm install -g bower
+```bash
+pip3 install -r application/requirements.txt
 bower install
 ```
 
