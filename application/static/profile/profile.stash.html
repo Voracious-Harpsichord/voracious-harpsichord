@@ -1,12 +1,12 @@
 <div class='container'>
   <form name='search'>
-    <input type='text' ng-model='product' required />
-    <button ng-click='add()'>Add to my Stack!</button>
+    <input type='text' ng-model='newProduct' required />
+    <button ng-click='addProduct()'>Add to my Stack!</button>
     <button ng-click='search()'>Seach for product</button>
   </form>
 
-  <div class='stash' ng-if='product' ng-repeat='product in stash track by $index | filter: product'>
-    <div class='product-brand'> {{ product }}</div>
-    <!-- <div class='product-name'> {{ product.name }}</div> -->
+  <div class='stash' ng-repeat='product in products track by $index'>
+    <div class='product-brand'> {{ product.brand_name }}</div>
+    <div class='product-name'> {{ product.product_name }}</div>
   </div>
 </div>

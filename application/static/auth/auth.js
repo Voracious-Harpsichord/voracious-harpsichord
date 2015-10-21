@@ -1,22 +1,19 @@
 angular.module('beautystack.auth', [])
 
-.controller('AuthController', function($scope, $window, $state, Auth, $document) {
+.controller('AuthController', function($scope, $state, Auth, Products, $document) {
 
     $scope.user = {};
-    $scope.loginStatus = true;
+    $scope.loginStatus = Auth.userData.loggedIn;
+    $scope.user.name = Auth.userData.name;
     
     $scope.signup = function() {
       //Invoke signup function from Auth factory
       Auth.signup($scope.user)
-      .then(function(userid, name) {
-        //Change loginStatus to true
-        $scope.loginStatus = true;
-        //Store userid in local storage
-        $window.localStorage.setItem('beauty.userid', userid);
-        //Assign name property on user object
-        $scope.user.name = name;
+      .then(function() {
+        //Fetch user's products
+        Products.getAllProducts();
         //Transition to stash page
-        $state.transitionTo('home');
+        $state.go('home');
       })
       .catch(function(error) {
         console.error(error);
@@ -26,16 +23,12 @@ angular.module('beautystack.auth', [])
 
     $scope.signin = function() {
       //Invoke signin function from Auth factory
-      Auth.signin($scope.user, name)
-      .then(function(userid) {
-        //Change loginStatus to true
-        $scope.loginStatus = true;
-        //Store userid in local storage
-        $window.localStorage.setItem('beauty.userid', userid);
-        //Assign name property on user object
-        $scope.user.name = name;
+      Auth.signin($scope.user)
+      .then(function() {
+        //Fetch user's products
+        Products.getAllProducts();
         //Transition to stash page
-        $state.transitionTo('home');
+        $state.go('home');
       })
       .catch(function(error) {
         console.error(error);
@@ -44,13 +37,10 @@ angular.module('beautystack.auth', [])
     };
 
     $scope.signout = function() {
-      //Change loginStatus to false
-      $scope.loginStatus = false;
-      //Remove userid stored in local storage
-      $window.localStorage.removeItem('beauty.userid', userid);
-      //Transition to home page
-      $state.transitionTo('home');
+      Auth.userData = {};
+      Auth.userData.loggedIn = false;
+      $state.go('home');
     };
-})
+});
 
 

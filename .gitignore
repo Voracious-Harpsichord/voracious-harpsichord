@@ -1,6 +1,9 @@
 *.log
 *.DS_Store
 
+#database file
+application/app.db
+
 #compiled python files
 *.pyc
 

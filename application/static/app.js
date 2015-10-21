@@ -159,7 +159,7 @@ app.run(function($rootScope, $location, $state, Auth) {
       //Prevent state transition from happening
       event.preventDefault();
       //Transition state to home page
-      $state.transitionTo('home');
+      $state.go('home');
     }
   });
 });
