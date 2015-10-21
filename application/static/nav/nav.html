@@ -40,7 +40,22 @@
         <span class='navButtonScrollAuth glyphicon glyphicon-star-empty' ui-sref='wishlist'></span>
         <span  class='navButtonScrollAuth' ui-sref='home'>Discover</span>
         <span class='navButtonScrollAuth' ui-sref='profile'>Your Stack</span>
-        <span class='navButtonScrollAuth'>Hi, Laura!</span>
+        <span class="navButtonScrollAuth dropdown" ui-sref='profile.stash'>
+            <span class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Hi, Laura!
+            <span class="caret"></span>
+            </span>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuDivider">
+                <li><a ui-sref='profile.explore'>Profile</a></li>
+                <li><a ui-sref='home'>Feed</a></li>
+                <li><a ui-sref='profile.friends'>Friends</a></li>
+                <li><a ui-sref='profile.wishlist'>Wishlist</a></li>
+                <li><a ui-sref='profile.recs'>Recommendations</a></li>
+                <li><a ui-sref='profile.blogs'>Blogs</a></li>
+                <li><a ui-sref='profile.settings'>Settings</a></li>
+                <li><a ui-sref='logout'>Logout</a></li>
+            </ul>
+        </span>
         <!-- Hard coded name for visual design -->
         <!-- <span class='navButtonScrollAuth'>Hi, {{user.name}}!</span> -->
         <span class="search searchAuth input-group">

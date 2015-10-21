@@ -11,7 +11,7 @@ ul {
 }
 
 button:focus {
-    outline:0;
+    outline:0 !important;
 }
 
 .nav {
@@ -90,7 +90,6 @@ button:focus {
     background-size: cover;
     background-image: url("/photos/homePhoto.jpg");
     height: 80px;
-    opacity: 0.8;
 }
 
 .navButtonScrollAuth {
@@ -103,6 +102,10 @@ button:focus {
 
 .searchAuth {
     margin-top: 10px;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
 }
 
 
@@ -128,7 +131,7 @@ button:focus {
 .profileMainPhoto {
     background-size: cover;
     background-image: url("/photos/backgroundProfilePhoto.jpg");
-    background-position: -80px;
+    background-position: -70px;
     height: 300px;
 }
 
