@@ -36,14 +36,14 @@
 
     <!-- Navigation bar for logged in user -->
     <nav class='homePostAuth navbar navbar-fixed-top' ng-switch-when='true'>
-        <h1  id='homeLogo' ui-sref='home'>BeautyStack</h1>
-        <!-- <span class='navElement'>Hi, {{user.name}}!</span> -->
+        <h1  class='navNameScroll' ui-sref='home'>BeautyStack</h1>
+        <span class='navButtonScrollAuth glyphicon glyphicon-star-empty' ui-sref='wishlist'></span>
+        <span  class='navButtonScrollAuth' ui-sref='home'>Discover</span>
+        <span class='navButtonScrollAuth' ui-sref='profile'>Your Stack</span>
+        <span class='navButtonScrollAuth'>Hi, Laura!</span>
         <!-- Hard coded name for visual design -->
-        <span class='navElement glyphicon glyphicon-star-empty' ui-sref='wishlist'></span>
-        <span  class='navElement' ui-sref='home'>Discover</span>
-        <span class='navElement' ui-sref='profile'>Your Stack</span>
-        <span class='navElement'>Hi, Laura!</span>
-        <span class="search input-group">
+        <!-- <span class='navButtonScrollAuth'>Hi, {{user.name}}!</span> -->
+        <span class="search searchAuth input-group">
             <input type="text" class="form-control" placeholder="Search for...">
             <span class="input-group-btn">
                 <button class="btn btn-default" type="button">

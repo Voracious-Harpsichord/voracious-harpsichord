@@ -3,7 +3,7 @@ angular.module('beautystack.auth', [])
 .controller('AuthController', function($scope, $window, $state, Auth, $document) {
 
     $scope.user = {};
-    $scope.loginStatus = false;
+    $scope.loginStatus = true;
     
     $scope.signup = function() {
       //Invoke signup function from Auth factory
