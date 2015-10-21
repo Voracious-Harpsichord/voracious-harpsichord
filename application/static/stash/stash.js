@@ -14,7 +14,6 @@ stash.controller('StashController',
       .then(function(addedProduct) {
         $scope.newProduct = '';
         $scope.products.push(addedProduct);
-        console.log('scope.products:', $scope.products);
       })
       .catch(function(error) {
         console.error('Error with adding product:', error);
