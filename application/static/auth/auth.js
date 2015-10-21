@@ -42,5 +42,3 @@ angular.module('beautystack.auth', [])
       $state.go('home');
     };
 });
-
-
