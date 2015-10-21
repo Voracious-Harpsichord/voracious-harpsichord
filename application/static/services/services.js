@@ -23,6 +23,7 @@ angular.module('beautystack.services', [])
 
   //Add a product to user's stash
   var addProduct = function(product) {
+    console.log('user data:', Auth.userData);
     
     //Send POST request to /userProducts/:user_id
     return $http({
@@ -34,6 +35,7 @@ angular.module('beautystack.services', [])
       data: product
     })
     .then(function(resp) {
+      console.log(resp.data);
       return resp.data;
     });
   };
@@ -73,7 +75,7 @@ angular.module('beautystack.services', [])
       data: user
     })
     .then(function(resp) {
-      userData = resp.data;
+      angular.extend(userData, resp.data);
       userData.loggedIn = true;
       return resp;
     });
@@ -88,9 +90,9 @@ angular.module('beautystack.services', [])
       data: user
     })
     .then(function(resp) {
-      userData = resp.data;
+      angular.extend(userData, resp.data);
       userData.loggedIn = true;
-      console.log(resp.data.userid);
+      console.log(userData);
       return resp.data;
     });
   };

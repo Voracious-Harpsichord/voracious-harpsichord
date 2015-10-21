@@ -28,7 +28,10 @@ def send_index():
 @app.route('/api/user',methods=['POST'])
 def user():
     body = request.get_json()
-    #if user is in database
+    #if user does not exist in database
+    if not u_ctrl.user_exists(body['username']):
+        return 'User does not exist', 404
+    #if user has correct password
     if u_ctrl.verify_user(body['username'], body['password']):
         #make response
         response = jsonify({'userid': u_ctrl.get_user_id(body['username'])})
@@ -38,7 +41,7 @@ def user():
         return response, 200
     #return 401 if auth failed
     else:
-        return 'Authentication Error', 401
+        return 'Invalid password', 401
 
 @app.route('/api/newUser',methods=['POST'])
 def newUser():
@@ -77,6 +80,7 @@ def userProducts(user_id):
             product_id = p_ctrl.add_product_to_products(body['product_name'], body['brand_name'])
         #create db relationship between user and product
         response = jsonify(p_ctrl.add_user_to_product(user_id, product_id))
+        print('>>>>>>>>>>>>>>>>>>>>>>>', response)
         #respond with created product and 201
         return response, 201
 

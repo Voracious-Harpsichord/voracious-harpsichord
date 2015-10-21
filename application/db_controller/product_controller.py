@@ -42,15 +42,20 @@ def add_product_to_products(product_name, product_brand):
     #Add product to Prodcut Table
     session.add(Product(product_name, product_brand))
     session.commit()
-    #Return most reecently created product
-    return dict(session.query(Product).order_by(Prdocut.id.desc()).first())
+    #Return most recently created product
+    return session.query(Product).filter(Product.product_name == product_name and Product.product_brand == product_brand).one().id
 
 #Create a relationship between user and product
 def add_user_to_product(user_id, product_id):
     #Add user and product to user/products
     session.add(User_product(user_id, product_id))
+    session.commit()
+    new_product = session.query(Product).filter(Product.id == product_id).one()
+    result = {}
+    for p in new_product:
+        result[p] = new_product[p]
     #return the product that whole product
-    return dict(session.query(Product).filter(Product.id == product_id).one())
+    return result
 
 #Delete a relationship between user and product
 def remove_user_from_product(user_product_id):

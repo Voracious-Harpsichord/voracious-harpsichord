@@ -4,7 +4,6 @@ class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     product_name = db.Column(db.String(120), unique=True)
     brand_name = db.Column(db.String(80))
-    user_products = db.relationship('User_product',backref='product',lazy='dynamic')
 
     def __init__(self, product_name, brand_name):
         self.product_name = product_name
