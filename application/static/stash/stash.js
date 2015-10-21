@@ -11,9 +11,9 @@ stash.controller('StashController',
     $scope.addProduct = function() {
       var product = {'brand_name': 'Sephora', 'product_name': $scope.newProduct};
       Products.addProduct(product)
-      .then(function(resp) {
+      .then(function(addedProduct) {
         $scope.newProduct = '';
-        $scope.products.push(resp.data);
+        $scope.products.push(addedProduct);
         console.log('scope.products:', $scope.products);
       })
       .catch(function(error) {
