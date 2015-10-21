@@ -1,20 +1,29 @@
-from flask import Flask, request, send_from_directory, jsonify, make_response
+from flask import Flask, request, send_from_directory, jsonify
 from flask.ext.bower import Bower
 from flask.ext.bcrypt import Bcrypt
-#db controllers
-from db_controller import user_controller as u_ctrl
-from db_controller import product_controller as p_ctrl
 # set the project root directory as the static folder, you can set others.
 app = Flask(__name__, static_url_path='')
 
+#utilities
 bower = Bower(app)
 bcrypt = Bcrypt(app)
-# make db and configure path
+
+#BEGIN DB SETUP
+from flask.ext.sqlalchemy import SQLAlchemy
+from config import SQLALCHEMY_DATABASE_URI
+
+#Config path and instantiate
+app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
+db = SQLAlchemy(app)
+
+#db controllers
+from db_controller import user_controller as u_ctrl
+from db_controller import product_controller as p_ctrl
+#END DB SETUP
 
 @app.route('/')
 def send_index():
     return send_from_directory('static', 'index.html')
-
 
 @app.route('/api/user',methods=['POST'])
 def user():

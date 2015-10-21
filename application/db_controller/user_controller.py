@@ -1,11 +1,16 @@
+#create DB session
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from config import SQLALCHEMY_DATABASE_URI
 
-from flask import Flask
-#import Bcrypt for hashing
-from server import bcrypt
+engine = create_engine(SQLALCHEMY_DATABASE_URI)
+session = sessionmaker(bind=engine)()
+session._model_changes = {}
+
 #import users model
-from db_models.initialze import session
 from db_models.users import User
-
+#additional libs
+from server import bcrypt
 
 # Stub functions for testing endpoints
 def signup(username,password,method):
