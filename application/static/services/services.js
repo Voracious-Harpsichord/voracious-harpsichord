@@ -16,7 +16,9 @@ angular.module('beautystack.services', [])
       }
     })
     .then(function(resp) {
-      userProducts = resp.data;
+      console.log('response', resp.data.userProducts);
+      resp.data.userProducts.forEach(function(item) {userProducts.push(item);});
+      console.log('userProducts', userProducts);
       return resp.data;
     });
   };
@@ -57,7 +59,8 @@ angular.module('beautystack.services', [])
   return {
     getAllProducts: getAllProducts,
     addProduct: addProduct,
-    updateProduct: updateProduct
+    updateProduct: updateProduct,
+    userProducts: userProducts
   };
 })
 
