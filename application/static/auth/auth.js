@@ -5,7 +5,7 @@ angular.module('beautystack.auth', [])
     $scope.user = {};
     $scope.loginStatus = Auth.userData.loggedIn;
     $scope.user.name = Auth.userData.name;
-    
+
     $scope.signup = function() {
       //Invoke signup function from Auth factory
       Auth.signup($scope.user)
