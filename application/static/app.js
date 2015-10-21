@@ -46,28 +46,63 @@ app.config(function($stateProvider, $urlRouterProvider) {
   });
 
   $stateProvider.state('profile.stash', {
-    templateUrl: 'profile/profile.stash.html',
-    controller: 'ProfileController'
+    url: '/stash',
+    views: {
+      'subview': {
+        templateUrl: 'profile/profile.stash.html',
+        controller: 'ProfileController'
+      }
+    }
+  });
+
+  $stateProvider.state('profile.explore', {
+    url: '/explore',
+    views: {
+      'subview': {
+        templateUrl: 'profile/profile.exploreStash.html',
+        controller: 'ProfileController'
+      }
+    }
   });
 
   $stateProvider.state('profile.recs', {
-    templateUrl: 'profile/profile.recs.html',
-    controller: 'ProfileController'
+    url: '/recs',
+    views: {
+      'subview': {
+        templateUrl: 'profile/profile.recs.html',
+        controller: 'ProfileController'
+      }
+    }
   });
 
   $stateProvider.state('profile.wishlist', {
-    templateUrl: 'profile/profile.wishlist.html',
-    controller: 'ProfileController'
+    url: '/wishlist',
+    views: {
+      'subview': {
+        templateUrl: 'profile/profile.wishlist.html',
+        controller: 'ProfileController'
+      }
+    }
   });
 
   $stateProvider.state('profile.friends', {
-    templateUrl: 'profile/profile.friends.html',
-    controller: 'ProfileController'
+    url: '/friends',
+    views: {
+      'subview': {
+        templateUrl: 'profile/profile.friends.html',
+        controller: 'ProfileController'
+      }
+    }
   });
 
   $stateProvider.state('profile.blogs', {
-    templateUrl: 'profile/profile.blogs.html',
-    controller: 'ProfileController'
+    url: '/blogs',
+    views: {
+      'subview': {
+        templateUrl: 'profile/profile.blogs.html',
+        controller: 'ProfileController'
+      }
+    }
   });
 
   $stateProvider.state('product', {
