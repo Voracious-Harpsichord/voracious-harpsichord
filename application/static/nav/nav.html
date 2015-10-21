@@ -3,10 +3,10 @@
     <!-- Navigation bar for not authenticated users -->
     <div class='homeImage' ng-switch-when='false'>
         <nav class='homeNoAuth'>
-            <h1 id='homeLogo' ui-sref='home'>BeautyStack</h1>
-            <span class='navElement' ui-sref='signin'>Log In</span>
-            <span class='navElement' ui-sref='signup'>Sign Up</span>
-            <span class='navElement' ui-sref='about'>About</span>
+            <span class='navName' ui-sref='home'>BeautyStack</span>
+            <span class='navButton' ui-sref='signin'>Log In</span>
+            <span class='navButton' ui-sref='signup'>Sign Up</span>
+            <span class='navButton' ui-sref='about'>About</span>
             
             <span class="searchFocal input-group">
                 <input type="text" class="form-control" placeholder="Search for...">
@@ -18,10 +18,10 @@
             </span>
         </nav>
         <nav class='homeNoAuth nav navbar-fixed-top' ng-hide="!showContent">
-            <h1 id='homeLogo' ui-sref='home'>BeautyStack</h1>
-            <span class='navElement' ui-sref='signin'>Log In</span>
-            <span class='navElement' ui-sref='signup'>Sign Up</span>
-            <span class='navElement' ui-sref='about'>About</span>
+            <span class='navNameScroll' ui-sref='home'>BeautyStack</span>
+            <span class='navButtonScroll' ui-sref='signin'>Log In</span>
+            <span class='navButtonScroll' ui-sref='signup'>Sign Up</span>
+            <span class='navButtonScroll' ui-sref='about'>About</span>
             
             <span class="search input-group">
                 <input type="text" class="form-control" placeholder="Search for...">

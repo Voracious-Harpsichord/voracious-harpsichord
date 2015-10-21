@@ -3,6 +3,7 @@ var app = angular.module('beautystack',[
   'beautystack.home',
   'beautystack.product',
   'beautystack.auth',
+  'beautystack.settings',
   'beautystack.stash',
   'ui.router'
 ]);

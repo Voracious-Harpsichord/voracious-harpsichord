@@ -1,11 +1,19 @@
-<div class='container'>
-  <form name='search'>
-    <input type='text' ng-model='newProduct' placeholder='Add a product' />
-    <button ng-click='addProduct()'>Add to my Stack!</button>
-  </form>
-  <ul>
-    <li class='stash' ng-repeat='product in products track by $index'>
-      <div><span class='brand-name'>{{ product.brand_name }}</span> <span class='product-name'>{{product.product_name}}</span></div>
-    </li>
-  </ul>
+<div class='profileMainPhoto'>
+    <img class='profilePhoto' ng-src="{{user.photo}}" alt="Description"/>
+    <div class='profileInfo'>
+        <h1>{{user.firstName}} {{user.lastName}} </h1>
+        <h5> {{user.location}} | You have been giving since {{user.createdAt}}.</h5>
+    </div>
+</div>
+<div>
+    <button ng-model='filter'>Search</button>    
+    <button ng-click='addProduct()'>Add/Revise My Stash</button>
+    <ul>
+        <li class="product" ng-repeat="product in data.products | filter : filter">
+            <a id='name'>{{ product.name }}</a>
+            <span id='maker'>{{ product.Maker.name }}</span>
+            <span id='category'>{{ product.Category.name }}</span>
+            <span id='size'>{{ product.size }}</span>
+        </li>
+    </ul>
 </div>

@@ -1,19 +1,12 @@
 body {
-    font-family: 'Archivo Narrow', sans-serif;
     margin:0;
     padding:0;
 }
 
+/*No Auth Opening Page*/
+
 .homeNoAuth {
     color: white;
-}
-
-.homePostAuth {
-    color: white;
-    background-size: cover;
-    background-image: url("/photos/homePhoto.jpg");
-    height: 80px;
-    opacity: 0.8;
 }
 
 .homeImage {
@@ -23,9 +16,22 @@ body {
     opacity: 0.8;
 }
 
-#homeLogo {
+.navName {
+    font-size: 500%;
     float: left;
-    padding-left:25px;
+    margin-left: 40px;
+    margin-top: 20px;
+}
+
+.navButton {
+    border-radius: 10px;
+    font-size: 130%;
+    margin-right: 30px;
+    margin-top: 40px;
+    float: right;
+    padding:15px;
+    background-color: transparent;
+    border:2px solid white;
 }
 
 .searchFocal {
@@ -36,6 +42,34 @@ body {
     padding-top: 375px;
 }
 
+/*No Auth Scroll Bar*/
+
+.navNameScroll {
+    float: left;
+    padding-left:25px;
+    font-size: 250%;
+}
+
+.navButtonScroll {
+    border-radius: 10px;
+    font-size: 130%;
+    margin-right: 25px;
+    margin-top: 5px;
+    float: right;
+    padding:7px;
+    background-color: transparent;
+    border:2px solid white;
+}
+
+.homePostAuth {
+    color: white;
+    background-size: cover;
+    background-image: url("/photos/homePhoto.jpg");
+    height: 80px;
+    opacity: 0.8;
+}
+
+
 .nav {
     background-color: #000000;
 }
@@ -44,15 +78,9 @@ body {
     float: left;
     width: 500px;
     padding-left: 25px;
-    padding-top: 25px;
+    padding-top: 10px;
 }
 
-.navElement {
-    font-size: 150%;
-    padding-top: 25px;
-    padding-right: 25px;
-    float: right;
-}
 
 .feed {
     padding-top: 100px;
@@ -66,4 +94,43 @@ body {
 li {
   height: 120px;
   border-bottom: 1px solid gray;
+}
+
+/*Stash and Profile*/
+
+.profileHeader {
+/*    margin-bottom: 100px;
+    padding-bottom: 80px;
+    border-bottom: 1px black;*/
+}
+
+.profileMainPhoto {
+    background-size: cover;
+    background-image: url("/photos/backgroundProfilePhoto.jpg");
+    background-position: -80px;
+/*    background-attachment: fixed;*/
+    height: 300px;
+    /*opacity: 0.8;*/
+}
+
+.profilePhoto {
+    float: left;
+    height: 250px;
+    width: 250px;
+    margin-top: 100px;
+    margin-left: 150px;
+    padding:3px;
+    border:1px solid #E8E8E8;
+    background-color:white;
+    border-radius: 150px;
+    -webkit-border-radius: 150px;
+    -moz-border-radius: 150px
+}
+
+.profileInfo {
+    color: #fff;
+    text-shadow: 0 0 3px rgba(0,0,0,.8);
+    float: left;
+    margin-top: 200px;
+    margin-left: 30px;
 }
