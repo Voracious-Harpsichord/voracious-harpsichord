@@ -16,16 +16,13 @@ angular.module('beautystack.services', [])
       }
     })
     .then(function(resp) {
-      console.log('response', resp.data.userProducts);
       resp.data.userProducts.forEach(function(item) {userProducts.push(item);});
-      console.log('userProducts', userProducts);
       return resp.data;
     });
   };
 
   //Add a product to user's stash
   var addProduct = function(product) {
-    console.log('user data:', Auth.userData);
     
     //Send POST request to /userProducts/:user_id
     return $http({
@@ -37,7 +34,6 @@ angular.module('beautystack.services', [])
       data: product
     })
     .then(function(resp) {
-      console.log(resp.data);
       return resp.data;
     });
   };
@@ -95,7 +91,6 @@ angular.module('beautystack.services', [])
     .then(function(resp) {
       angular.extend(userData, resp.data);
       userData.loggedIn = true;
-      console.log(userData);
       return resp.data;
     });
   };
