@@ -2,15 +2,16 @@
   <img class='profilePhoto' ng-src="{{user.photo}}" alt="Description"/>
   <div class='profileInfo'>
     <h1>{{user.firstName}} {{user.lastName}} </h1>
-    <h5> {{user.location}} | You have been giving since {{user.createdAt}}.</h5>
+    <h5> {{user.location}} | Member since {{user.createdAt}}.</h5>
   </div>
 </div>
 
-<div class='dashboardTabs'>    
+<div class='dashboardTabs'>  
   <ul>
-    <li ui-sref-active="selected" ng-repeat="tab in tabs">
-      <a ui-sref="profile.{{tab.path}}">{{tab.name}}</a>
+    <li class='dashboardTab' ng-repeat="tab in tabs">
+      <button class='dashboardTabText' ui-sref-active="selectTab" ui-sref="profile.{{tab.path}}">{{tab.name}}</button>
     </li>
   </ul>
 </div>
+
 <div ui-view="subview"></div>
