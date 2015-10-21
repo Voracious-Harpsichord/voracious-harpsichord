@@ -1,8 +1,22 @@
 var stash = angular.module('beautystack.stash', []);
 
-stash.controller('StashController',
-  function ($scope, Products) {
+stash.controller('StashController', function ($scope, Products) {
     $scope.newProduct = '';
+    $scope.user = {};
+
+    $scope.getCurrentUser = function() {
+      $scope.user = {
+        firstName: 'Laura', 
+        lastName: 'Weaver',
+        email: 'laura.maclay.weaver@gmail.com',
+        age: 25, 
+        location: 'San Francisco, CA',
+        photo: '../photos/testProfilePhoto.jpg',
+        username: 'lauraweaver',
+        createdAt: 2015,
+        description: 'I am a real human who likes skincare a bit too much.'
+      };
+    };
 
     //Fetch all products in user's stash
     $scope.getAll = function() {
@@ -30,5 +44,6 @@ stash.controller('StashController',
       });
     };
 
-    $scope.getAll();
+    $scope.getCurrentUser()
+    // $scope.getAll();
   });
