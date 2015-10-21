@@ -4,7 +4,7 @@ var app = angular.module('beautystack',[
   'beautystack.product',
   'beautystack.auth',
   'beautystack.settings',
-  'beautystack.stash',
+  'beautystack.profile',
   'ui.router'
 ]);
 
@@ -28,21 +28,46 @@ app.config(function($stateProvider, $urlRouterProvider) {
     }
   });
 
-  $stateProvider.state('stash', {
-    url: '/stash',
+  $stateProvider.state('profile', {
+    url: '/profile',
     views: {
       'nav': {
         templateUrl: 'nav/nav.html',
         controller: 'AuthController'
       },
       'page': {
-        templateUrl: 'stash/stash.html',
-        controller: 'StashController'
+        templateUrl: 'profile/profile.html',
+        controller: 'ProfileController'
       }
     },
     data: {
       requireLogin: true
     }
+  });
+
+  $stateProvider.state('profile.stash', {
+    templateUrl: 'profile/profile.stash.html',
+    controller: 'ProfileController'
+  });
+
+  $stateProvider.state('profile.recs', {
+    templateUrl: 'profile/profile.recs.html',
+    controller: 'ProfileController'
+  });
+
+  $stateProvider.state('profile.wishlist', {
+    templateUrl: 'profile/profile.wishlist.html',
+    controller: 'ProfileController'
+  });
+
+  $stateProvider.state('profile.friends', {
+    templateUrl: 'profile/profile.friends.html',
+    controller: 'ProfileController'
+  });
+
+  $stateProvider.state('profile.blogs', {
+    templateUrl: 'profile/profile.blogs.html',
+    controller: 'ProfileController'
   });
 
   $stateProvider.state('product', {

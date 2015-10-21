@@ -1,6 +1,19 @@
+/*Generic Specs*/
+
 body {
     margin:0;
     padding:0;
+}
+
+.nav {
+    background-color: #000000;
+}
+
+.search {
+    float: left;
+    width: 500px;
+    padding-left: 25px;
+    padding-top: 10px;
 }
 
 /*No Auth Opening Page*/
@@ -24,7 +37,7 @@ body {
 }
 
 .navButton {
-    border-radius: 10px;
+    border-radius: 5px;
     font-size: 130%;
     margin-right: 30px;
     margin-top: 40px;
@@ -51,7 +64,7 @@ body {
 }
 
 .navButtonScroll {
-    border-radius: 10px;
+    border-radius: 5px;
     font-size: 130%;
     margin-right: 25px;
     margin-top: 5px;
@@ -61,6 +74,8 @@ body {
     border:2px solid white;
 }
 
+/*Auth nav bar*/
+
 .homePostAuth {
     color: white;
     background-size: cover;
@@ -69,31 +84,28 @@ body {
     opacity: 0.8;
 }
 
-
-.nav {
-    background-color: #000000;
+.navButtonScrollAuth {
+    border-radius: 5px;
+    font-size: 150%;
+    margin-right: 25px;
+    margin-top: 25px;
+    float: right;
 }
 
-.search {
-    float: left;
-    width: 500px;
-    padding-left: 25px;
-    padding-top: 10px;
+.searchAuth {
+    margin-top: 10px;
 }
 
+
+/*Home feed*/
 
 .feed {
     padding-top: 100px;
 }
 
 .feedItem {
-    height: 80;
-    border-bottom: black;
-}
-
-li {
-  height: 120px;
-  border-bottom: 1px solid gray;
+    height: 120px;
+    border-bottom: 1px solid gray;
 }
 
 /*Stash and Profile*/
@@ -108,9 +120,7 @@ li {
     background-size: cover;
     background-image: url("/photos/backgroundProfilePhoto.jpg");
     background-position: -80px;
-/*    background-attachment: fixed;*/
     height: 300px;
-    /*opacity: 0.8;*/
 }
 
 .profilePhoto {
