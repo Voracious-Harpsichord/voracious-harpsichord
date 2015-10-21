@@ -136,12 +136,6 @@ button:focus {
 
 /*Stash and Profile*/
 
-.profileHeader {
-/*    margin-bottom: 100px;
-    padding-bottom: 80px;
-    border-bottom: 1px black;*/
-}
-
 .profileMainPhoto {
     background-size: cover;
     background-image: url("/photos/backgroundProfilePhoto.jpg");
