@@ -1,39 +1,34 @@
 angular.module('beautystack.services', [])
 
-.factory('Products', ['$http', '$window', function($http, $window) {
+.factory('Products', function($http, Auth) {
+
+  var userProducts = [];
   
   //Get all products for user
   var getAllProducts = function() {
-    //Get userid from local storage
-    // var userid = $window.localstorage.getItem('beauty.userid');
-    // if (!userid) {
-    //   return;
-    // }
 
     //Send GET request to /userProducts/:user_id
     return $http({
       method: 'GET',
-      url: '/api/userProducts/' + '1',
-      // headers: {}
+      url: '/api/userProducts/' + Auth.userData.userid,
+      headers: {
+        'Content-Type': 'application/json'
+      }
     })
     .then(function(resp) {
+      userProducts = resp.data;
       return resp.data;
     });
   };
 
   //Add a product to user's stash
   var addProduct = function(product) {
-    //Get userid from local storage
-    // var userid = $window.localstorage.getItem('beauty.userid');
-    // if (!userid) {
-    //   return;
-    // }
+    
     //Send POST request to /userProducts/:user_id
     return $http({
       method: 'POST',
-      url: '/api/userProducts/' + '1',
+      url: '/api/userProducts/' + Auth.userData.userid,
       headers: {
-        // 'x-access-token': $window.localstorage.getItem('beauty'),
         'Content-Type': 'application/json'
       },
       data: product
@@ -45,17 +40,12 @@ angular.module('beautystack.services', [])
 
   //Update a product in user's stash
   var updateProduct = function(product, newStatus) {
-    //Get userid from local storage
-    // var userid = $window.localstorage.getItem('beauty.userid');
-    // if (!userid) {
-    //   return;
-    // }
+
     //Send PUT request to /userProducts/:user_id
     return $http({
       method: 'PUT',
-      url: '/api/userProducts/' + userid,
+      url: '/api/userProducts/' + Auth.userData.userid,
       headers: {
-        'x-access-token': $window.localstorage.getItem('beauty'),
         'Content-Type': 'application/json'
       },
       data: product
@@ -67,9 +57,12 @@ angular.module('beautystack.services', [])
     addProduct: addProduct,
     updateProduct: updateProduct
   };
-}])
+})
 
-.factory('Auth', ['$http', '$window', function($http, $window) {
+.factory('Auth', function($http) {
+
+  var userData = {};
+  userData.loggedIn = false;
 
   //Send POST request to /newUser when user signs up
   var signup = function(user) {
@@ -80,7 +73,9 @@ angular.module('beautystack.services', [])
       data: user
     })
     .then(function(resp) {
-      return resp.data.userid;
+      userData = resp.data;
+      userData.loggedIn = true;
+      return resp;
     });
   };
 
@@ -93,20 +88,23 @@ angular.module('beautystack.services', [])
       data: user
     })
     .then(function(resp) {
-      return resp.data.userid;
+      userData = resp.data;
+      userData.loggedIn = true;
+      console.log(resp.data.userid);
+      return resp.data;
     });
   };
 
   //Check if beauty object is in local storage
   var isAuth = function() {
-    return true;
-    // return !!$window.localstorage.getItem('beauty');
+    return userData.loggedIn;
   };
 
   return {
+    userData: userData,
     signup: signup,
     signin: signin,
     isAuth: isAuth
   };
 
-}]);
+});
