@@ -1,8 +1,16 @@
 var stash = angular.module('beautystack.profile', []);
 
-stash.controller('ProfileController', function ($scope, Products) {
+stash.controller('ProfileController', function ($scope, Products, $stateParams) {
     $scope.newProduct = '';
     $scope.user = {};
+    $scope.tabs = [
+      {name: 'My Stash', path: 'stash'}, 
+      {name: 'Explore Your Products', path: 'explore'}, 
+      {name: 'Friends', path: 'friends'}, 
+      {name: 'Wishlist', path: 'wishlist'},
+      {name: 'Recommendations', path: 'recs'}, 
+      {name: 'Blogs', path: 'blogs'}
+    ]
 
     $scope.getCurrentUser = function() {
       $scope.user = {
