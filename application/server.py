@@ -25,7 +25,7 @@ from db_controller import product_controller as p_ctrl
 def send_index():
     return send_from_directory('static', 'index.html')
 
-@app.route('/api/user',methods=['GET', 'POST'])
+@app.route('/api/user',methods=['GET', 'POST', 'DELETE'])
 def user():
     #Cookie Authentication
     if request.method == 'GET':
@@ -33,8 +33,8 @@ def user():
         #if cookie exists
         if user_id != None:
             #return user data from user id on cookie, and refresh cookie
-            reponse = sonify(u_ctrl.get_user_as_dictionary(user_id))
-            u_ctrl.create_session(response, user_id)
+            response = jsonify(u_ctrl.get_user_as_dictionary(user_id))
+            response = u_ctrl.create_session(response, user_id)
             return response, 200
         #otherwise return a 204
         return "No login", 204
@@ -58,6 +58,12 @@ def user():
         else:
             return 'Invalid password', 401
 
+    #Destroying sessions on logaou
+    if request.method == 'DELETE':
+        response = jsonify(response="Session Destroyed")
+        response = u_ctrl.destroy_session(response)
+        return response, 204
+
 @app.route('/api/newUser',methods=['POST'])
 def newUser():
     body = request.get_json()
@@ -79,6 +85,7 @@ def newUser():
 
 @app.route('/api/userProducts/<user_id>',methods=['GET','POST','PUT','DELETE'])
 def userProducts(user_id):
+
     #GET
     if request.method == 'GET':
         #lookup all products for in users collection

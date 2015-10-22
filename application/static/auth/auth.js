@@ -44,10 +44,10 @@ angular.module('beautystack.auth', [])
     };
 
     $scope.signout = function() {
-      for (var key in Auth.userData) {
-        delete Auth.userData[key];
-      }
-      Auth.userData.loggedIn = false;
+      Auth.signout()
+      .catch(function(err) {
+        console.error(err);
+      });
       $state.go('home');
     };
 });

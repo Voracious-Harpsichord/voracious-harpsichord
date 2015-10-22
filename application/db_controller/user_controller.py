@@ -66,15 +66,17 @@ def get_user_as_dictionary(id):
 # Add a sessions cookie on to the
 def create_session(response, user_id):
     #Attach session-cookie to response
-    return response.set_cookie('beauty', value=user_id)
+    response.set_cookie('beauty', str(user_id))
+    return response
 
 # Verify that request has session-cookie to continue
 def verify_session(request):
     #Return value stored in session-cookie or None
-    return request.cookies.get('beauty', None)
+    return request.cookies.get('beauty')
 
 # Remove the sessions
 def destroy_session(response):
     # Destory session-cookie
-    return response.set_cookie('beauty', expires=0)
+    response.set_cookie('beauty', expires=0)
+    return response
 

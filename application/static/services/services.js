@@ -7,18 +7,21 @@ angular.module('beautystack.services', [])
   //Get all products for user
   var getAllProducts = function() {
 
-    //Send GET request to /userProducts/:user_id
-    return $http({
-      method: 'GET',
-      url: '/api/userProducts/' + Auth.userData.userid,
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(function(resp) {
-      resp.data.userProducts.forEach(function(item) {userProducts.push(item);});
-      return resp.data;
-    });
+    //check if userid exists first
+    if (Auth.userData.userid) {
+      //Send GET request to /userProducts/:user_id
+      return $http({
+        method: 'GET',
+        url: '/api/userProducts/' + Auth.userData.userid,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(function(resp) {
+        resp.data.userProducts.forEach(function(item) {userProducts.push(item);});
+        return resp.data;
+      });
+    }
   };
 
   //Add a product to user's stash
@@ -74,15 +77,18 @@ angular.module('beautystack.services', [])
     })
     .then(function(resp) {
       //if status code is 200, then extend userData
-      if (resp.statusCode === 200) {
+      if (resp.status === 200) {
         angular.extend(userData, resp.data);
         userData.loggedIn = true;
         return resp;
       }
       //if status code is 204, then do nothing
-      if (resp.statusCode === 204) {
+      if (resp.status === 204) {
         return resp;
       }
+    })
+    .catch(function(error) {
+      console.error(error);
     });
   };
 
@@ -114,8 +120,19 @@ angular.module('beautystack.services', [])
     .then(function(resp) {
       angular.extend(userData, resp.data);
       userData.loggedIn = true;
-      console.log(userData);
       return resp.data;
+    });
+  };
+
+  var signout = function() {
+    for (var key in userData) {
+      delete userData[key];
+    }
+    userData.loggedIn = false;
+    return $http({
+      method: 'DELETE',
+      url: '/api/user',
+      headers: {'Content-Type': 'application/json'},
     });
   };
 
@@ -128,6 +145,7 @@ angular.module('beautystack.services', [])
     userData: userData,
     signup: signup,
     signin: signin,
+    signout: signout,
     isAuth: isAuth
   };
 
