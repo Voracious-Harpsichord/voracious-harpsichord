@@ -25,24 +25,44 @@ from db_controller import product_controller as p_ctrl
 def send_index():
     return send_from_directory('static', 'index.html')
 
-@app.route('/api/user',methods=['POST'])
+@app.route('/api/user',methods=['GET', 'POST', 'DELETE'])
 def user():
-    body = request.get_json()
-    #if user does not exist in database
-    if not u_ctrl.user_exists(body['username']):
-        return 'User does not exist', 404
-    #if user has correct password
-    if u_ctrl.verify_user(body['username'], body['password']):
-        #make response
-        user_id = u_ctrl.get_user_id(body['username'])
-        response = jsonify(u_ctrl.get_user_as_dictionary(user_id))
-        #add session-cookie to response
-        u_ctrl.create_session(response)
-        #return user object with a 200
-        return response, 200
-    #return 401 if auth failed
-    else:
-        return 'Invalid password', 401
+    #Cookie Authentication
+    if request.method == 'GET':
+        user_id = u_ctrl.verify_session(request)
+        #if cookie exists
+        if user_id != None:
+            #return user data from user id on cookie, and refresh cookie
+            response = jsonify(u_ctrl.get_user_as_dictionary(user_id))
+            response = u_ctrl.create_session(response, user_id)
+            return response, 200
+        #otherwise return a 204
+        return "No login", 204
+    
+    #Regular logins
+    if request.method == 'POST':
+        body = request.get_json()
+        #if user does not exist in database
+        if not u_ctrl.user_exists(body['username']):
+            return 'User does not exist', 404
+        #if user has correct password
+        if u_ctrl.verify_user(body['username'], body['password']):
+            #make response
+            user_id = u_ctrl.get_user_id(body['username'])
+            response = jsonify(u_ctrl.get_user_as_dictionary(user_id))
+            #add session-cookie to response
+            response = u_ctrl.create_session(response, user_id)
+            #return user object with a 200
+            return response, 200
+        #return 401 if auth failed
+        else:
+            return 'Invalid password', 401
+
+    #Destroying sessions on logaou
+    if request.method == 'DELETE':
+        response = jsonify(response="Session Destroyed")
+        response = u_ctrl.destroy_session(response)
+        return response, 204
 
 @app.route('/api/newUser',methods=['POST'])
 def newUser():
@@ -55,7 +75,7 @@ def newUser():
         user_id = u_ctrl.get_user_id(body['username'])
         response = jsonify(u_ctrl.get_user_as_dictionary(user_id))
         #add session-cookie to response
-        u_ctrl.create_session(response)
+        response = u_ctrl.create_session(response, user_id)
         #return user object with a 201
         return response, 201
     #else return a 302 for Found
@@ -65,6 +85,7 @@ def newUser():
 
 @app.route('/api/userProducts/<user_id>',methods=['GET','POST','PUT','DELETE'])
 def userProducts(user_id):
+
     #GET
     if request.method == 'GET':
         #lookup all products for in users collection

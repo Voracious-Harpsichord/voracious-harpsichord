@@ -5,7 +5,7 @@ class User(db.Model):
     created_at =db.Column(db.String(40))
     username = db.Column(db.String(80), unique=True)
     pw_hash = db.Column(db.String(120))
-    email = db.Column(db.String(80), unique=True)
+    email = db.Column(db.String(80))
     name_title = db.Column(db.String(80))
     name_first = db.Column(db.String(80))
     name_last = db.Column(db.String(80))

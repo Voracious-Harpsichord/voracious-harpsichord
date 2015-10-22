@@ -64,17 +64,19 @@ def get_user_as_dictionary(id):
     return {'userid':u.id, 'created_at':u.created_at, 'username':u.username, 'name_title':u.name_title, 'name_first':u.name_first, 'name_last':u.name_last, 'gender':u.gender, 'location':u.location, 'birthday':u.birthday}
 
 # Add a sessions cookie on to the
-def create_session(response):
+def create_session(response, user_id):
     #Attach session-cookie to response
-    return response.set_cookie('beauty', value='beauty')
+    response.set_cookie('beauty', str(user_id))
+    return response
 
 # Verify that request has session-cookie to continue
 def verify_session(request):
-    #Check for session-cookie and return true or false
-    return 'beauty' in request.cookies
+    #Return value stored in session-cookie or None
+    return request.cookies.get('beauty')
 
 # Remove the sessions
 def destroy_session(response):
     # Destory session-cookie
-    return response.set_cookie('beauty', expires=0)
+    response.set_cookie('beauty', expires=0)
+    return response
 
