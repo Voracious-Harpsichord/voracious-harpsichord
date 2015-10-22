@@ -19,12 +19,12 @@ def login(username,password,method):
     return jsonify(username=username,password=password,method=method)
 
 # Write a new entry into the users table
-def make_new_user(username, password):
+def make_new_user(created_at, username, password, email='', name_title='', name_first='', name_last='', gender='', location='', birthday=''):
     # hash password
     hashed = bcrypt.generate_password_hash(password)
     # make new user entry
     # add new user entry to the table
-    session.add(User(username, hashed))
+    session.add(User(created_at, username, hashed, email, name_title, name_first, name_last, gender, location, birthday))
     session.commit()
     return None
 
