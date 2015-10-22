@@ -6,7 +6,7 @@ stash.controller('ProfileController', function ($scope, Products, $stateParams, 
     $scope.newProduct.brand_name = '';
     $scope.newProduct.product_name = '';
     $scope.tabs = [
-      {name: 'My Stash', path: 'stash'}, 
+      {name: 'Stash', path: 'stash'}, 
       {name: 'Explore Your Products', path: 'explore'}, 
       {name: 'Friends', path: 'friends'}, 
       {name: 'Wishlist', path: 'wishlist'},
