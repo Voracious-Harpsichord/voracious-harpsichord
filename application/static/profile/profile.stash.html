@@ -1,6 +1,22 @@
 <div class='container'>
   <form name='search'>
-    <input type='text' ng-model='newProduct' required />
+    <label for='product'>Product:</label>
+    <input id='product' type='text' ng-model='newProduct.brand_name' placeholder='Brand name' required />
+    <input type='text' ng-model='newProduct.product_name' placeholder='Product name' required />
+    <label for='size'>Size</label>
+    <select id='size'>
+      <option value='Full'>Full</option>
+      <option value='Travel'>Travel</option>
+    </select>
+    <label for='status'>Status</label>
+    <select id='status'>
+      <option value='Own'>Currently Own</option>
+      <option value='Finished'>Finished</option>
+      <option value='Expired'>Expired</option>
+      <option value='Wish'>Wish</option>
+    </select><br>
+    <label for='notes'>Notes:</label><br>
+    <textarea id='notes' ng-model='newProduct.notes' rows='10' cols='50'>Enter your notes</textarea><br>
     <button ng-click='addProduct()'>Add to my Stack!</button>
     <button ng-click='search()'>Seach for product</button>
   </form>
