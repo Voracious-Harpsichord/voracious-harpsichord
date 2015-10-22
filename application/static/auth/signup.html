@@ -2,10 +2,14 @@
   <div class='content'>
     <h1>Sign Up</h1>
     <form name='signupForm' ng-submit='signup()' novalidate>
-      <input type='text' ng-model='user.firstName' placeholder='First Name' required />
-      <input type='text' ng-model='user.lastName' placeholder='Last Name' required />
-      <input type='text' ng-model='user.username' placeholder='Email' required />
-      <input type='password' ng-model='user.password' placeholder='Password' required />
+      <input id='title' type='text' ng-model='user.name_title' placeholder='Mr., Mrs., Ms, etc...' required />
+      <input type='text' ng-model='user.name_first' placeholder='First Name' required />
+      <input type='text' ng-model='user.name_last' placeholder='Last Name' required /><br>
+      <input id='email' type='text' ng-model='user.email' placeholder='Email address' required /><br>
+      <input type='text' ng-model='user.username' placeholder='Username' required />
+      <input type='password' ng-model='user.password' placeholder='Password' required /><br>
+      <input type='text' ng-model='user.birthday' placeholder='Birthday (MM/DD/YYYY)' required /><br>
+      <input type='text' ng-model='user.location' placeholder='Current City' required /><br>
       <button>Sign up</button>
       <div class='spinner'></div>
     </form>

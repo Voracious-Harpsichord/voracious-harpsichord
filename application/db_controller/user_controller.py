@@ -11,6 +11,7 @@ session._model_changes = {}
 from db_models.users import User
 #additional libs
 from server import bcrypt
+import datetime
 
 # Stub functions for testing endpoints
 def signup(username,password,method):
@@ -19,12 +20,13 @@ def login(username,password,method):
     return jsonify(username=username,password=password,method=method)
 
 # Write a new entry into the users table
-def make_new_user(username, password):
+def make_new_user(u):
     # hash password
-    hashed = bcrypt.generate_password_hash(password)
+    hashed = bcrypt.generate_password_hash(u['password'])
     # make new user entry
     # add new user entry to the table
-    session.add(User(username, hashed))
+    #__init__(self, created_at, username, pw_hash, email, name_title, name_first, name_last, gender, location, birthday)
+    session.add(User(str(datetime.datetime.now()), u['username'], hashed, u.get('email', ''), u.get('name_title', ''), u.get('name_first', ''), u.get('name_last', ''), u.get('gender', ''), u.get('location', ''), u.get('birthday', '')))
     session.commit()
     return None
 
@@ -55,10 +57,11 @@ def get_user_id(username):
     # return user id of user
     return session.query(User).filter(User.username == username).one().id
 
-def get_user_obj(id):
+def get_user_as_dictionary(id):
     # lookup user in table by usernamed
     # return user id of user
-    return session.query(User).filter(User.id == id).one()
+    u = session.query(User).filter(User.id == id).one()
+    return {'userid':u.id, 'created_at':u.created_at, 'username':u.username, 'name_title':u.name_title, 'name_first':u.name_first, 'name_last':u.name_last, 'gender':u.gender, 'location':u.location, 'birthday':u.birthday}
 
 # Add a sessions cookie on to the
 def create_session(response):

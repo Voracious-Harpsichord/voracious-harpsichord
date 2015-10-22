@@ -1,8 +1,10 @@
 var stash = angular.module('beautystack.profile', []);
 
-stash.controller('ProfileController', function ($scope, Products, $stateParams) {
-    $scope.newProduct = '';
-    $scope.user = {};
+stash.controller('ProfileController', function ($scope, Products, $stateParams, Auth) {
+    $scope.user = Auth.userData;
+    $scope.newProduct = {};
+    $scope.newProduct.brand_name = '';
+    $scope.newProduct.product_name = '';
     $scope.tabs = [
       {name: 'My Stash', path: 'stash'}, 
       {name: 'Explore Your Products', path: 'explore'}, 
@@ -12,29 +14,15 @@ stash.controller('ProfileController', function ($scope, Products, $stateParams) 
       {name: 'Blogs', path: 'blogs'}
     ]
 
-    $scope.getCurrentUser = function() {
-      $scope.user = {
-        firstName: 'Laura', 
-        lastName: 'Weaver',
-        email: 'laura.maclay.weaver@gmail.com',
-        age: 25, 
-        location: 'San Francisco, CA',
-        photo: '../photos/testProfilePhoto.jpg',
-        username: 'lauraweaver',
-        createdAt: 2015,
-        description: 'I am a real human who likes skincare a bit too much.'
-      };
-    };
-
     //Display all products in user's stash
     $scope.products = Products.userProducts;
 
     //Add a product 
     $scope.addProduct = function() {
-      var product = {'brand_name': 'Sephora', 'product_name': $scope.newProduct};
-      Products.addProduct(product)
+      Products.addProduct($scope.newProduct)
       .then(function(addedProduct) {
-        $scope.newProduct = '';
+        $scope.newProduct.brand_name = '';
+        $scope.newProduct.product_name = '';
         $scope.products.push(addedProduct);
       })
       .catch(function(error) {
@@ -42,5 +30,4 @@ stash.controller('ProfileController', function ($scope, Products, $stateParams) 
       });
     };
 
-    $scope.getCurrentUser();
   });

@@ -65,6 +65,29 @@ angular.module('beautystack.services', [])
   var userData = {};
   userData.loggedIn = false;
 
+  //Send GET request to /api/user upon loading services.js file in index.html
+  var checkCookie = function() {
+    return $http({
+      method: 'GET',
+      url: '/api/user',
+      headers: {'Content-Type': 'application/json'}
+    })
+    .then(function(resp) {
+      //if status code is 200, then extend userData
+      if (resp.statusCode === 200) {
+        angular.extend(userData, resp.data);
+        userData.loggedIn = true;
+        return resp;
+      }
+      //if status code is 204, then do nothing
+      if (resp.statusCode === 204) {
+        return resp;
+      }
+    });
+  };
+
+  checkCookie();
+
   //Send POST request to /newUser when user signs up
   var signup = function(user) {
     return $http({
@@ -91,6 +114,7 @@ angular.module('beautystack.services', [])
     .then(function(resp) {
       angular.extend(userData, resp.data);
       userData.loggedIn = true;
+      console.log(userData);
       return resp.data;
     });
   };

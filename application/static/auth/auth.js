@@ -1,10 +1,12 @@
 angular.module('beautystack.auth', [])
 
-.controller('AuthController', function($scope, $state, Auth, Products, $document) {
+.controller('AuthController', function($scope, $window, $state, Auth, Products, $document) {
 
-    $scope.user = {};
+    $scope.user = Auth.userData;
     $scope.loginStatus = Auth.userData.loggedIn;
-    $scope.user.name = Auth.userData.name;
+    
+    //Invoke getAllProducts function from Products factory immediately
+    Products.getAllProducts();
 
     $scope.signup = function() {
       //Invoke signup function from Auth factory
@@ -12,6 +14,8 @@ angular.module('beautystack.auth', [])
       .then(function() {
         //Fetch user's products
         Products.getAllProducts();
+        //Delete password property on $scope.user
+        delete $scope.user.password;
         //Transition to stash page
         $state.go('home');
       })
@@ -19,6 +23,7 @@ angular.module('beautystack.auth', [])
         console.error(error);
         $scope.error = error.data;
       });
+
     };
 
     $scope.signin = function() {
@@ -27,6 +32,8 @@ angular.module('beautystack.auth', [])
       .then(function() {
         //Fetch user's products
         Products.getAllProducts();
+        //Delete password property on $scope.user
+        delete $scope.user.password;
         //Transition to stash page
         $state.go('home');
       })
@@ -37,7 +44,9 @@ angular.module('beautystack.auth', [])
     };
 
     $scope.signout = function() {
-      Auth.userData = {};
+      for (var key in Auth.userData) {
+        delete Auth.userData[key];
+      }
       Auth.userData.loggedIn = false;
       $state.go('home');
     };

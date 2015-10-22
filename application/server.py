@@ -34,7 +34,8 @@ def user():
     #if user has correct password
     if u_ctrl.verify_user(body['username'], body['password']):
         #make response
-        response = jsonify({'userid': u_ctrl.get_user_id(body['username'])})
+        user_id = u_ctrl.get_user_id(body['username'])
+        response = jsonify(u_ctrl.get_user_as_dictionary(user_id))
         #add session-cookie to response
         u_ctrl.create_session(response)
         #return user object with a 200
@@ -49,12 +50,13 @@ def newUser():
     #if user is not already in db
     if not u_ctrl.user_exists(body['username']):
         #add user to db
-        u_ctrl.make_new_user(body['username'], body['password'])
+        u_ctrl.make_new_user(body)
         #make response
-        response = jsonify({'userid': u_ctrl.get_user_id(body['username'])})
-        #add session-cooker to response
+        user_id = u_ctrl.get_user_id(body['username'])
+        response = jsonify(u_ctrl.get_user_as_dictionary(user_id))
+        #add session-cookie to response
         u_ctrl.create_session(response)
-        #return user object witha 201
+        #return user object with a 201
         return response, 201
     #else return a 302 for Found
     else:
