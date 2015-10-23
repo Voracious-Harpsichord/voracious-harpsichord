@@ -6,3 +6,6 @@ Flask-SQLAlchemy==1.0
 SQLAlchemy==0.9.7
 SQLAlchemy-Utils==0.26.9
 Flask-Bower==1.2.1
+redis==2.10.3
+rq==0.5.3
+
