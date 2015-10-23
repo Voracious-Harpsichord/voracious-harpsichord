@@ -1,4 +1,4 @@
-var services = angular.module('beautystack.services', [])
+var services = angular.module('beautystack.services', []);
 
 services.factory('Products', function($http, Auth) {
 
@@ -6,6 +6,7 @@ services.factory('Products', function($http, Auth) {
   
   //Get all products for user
   var getAllProducts = function() {
+    console.log('getAllProducts was invoked!');
 
     //check if userid exists first
     if (Auth.userData.userid) {
@@ -18,12 +19,23 @@ services.factory('Products', function($http, Auth) {
         }
       })
       .then(function(resp) {
-        while(userProducts.length) {userProducts.pop()}
+        while(userProducts.length) {userProducts.pop();}
         resp.data.userProducts.forEach(function(item) {userProducts.push(item);});
+        // console.log(userProducts);
         return resp.data;
       });
     }
   };
+
+  Auth.checkCookie()
+  .then(function(resp) {
+    if (resp.status === 200) {
+      getAllProducts()
+      .then(function(resp) {
+        console.log('cookie checked!', userProducts);
+      });
+    }
+  });
 
   //Add a product to user's stash
   var addProduct = function(product) {
@@ -95,10 +107,13 @@ services.factory('Auth', function($http) {
       if (resp.status === 200) {
         angular.extend(userData, resp.data);
         userData.loggedIn = true;
+        userData.created_at = userData.created_at.substring(0, 4);
+        console.log('200 resp');
         return resp;
       }
       //if status code is 204, then do nothing
       if (resp.status === 204) {
+        console.log('204 resp');
         return resp;
       }
     })
@@ -122,7 +137,6 @@ services.factory('Auth', function($http) {
       userData.loggedIn = true;
       //Use substring to get year
       userData.created_at = userData.created_at.substring(0, 4);
-      console.log(userData.created_at);
       return resp;
     });
   };
@@ -166,6 +180,7 @@ services.factory('Auth', function($http) {
     signup: signup,
     signin: signin,
     signout: signout,
-    isAuth: isAuth
+    isAuth: isAuth,
+    checkCookie: checkCookie
   };
 });
