@@ -20,13 +20,15 @@ class User_product(db.Model):
     product_size = db.Column(db.String(20))
     product_status = db.Column(db.String(20))
     product_notes = db.Column(db.String(500))
+    product_color = db.Column(db.String(40))
 
-    def __init__(self, user_id, product_id, product_size, product_status, product_notes):
+    def __init__(self, user_id, product_id, product_size, product_status, product_notes, product_color):
         self.user_id = user_id
         self.product_id = product_id
         self.product_size = product_size
         self.product_status = product_status
         self.product_notes = product_notes
+        self.product_color = product_color
 
     def __repr__(self):
         return '<product_id %r>' % self.product_id
