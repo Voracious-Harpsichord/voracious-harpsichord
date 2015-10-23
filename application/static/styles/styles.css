@@ -3,11 +3,17 @@
 body {
     margin:0;
     padding:0;
+    font-family: 'Helvetica Neue';
+    font-weight: bold;
 }
 
 ul {
     list-style-type: none;
     margin: 0px;
+}
+
+a {
+    text-decoration: none;
 }
 
 button:focus {
@@ -40,6 +46,7 @@ button:focus {
     float: left;
     margin-left: 40px;
     margin-top: 20px;
+    cursor: pointer; 
 }
 
 .navButton {
@@ -52,6 +59,7 @@ button:focus {
     padding:15px;
     background-color: transparent;
     border:2px solid white;
+    cursor: pointer;
 }
 
 .navButton:hover {
@@ -74,6 +82,7 @@ button:focus {
     float: left;
     padding-left:25px;
     font-size: 250%;
+    cursor: pointer;
 }
 
 .navButtonScroll {
@@ -85,7 +94,8 @@ button:focus {
     float: right;
     padding:7px;
     background-color: transparent;
-    border:2px solid white;
+    cursor: pointer;
+    /*border:2px solid white;*/
 }
 
 .navButtonScroll:hover {
@@ -108,6 +118,7 @@ button:focus {
     margin-right: 25px;
     margin-top: 25px;
     float: right;
+    cursor: pointer;
 }
 
 .searchAuth {
@@ -192,3 +203,53 @@ button:focus {
 .selectTab {
     border-bottom: 5px solid #E8E8E8;
 }
+
+/* Login */
+
+.container {
+    margin-top: 115px;
+    margin-bottom: 50px;
+}
+
+.content {
+    border: 1px solid #bebebe;
+    border-radius: 7px;
+    padding-bottom: 20px;
+}
+
+.header{
+    margin-bottom: 30px;
+}
+
+.oauth {
+    border-bottom: 1px solid #bebebe;
+    margin-bottom: 25px;
+}
+
+#login {
+    background-color: #fb7060;
+    font-weight: bold;
+    font-family: 'Helvetica Neue';
+    color: #fff;
+    margin-top: 15px;
+}
+
+.btn-block {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    margin-bottom: 5px;
+}
+
+#link {
+    text-decoration: none;
+    color: #606d9f;
+    font-size: 20px;
+}
+
+.error {
+    font-size:15px;
+}
+
+
