@@ -57,11 +57,25 @@ angular.module('beautystack.services', [])
     });
   };
 
+  //Retrieve prouct information for product profile page
+  var retrieveProduct = function(product_id) {
+
+    //Send GET request to /api/products/:product_id
+    return $http({
+      method: 'GET',
+      url: '/api/products/' + product_id,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+  };
+
   return {
     getAllProducts: getAllProducts,
     addProduct: addProduct,
     updateProduct: updateProduct,
-    userProducts: userProducts
+    userProducts: userProducts,
+    retrieveProduct: retrieveProduct
   };
 })
 
@@ -107,6 +121,8 @@ angular.module('beautystack.services', [])
     .then(function(resp) {
       angular.extend(userData, resp.data);
       userData.loggedIn = true;
+      userData.created_at = userData.created_at.substring(0, 4);
+      console.log(userData.created_at);
       return resp;
     });
   };
@@ -122,6 +138,8 @@ angular.module('beautystack.services', [])
     .then(function(resp) {
       angular.extend(userData, resp.data);
       userData.loggedIn = true;
+      userData.created_at = userData.created_at.substring(0, 4);
+      console.log(userData.created_at);
       return resp.data;
     });
   };
