@@ -2,9 +2,20 @@ var stash = angular.module('beautystack.profile', []);
 
 stash.controller('ProfileController', function ($scope, Products, $stateParams, Auth) {
     $scope.user = Auth.userData;
-    $scope.newProduct = {};
-    $scope.newProduct.brand_name = '';
-    $scope.newProduct.product_name = '';
+
+    $scope.newProduct = {
+      product_name: '',
+      brand_name: '',
+      product_size: '',
+      product_status:'',
+      product_notes: '',
+      product_color: ''
+    };
+
+    $scope.editMode = false;
+    $scope.filter;
+    $scope.currentItemIndex;
+
     $scope.tabs = [
       {name: 'Stash', path: 'stash'}, 
       {name: 'Explore Your Products', path: 'explore'}, 
@@ -18,17 +29,41 @@ stash.controller('ProfileController', function ($scope, Products, $stateParams, 
     $scope.products = Products.userProducts;
 
     //Add a product 
-    $scope.addProduct = function() {
-      console.log('Frontend Object:', $scope.newProduct)
-      Products.addProduct($scope.newProduct)
+    $scope.addProduct = function(product) {
+      console.log(product)
+      Products.addProduct(product)
       .then(function(addedProduct) {
+        $scope.products.push(addedProduct);
         $scope.newProduct.brand_name = '';
         $scope.newProduct.product_name = '';
-        $scope.products.push(addedProduct);
+        $scope.newProduct.notes = '';
       })
       .catch(function(error) {
         console.error('Error with adding product:', error);
       });
     };
 
+    $scope.editModeFn = function(product) {
+      $scope.editMode = true
+      $scope.newProduct = angular.copy(product);
+      $scope.currentItemIndex = $scope.products.indexOf(product);
+    }
+
+    $scope.editProduct = function(product) {
+      $scope.products[$scope.currentItemIndex] = angular.copy(product)
+      $scope.editMode = false
+      Products.editProduct(product)
+        .then(function(editedProduct){
+          $scope.newProduct.brand_name = '';
+          $scope.newProduct.product_name = '';
+          $scope.newProduct.notes = '';
+        })
+        .catch(function(error) {
+          console.error('Error with editing product:', error);
+        })
+    }
+
+    // $scope.search = function(product) {
+    //   $scope.filter = product
+    // }
   });

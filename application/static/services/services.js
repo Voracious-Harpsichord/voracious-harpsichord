@@ -1,6 +1,6 @@
-angular.module('beautystack.services', [])
+var services = angular.module('beautystack.services', [])
 
-.factory('Products', function($http, Auth) {
+services.factory('Products', function($http, Auth) {
 
   var userProducts = [];
   
@@ -18,7 +18,6 @@ angular.module('beautystack.services', [])
         }
       })
       .then(function(resp) {
-        console.log(resp)
         while(userProducts.length) {userProducts.pop()}
         resp.data.userProducts.forEach(function(item) {userProducts.push(item);});
         return resp.data;
@@ -44,8 +43,8 @@ angular.module('beautystack.services', [])
   };
 
   //Update a product in user's stash
-  var updateProduct = function(product, newStatus) {
-
+  var editProduct = function(product) {
+    console.log(product)
     //Send PUT request to /userProducts/:user_id
     return $http({
       method: 'PUT',
@@ -71,15 +70,15 @@ angular.module('beautystack.services', [])
   };
 
   return {
+    userProducts: userProducts,
     getAllProducts: getAllProducts,
     addProduct: addProduct,
-    updateProduct: updateProduct,
-    userProducts: userProducts,
+    editProduct: editProduct,
     retrieveProduct: retrieveProduct
   };
-})
+});
 
-.factory('Auth', function($http) {
+services.factory('Auth', function($http) {
 
   var userData = {};
   userData.loggedIn = false;
@@ -169,5 +168,4 @@ angular.module('beautystack.services', [])
     signout: signout,
     isAuth: isAuth
   };
-
 });

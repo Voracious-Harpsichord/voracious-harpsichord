@@ -4,28 +4,32 @@
     <input id='product' type='text' ng-model='newProduct.brand_name' placeholder='Brand name' required />
     <input type='text' ng-model='newProduct.product_name' placeholder='Product name' required />
     <label for='size'>Size</label>
-    <select ng-model='newProduct.size' id='size'>
+    <select ng-model='newProduct.product_size' id='size'>
       <option value='Full'>Full</option>
       <option value='Travel'>Travel</option>
     </select>
     <label for='status'>Status</label>
-    <select ng-model='newProduct.status' id='status'>
+    <select ng-model='newProduct.product_status' id='status'>
       <option value='Own'>Currently Own</option>
       <option value='Finished'>Finished</option>
       <option value='Expired'>Expired</option>
       <option value='Wish'>Wish</option>
     </select><br>
     <label for='notes'>Notes:</label><br>
-    <textarea id='notes' ng-model='newProduct.notes' rows='10' cols='50'>Enter your notes</textarea><br>
-    <button ng-click='addProduct()'>Add to my Stack!</button>
-    <button ng-click='search()'>Seach for product</button>
+    <input id='notes' ng-model='newProduct.product_notes' rows='1' cols='50'></input><br>
+    <label for='notes'>Color:</label><br>
+    <input id='notes' ng-model='newProduct.product_color' rows='1' cols='50'></input><br>
+    <button ng-click='search(newProduct)'>Seach for product</button>
+    <button ng-show='editMode' ng-click='editProduct(newProduct)'>Edit Product</button>
+    <button ng-hide='editMode' ng-click='addProduct(newProduct)'> Add Product</button>
   </form>
 
-  <div class='stash' ng-repeat='product in products track by $index'>
+  <div class='stash' ng-repeat='product in products track by $index | filter: filter'>
     <span class='product-brand'> {{ product.brand_name }}</span>
     <span class='product-name'> {{ product.product_name }}</span>
     <span>{{product.product_size}}</span>
     <span>{{product.product_status}}</span>
     <span>{{product.product_notes}}</span>
+    <button ng-click='editModeFn(product)'>Edit</button>
   </div>
 </div>
