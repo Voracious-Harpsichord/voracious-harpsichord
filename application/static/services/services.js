@@ -56,7 +56,7 @@ services.factory('Products', function($http, Auth) {
 
   //Update a product in user's stash
   var editProduct = function(product) {
-    console.log(product)
+    console.log(product);
     //Send PUT request to /userProducts/:user_id
     return $http({
       method: 'PUT',
