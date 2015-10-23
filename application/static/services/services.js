@@ -73,7 +73,7 @@ services.factory('Products', function($http, Auth) {
     userProducts: userProducts,
     getAllProducts: getAllProducts,
     addProduct: addProduct,
-    editProduct: editProduct
+    editProduct: editProduct,
     retrieveProduct: retrieveProduct
   };
 });
