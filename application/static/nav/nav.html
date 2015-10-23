@@ -39,7 +39,7 @@
         <h1  class='navNameScroll' ui-sref='home'>BeautyStack</h1>
         <span class='navButtonScrollAuth glyphicon glyphicon-star-empty' ui-sref='wishlist'></span>
         <span  class='navButtonScrollAuth' ui-sref='home'>Discover</span>
-        <span class='navButtonScrollAuth' ui-sref='profile'>Your Stack</span>
+        <span class='navButtonScrollAuth' ui-sref='profile.stash'>Your Stash</span>
         <span class="navButtonScrollAuth dropdown">
             <button class="nameButton dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ui-sref='profile.stash'>
                 Hi, {{user.name_first}}!
@@ -52,7 +52,7 @@
                 <li><a ui-sref='profile.wishlist'>Wishlist</a></li>
                 <li><a ui-sref='profile.recs'>Recommendations</a></li>
                 <li><a ui-sref='profile.blogs'>Blogs</a></li>
-                <li><a ui-sref='profile.settings'>Settings</a></li>
+                <li><a ui-sref='profile'>Settings</a></li>
                 <li><a ng-click='signout()'>Logout</a></li>
             </ul>
         </span>

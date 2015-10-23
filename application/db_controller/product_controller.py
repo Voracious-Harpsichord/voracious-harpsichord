@@ -47,14 +47,45 @@ def add_product_to_products(product_name, product_brand):
     #Return most recently created product
     return session.query(Product).filter(Product.product_name == product_name and Product.product_brand == product_brand).one().id
 
-#Create a relationship between user and product
-def add_user_to_product(user_id, product_id):
+#Create a relationship between user and product and add user data to product relationship
+def add_user_to_product(user_id, product_id, product_size='full', product_status='own', product_notes=''):
     #Add user and product to user/products
-    session.add(User_product(int(user_id), int(product_id)))
+    session.add(User_product(int(user_id), int(product_id), product_size, product_status, product_notes))
     session.commit()
-    new_product = session.query(Product).filter(Product.id == product_id).one()
+    product_universal = session.query(Product).filter(Product.id == product_id).one()
+    product_user = session.query(User_product).filter(User_product.product_id == product_id).one()
+
     #return the new product from Products table
-    return {'product_id': new_product.id, 'brand_name': new_product.product_brand, 'product_name': new_product.product_name}
+    return {
+        'product_id': product_universal.id, 
+        'brand_name': product_universal.product_brand, 
+        'product_name': product_universal.product_name,
+        'product_size': product_user.product_size,
+        'product_status': product_user.product_status,
+        'product_notes': product_user.product_notes
+    }
+
+def edit_user_to_product(product_id, product_size, product_status, product_notes):
+    
+    session.query(Product).\
+        filter(Product.id == product_id).\
+        update({
+            'product_size': product_size,
+            'product_status': product_status,
+            'product_notes': product_notes
+        })
+
+    session.commit()
+
+    product = session.query(Product).filter(Product.id == product_id).one()
+    return {
+        'product_id': product.id, 
+        'brand_name': product.product_brand, 
+        'product_name': product.product_name,
+        'product_size': product.product_size,
+        'product_status': product.product_status,
+        'product_notes': product.product_notes
+    }
 
 #Delete a relationship between user and product
 def remove_user_from_product(user_product_id):

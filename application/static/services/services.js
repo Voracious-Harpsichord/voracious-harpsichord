@@ -18,6 +18,7 @@ angular.module('beautystack.services', [])
         }
       })
       .then(function(resp) {
+        while(userProducts.length) {userProducts.pop()}
         resp.data.userProducts.forEach(function(item) {userProducts.push(item);});
         return resp.data;
       });

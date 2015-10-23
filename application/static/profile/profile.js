@@ -6,7 +6,7 @@ stash.controller('ProfileController', function ($scope, Products, $stateParams, 
     $scope.newProduct.brand_name = '';
     $scope.newProduct.product_name = '';
     $scope.tabs = [
-      {name: 'My Stash', path: 'stash'}, 
+      {name: 'Stash', path: 'stash'}, 
       {name: 'Explore Your Products', path: 'explore'}, 
       {name: 'Friends', path: 'friends'}, 
       {name: 'Wishlist', path: 'wishlist'},
@@ -19,6 +19,7 @@ stash.controller('ProfileController', function ($scope, Products, $stateParams, 
 
     //Add a product 
     $scope.addProduct = function() {
+      console.log('Frontend Object:', $scope.newProduct)
       Products.addProduct($scope.newProduct)
       .then(function(addedProduct) {
         $scope.newProduct.brand_name = '';
