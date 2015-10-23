@@ -100,13 +100,28 @@ def userProducts(user_id):
             #Add product if not
             product_id = p_ctrl.add_product_to_products(body['product_name'], body['brand_name'])
         #create db relationship between user and product
-        response = jsonify(p_ctrl.add_user_to_product(user_id, product_id))
-        #respond with created product and 201
+        response = jsonify(p_ctrl.add_user_to_product(
+            user_id, 
+            product_id, 
+            body['product_size'], 
+            body['product_status'], 
+            body['product_notes'],
+            body['product_color']
+        ))
         return response, 201
 
-    # if request.method == 'PUT':
-    #     body = request.get_json()
-    #     product = p_ctrl.edit_user_to_product(body['product_size', body['product_status'], body['product_notes'])
+    if request.method == 'PUT':
+        body = request.get_json()
+        product_id = p_ctrl.verify_product_by_name_and_brand(body['product_name'], body['brand_name'])
+        response = jsonify(p_ctrl.edit_user_to_product(
+            user_id,
+            product_id,
+            body['product_size'], 
+            body['product_status'], 
+            body['product_notes'],
+            body['product_color']
+        ))
+        return response, 202
 
     if request.method == 'DELETE':
         body = request.get_json()

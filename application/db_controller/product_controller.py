@@ -72,10 +72,11 @@ def add_user_to_product(user_id, product_id, product_size='full', product_status
         'product_color': product_user.product_color
     }
 
-def edit_user_to_product(product_id, product_size, product_status, product_notes, product_color):
+def edit_user_to_product(user_id, product_id, product_size, product_status, product_notes, product_color):
     
-    session.query(Product).\
-        filter(Product.id == product_id).\
+    session.query(User_product).\
+        filter(User_product.product_id == product_id).\
+        filter(User_product.user_id == user_id).\
         update({
             'product_size': product_size,
             'product_status': product_status,
@@ -84,16 +85,17 @@ def edit_user_to_product(product_id, product_size, product_status, product_notes
         })
 
     session.commit()
+    product_universal = session.query(Product).filter(Product.id == product_id).one()
+    product_user = session.query(User_product).filter(User_product.product_id == product_id).one()
 
-    product = session.query(Product).filter(Product.id == product_id).one()
     return {
-        'product_id': product.id, 
-        'brand_name': product.product_brand, 
-        'product_name': product.product_name,
-        'product_size': product.product_size,
-        'product_status': product.product_status,
-        'product_notes': product.product_notes,
-        'product_color': product_color
+        'product_id': product_universal.id, 
+        'brand_name': product_universal.product_brand, 
+        'product_name': product_universal.product_name,
+        'product_size': product_user.product_size,
+        'product_status': product_user.product_status,
+        'product_notes': product_user.product_notes,
+        'product_color': product_user.product_color
     }
 
 #Delete a relationship between user and product
