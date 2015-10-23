@@ -1,24 +1,33 @@
 <div class='container'>
   <form name='search'>
-    <label for='product'>Product:</label>
-    <input id='product' type='text' ng-model='newProduct.brand_name' placeholder='Brand name' required />
-    <input type='text' ng-model='newProduct.product_name' placeholder='Product name' required />
-    <label for='size'>Size</label>
-    <select ng-model='newProduct.product_size' id='size'>
+    <label>Product:</label>
+    <input type='text' ng-model='newProduct.brand_name' placeholder='Brand name' required/>
+    <input type='text' ng-model='newProduct.product_name' placeholder='Product name' required/>
+    <label>Size</label>
+    <select ng-model='newProduct.product_size'>
       <option value='Full'>Full</option>
       <option value='Travel'>Travel</option>
     </select>
-    <label for='status'>Status</label>
-    <select ng-model='newProduct.product_status' id='status'>
+    <label>Status</label>
+    <select ng-model='newProduct.product_status'>
       <option value='Own'>Currently Own</option>
       <option value='Finished'>Finished</option>
       <option value='Expired'>Expired</option>
       <option value='Wish'>Wish</option>
     </select><br>
-    <label for='notes'>Notes:</label><br>
-    <input id='notes' ng-model='newProduct.product_notes' rows='1' cols='50'></input><br>
+    <label>Category:</label>
+    <select ng-model='newProduct.product_category'>
+      <option>Makeup</option>
+      <option>Skin Care</option>
+      <option>Hair</option>
+      <option>Bath and Body</option>
+      <option>Fragrence</option>
+      <option>Tools|Brushes</option>
+    </select><br>
+    <label>Notes:</label><br>
+      <input ng-model='newProduct.product_notes'></input><br>
     <label for='notes'>Color:</label><br>
-    <input id='notes' ng-model='newProduct.product_color' rows='1' cols='50'></input><br>
+    <input ng-model='newProduct.product_color'></input><br>
     <button ng-click='search(newProduct)'>Seach for product</button>
     <button ng-show='editMode' ng-click='editProduct(newProduct)'>Edit Product</button>
     <button ng-hide='editMode' ng-click='addProduct(newProduct)'> Add Product</button>
@@ -30,6 +39,7 @@
     <span>{{product.product_size}}</span>
     <span>{{product.product_status}}</span>
     <span>{{product.product_notes}}</span>
+    <span>{{product.product_category}}</span>
     <button ng-click='editModeFn(product)'>Edit</button>
   </div>
 </div>

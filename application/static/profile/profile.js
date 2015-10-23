@@ -2,6 +2,11 @@ var stash = angular.module('beautystack.profile', []);
 
 stash.controller('ProfileController', function ($scope, Products, $stateParams, Auth) {
     $scope.user = Auth.userData;
+    //Display all products in user's stash
+    $scope.products = Products.userProducts;
+    $scope.editMode = false;
+    $scope.filter;
+    $scope.currentItemIndex;
 
     $scope.newProduct = {
       product_name: '',
@@ -9,24 +14,18 @@ stash.controller('ProfileController', function ($scope, Products, $stateParams, 
       product_size: '',
       product_status:'',
       product_notes: '',
-      product_color: ''
+      product_color: '',
+      product_category: ''
     };
-
-    $scope.editMode = false;
-    $scope.filter;
-    $scope.currentItemIndex;
 
     $scope.tabs = [
       {name: 'Stash', path: 'stash'}, 
-      {name: 'Explore Your Products', path: 'explore'}, 
+      {name: 'Explore Products', path: 'explore'}, 
       {name: 'Friends', path: 'friends'}, 
       {name: 'Wishlist', path: 'wishlist'},
       {name: 'Recommendations', path: 'recs'}, 
       {name: 'Blogs', path: 'blogs'}
     ]
-
-    //Display all products in user's stash
-    $scope.products = Products.userProducts;
 
     //Add a product 
     $scope.addProduct = function(product) {
@@ -63,7 +62,7 @@ stash.controller('ProfileController', function ($scope, Products, $stateParams, 
         })
     }
 
-    // $scope.search = function(product) {
-    //   $scope.filter = product
-    // }
+    $scope.search = function(product) {
+      $scope.filter = product
+    }
   });
