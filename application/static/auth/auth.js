@@ -48,6 +48,6 @@ angular.module('beautystack.auth', [])
       .catch(function(err) {
         console.error(err);
       });
-      $state.go('home');
+      $state.go('signin');
     };
 });
