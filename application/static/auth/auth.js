@@ -4,9 +4,6 @@ angular.module('beautystack.auth', [])
 
     $scope.user = Auth.userData;
     $scope.loginStatus = Auth.userData.loggedIn;
-    
-    //Invoke getAllProducts function from Products factory immediately
-    Products.getAllProducts();
 
     $scope.signup = function() {
       //Invoke signup function from Auth factory
