@@ -19,6 +19,7 @@ stash.controller('ProfileController', function ($scope, Products, $stateParams, 
 
     //Add a product 
     $scope.addProduct = function() {
+      console.log('Frontend Object:', $scope.newProduct)
       Products.addProduct($scope.newProduct)
       .then(function(addedProduct) {
         $scope.newProduct.brand_name = '';

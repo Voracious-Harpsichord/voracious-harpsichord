@@ -86,14 +86,12 @@ def newUser():
 @app.route('/api/userProducts/<user_id>',methods=['GET','POST','PUT','DELETE'])
 def userProducts(user_id):
 
-    #GET
     if request.method == 'GET':
         #lookup all products for in users collection
         response = jsonify(userProducts=p_ctrl.get_products_by_user_id(user_id))
         #respond array of products and a 200
         return response, 200
     
-    #POST
     if request.method == 'POST':
         body = request.get_json()
         #check if product is already in DB
@@ -106,11 +104,14 @@ def userProducts(user_id):
         #respond with created product and 201
         return response, 201
 
-    #DELETE
+    # if request.method == 'PUT':
+    #     body = request.get_json()
+    #     product = p_ctrl.edit_user_to_product(body['product_size', body['product_status'], body['product_notes'])
+
     if request.method == 'DELETE':
         body = request.get_json()
         #remove relation between user and product
-        remove_user_from_product(user_product_id)
+        p_ctrl.remove_user_from_product(user_product_id)
         #respond with a 204
         return "Product Removed", 204
 
