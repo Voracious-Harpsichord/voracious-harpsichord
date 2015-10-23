@@ -121,6 +121,7 @@ angular.module('beautystack.services', [])
     .then(function(resp) {
       angular.extend(userData, resp.data);
       userData.loggedIn = true;
+      //Use substring to get year
       userData.created_at = userData.created_at.substring(0, 4);
       console.log(userData.created_at);
       return resp;
