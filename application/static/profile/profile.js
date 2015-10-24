@@ -61,20 +61,19 @@ stash.controller('ProfileController', function ($scope, Products, $stateParams, 
           console.error('Error with editing product:', error);
         })
     }
-
-    // $scope.search = function(product) {
-    //   $scope.filter = 
-    // }
   });
 
 stash.filter('wishlistFilter', function() {
   return function(input) {
     var output = []
     angular.forEach(input, function(product) {
-      if (product.status === Wishlist) {
+      if (product.product_status === 'Wishlist') {
         output.push(product)
       }
     })
     return output
   }
+})
+
+stash.filter('universalFilter', function() {
 })
