@@ -3,7 +3,7 @@
     <!-- Navigation bar for not authenticated users -->
     <div class='homeImage' ng-switch-when='false'>
         <nav>
-            <span class='navName' ui-sref='home'>BeautyStack</span>
+            <span class='navName' ui-sref='home'>BeautyStash</span>
             <span class='navButton' ui-sref='signin'>Log In</span>
             <span class='navButton' ui-sref='signup'>Sign Up</span>
             <span class='navButton' ui-sref='about'>About</span>
@@ -18,7 +18,7 @@
             </span>
         </nav>
         <nav class='nav navbar-fixed-top' ng-hide="!showContent">
-            <span class='navNameScroll' ui-sref='home'>BeautyStack</span>
+            <span class='navNameScroll' ui-sref='home'>BeautyStash</span>
             <span class='navButtonScroll' ui-sref='signin'>Log In</span>
             <span class='navButtonScroll' ui-sref='signup'>Sign Up</span>
             <span class='navButtonScroll' ui-sref='about'>About</span>
@@ -36,10 +36,10 @@
 
     <!-- Navigation bar for logged in user -->
     <nav class='homePostAuth navbar navbar-fixed-top' ng-switch-when='true'>
-        <h1  class='navNameScroll' ui-sref='home'>BeautyStack</h1>
-        <span class='navButtonScrollAuth glyphicon glyphicon-star-empty' id ='nav-star' ui-sref='wishlist'></span>
+        <h1  class='navNameScroll' ui-sref='home'>BeautyStash</h1>
+        <span class='navButtonScrollAuth glyphicon glyphicon-star-empty' id ='nav-star' ui-sref='profile.wishlist'></span>
         <span  class='navButtonScrollAuth' ui-sref='home'>Discover</span>
-        <span class='navButtonScrollAuth' ui-sref='profile.stash'>Your Stash</span>
+        <span class='navButtonScrollAuth' ui-sref='profile.stash'>My Stash</span>
         <span class="navButtonScrollAuth dropdown">
             <button class="nameButton dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ui-sref='profile.stash'>
                 Hi, {{user.name_first}}!

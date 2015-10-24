@@ -1,4 +1,4 @@
-angular.module('beautystack.auth', [])
+angular.module('beautystash.auth', [])
 
 .controller('AuthController', function($scope, $window, $state, Auth, Products, $document) {
 

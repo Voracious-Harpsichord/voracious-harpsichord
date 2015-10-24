@@ -1,7 +1,7 @@
 <div class='container'>
     <div class="btn-group" role="group" aria-label="...">
       <button type="button" class="btn btn-default" ng-click='editProduct(newProduct)'>Search</button>
-      <button type="button" class="btn btn-default" ng-show='editMode' ng-click='editProduct(newProduct)'>Edit Product</button>
+      <button type="button" class="btn btn-default" ng-show='editMode' ng-click='editProduct(newProduct)'>Save Changes</button>
       <button type="button" class="btn btn-default" ng-hide='editMode' ng-click='addProduct(newProduct)'> Add Product</button>
     </div>
     <form>
@@ -19,9 +19,9 @@
         <option value='Expired'>Expired</option>
         <option value='Wishlist'>Wishlist</option>
       </select><br>
-      <label for='category'>Category</label>
-      <select name='category' ng-model='newProduct.product_category'>
-        <option value='Makeup'>Makeup</option>
+      <label ng-hide='editMode' for='category'>Category</label>
+      <select ng-hide='editMode' name='category' ng-model='newProduct.product_category'>
+        <option  value='Makeup'>Makeup</option>
         <option value='Skin Care'>Skin Care</option>
         <option value='Hair'>Hair</option>
         <option value='Bath and Body'>Bath and Body</option>

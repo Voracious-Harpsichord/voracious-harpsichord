@@ -1,4 +1,4 @@
-var services = angular.module('beautystack.services', []);
+var services = angular.module('beautystash.services', []);
 
 services.factory('Products', function($http, Auth) {
 
