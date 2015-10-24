@@ -14,8 +14,7 @@ stash.controller('ProfileController', function ($scope, Products, $stateParams, 
       product_size: '',
       product_status:'',
       product_notes: '',
-      product_color: '',
-      product_category: ''
+      product_color: ''
     };
 
     $scope.tabs = [
@@ -56,13 +55,26 @@ stash.controller('ProfileController', function ($scope, Products, $stateParams, 
           $scope.newProduct.brand_name = '';
           $scope.newProduct.product_name = '';
           $scope.newProduct.notes = '';
+          $scope.newProduct.color = '';
         })
         .catch(function(error) {
           console.error('Error with editing product:', error);
         })
     }
 
-    $scope.search = function(product) {
-      $scope.filter = product
-    }
+    // $scope.search = function(product) {
+    //   $scope.filter = 
+    // }
   });
+
+stash.filter('wishlistFilter', function() {
+  return function(input) {
+    var output = []
+    angular.forEach(input, function(product) {
+      if (product.status === Wishlist) {
+        output.push(product)
+      }
+    })
+    return output
+  }
+})
