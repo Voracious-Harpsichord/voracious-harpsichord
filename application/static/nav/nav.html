@@ -9,7 +9,7 @@
             <span class='navButton' ui-sref='about'>About</span>
             
             <span class="searchFocal input-group">
-                <input type="text" class="form-control" placeholder="Search for...">
+                <input type="text" class="form-control" id ='search-box' placeholder="Search for...">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button">
                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -37,7 +37,7 @@
     <!-- Navigation bar for logged in user -->
     <nav class='homePostAuth navbar navbar-fixed-top' ng-switch-when='true'>
         <h1  class='navNameScroll' ui-sref='home'>BeautyStack</h1>
-        <span class='navButtonScrollAuth glyphicon glyphicon-star-empty' ui-sref='wishlist'></span>
+        <span class='navButtonScrollAuth glyphicon glyphicon-star-empty' id ='nav-star' ui-sref='wishlist'></span>
         <span  class='navButtonScrollAuth' ui-sref='home'>Discover</span>
         <span class='navButtonScrollAuth' ui-sref='profile.stash'>Your Stash</span>
         <span class="navButtonScrollAuth dropdown">
