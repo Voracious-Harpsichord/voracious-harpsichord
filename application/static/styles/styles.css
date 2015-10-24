@@ -42,7 +42,9 @@ button:focus {
 
 .navName {
     color: white;
+    font-family: 'Abril Fatface', cursive;
     font-size: 500%;
+    letter-spacing: 2px;
     float: left;
     margin-left: 40px;
     margin-top: 20px;
@@ -56,7 +58,7 @@ button:focus {
     margin-right: 30px;
     margin-top: 40px;
     float: right;
-    padding:15px;
+    padding:10px;
     background-color: transparent;
     border:2px solid white;
     cursor: pointer;
@@ -75,10 +77,16 @@ button:focus {
     padding-top: 375px;
 }
 
+#search-box {
+    width: 90%;
+}
+
 /*No Auth Scroll Bar*/
 
 .navNameScroll {
     color: white;
+    font-family: 'Abril Fatface', cursive;
+    letter-spacing: 1px;
     float: left;
     padding-left:25px;
     font-size: 250%;
@@ -119,6 +127,10 @@ button:focus {
     margin-top: 25px;
     float: right;
     cursor: pointer;
+}
+
+#nav-star {
+    font-size: 175%;
 }
 
 .searchAuth {
@@ -169,11 +181,16 @@ button:focus {
 }
 
 .profileInfo {
-    color: #fff;
-    text-shadow: 0 0 3px rgba(0,0,0,.8);
+    font-family: 'Abril Fatface', cursive;
+    color: #eee;
+    text-shadow: 0 0 5px rgba(0,0,0,1);
     float: left;
     margin-top: 200px;
     margin-left: 30px;
+}
+
+.profileInfo h5 {
+    font-size: 16px;
 }
 
 .dashboardTabs {
@@ -182,6 +199,7 @@ button:focus {
     padding-bottom: 0px;
     padding-top: 0px;
     border-bottom: 1px solid #E8E8E8;
+    font-size: 12px;
 }
 
 .dashboardTab {
@@ -207,7 +225,7 @@ button:focus {
 /* Login */
 
 .container {
-    margin-top: 115px;
+    margin-top: 85px;
     margin-bottom: 50px;
 }
 
@@ -218,6 +236,7 @@ button:focus {
 }
 
 .header{
+    font-family: 'Abril Fatface', cursive;
     margin-bottom: 30px;
 }
 
@@ -227,7 +246,7 @@ button:focus {
 }
 
 #login {
-    background-color: #fb7060;
+    background-color: #FA5A47;
     font-weight: bold;
     font-family: 'Helvetica Neue';
     color: #fff;
@@ -236,16 +255,18 @@ button:focus {
 
 .btn-block {
     margin-bottom: 15px;
+    font-size: 16px;
 }
 
-.form-control {
+.form-input-box {
     margin-bottom: 5px;
 }
 
 #link {
     text-decoration: none;
     color: #606d9f;
-    font-size: 20px;
+    font-family: 'Abril Fatface', cursive;
+    font-size: 25px;
 }
 
 .error {

@@ -12,11 +12,11 @@
         <div class='col-md-10 col-md-offset-1 oauth'>
           <div class='text-center'><button class="btn btn-block btn-social btn-facebook" type="button"><i class="fa fa-facebook"></i>Log in with Facebook</button></div>
           <div class='text-center'><button class="btn btn-block btn-social btn-google" type="button"><i class="fa fa-google"></i>Log in with Google</button></div>
-          <div class='text-center'><button class="btn btn-block btn-social btn-reddit" type="button"><i class="fa fa-reddit"></i>Log in with Reddit</button></div>
+          <div class='text-center'><button class="btn btn-block btn-social btn-github" type="button"><i class="fa fa-github"></i>Log in with Github</button></div>
         </div>
         <div class='col-md-10 col-md-offset-1'>
-          <input id='username' type='text' ng-model='user.username' class="form-control" placeholder='Username' required />
-          <input id='password' type='password' ng-model='user.password' class="form-control" placeholder = 'Password' required />
+          <input id='username' type='text' ng-model='user.username' class="form-control form-input-box" placeholder='Username' required />
+          <input id='password' type='password' ng-model='user.password' class="form-control form-input-box" placeholder = 'Password' required />
           <div class='text-center'><button ng-click='signin()' class="btn btn-block text-center" type="button" id='login'>Log in</button></div>
           <div class='text-center'><a id='link' ui-sref='signup'>Sign up</a></div><br>
           <div class='text-center error' ng-show='error'> {{error}}</div>
