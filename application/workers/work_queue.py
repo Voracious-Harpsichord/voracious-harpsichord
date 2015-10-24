@@ -1,28 +1,36 @@
-# import multi threading library and make a queue
-from multiprocessing import Pool
-Q = Pool()
-# import workers
-# import test_worker
+# # How to use this module:
+# from workers import work_queue
+# work_queue.enqueue(<taskName>, [<arg1>, <arg2>, <arg3>, ...])
 
-# library of worker function mapped to kerywords
-# tasks = {
-#     "test": test_worker.test
-# }
+from threading import *
 
-def this_func(num):
-    print(num)
-    return num + 1
+#workers
+import test_worker
 
-def that_func(num):
-    print(num)
-    return num + 1
+tasks = {
+    "test": test_worker.testing
+}
 
-def enqueue(func, arg, callback):
-    print("enqueue was called")
-    result = Q.apply_async(func, args=(arg,))
-    print("async was called")
-    # print(result.get())
+#RYAN WHOLEY IS AWESOME!!!
+class Asyncifyer():
+  def __init__(self, func, args=[]):
+    self.args = args
+    self.func = func
+    Thread(target=self.run).start()
 
-# this_func(1)
-enqueue(this_func, 1, that_func)
-# that_func(1)
+  def run(self):
+    try:
+      self.func(*self.args)
+    except: 
+      try:
+        self.func()
+      except:
+        print('error with func:', self.func)
+
+  def start(self):
+    self.t.start()
+
+def enqueue(taskname, args):  
+    print("running task: " + taskname + " with arguments", args)
+    Asyncifyer(tasks[taskname], args)
+

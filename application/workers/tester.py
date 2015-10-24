@@ -1,14 +1,6 @@
+#Note: 	This module doesn't do anything for the application
+#		it just tests what would happen if we used the worker_queue module from another module.
+
 import work_queue
 
-def before():
-	print("before was run")
-	return
-
-def after():
-	print("after was run")
-	return
-
-before()
-work_queue.enqueue(before, 7, after)
-after()
-# enqueue("test", logger, "an arguement to be printed")
+work_queue.enqueue("test", ["Hello World"])
