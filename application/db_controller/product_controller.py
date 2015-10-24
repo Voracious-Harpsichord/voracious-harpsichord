@@ -22,6 +22,7 @@ def get_products_by_user_id(user_id):
             'product_id': user_product.id, 
             'brand_name': user_product.product_brand, 
             'product_name': user_product.product_name,
+            'product_category': user_product.product_category,
             'product_size': p.product_size,
             'product_status': p.product_status,
             'product_notes': p.product_notes,
@@ -47,8 +48,8 @@ def verify_product_by_id(product_id):
     return session.query(Product).filter(Product.id == product_id).count() > 0
 
 #Add a product to the product table and return the newly created product
-def add_product_to_products(product_name, product_brand):
-    session.add(Product(product_name, product_brand))
+def add_product_to_products(product_name, product_brand, product_category):
+    session.add(Product(product_name, product_brand, product_category))
     session.commit()
     #Return most recently created product
     return session.query(Product).filter(Product.product_name == product_name and Product.product_brand == product_brand).one().id
@@ -66,6 +67,7 @@ def add_user_to_product(user_id, product_id, product_size='full', product_status
         'product_id': product_universal.id, 
         'brand_name': product_universal.product_brand, 
         'product_name': product_universal.product_name,
+        'product_category':product_universal.product_category,
         'product_size': product_user.product_size,
         'product_status': product_user.product_status,
         'product_notes': product_user.product_notes,

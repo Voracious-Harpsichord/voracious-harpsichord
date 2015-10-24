@@ -2,6 +2,11 @@ var stash = angular.module('beautystack.profile', []);
 
 stash.controller('ProfileController', function ($scope, Products, $stateParams, Auth) {
     $scope.user = Auth.userData;
+    //Display all products in user's stash
+    $scope.products = Products.userProducts;
+    $scope.editMode = false;
+    $scope.filter;
+    $scope.currentItemIndex;
 
     $scope.newProduct = {
       product_name: '',
@@ -12,21 +17,14 @@ stash.controller('ProfileController', function ($scope, Products, $stateParams, 
       product_color: ''
     };
 
-    $scope.editMode = false;
-    $scope.filter;
-    $scope.currentItemIndex;
-
     $scope.tabs = [
       {name: 'Stash', path: 'stash'}, 
-      {name: 'Explore Your Products', path: 'explore'}, 
+      {name: 'Explore Products', path: 'explore'}, 
       {name: 'Friends', path: 'friends'}, 
       {name: 'Wishlist', path: 'wishlist'},
       {name: 'Recommendations', path: 'recs'}, 
       {name: 'Blogs', path: 'blogs'}
     ]
-
-    //Display all products in user's stash
-    $scope.products = Products.userProducts;
 
     //Add a product 
     $scope.addProduct = function(product) {
@@ -57,13 +55,25 @@ stash.controller('ProfileController', function ($scope, Products, $stateParams, 
           $scope.newProduct.brand_name = '';
           $scope.newProduct.product_name = '';
           $scope.newProduct.notes = '';
+          $scope.newProduct.color = '';
         })
         .catch(function(error) {
           console.error('Error with editing product:', error);
         })
     }
-
-    // $scope.search = function(product) {
-    //   $scope.filter = product
-    // }
   });
+
+stash.filter('wishlistFilter', function() {
+  return function(input) {
+    var output = []
+    angular.forEach(input, function(product) {
+      if (product.product_status === 'Wishlist') {
+        output.push(product)
+      }
+    })
+    return output
+  }
+})
+
+stash.filter('universalFilter', function() {
+})

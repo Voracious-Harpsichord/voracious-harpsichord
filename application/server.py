@@ -98,7 +98,7 @@ def userProducts(user_id):
         product_id = p_ctrl.verify_product_by_name_and_brand(body['product_name'], body['brand_name'])
         if product_id == None:    
             #Add product if not
-            product_id = p_ctrl.add_product_to_products(body['product_name'], body['brand_name'])
+            product_id = p_ctrl.add_product_to_products(body['product_name'], body['brand_name'], body['product_category'])
         #create db relationship between user and product
         response = jsonify(p_ctrl.add_user_to_product(
             user_id, 
