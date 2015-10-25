@@ -1,14 +1,15 @@
 <div class='container'>
     <!-- Add Product Mode -->
+    <form>
     <div class="btn-group" role="group" ng-hide='editMode' aria-label="...">
       <button type="button" class="btn btn-default" ng-click='editProduct(newProduct)'>Search</button>
       <button type="button" class="btn btn-default" ng-click='addProduct(newProduct)'> Add Product</button>
     </div>
     <!-- Edit Product Mode -->
     <button type="button" class="btn btn-default" ng-show='editMode' ng-click='editProduct(newProduct)'>Save Changes</button>
-    <form>
       <input type='text' ng-hide='editMode' ng-model='newProduct.brand_name' placeholder='Brand name' required/>
       <input type='text' ng-hide='editMode' ng-model='newProduct.product_name' placeholder='Product name' required/>
+    </form>
       <label for='size'>Size</label>
       <select name='size' ng-model='newProduct.product_size'>
         <option value='Full'>Full</option>
@@ -34,7 +35,6 @@
         <input ng-model='newProduct.product_notes'></input><br>
       <label for='notes'>Color:</label><br>
       <input ng-model='newProduct.product_color'></input><br>
-    </form>
 
   <div ng-repeat='product in products track by $index | filter: filter'>
     <span class='product-brand'> {{product.brand_name}}</span>
@@ -45,6 +45,7 @@
     <span>{{product.product_color}}</span>
     <span>{{product.product_category}}</span>
     <button ng-click='editModeFn(product)'>Edit</button>
+    <button ng-click='deleteProduct(product)'>x</button>
   </div>
 </div>
 

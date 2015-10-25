@@ -30,9 +30,10 @@ stash.controller('ProfileController', function ($scope, Products, $stateParams, 
 
     //Add a product 
     $scope.addProduct = function(product) {
-      console.log('Adding:', product)
+      console.log(product)
       Products.addProduct(product)
       .then(function(addedProduct) {
+        console.log(addedProduct)
         $scope.products.push(addedProduct);
         $scope.newProduct.product_id = '';
         $scope.newProduct.brand_name = '';
@@ -41,28 +42,52 @@ stash.controller('ProfileController', function ($scope, Products, $stateParams, 
       })
       .catch(function(error) {
         console.error('Error with adding product:', error);
+        $scope.newProduct.product_id = '';
+        $scope.newProduct.brand_name = '';
+        $scope.newProduct.product_name = '';
+        $scope.newProduct.notes = '';
+        $scope.newProduct.product_color = '';
       });
     };
 
     $scope.editModeFn = function(product) {
-      console.log('Editing:', product)
       $scope.editMode = true
       $scope.newProduct = angular.copy(product);
       $scope.currentItemIndex = $scope.products.indexOf(product);
     }
 
     $scope.editProduct = function(product) {
+      console.log(product)
       $scope.products[$scope.currentItemIndex] = angular.copy(product)
       $scope.editMode = false
       Products.editProduct(product)
         .then(function(editedProduct){
+          console.log(editedProduct)
+          $scope.newProduct.product_id = '';
           $scope.newProduct.brand_name = '';
           $scope.newProduct.product_name = '';
-          $scope.newProduct.product_notes = '';
+          $scope.newProduct.notes = '';
           $scope.newProduct.product_color = '';
         })
         .catch(function(error) {
           console.error('Error with editing product:', error);
+          $scope.newProduct.product_id = '';
+          $scope.newProduct.brand_name = '';
+          $scope.newProduct.product_name = '';
+          $scope.newProduct.notes = '';
+          $scope.newProduct.product_color = '';
+        })
+    }
+
+    $scope.deleteProduct = function(product) {
+      $scope.currentItemIndex = $scope.products.indexOf(product);
+      Products.deleteProduct(product)
+        .then(function(response) {
+          $scope.products.splice($scope.currentItemIndex, 1)
+          console.log($scope.products)
+        })
+        .catch(function(error) {
+          console.error('Error with deleting product:', error);
         })
     }
   });
