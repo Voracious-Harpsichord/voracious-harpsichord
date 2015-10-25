@@ -9,12 +9,14 @@ stash.controller('ProfileController', function ($scope, Products, $stateParams, 
     $scope.currentItemIndex;
 
     $scope.newProduct = {
+      product_id: '',
       product_name: '',
       brand_name: '',
       product_size: '',
       product_status:'',
       product_notes: '',
-      product_color: ''
+      product_color: '',
+      product_category: ''
     };
 
     $scope.tabs = [
@@ -28,9 +30,11 @@ stash.controller('ProfileController', function ($scope, Products, $stateParams, 
 
     //Add a product 
     $scope.addProduct = function(product) {
+      console.log('Adding:', product)
       Products.addProduct(product)
       .then(function(addedProduct) {
         $scope.products.push(addedProduct);
+        $scope.newProduct.product_id = '';
         $scope.newProduct.brand_name = '';
         $scope.newProduct.product_name = '';
         $scope.newProduct.notes = '';
@@ -41,6 +45,7 @@ stash.controller('ProfileController', function ($scope, Products, $stateParams, 
     };
 
     $scope.editModeFn = function(product) {
+      console.log('Editing:', product)
       $scope.editMode = true
       $scope.newProduct = angular.copy(product);
       $scope.currentItemIndex = $scope.products.indexOf(product);

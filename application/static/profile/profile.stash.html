@@ -1,9 +1,11 @@
 <div class='container'>
-    <div class="btn-group" role="group" aria-label="...">
+    <!-- Add Product Mode -->
+    <div class="btn-group" role="group" ng-hide='editMode' aria-label="...">
       <button type="button" class="btn btn-default" ng-click='editProduct(newProduct)'>Search</button>
-      <button type="button" class="btn btn-default" ng-show='editMode' ng-click='editProduct(newProduct)'>Save Changes</button>
-      <button type="button" class="btn btn-default" ng-hide='editMode' ng-click='addProduct(newProduct)'> Add Product</button>
+      <button type="button" class="btn btn-default" ng-click='addProduct(newProduct)'> Add Product</button>
     </div>
+    <!-- Edit Product Mode -->
+    <button type="button" class="btn btn-default" ng-show='editMode' ng-click='editProduct(newProduct)'>Save Changes</button>
     <form>
       <input type='text' ng-hide='editMode' ng-model='newProduct.brand_name' placeholder='Brand name' required/>
       <input type='text' ng-hide='editMode' ng-model='newProduct.product_name' placeholder='Product name' required/>

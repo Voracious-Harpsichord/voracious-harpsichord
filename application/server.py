@@ -114,6 +114,7 @@ def userProducts(user_id):
         body = request.get_json()
         product_id = p_ctrl.verify_product_by_name_and_brand(body['product_name'], body['brand_name'])
         response = jsonify(p_ctrl.edit_user_to_product(
+            body['product_id'],
             user_id,
             product_id,
             body['product_size'], 

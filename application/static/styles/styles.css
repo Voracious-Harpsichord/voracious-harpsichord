@@ -103,7 +103,7 @@ button:focus {
     padding:7px;
     background-color: transparent;
     cursor: pointer;
-    /*border:2px solid white;*/
+
 }
 
 .navButtonScroll:hover {
@@ -276,5 +276,5 @@ button:focus {
 /* Profile Stash and Wishlist */
 
 .searchAddButton {
-    
+    border-radius: 20px;
 }

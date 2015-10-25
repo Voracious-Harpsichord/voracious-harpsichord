@@ -19,7 +19,7 @@ def get_products_by_user_id(user_id):
     for p in product_ids:
         user_product = session.query(Product).filter(Product.id == p.product_id).one()
         results.append({
-            'product_id': user_product.id, 
+            'product_id': p.id, 
             'brand_name': user_product.product_brand, 
             'product_name': user_product.product_name,
             'product_category': user_product.product_category,
@@ -48,7 +48,7 @@ def verify_product_by_id(product_id):
     return session.query(Product).filter(Product.id == product_id).count() > 0
 
 #Add a product to the product table and return the newly created product
-def add_product_to_products(product_name, product_brand, product_category):
+def add_product_to_products(product_name, product_brand, product_category=''):
     session.add(Product(product_name, product_brand, product_category))
     session.commit()
     #Return most recently created product
@@ -57,14 +57,16 @@ def add_product_to_products(product_name, product_brand, product_category):
 #Create a relationship between user and product and add user data to product relationship
 def add_user_to_product(user_id, product_id, product_size='full', product_status='own', product_notes='', product_color=''):
     #Add user and product to user/products
-    session.add(User_product(int(user_id), int(product_id), product_size, product_status, product_notes, product_color))
+    product = User_product(int(user_id), int(product_id), product_size, product_status, product_notes, product_color)
+    session.add(product)
     session.commit()
+    print(product.id)
     product_universal = session.query(Product).filter(Product.id == product_id).one()
-    product_user = session.query(User_product).filter(User_product.product_id == product_id).one()
+    product_user = session.query(User_product).filter(User_product.id == product.id).one()
 
     #return the new product from Products table
     return {
-        'product_id': product_universal.id, 
+        'product_id': product.id, 
         'brand_name': product_universal.product_brand, 
         'product_name': product_universal.product_name,
         'product_category':product_universal.product_category,
@@ -74,11 +76,10 @@ def add_user_to_product(user_id, product_id, product_size='full', product_status
         'product_color': product_user.product_color
     }
 
-def edit_user_to_product(user_id, product_id, product_size, product_status, product_notes, product_color):
-    
+def edit_user_to_product(id, user_id, product_id, product_size, product_status, product_notes, product_color):
+
     session.query(User_product).\
-        filter(User_product.product_id == product_id).\
-        filter(User_product.user_id == user_id).\
+        filter(User_product.id == id).\
         update({
             'product_size': product_size,
             'product_status': product_status,
@@ -88,12 +89,13 @@ def edit_user_to_product(user_id, product_id, product_size, product_status, prod
 
     session.commit()
     product_universal = session.query(Product).filter(Product.id == product_id).one()
-    product_user = session.query(User_product).filter(User_product.product_id == product_id).one()
+    product_user = session.query(User_product).filter(User_product.id == id).one()
 
     return {
-        'product_id': product_universal.id, 
+        'product_id': product_user.id, 
         'brand_name': product_universal.product_brand, 
         'product_name': product_universal.product_name,
+        'product_category': product_universal.product_category,
         'product_size': product_user.product_size,
         'product_status': product_user.product_status,
         'product_notes': product_user.product_notes,
