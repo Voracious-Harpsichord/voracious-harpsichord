@@ -1,10 +1,10 @@
-var app = angular.module('beautystack',[
-  'beautystack.services',
-  'beautystack.home',
-  'beautystack.product',
-  'beautystack.auth',
-  'beautystack.settings',
-  'beautystack.profile',
+var app = angular.module('beautystash',[
+  'beautystash.services',
+  'beautystash.home',
+  'beautystash.product',
+  'beautystash.auth',
+  'beautystash.settings',
+  'beautystash.profile',
   'ui.router'
 ]);
 

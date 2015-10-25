@@ -1,4 +1,4 @@
-angular.module('beautystack.product', [])
+angular.module('beautystash.product', [])
 
 .controller('ProductController', function ($scope, Products) {
     

@@ -1,4 +1,4 @@
-var profile = angular.module('beautystack.settings', []);
+var profile = angular.module('beautystash.settings', []);
 
 profile.controller('SettingsController', function ($scope, Products) {
   $scope.newProduct = '';

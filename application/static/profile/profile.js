@@ -1,4 +1,4 @@
-var stash = angular.module('beautystack.profile', []);
+var stash = angular.module('beautystash.profile', []);
 
 stash.controller('ProfileController', function ($scope, Products, $stateParams, Auth) {
     $scope.user = Auth.userData;
@@ -9,17 +9,19 @@ stash.controller('ProfileController', function ($scope, Products, $stateParams, 
     $scope.currentItemIndex;
 
     $scope.newProduct = {
+      product_id: '',
       product_name: '',
       brand_name: '',
       product_size: '',
       product_status:'',
       product_notes: '',
-      product_color: ''
+      product_color: '',
+      product_category: ''
     };
 
     $scope.tabs = [
       {name: 'Stash', path: 'stash'}, 
-      {name: 'Explore Products', path: 'explore'}, 
+      {name: 'Explore Your Products', path: 'explore'}, 
       {name: 'Friends', path: 'friends'}, 
       {name: 'Wishlist', path: 'wishlist'},
       {name: 'Recommendations', path: 'recs'}, 
@@ -28,10 +30,11 @@ stash.controller('ProfileController', function ($scope, Products, $stateParams, 
 
     //Add a product 
     $scope.addProduct = function(product) {
-      console.log(product)
+      console.log('Adding:', product)
       Products.addProduct(product)
       .then(function(addedProduct) {
         $scope.products.push(addedProduct);
+        $scope.newProduct.product_id = '';
         $scope.newProduct.brand_name = '';
         $scope.newProduct.product_name = '';
         $scope.newProduct.notes = '';
@@ -42,6 +45,7 @@ stash.controller('ProfileController', function ($scope, Products, $stateParams, 
     };
 
     $scope.editModeFn = function(product) {
+      console.log('Editing:', product)
       $scope.editMode = true
       $scope.newProduct = angular.copy(product);
       $scope.currentItemIndex = $scope.products.indexOf(product);
@@ -54,8 +58,8 @@ stash.controller('ProfileController', function ($scope, Products, $stateParams, 
         .then(function(editedProduct){
           $scope.newProduct.brand_name = '';
           $scope.newProduct.product_name = '';
-          $scope.newProduct.notes = '';
-          $scope.newProduct.color = '';
+          $scope.newProduct.product_notes = '';
+          $scope.newProduct.product_color = '';
         })
         .catch(function(error) {
           console.error('Error with editing product:', error);

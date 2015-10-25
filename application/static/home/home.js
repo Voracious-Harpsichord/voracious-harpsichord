@@ -1,4 +1,4 @@
-var home = angular.module('beautystack.home', ['infinite-scroll'])
+var home = angular.module('beautystash.home', ['infinite-scroll'])
 
 home.controller('HomeController', function($scope){
     $scope.items = [];
