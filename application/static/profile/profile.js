@@ -9,14 +9,14 @@ stash.controller('ProfileController', function ($scope, Products, $stateParams, 
     $scope.currentItemIndex;
 
     $scope.newProduct = {
-      product_id: '',
-      product_name: '',
-      brand_name: '',
-      product_size: '',
-      product_status:'',
-      product_notes: '',
-      product_color: '',
-      product_category: ''
+      product_id: null,
+      product_name: null,
+      brand_name: null,
+      product_size: null,
+      product_status:null,
+      product_notes: null,
+      product_color: null,
+      product_category: null
     };
 
     $scope.tabs = [
@@ -28,6 +28,17 @@ stash.controller('ProfileController', function ($scope, Products, $stateParams, 
       {name: 'Blogs', path: 'blogs'}
     ]
 
+    resetFields = function() {
+      $scope.newProduct.product_id = null;
+      $scope.newProduct.brand_name = null;
+      $scope.newProduct.product_name = null;
+      $scope.newProduct.notes = null;
+      $scope.newProduct.product_color = null;
+      $scope.newProduct.product_size = null
+      $scope.newProduct.product_status = null
+      $scope.newProduct.product_category = null
+    }
+
     //Add a product 
     $scope.addProduct = function(product) {
       console.log(product)
@@ -35,18 +46,11 @@ stash.controller('ProfileController', function ($scope, Products, $stateParams, 
       .then(function(addedProduct) {
         console.log(addedProduct)
         $scope.products.push(addedProduct);
-        $scope.newProduct.product_id = '';
-        $scope.newProduct.brand_name = '';
-        $scope.newProduct.product_name = '';
-        $scope.newProduct.notes = '';
+        resetFields();
       })
       .catch(function(error) {
         console.error('Error with adding product:', error);
-        $scope.newProduct.product_id = '';
-        $scope.newProduct.brand_name = '';
-        $scope.newProduct.product_name = '';
-        $scope.newProduct.notes = '';
-        $scope.newProduct.product_color = '';
+        resetFields();
       });
     };
 
@@ -63,19 +67,11 @@ stash.controller('ProfileController', function ($scope, Products, $stateParams, 
       Products.editProduct(product)
         .then(function(editedProduct){
           console.log(editedProduct)
-          $scope.newProduct.product_id = '';
-          $scope.newProduct.brand_name = '';
-          $scope.newProduct.product_name = '';
-          $scope.newProduct.notes = '';
-          $scope.newProduct.product_color = '';
+          resetFields();
         })
         .catch(function(error) {
           console.error('Error with editing product:', error);
-          $scope.newProduct.product_id = '';
-          $scope.newProduct.brand_name = '';
-          $scope.newProduct.product_name = '';
-          $scope.newProduct.notes = '';
-          $scope.newProduct.product_color = '';
+          resetFields();
         })
     }
 
@@ -104,5 +100,26 @@ stash.filter('wishlistFilter', function() {
   }
 })
 
-stash.filter('universalFilter', function() {
+stash.filter('finishedFilter', function() {
+  return function(input) {
+    var output = []
+    angular.forEach(input, function(product) {
+      if (product.product_status === 'Finished') {
+        output.push(product)
+      }
+    })
+    return output
+  }
 })
+
+// stash.filter('myStashFilter', function() {
+//   return function(input) {
+//     var output = []
+//     angular.forEach(input, function(product) {
+//       if (product.product_status === 'Own') {
+//         output.push(product)
+//       }
+//     })
+//     return output
+//   }
+// })
