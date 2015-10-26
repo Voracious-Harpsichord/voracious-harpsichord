@@ -55,7 +55,7 @@ def add_product_to_products(name, brand, category='', price='', sephora_id='', i
     return session.query(Product).filter(Product.name == name, Product.brand == brand).one().id
 
 #Create a relationship between user and product and add user data to product relationship
-def add_user_to_product(user_id, product_id, size='full', status='own', notes='', color='', stars='', review='', user_product_image_url=''):
+def add_user_to_product(user_id, product_id, size='Full', status='Own', notes='', color='', stars='', review='', user_product_image_url=''):
     #Add user and product to user/products
     product = User_product(int(user_id), int(product_id), size, status, notes, color, stars, review, user_product_image_url)
     session.add(product)
