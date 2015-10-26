@@ -1,15 +1,18 @@
-<div style='color:black;'>
-  Blogs
-</div>
-<div>
-  <button ng-model='filter'>Search</button>    
-  <button ng-click='addProduct()'>Add/Revise My Stash</button>
-  <ul>
-    <li class="product" ng-repeat="product in data.products | filter : filter">
-      <a id='name'>{{ product.name }}</a>
-      <span id='maker'>{{ product.Maker.name }}</span>
-      <span id='category'>{{ product.Category.name }}</span>
-      <span id='size'>{{ product.size }}</span>
-    </li>
-  </ul>
+<div class='container'>
+  <h1>Your Blogs</h1>
+  <div class='row'>
+    <div class='col-md-4'>
+      <textarea class='form-control' rows='5'></textarea>
+      <input type='text' ng-model='blog.url' class="form-control form-input-box" placeholder='Enter a blog or article' required /> 
+      <div class='col-md-1 col-md-offset-3'>
+        <button ng-click='addBlog(blog.url)'>Add this blog!</button>
+      </div>
+    </div>
+    <div ng-repeat='blog in blogs track by $index'>
+      <div class='blog'>
+        <h3 class='blog-name'>{{blog.name}}</h3>
+        <a ng-href='http://{{blog.url}}'>{{blog.url}}</a>
+      </div>
+    </div>
+  </div>
 </div>
