@@ -1,5 +1,147 @@
 var services = angular.module('beautystash.services', []);
 
+services.factory('Cookie', function(Auth, Friends, Products) {
+  //Send GET request to /api/user upon loading services.js file in index.html
+  var checkCookie = function() {
+    return $http({
+      method: 'GET',
+      url: '/api/user',
+      headers: {'Content-Type': 'application/json'}
+    })
+    .then(function(resp) {
+      //if status code is 200, then extend userData
+      if (resp.status === 200) {
+        console.log('200');
+        angular.extend(Auth.userData, resp.data);
+        Auth.userData.loggedIn = true;
+        Auth.userData.created_at = Auth.userData.created_at.substring(0, 4);
+        Products.getAllProducts();
+        // Friends.getFriends();
+        return resp;
+      }
+      //if status code is 204, then do nothing
+      if (resp.status === 204) {
+        console.log('204');
+        return resp;
+      }
+    })
+    .catch(function(error) {
+      console.error(error);
+    });
+  };
+
+  checkCookie();
+
+  return {
+    checkCookie: checkCookie
+  };
+
+});
+
+services.factory('Friends', function($http, Auth) {
+
+  var userFriends = [
+  {'name_first': 'Laura', 'name_last': 'Weaver'},
+  {'name_first': 'Laura', 'name_last': 'Knight'},
+  {'name_first': 'Amy', 'name_last': 'Chiu'}
+  ];
+
+  //Maybe change friends to followers --> have list of following and followers?
+
+  var getFriends = function() {
+    //check if userid exists first
+    if (Auth.userData.userid) {
+      //Send GET request to /userFriends/:user_id
+      return $http({
+        method: 'GET',
+        url: '/api/userFriends' + Auth.userData.userid,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(function(resp) {
+        while(userFriends.length) {userFriends.pop();}
+        resp.data.userFriends.forEach(function(item) {userFriends.push(item);});
+        return resp.data;
+      });
+    }
+  };
+
+  var addFriend = function(user_id) {
+    //Send POST request to /userBlogs/:user_id
+    return $http({
+      method: 'POST',
+      url: '/api/userFriends' + Auth.userData.userid,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: user_id
+    })
+    .then(function(resp) {
+      return resp.data;
+    });
+  };
+
+  return {
+    getFriends: getFriends,
+    addFriend: addFriend,
+    userFriends: userFriends
+  };
+});
+
+services.factory('Blogs', function($http, Auth) {
+
+  var userBlogs = [];
+
+  var getBlogs = function() {
+    //check if userid exists first
+    if (Auth.userData.userid) {
+      //Send GET request to /userBlogs/:user_id
+      return $http({
+        method: 'GET',
+        url: '/api/userBlogs' + Auth.userData.userid,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(function(resp) {
+        while(userBlogs.length) {userBlogs.pop();}
+        resp.data.userBlogs.forEach(function(item) {userBlogs.push(item);});
+        return resp.data;
+      });
+    }
+  };
+
+  var getBlog = function() {
+    return $http({
+      method: 'GET',
+      url: '/'
+    })
+
+  }
+
+  var addBlog = function(blog_url) {
+    //Send POST request to /userBlogs/:user_id
+    return $http({
+      method: 'POST',
+      url: '/api/userBlogs/' + Auth.userData.userid,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: blog_url
+    })
+    .then(function(resp) {
+      return resp.data;
+    });
+  };
+
+  return {
+    getBlogs: getBlogs,
+    addBlog: addBlog
+  };
+});
+
+
 services.factory('Products', function($http, Auth) {
 
   var userProducts = [];
@@ -24,12 +166,12 @@ services.factory('Products', function($http, Auth) {
     }
   };
 
-  Auth.checkCookie()
-  .then(function(resp) {
-    if (resp.status === 200) {
-      getAllProducts();
-    }
-  });
+  // Auth.checkCookie()
+  // .then(function(resp) {
+  //   if (resp.status === 200) {
+  //     getAllProducts();
+  //   }
+  // });
 
   //Add a product to user's stash
   var addProduct = function(product) {
@@ -98,31 +240,31 @@ services.factory('Auth', function($http) {
   userData.loggedIn = false;
 
   //Send GET request to /api/user upon loading services.js file in index.html
-  var checkCookie = function() {
-    return $http({
-      method: 'GET',
-      url: '/api/user',
-      headers: {'Content-Type': 'application/json'}
-    })
-    .then(function(resp) {
-      //if status code is 200, then extend userData
-      if (resp.status === 200) {
-        angular.extend(userData, resp.data);
-        userData.loggedIn = true;
-        userData.created_at = userData.created_at.substring(0, 4);
-        return resp;
-      }
-      //if status code is 204, then do nothing
-      if (resp.status === 204) {
-        return resp;
-      }
-    })
-    .catch(function(error) {
-      console.error(error);
-    });
-  };
+  // var checkCookie = function() {
+  //   return $http({
+  //     method: 'GET',
+  //     url: '/api/user',
+  //     headers: {'Content-Type': 'application/json'}
+  //   })
+  //   .then(function(resp) {
+  //     //if status code is 200, then extend userData
+  //     if (resp.status === 200) {
+  //       angular.extend(userData, resp.data);
+  //       userData.loggedIn = true;
+  //       userData.created_at = userData.created_at.substring(0, 4);
+  //       return resp;
+  //     }
+  //     //if status code is 204, then do nothing
+  //     if (resp.status === 204) {
+  //       return resp;
+  //     }
+  //   })
+  //   .catch(function(error) {
+  //     console.error(error);
+  //   });
+  // };
 
-  checkCookie();
+  // checkCookie();
 
   //Send POST request to /newUser when user signs up
   var signup = function(user) {
@@ -181,6 +323,6 @@ services.factory('Auth', function($http) {
     signin: signin,
     signout: signout,
     isAuth: isAuth,
-    checkCookie: checkCookie
+    // checkCookie: checkCookie
   };
 });
