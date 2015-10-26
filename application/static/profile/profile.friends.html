@@ -1,3 +1,12 @@
-<div>
-  Friends
+<div class='container'>
+  <h1>Your Friends</h1>
+  <div ng-repeat='friend in friends track by $index'>
+    <div class='friend'>
+      <span class='friend-name'>{{friend.name_first}} {{friend.name_last}}</span>
+    </div>
+  </div>
+
 </div>
+
+
+
