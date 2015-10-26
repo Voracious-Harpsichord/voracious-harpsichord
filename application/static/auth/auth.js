@@ -1,6 +1,6 @@
 angular.module('beautystash.auth', [])
 
-.controller('AuthController', function($scope, $window, $state, Auth, Products, $document) {
+.controller('AuthController', function($scope, $window, $state, Auth, Products, Friends, $document) {
 
     $scope.user = Auth.userData;
     $scope.loginStatus = Auth.userData.loggedIn;
@@ -11,6 +11,8 @@ angular.module('beautystash.auth', [])
       .then(function() {
         //Fetch user's products
         Products.getAllProducts();
+        //Fetch user's friends
+        // Friends.getFriends();
         //Delete password property on $scope.user
         delete $scope.user.password;
         //Transition to stash page
@@ -33,6 +35,8 @@ angular.module('beautystash.auth', [])
       .then(function() {
         //Fetch user's products
         Products.getAllProducts();
+        //Fetch user's friends
+        // Friends.getFriends();
         //Delete password property on $scope.user
         delete $scope.user.password;
         //Transition to stash page
