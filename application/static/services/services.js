@@ -1,43 +1,5 @@
 var services = angular.module('beautystash.services', []);
 
-services.factory('Cookie', function(Auth, Friends, Products) {
-  //Send GET request to /api/user upon loading services.js file in index.html
-  var checkCookie = function() {
-    return $http({
-      method: 'GET',
-      url: '/api/user',
-      headers: {'Content-Type': 'application/json'}
-    })
-    .then(function(resp) {
-      //if status code is 200, then extend userData
-      if (resp.status === 200) {
-        console.log('200');
-        angular.extend(Auth.userData, resp.data);
-        Auth.userData.loggedIn = true;
-        Auth.userData.created_at = Auth.userData.created_at.substring(0, 4);
-        Products.getAllProducts();
-        // Friends.getFriends();
-        return resp;
-      }
-      //if status code is 204, then do nothing
-      if (resp.status === 204) {
-        console.log('204');
-        return resp;
-      }
-    })
-    .catch(function(error) {
-      console.error(error);
-    });
-  };
-
-  checkCookie();
-
-  return {
-    checkCookie: checkCookie
-  };
-
-});
-
 services.factory('Friends', function($http, Auth) {
 
   var userFriends = [
@@ -112,13 +74,13 @@ services.factory('Blogs', function($http, Auth) {
     }
   };
 
-  var getBlog = function() {
-    return $http({
-      method: 'GET',
-      url: '/'
-    })
+  // var getBlog = function() {
+  //   return $http({
+  //     method: 'GET',
+  //     url: '/'
+  //   });
 
-  }
+  };
 
   var addBlog = function(blog_url) {
     //Send POST request to /userBlogs/:user_id
@@ -166,12 +128,12 @@ services.factory('Products', function($http, Auth) {
     }
   };
 
-  // Auth.checkCookie()
-  // .then(function(resp) {
-  //   if (resp.status === 200) {
-  //     getAllProducts();
-  //   }
-  // });
+  Auth.checkCookie()
+  .then(function(resp) {
+    if (resp.status === 200) {
+      getAllProducts();
+    }
+  });
 
   //Add a product to user's stash
   var addProduct = function(product) {
@@ -222,8 +184,8 @@ services.factory('Products', function($http, Auth) {
         'Content-Type': 'application/json'
       },
       data: product
-    })
-  }
+    });
+  };
 
   return {
     userProducts: userProducts,
@@ -240,31 +202,31 @@ services.factory('Auth', function($http) {
   userData.loggedIn = false;
 
   //Send GET request to /api/user upon loading services.js file in index.html
-  // var checkCookie = function() {
-  //   return $http({
-  //     method: 'GET',
-  //     url: '/api/user',
-  //     headers: {'Content-Type': 'application/json'}
-  //   })
-  //   .then(function(resp) {
-  //     //if status code is 200, then extend userData
-  //     if (resp.status === 200) {
-  //       angular.extend(userData, resp.data);
-  //       userData.loggedIn = true;
-  //       userData.created_at = userData.created_at.substring(0, 4);
-  //       return resp;
-  //     }
-  //     //if status code is 204, then do nothing
-  //     if (resp.status === 204) {
-  //       return resp;
-  //     }
-  //   })
-  //   .catch(function(error) {
-  //     console.error(error);
-  //   });
-  // };
+  var checkCookie = function() {
+    return $http({
+      method: 'GET',
+      url: '/api/user',
+      headers: {'Content-Type': 'application/json'}
+    })
+    .then(function(resp) {
+      //if status code is 200, then extend userData
+      if (resp.status === 200) {
+        angular.extend(userData, resp.data);
+        userData.loggedIn = true;
+        userData.created_at = userData.created_at.substring(0, 4);
+        return resp;
+      }
+      //if status code is 204, then do nothing
+      if (resp.status === 204) {
+        return resp;
+      }
+    })
+    .catch(function(error) {
+      console.error(error);
+    });
+  };
 
-  // checkCookie();
+  checkCookie();
 
   //Send POST request to /newUser when user signs up
   var signup = function(user) {
@@ -323,6 +285,44 @@ services.factory('Auth', function($http) {
     signin: signin,
     signout: signout,
     isAuth: isAuth,
-    // checkCookie: checkCookie
+    checkCookie: checkCookie
   };
 });
+
+// services.factory('Cookie', function(Auth, Friends, Products) {
+//   //Send GET request to /api/user upon loading services.js file in index.html
+//   var checkCookie = function() {
+//     return $http({
+//       method: 'GET',
+//       url: '/api/user',
+//       headers: {'Content-Type': 'application/json'}
+//     })
+//     .then(function(resp) {
+//       //if status code is 200, then extend userData
+//       if (resp.status === 200) {
+//         console.log('200');
+//         angular.extend(Auth.userData, resp.data);
+//         Auth.userData.loggedIn = true;
+//         Auth.userData.created_at = Auth.userData.created_at.substring(0, 4);
+//         Products.getAllProducts();
+//         // Friends.getFriends();
+//         return resp;
+//       }
+//       //if status code is 204, then do nothing
+//       if (resp.status === 204) {
+//         console.log('204');
+//         return resp;
+//       }
+//     })
+//     .catch(function(error) {
+//       console.error(error);
+//     });
+//   };
+
+//   checkCookie();
+
+//   return {
+//     checkCookie: checkCookie
+//   };
+
+// });
