@@ -9,14 +9,14 @@ stash.controller('ProfileController', function ($scope, Products, $stateParams, 
     $scope.currentItemIndex;
 
     $scope.newProduct = {
-      product_id: '',
-      product_name: '',
-      brand_name: '',
-      product_size: '',
-      product_status:'',
-      product_notes: '',
-      product_color: '',
-      product_category: ''
+      product_id: null,
+      product_name: null,
+      brand_name: null,
+      product_size: null,
+      product_status:null,
+      product_notes: null,
+      product_color: null,
+      product_category: null
     };
 
     $scope.tabs = [
@@ -28,41 +28,62 @@ stash.controller('ProfileController', function ($scope, Products, $stateParams, 
       {name: 'Blogs', path: 'blogs'}
     ]
 
+    resetFields = function() {
+      $scope.newProduct.product_id = null;
+      $scope.newProduct.brand_name = null;
+      $scope.newProduct.product_name = null;
+      $scope.newProduct.notes = null;
+      $scope.newProduct.product_color = null;
+      $scope.newProduct.product_size = null
+      $scope.newProduct.product_status = null
+      $scope.newProduct.product_category = null
+    }
+
     //Add a product 
     $scope.addProduct = function(product) {
-      console.log('Adding:', product)
+      console.log(product)
       Products.addProduct(product)
       .then(function(addedProduct) {
+        console.log(addedProduct)
         $scope.products.push(addedProduct);
-        $scope.newProduct.product_id = '';
-        $scope.newProduct.brand_name = '';
-        $scope.newProduct.product_name = '';
-        $scope.newProduct.notes = '';
+        resetFields();
       })
       .catch(function(error) {
         console.error('Error with adding product:', error);
+        resetFields();
       });
     };
 
     $scope.editModeFn = function(product) {
-      console.log('Editing:', product)
       $scope.editMode = true
       $scope.newProduct = angular.copy(product);
       $scope.currentItemIndex = $scope.products.indexOf(product);
     }
 
     $scope.editProduct = function(product) {
+      console.log(product)
       $scope.products[$scope.currentItemIndex] = angular.copy(product)
       $scope.editMode = false
       Products.editProduct(product)
         .then(function(editedProduct){
-          $scope.newProduct.brand_name = '';
-          $scope.newProduct.product_name = '';
-          $scope.newProduct.product_notes = '';
-          $scope.newProduct.product_color = '';
+          console.log(editedProduct)
+          resetFields();
         })
         .catch(function(error) {
           console.error('Error with editing product:', error);
+          resetFields();
+        })
+    }
+
+    $scope.deleteProduct = function(product) {
+      $scope.currentItemIndex = $scope.products.indexOf(product);
+      Products.deleteProduct(product)
+        .then(function(response) {
+          $scope.products.splice($scope.currentItemIndex, 1)
+          console.log($scope.products)
+        })
+        .catch(function(error) {
+          console.error('Error with deleting product:', error);
         })
     }
   });
@@ -79,5 +100,26 @@ stash.filter('wishlistFilter', function() {
   }
 })
 
-stash.filter('universalFilter', function() {
+stash.filter('finishedFilter', function() {
+  return function(input) {
+    var output = []
+    angular.forEach(input, function(product) {
+      if (product.product_status === 'Finished') {
+        output.push(product)
+      }
+    })
+    return output
+  }
 })
+
+// stash.filter('myStashFilter', function() {
+//   return function(input) {
+//     var output = []
+//     angular.forEach(input, function(product) {
+//       if (product.product_status === 'Own') {
+//         output.push(product)
+//       }
+//     })
+//     return output
+//   }
+// })

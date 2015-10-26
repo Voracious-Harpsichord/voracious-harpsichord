@@ -126,12 +126,8 @@ def userProducts(user_id):
 
     if request.method == 'DELETE':
         body = request.get_json()
-        #remove relation between user and product
-        p_ctrl.remove_user_from_product(user_product_id)
-        #respond with a 204
+        p_ctrl.remove_user_from_product(body['product_id'])
         return "Product Removed", 204
-
-
 
 @app.route('/api/products/<product_id>',methods=['GET'])
 def products(product_id):

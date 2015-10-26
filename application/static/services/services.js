@@ -9,7 +9,6 @@ services.factory('Products', function($http, Auth) {
 
     //check if userid exists first
     if (Auth.userData.userid) {
-      //Send GET request to /userProducts/:user_id
       return $http({
         method: 'GET',
         url: '/api/userProducts/' + Auth.userData.userid,
@@ -34,8 +33,6 @@ services.factory('Products', function($http, Auth) {
 
   //Add a product to user's stash
   var addProduct = function(product) {
-    
-    //Send POST request to /userProducts/:user_id
     return $http({
       method: 'POST',
       url: '/api/userProducts/' + Auth.userData.userid,
@@ -51,7 +48,6 @@ services.factory('Products', function($http, Auth) {
 
   //Update a product in user's stash
   var editProduct = function(product) {
-    //Send PUT request to /userProducts/:user_id
     return $http({
       method: 'PUT',
       url: '/api/userProducts/' + Auth.userData.userid,
@@ -62,25 +58,36 @@ services.factory('Products', function($http, Auth) {
     });
   };
 
-  //Retrieve prouct information for product profile page
-  var retrieveProduct = function(product_id) {
+  // //Retrieve product information for product profile page
+  // var retrieveProduct = function(product_id) {
 
-    //Send GET request to /api/products/:product_id
+  //   //Send GET request to /api/products/:product_id
+  //   return $http({
+  //     method: 'GET',
+  //     url: '/api/products/' + product_id,
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     }
+  //   });
+  // };
+
+  var deleteProduct = function(product) {
     return $http({
-      method: 'GET',
-      url: '/api/products/' + product_id,
+      method: 'DELETE',
+      url: '/api/userProducts/' + Auth.userData.userid,
       headers: {
         'Content-Type': 'application/json'
-      }
-    });
-  };
+      },
+      data: product
+    })
+  }
 
   return {
     userProducts: userProducts,
     getAllProducts: getAllProducts,
     addProduct: addProduct,
     editProduct: editProduct,
-    retrieveProduct: retrieveProduct
+    deleteProduct: deleteProduct
   };
 });
 

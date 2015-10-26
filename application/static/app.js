@@ -28,6 +28,18 @@ app.config(function($stateProvider, $urlRouterProvider) {
     }
   });
 
+  $stateProvider.state('about', {
+    url: '/about',
+    views: {
+      'page': {
+        templateUrl: 'about/about.html'
+      }
+    },
+    data: {
+      requireLogin: false
+    }
+  });
+
   $stateProvider.state('profile', {
     url: '/profile',
     views: {
@@ -37,6 +49,23 @@ app.config(function($stateProvider, $urlRouterProvider) {
       },
       'page': {
         templateUrl: 'profile/profile.html',
+        controller: 'ProfileController'
+      }
+    },
+    data: {
+      requireLogin: true
+    }
+  });
+
+  $stateProvider.state('settings', {
+    url: '/settings',
+    views: {
+      'nav': {
+        templateUrl: 'nav/nav.html',
+        controller: 'AuthController'
+      },
+      'page': {
+        templateUrl: 'settings/settings.html',
         controller: 'ProfileController'
       }
     },

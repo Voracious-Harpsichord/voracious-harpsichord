@@ -278,3 +278,19 @@ button:focus {
 .searchAddButton {
     border-radius: 20px;
 }
+
+/*About Page*/
+
+.teamMemberProfile {
+    float: left;
+    height: 250px;
+    width: 250px;
+    margin-top: 100px;
+    margin-left: 150px;
+    padding:3px;
+    border:1px solid #E8E8E8;
+    background-color:white;
+    border-radius: 150px;
+    -webkit-border-radius: 150px;
+    -moz-border-radius: 150px
+}
