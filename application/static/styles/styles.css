@@ -38,6 +38,11 @@ body {
     font-weight: bold;
 }
 
+h1 {
+    font-family: 'Abril Fatface', cursive;
+
+}
+
 ul {
     list-style-type: none;
     margin: 0px;
@@ -276,12 +281,9 @@ button:focus {
 
 /* Login */
 
-.container {
+.content {
     margin-top: 85px;
     margin-bottom: 50px;
-}
-
-.content {
     border: 1px solid #bebebe;
     border-radius: 7px;
     padding-bottom: 20px;
