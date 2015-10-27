@@ -1,17 +1,26 @@
 <div class='container'>
-  <h1>Your Blogs</h1>
+  <h1>Your Sites</h1>
   <div class='row'>
     <div class='col-md-4'>
       <textarea class='form-control' rows='5'></textarea>
-      <input type='text' ng-model='blog.url' class="form-control form-input-box" placeholder='Enter a blog or article' required /> 
-      <div class='col-md-1 col-md-offset-3'>
-        <button ng-click='addBlog(blog.url)'>Add this blog!</button>
+      <input type='text' ng-model='site.url' class="form-control form-input-box" placeholder='Enter a blog or article' required />
+      <div class='col-lg-6 col-lg-offset-7'>
+        <label class="radio-inline">
+          <input type="radio" name="site-type" ng-model='site.type' id="blog" value="false"> Blog
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="site-type" ng-model='site.type' id="article" value="true"> Article
+        </label>
+      </div>
+      <div class='col-md-6 col-md-offset-10'>
+        <button ng-click='addSite(site)'>Add</button>
       </div>
     </div>
-    <div ng-repeat='blog in blogs track by $index'>
-      <div class='blog'>
-        <h3 class='blog-name'>{{blog.name}}</h3>
-        <a ng-href='http://{{blog.url}}'>{{blog.url}}</a>
+    <div class='col-md-offset-1' ng-repeat='site in sites track by $index'>
+      <div class='site'>
+        <h3 class='site-name'>{{site.name}}</h3>
+        <a ng-href='http://{{site.url}}'>{{site.url}}</a>
+        <p>{{site.type}}</p>
       </div>
     </div>
   </div>
