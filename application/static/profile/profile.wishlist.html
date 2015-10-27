@@ -32,7 +32,7 @@
     </tabset>
     <!-- Search tab scoped to product list -->
     <input ng-hide='addProductMode' type='text' ng-model="filter" placeholder='Browser by keywords'/>
-    <h2>myStash</h2>
+    <h2>Wishlist</h2>
     <ul>
         <li ng-repeat="product in products | wishlistFilter | filter : filter">
             <span class='product-brand'> {{product.brand_name}}</span>
@@ -42,6 +42,6 @@
             <span>{{product.product_notes}}</span>
             <span>{{product.product_color}}</span>
             <span>{{product.product_category}}</span>
-            <button ng-click='editModeFn(product)'>Edit</button>
+            <button ng-click='editProductModal(product)'>Edit</button>
             <button ng-click='deleteProduct(product)'>x</button>
     </ul>
