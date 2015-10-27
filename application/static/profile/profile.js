@@ -5,6 +5,7 @@ var stash = angular.module('beautystash.profile', [
   'ngMessages'
 ]);
 
+
 stash.controller('ProfileController', function ($scope, $window, Products, Friends, Blogs, $stateParams, Auth, ModalService) {
   //General variables
   $scope.user = Auth.userData;
@@ -69,6 +70,52 @@ stash.controller('ProfileController', function ($scope, $window, Products, Frien
 
   //Variables and fns relating to editing product 
   $scope.editMode = false;
+
+    $scope.newProduct = {
+      product_id: null,
+      product_name: null,
+      brand_name: null,
+      product_size: null,
+      product_status:null,
+      product_notes: null,
+      product_color: null,
+      product_category: null
+    };
+
+    $scope.tabs = [
+      {name: 'Stash', path: 'stash'},
+      {name: 'Explore Your Products', path: 'explore'},
+      {name: 'Followers', path: 'friends'},
+      {name: 'Wishlist', path: 'wishlist'},
+      {name: 'Recommendations', path: 'recs'},
+      {name: 'Blogs', path: 'blogs'}
+    ];
+
+    resetFields = function() {
+      $scope.newProduct.product_id = null;
+      $scope.newProduct.brand_name = null;
+      $scope.newProduct.product_name = null;
+      $scope.newProduct.notes = null;
+      $scope.newProduct.product_color = null;
+      $scope.newProduct.product_size = null;
+      $scope.newProduct.product_status = null;
+      $scope.newProduct.product_category = null;
+    };
+
+    //Add a product 
+    $scope.addProduct = function(product) {
+      console.log(product);
+      Products.addProduct(product)
+      .then(function(addedProduct) {
+        console.log(addedProduct);
+        $scope.products.push(addedProduct);
+        resetFields();
+      })
+      .catch(function(error) {
+        console.error('Error with adding product:', error);
+        resetFields();
+      });
+    };
 
   $scope.editModeFn = function(product) {
     $scope.editMode = true
@@ -157,13 +204,14 @@ stash.controller('ProfileController', function ($scope, $window, Products, Frien
   // };
 
   // $scope.blogs = Blogs.userBlogs;
-  $scope.blogs = [];
-  $scope.blog = {};
-  $scope.blog.url = '';
+  $scope.sites = [];
+  $scope.site = {};
+  $scope.site.url = '';
 
-  $scope.addBlog = function(blog_url) {
-    $scope.blogs.push({'name': 'BeautyBlog', 'url': blog_url});
-    $scope.blog.url = '';
+  $scope.addSite = function(site) {
+    $scope.sites.push({'name': 'BeautyBlog', 'url': site.url, 'article': site.type});
+    console.log($scope.sites);
+    $scope.site.url = '';
     // Blogs.addBlog()
     //   .then(function(addedBlog) {
     //     $scope.blogs.push(addedBlog);
