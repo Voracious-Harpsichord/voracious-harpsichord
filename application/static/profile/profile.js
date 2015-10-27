@@ -1,7 +1,8 @@
 var stash = angular.module('beautystash.profile', [
   'ui.bootstrap',
   'ui.bootstrap.tabs',
-  'angularModalService'
+  'angularModalService',
+  'ngMessages'
 ]);
 
 stash.controller('ProfileController', function ($scope, $window, Products, $stateParams, Auth, ModalService) {
@@ -46,19 +47,24 @@ stash.controller('ProfileController', function ($scope, $window, Products, $stat
   $scope.addProductMode = false
 
   $scope.addProductModeFn = function(bool) {
-    $scope.addProductMode = bool   
+    $scope.addProductMode = bool
+    if ($scope.addProductMode === true) {
+      $scope.filter = ''
+    }   
   }
 
   $scope.addProduct = function(product) {
-    Products.addProduct(product)
-    .then(function(addedProduct) {
-      $scope.products.unshift(addedProduct);
-      resetFields();
-    })
-    .catch(function(error) {
-      console.error('Error with adding product:', error);
-      resetFields();
-    });
+    if (product.brand_name !== null && product.product_name !== null) {    
+      Products.addProduct(product)
+      .then(function(addedProduct) {
+        $scope.products.unshift(addedProduct);
+        resetFields();
+      })
+      .catch(function(error) {
+        console.error('Error with adding product:', error);
+        resetFields();
+      });
+    }
   };
 
   //Variables and fns relating to editing product 
@@ -68,18 +74,6 @@ stash.controller('ProfileController', function ($scope, $window, Products, $stat
     $scope.editMode = true
     $scope.newProduct = angular.copy(product);
     $scope.currentItemIndex = $scope.products.indexOf(product);
-  }
-
-  $scope.editProduct = function(product) {
-    $scope.products[$scope.currentItemIndex] = angular.copy(product).product
-    $scope.editMode = false
-    Products.editProduct(product)
-      .then(function(editedProduct){
-        console.log(editedProduct)
-      })
-      .catch(function(error) {
-        console.error('Error with editing product:', error);
-      })
   }
 
   $scope.editProductModal = function(product) {
@@ -99,11 +93,49 @@ stash.controller('ProfileController', function ($scope, $window, Products, $stat
     });
   };
 
-  $scope.deleteProduct = function(product) {
+  $scope.editProduct = function(product) {
+    $scope.products[$scope.currentItemIndex] = angular.copy(product).product
+    $scope.editMode = false
+    Products.editProduct(product)
+      .then(function(editedProduct){
+        resetFields()
+      })
+      .catch(function(error) {
+        console.error('Error with editing product:', error);
+      })
+  }
+
+  //Variables and fns relating to delete product
+
+  $scope.deleteMode = false
+
+  $scope.deleteModeFn = function(product) {
+    $scope.deleteMode = true
     $scope.currentItemIndex = $scope.products.indexOf(product);
-    Products.deleteProduct(product)
+  }
+
+  $scope.deleteProductModal = function(product) {
+    $scope.deleteModeFn(product)
+    ModalService.showModal({
+      templateUrl: "profile/profile.deleteModal.html",
+      controller: "ModalController",
+      inputs: {
+        product: product
+      }
+    }).then(function(modal) {
+      modal.element.modal();
+      modal.close.then(function(product) {
+        $scope.deleteProduct(product)
+      });
+    });
+  }
+
+  $scope.deleteProduct = function(product) {
+    $scope.products.splice($scope.currentItemIndex, 1)
+    $scope.editMode = false
+    Products.deleteProduct(product.product)
       .then(function(response) {
-        $scope.products.splice($scope.currentItemIndex, 1)
+        console.log('Product Deletion Success')
       })
       .catch(function(error) {
         console.error('Error with deleting product:', error);
@@ -130,7 +162,6 @@ stash.controller('ModalController', function($scope, $element, product, close) {
 
   $scope.cancel = function() {
     $element.modal('hide');
-    close({product: $scope.product}, 500);
   };
 })
 
