@@ -5,7 +5,7 @@ var stash = angular.module('beautystash.profile', [
   'ngMessages'
 ]);
 
-stash.controller('ProfileController', function ($scope, $window, Products, $stateParams, Auth, ModalService) {
+stash.controller('ProfileController', function ($scope, $window, Products, Friends, Blogs, $stateParams, Auth, ModalService) {
   //General variables
   $scope.user = Auth.userData;
   //Display all products in user's stash
@@ -107,15 +107,15 @@ stash.controller('ProfileController', function ($scope, $window, Products, $stat
 
   //Variables and fns relating to delete product
 
-  $scope.deleteMode = false
+  $scope.deleteMode = false;
 
   $scope.deleteModeFn = function(product) {
-    $scope.deleteMode = true
+    $scope.deleteMode = true;
     $scope.currentItemIndex = $scope.products.indexOf(product);
   }
 
   $scope.deleteProductModal = function(product) {
-    $scope.deleteModeFn(product)
+    $scope.deleteModeFn(product);
     ModalService.showModal({
       templateUrl: "profile/profile.deleteModal.html",
       controller: "ModalController",
@@ -125,30 +125,61 @@ stash.controller('ProfileController', function ($scope, $window, Products, $stat
     }).then(function(modal) {
       modal.element.modal();
       modal.close.then(function(product) {
-        $scope.deleteProduct(product)
+        $scope.deleteProduct(product);
       });
     });
-  }
+  };
 
   $scope.deleteProduct = function(product) {
-    $scope.products.splice($scope.currentItemIndex, 1)
+    $scope.products.splice($scope.currentItemIndex, 1);
     $scope.editMode = false
     Products.deleteProduct(product.product)
       .then(function(response) {
-        console.log('Product Deletion Success')
+        console.log('Product Deletion Success');
       })
       .catch(function(error) {
         console.error('Error with deleting product:', error);
-      })
-  }
+      });
+  };
+
+
+  $scope.friends = Friends.userFriends;
+  // $scope.friends = [{'name_first': 'Laura', 'name_last': 'Weaver'}];
+
+  // $scope.addFriend = function(userid) {
+  //   Friends.addFriend(userid)
+  //     .then(function(newFriend) {
+  //       $scope.friends.push(newFriend);
+  //     })
+  //     .catch(function(error) {
+  //       console.error('Error with adding friend:', error);
+  //     });
+  // };
+
+  // $scope.blogs = Blogs.userBlogs;
+  $scope.blogs = [];
+  $scope.blog = {};
+  $scope.blog.url = '';
+
+  $scope.addBlog = function(blog_url) {
+    $scope.blogs.push({'name': 'BeautyBlog', 'url': blog_url});
+    $scope.blog.url = '';
+    // Blogs.addBlog()
+    //   .then(function(addedBlog) {
+    //     $scope.blogs.push(addedBlog);
+    //   })
+    //   .catch(function(error) {
+    //     console.error('Error with adding blog:', error);
+    //   });
+  };
 });
 
 stash.controller('ModalController', function($scope, $element, product, close) {
 
-  $scope.product = {}
+  $scope.product = {};
 
   $scope.product.product_id = product.product_id;
-  $scope.product.brand_name = product.brand_name
+  $scope.product.brand_name = product.brand_name;
   $scope.product.product_name = product.product_name;
   $scope.product.product_notes = product.product_notes;
   $scope.product.product_color = product.product_color;
@@ -163,40 +194,40 @@ stash.controller('ModalController', function($scope, $element, product, close) {
   $scope.cancel = function() {
     $element.modal('hide');
   };
-})
+});
 
 stash.filter('wishlistFilter', function() {
   return function(input) {
-    var output = []
+    var output = [];
     angular.forEach(input, function(product) {
       if (product.product_status === 'Wishlist') {
-        output.push(product)
+        output.push(product);
       }
-    })
-    return output
-  }
-})
+    });
+    return output;
+  };
+});
 
 stash.filter('finishedFilter', function() {
   return function(input) {
-    var output = []
+    var output = [];
     angular.forEach(input, function(product) {
       if (product.product_status === 'Finished') {
-        output.push(product)
+        output.push(product);
       }
-    })
-    return output
-  }
-})
+    });
+    return output;
+  };
+});
 
 stash.filter('myStashFilter', function() {
   return function(input) {
-    var output = []
+    var output = [];
     angular.forEach(input, function(product) {
       if (product.product_status === 'Own' || product.product_status === null) {
-        output.push(product)
+        output.push(product);
       }
-    })
-    return output
-  }
-})
+    });
+    return output;
+  };
+});
