@@ -5,6 +5,12 @@ var stash = angular.module('beautystash.profile', [
   'ngMessages'
 ]);
 
+// stash.config(['SuperfeedrProvider', function(Superfeedr) {
+//   Superfeedr.configure({
+//     login: 'checy16',
+//     token: '6305651b20a3fb3d896a5b940070d676'
+//   });
+// }]);
 
 stash.controller('ProfileController', function ($scope, $window, Products, Friends, Blogs, $stateParams, Auth, ModalService) {
   //General variables
