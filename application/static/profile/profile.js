@@ -150,19 +150,22 @@ stash.controller('ProfileController', function ($scope, $window, Products, Frien
 
 
   $scope.friends = Friends.userFriends;
-  // $scope.friends = [{'name_first': 'Laura', 'name_last': 'Weaver'}];
+  
+  $scope.follow = function() {
+    console.log('userid', Auth.userData.userid);
+    $scope.friends.push({
+      'name_first': 'Cynthia', 'name_last': 'Chen', 'profilePic': '../photos/chen.jpg', 'status': 'Following'
+    });
+    // Friends.follow(Auth.userData.userid)
+    //   .then(function(user) {
+    //     $scope.friends.push(user);
+    //   })
+    //   .catch(function(error) {
+    //     console.error('Error with following user:', error);
+    //   });
+  };
 
-  // $scope.addFriend = function(userid) {
-  //   Friends.addFriend(userid)
-  //     .then(function(newFriend) {
-  //       $scope.friends.push(newFriend);
-  //     })
-  //     .catch(function(error) {
-  //       console.error('Error with adding friend:', error);
-  //     });
-  // };
-
-  // $scope.blogs = Blogs.userBlogs;
+  // $scope.sites = Sites.userSites;
   $scope.sites = [];
   $scope.site = {};
   $scope.site.url = '';
@@ -171,12 +174,12 @@ stash.controller('ProfileController', function ($scope, $window, Products, Frien
     $scope.sites.push({'name': 'BeautyBlog', 'url': site.url, 'article': site.type});
     console.log($scope.sites);
     $scope.site.url = '';
-    // Blogs.addBlog()
-    //   .then(function(addedBlog) {
-    //     $scope.blogs.push(addedBlog);
+    // Sites.addSite()
+    //   .then(function(addedSite) {
+    //     $scope.sites.push(addedSite);
     //   })
     //   .catch(function(error) {
-    //     console.error('Error with adding blog:', error);
+    //     console.error('Error with adding site:', error);
     //   });
   };
 });
