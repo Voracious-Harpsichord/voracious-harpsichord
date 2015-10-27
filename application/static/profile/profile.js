@@ -12,12 +12,11 @@ var stash = angular.module('beautystash.profile', [
 //   });
 // }]);
 
-stash.controller('ProfileController', function ($scope, $window, Products, Friends, Blogs, $stateParams, Auth, ModalService) {
+stash.controller('ProfileController', function ($scope, $window, Products, Friends, $stateParams, Auth, ModalService) {
   //General variables
   $scope.user = Auth.userData;
   //Display all products in user's stash
   $scope.products = Products.userProducts;
-  $scope.currentItemIndex;
 
   $scope.newProduct = {
     product_id: null,
@@ -31,13 +30,13 @@ stash.controller('ProfileController', function ($scope, $window, Products, Frien
   };
 
   $scope.tabs = [
-    {name: 'Stash', path: 'stash'}, 
-    {name: 'Explore Your Products', path: 'explore'}, 
-    {name: 'Friends', path: 'friends'}, 
+    {name: 'Stash', path: 'stash'},
+    {name: 'Explore Your Products', path: 'explore'},
+    {name: 'Friends', path: 'friends'},
     {name: 'Wishlist', path: 'wishlist'},
-    {name: 'Recommendations', path: 'recs'}, 
+    {name: 'Recommendations', path: 'recs'},
     {name: 'Blogs', path: 'blogs'}
-  ]
+  ];
 
   resetFields = function() {
     $scope.newProduct.product_id = null;
@@ -45,13 +44,13 @@ stash.controller('ProfileController', function ($scope, $window, Products, Frien
     $scope.newProduct.product_name = null;
     $scope.newProduct.product_notes = null;
     $scope.newProduct.product_color = null;
-    $scope.newProduct.product_size = null
-    $scope.newProduct.product_status = null
-    $scope.newProduct.product_category = null
-  }
+    $scope.newProduct.product_size = null;
+    $scope.newProduct.product_status = null;
+    $scope.newProduct.product_category = null;
+  };
 
   //Variables and fns relating to adding product 
-  $scope.addProductMode = false
+  $scope.addProductMode = false;
 
   $scope.addProductModeFn = function(bool) {
     $scope.addProductMode = bool
@@ -77,57 +76,11 @@ stash.controller('ProfileController', function ($scope, $window, Products, Frien
   //Variables and fns relating to editing product 
   $scope.editMode = false;
 
-    $scope.newProduct = {
-      product_id: null,
-      product_name: null,
-      brand_name: null,
-      product_size: null,
-      product_status:null,
-      product_notes: null,
-      product_color: null,
-      product_category: null
-    };
-
-    $scope.tabs = [
-      {name: 'Stash', path: 'stash'},
-      {name: 'Explore Your Products', path: 'explore'},
-      {name: 'Followers', path: 'friends'},
-      {name: 'Wishlist', path: 'wishlist'},
-      {name: 'Recommendations', path: 'recs'},
-      {name: 'Blogs', path: 'blogs'}
-    ];
-
-    resetFields = function() {
-      $scope.newProduct.product_id = null;
-      $scope.newProduct.brand_name = null;
-      $scope.newProduct.product_name = null;
-      $scope.newProduct.notes = null;
-      $scope.newProduct.product_color = null;
-      $scope.newProduct.product_size = null;
-      $scope.newProduct.product_status = null;
-      $scope.newProduct.product_category = null;
-    };
-
-    //Add a product 
-    $scope.addProduct = function(product) {
-      console.log(product);
-      Products.addProduct(product)
-      .then(function(addedProduct) {
-        console.log(addedProduct);
-        $scope.products.push(addedProduct);
-        resetFields();
-      })
-      .catch(function(error) {
-        console.error('Error with adding product:', error);
-        resetFields();
-      });
-    };
-
   $scope.editModeFn = function(product) {
-    $scope.editMode = true
+    $scope.editMode = true;
     $scope.newProduct = angular.copy(product);
     $scope.currentItemIndex = $scope.products.indexOf(product);
-  }
+  };
 
   $scope.editProductModal = function(product) {
     $scope.editModeFn(product)
@@ -147,8 +100,8 @@ stash.controller('ProfileController', function ($scope, $window, Products, Frien
   };
 
   $scope.editProduct = function(product) {
-    $scope.products[$scope.currentItemIndex] = angular.copy(product).product
-    $scope.editMode = false
+    $scope.products[$scope.currentItemIndex] = angular.copy(product).product;
+    $scope.editMode = false;
     Products.editProduct(product)
       .then(function(editedProduct){
         resetFields()
