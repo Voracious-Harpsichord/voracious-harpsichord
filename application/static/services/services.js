@@ -48,6 +48,7 @@ services.factory('Products', function($http, Auth) {
 
   //Update a product in user's stash
   var editProduct = function(product) {
+    console.log(product)
     return $http({
       method: 'PUT',
       url: '/api/userProducts/' + Auth.userData.userid,

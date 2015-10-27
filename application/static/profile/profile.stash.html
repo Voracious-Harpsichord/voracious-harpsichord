@@ -1,7 +1,9 @@
 <div class='container'>
     <tabset>
+        <!-- Search Tab -->
         <tab heading="Search" select='addProductModeFn(false)'>
         </tab>
+        <!-- Add Product Tab -->
         <tab heading="Add Product" select='addProductModeFn(true)'>
             <input type='text' ng-model='newProduct.brand_name' placeholder='Brand name'/>
             <input type='text' ng-model='newProduct.product_name' placeholder='Product name'/>
@@ -27,13 +29,14 @@
             </select><br>
             <label>Notes</label><br>
               <input ng-model='newProduct.product_notes'></input><br>
-            <label for='notes'>Color:</label><br>
+            <label>Color:</label><br>
             <input ng-model='newProduct.product_color'></input><br>
             <button type='submit' ng-click='addProduct(newProduct)'>Save Product</button>
         </tab>
     </tabset>
     <!-- Search tab scoped to product list -->
     <input ng-hide='addProductMode' type='text' ng-model="filter" placeholder='Browser by keywords'/>
+    <!-- Products Lists -->
     <h2>myStash</h2>
     <ul>
         <li ng-repeat="product in products | myStashFilter | filter : filter">
@@ -44,7 +47,7 @@
             <span>{{product.product_notes}}</span>
             <span>{{product.product_color}}</span>
             <span>{{product.product_category}}</span>
-            <button ng-click='editModeFn(product)'>Edit</button>
+            <button ng-click='editProductModal(product)'>Edit</button>
             <button ng-click='deleteProduct(product)'>x</button>
     </ul>
     <h2>Finished</h2>
@@ -57,7 +60,7 @@
             <span>{{product.product_notes}}</span>
             <span>{{product.product_color}}</span>
             <span>{{product.product_category}}</span>
-            <button ng-click='editModeFn(product)'>Edit</button>
+            <button ng-click='editProductModal(product)'>Edit</button>
             <button ng-click='deleteProduct(product)'>x</button>
     </ul>
 </div>

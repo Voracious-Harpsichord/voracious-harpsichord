@@ -1,21 +1,14 @@
 var stash = angular.module('beautystash.profile', [
   'ui.bootstrap',
-  'ui.bootstrap.tabs'
+  'ui.bootstrap.tabs',
+  'angularModalService'
 ]);
 
-stash.controller('ProfileController', function ($scope, $window, Products, $stateParams, Auth, filterFilter) {
-
-  // $scope.alertMe = function() {
-  //   setTimeout(function() {
-  //     $window.alert('You\'ve selected the alert tab!');
-  //   });
-  // };
-
+stash.controller('ProfileController', function ($scope, $window, Products, $stateParams, Auth, ModalService) {
+  //General variables
   $scope.user = Auth.userData;
   //Display all products in user's stash
   $scope.products = Products.userProducts;
-  $scope.editMode = false;
-  $scope.filter;
   $scope.currentItemIndex;
 
   $scope.newProduct = {
@@ -42,20 +35,20 @@ stash.controller('ProfileController', function ($scope, $window, Products, $stat
     $scope.newProduct.product_id = null;
     $scope.newProduct.brand_name = null;
     $scope.newProduct.product_name = null;
-    $scope.newProduct.notes = null;
+    $scope.newProduct.product_notes = null;
     $scope.newProduct.product_color = null;
     $scope.newProduct.product_size = null
     $scope.newProduct.product_status = null
     $scope.newProduct.product_category = null
   }
 
+  //Variables and fns relating to adding product 
   $scope.addProductMode = false
 
   $scope.addProductModeFn = function(bool) {
-    $scope.addProductMode = bool    
+    $scope.addProductMode = bool   
   }
 
-  //Add a product 
   $scope.addProduct = function(product) {
     Products.addProduct(product)
     .then(function(addedProduct) {
@@ -68,6 +61,9 @@ stash.controller('ProfileController', function ($scope, $window, Products, $stat
     });
   };
 
+  //Variables and fns relating to editing product 
+  $scope.editMode = false;
+
   $scope.editModeFn = function(product) {
     $scope.editMode = true
     $scope.newProduct = angular.copy(product);
@@ -75,32 +71,68 @@ stash.controller('ProfileController', function ($scope, $window, Products, $stat
   }
 
   $scope.editProduct = function(product) {
-    console.log(product)
-    $scope.products[$scope.currentItemIndex] = angular.copy(product)
+    $scope.products[$scope.currentItemIndex] = angular.copy(product).product
     $scope.editMode = false
     Products.editProduct(product)
       .then(function(editedProduct){
         console.log(editedProduct)
-        resetFields();
       })
       .catch(function(error) {
         console.error('Error with editing product:', error);
-        resetFields();
       })
   }
+
+  $scope.editProductModal = function(product) {
+    $scope.editModeFn(product)
+    ModalService.showModal({
+      templateUrl: "profile/profile.editModal.html",
+      controller: "ModalController",
+      inputs: {
+        product: product
+      }
+    }).then(function(modal) {
+      modal.element.modal();
+      modal.close.then(function(product) {
+        console.log('Modal Closes:', product)
+        $scope.editProduct(product)
+      });
+    });
+  };
 
   $scope.deleteProduct = function(product) {
     $scope.currentItemIndex = $scope.products.indexOf(product);
     Products.deleteProduct(product)
       .then(function(response) {
         $scope.products.splice($scope.currentItemIndex, 1)
-        console.log($scope.products)
       })
       .catch(function(error) {
         console.error('Error with deleting product:', error);
       })
   }
-  });
+});
+
+stash.controller('ModalController', function($scope, $element, product, close) {
+
+  $scope.product = {}
+
+  $scope.product.product_id = product.product_id;
+  $scope.product.brand_name = product.brand_name
+  $scope.product.product_name = product.product_name;
+  $scope.product.product_notes = product.product_notes;
+  $scope.product.product_color = product.product_color;
+  $scope.product.product_size = product.product_size;
+  $scope.product.product_status = product.product_status;
+  $scope.product.product_category = product.product_category;
+
+  $scope.close = function() {
+    close({product: $scope.product}, 500);
+  };
+
+  $scope.cancel = function() {
+    $element.modal('hide');
+    close({product: $scope.product}, 500);
+  };
+})
 
 stash.filter('wishlistFilter', function() {
   return function(input) {

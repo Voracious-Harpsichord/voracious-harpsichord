@@ -112,15 +112,18 @@ def userProducts(user_id):
 
     if request.method == 'PUT':
         body = request.get_json()
-        product_id = p_ctrl.verify_product_by_name_and_brand(body['product_name'], body['brand_name'])
+        product = body['product']
+        print(body)
+        print(product)
+        product_id = p_ctrl.verify_product_by_name_and_brand(product['product_name'], product['brand_name'])
         response = jsonify(p_ctrl.edit_user_to_product(
-            body['product_id'],
+            product['product_id'],
             user_id,
             product_id,
-            body['product_size'], 
-            body['product_status'], 
-            body['product_notes'],
-            body['product_color']
+            product['product_size'], 
+            product['product_status'], 
+            product['product_notes'],
+            product['product_color']
         ))
         return response, 202
 
