@@ -3,9 +3,9 @@ var services = angular.module('beautystash.services', []);
 services.factory('Friends', function($http, Auth) {
 
   var userFriends = [
-  {'name_first': 'Laura', 'name_last': 'Weaver', 'profilePic': '../photos/weaver.jpg'},
-  {'name_first': 'John', 'name_last': 'Knox', 'profilePic': '../photos/knox.jpg'},
-  {'name_first': 'Michael', 'name_last': 'Sova', 'profilePic': '../photos/sova.jpg'}
+  {'name_first': 'Laura', 'name_last': 'Weaver', 'profilePic': '../photos/weaver.jpg', 'status': 'Following'},
+  {'name_first': 'John', 'name_last': 'Knox', 'profilePic': '../photos/knox.jpg', 'status': 'Follower'},
+  {'name_first': 'Michael', 'name_last': 'Sova', 'profilePic': '../photos/sova.jpg', 'status': 'Follower'}
   ];
 
   var getFriends = function() {
@@ -27,11 +27,11 @@ services.factory('Friends', function($http, Auth) {
     }
   };
 
-  var addFriend = function(user_id) {
+  var follow = function(userid) {
     //Send POST request to /userFriends/:user_id
     return $http({
       method: 'POST',
-      url: '/api/userFriends' + Auth.userData.userid,
+      url: '/api/userFriends' + userid,
       headers: {
         'Content-Type': 'application/json'
       },
@@ -44,7 +44,7 @@ services.factory('Friends', function($http, Auth) {
 
   return {
     getFriends: getFriends,
-    addFriend: addFriend,
+    follow: follow,
     userFriends: userFriends
   };
 });
