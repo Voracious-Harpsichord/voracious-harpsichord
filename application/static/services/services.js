@@ -3,12 +3,10 @@ var services = angular.module('beautystash.services', []);
 services.factory('Friends', function($http, Auth) {
 
   var userFriends = [
-  {'name_first': 'Laura', 'name_last': 'Weaver'},
-  {'name_first': 'Laura', 'name_last': 'Knight'},
-  {'name_first': 'Amy', 'name_last': 'Chiu'}
+  {'name_first': 'Laura', 'name_last': 'Weaver', 'profilePic': '../photos/weaver.jpg'},
+  {'name_first': 'John', 'name_last': 'Knox', 'profilePic': '../photos/knox.jpg'},
+  {'name_first': 'Michael', 'name_last': 'Sova', 'profilePic': '../photos/sova.jpg'}
   ];
-
-  //Maybe change friends to followers --> have list of following and followers?
 
   var getFriends = function() {
     //check if userid exists first
@@ -30,7 +28,7 @@ services.factory('Friends', function($http, Auth) {
   };
 
   var addFriend = function(user_id) {
-    //Send POST request to /userBlogs/:user_id
+    //Send POST request to /userFriends/:user_id
     return $http({
       method: 'POST',
       url: '/api/userFriends' + Auth.userData.userid,
@@ -51,57 +49,57 @@ services.factory('Friends', function($http, Auth) {
   };
 });
 
-services.factory('Blogs', function($http, Auth) {
+// services.factory('Sites', function($http, Auth) {
 
-  var userBlogs = [];
+//   var userSites = [];
 
-  var getBlogs = function() {
-    //check if userid exists first
-    if (Auth.userData.userid) {
-      //Send GET request to /userBlogs/:user_id
-      return $http({
-        method: 'GET',
-        url: '/api/userBlogs' + Auth.userData.userid,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      .then(function(resp) {
-        while(userBlogs.length) {userBlogs.pop();}
-        resp.data.userBlogs.forEach(function(item) {userBlogs.push(item);});
-        return resp.data;
-      });
-    }
-  };
+//   var getSites = function() {
+//     //check if userid exists first
+//     if (Auth.userData.userid) {
+//       //Send GET request to /userSites/:user_id
+//       return $http({
+//         method: 'GET',
+//         url: '/api/userSites' + Auth.userData.userid,
+//         headers: {
+//           'Content-Type': 'application/json'
+//         }
+//       })
+//       .then(function(resp) {
+//         while(userSites.length) {userSites.pop();}
+//         resp.data.userSites.forEach(function(item) {userSites.push(item);});
+//         return resp.data;
+//       });
+//     }
+//   };
 
-  // var getBlog = function() {
+  // var getSite = function() {
   //   return $http({
   //     method: 'GET',
   //     url: '/'
   //   });
 
-  };
+//   });
 
-  var addBlog = function(blog_url) {
-    //Send POST request to /userBlogs/:user_id
-    return $http({
-      method: 'POST',
-      url: '/api/userBlogs/' + Auth.userData.userid,
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: blog_url
-    })
-    .then(function(resp) {
-      return resp.data;
-    });
-  };
+//   var addSite = function(site) {
+//     //Send POST request to /userSites/:user_id
+//     return $http({
+//       method: 'POST',
+//       url: '/api/userSites/' + Auth.userData.userid,
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       data: site
+//     })
+//     .then(function(resp) {
+//       return resp.data;
+//     });
+//   };
 
-  return {
-    getBlogs: getBlogs,
-    addBlog: addBlog
-  };
-});
+//   return {
+//     getSites: getSites,
+//     addSite: addSite
+//   };
+// });
 
 
 services.factory('Products', function($http, Auth) {
