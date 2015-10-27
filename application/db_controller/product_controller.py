@@ -55,7 +55,7 @@ def add_product_to_products(name, brand, category='', price='', sephora_id='', i
     return session.query(Product).filter(Product.name == name, Product.brand == brand).one().id
 
 #Create a relationship between user and product and add user data to product relationship
-def add_user_to_product(user_id, product_id, size='full', status='own', notes='', color='', stars='', review='', user_product_image_url=''):
+def add_user_to_product(user_id, product_id, size='Full', status='Own', notes='', color='', stars='', review='', user_product_image_url=''):
     #Add user and product to user/products
     product = User_product(int(user_id), int(product_id), size, status, notes, color, stars, review, user_product_image_url)
     session.add(product)
@@ -87,13 +87,13 @@ def edit_user_to_product(id, user_id, product_id, size='full', status='own', not
     session.query(User_product).\
         filter(User_product.id == id).\
         update({
-            'product_size': size,
-            'product_status': status,
-            'product_notes': notes,
-            'product_color': color,
-            'product_stars': stars,
-            'product_review': review,
-            'product_user_product_image_url': user_product_image_url
+            'size': size,
+            'status': status,
+            'notes': notes,
+            'color': color,
+            'stars': stars,
+            'review': review,
+            'user_product_image_url': user_product_image_url
         })
 
     session.commit()
@@ -102,13 +102,13 @@ def edit_user_to_product(id, user_id, product_id, size='full', status='own', not
 
     return {
         'product_id': product_user.id, 
-        'brand_name': product_universal.product_brand, 
-        'product_name': product_universal.product_name,
-        'product_category': product_universal.product_category,
-        'product_size': product_user.product_size,
-        'product_status': product_user.product_status,
-        'product_notes': product_user.product_notes,
-        'product_color': product_user.product_color
+        'brand_name': product_universal.brand, 
+        'product_name': product_universal.name,
+        'product_category': product_universal.category,
+        'product_size': product_user.size,
+        'product_status': product_user.status,
+        'product_notes': product_user.notes,
+        'product_color': product_user.color
     }
 
 #Delete a relationship between user and product

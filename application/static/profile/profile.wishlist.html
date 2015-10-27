@@ -1,53 +1,47 @@
 <div class='container'>
-    <!-- Add Product Mode -->
-    <div class="btn-group" role="group" ng-hide='editMode' aria-label="...">
-      <button type="button" class="btn btn-default" ng-click='editProduct(newProduct)'>Search</button>
-      <button type="button" class="btn btn-default" ng-click='addProduct(newProduct)'> Add Product</button>
-    </div>
-    <!-- Edit Product Mode -->
-    <button type="button" class="btn btn-default" ng-show='editMode' ng-click='editProduct(newProduct)'>Save Changes</button>
-    <form>
-      <input type='text' ng-hide='editMode' ng-model='newProduct.brand_name' placeholder='Brand name' required/>
-      <input type='text' ng-hide='editMode' ng-model='newProduct.product_name' placeholder='Product name' required/>
-      <label for='size'>Size</label>
-      <select name='size' ng-model='newProduct.product_size'>
-        <option value='Full'>Full</option>
-        <option value='Travel'>Travel</option>
-      </select>
-      <!-- Edit Product Mode -->
-      <label for='status'>Status</label>
-      <select name='status' ng-model='newProduct.product_status' ng-show='editMode'>
-        <option value='Own'>Currently Own</option>
-        <option value='Finished'>Finished</option>
-        <option value='Expired'>Expired</option>
-        <option value='Wishlist'>Wishlist</option>
-      </select><br>
-      <!-- Add Product Mode -->
-      <select name='status' ng-model='newProduct.product_status' ng-hide='editMode'>
-        <option value='Wishlist'>Wishlist</option>
-      </select><br>
-      <label ng-hide='editMode' for='category' required>Category</label>
-      <select ng-hide='editMode'  sname='category' ng-model='newProduct.product_category'>
-        <option value='Makeup'>Makeup</option>
-        <option value='Skin Care'>Skin Care</option>
-        <option value='Hair'>Hair</option>
-        <option value='Bath and Body'>Bath and Body</option>
-        <option value='Fragrance'>Fragrance</option>
-        <option value='Tools|Brushes'>Tools|Brushes</option>
-      </select><br>
-      <label>Notes</label><br>
-        <input ng-model='newProduct.product_notes'></input><br>
-      <label for='notes'>Color:</label><br>
-      <input ng-model='newProduct.product_color'></input><br>
-    </form>
-
-  <div class='stash' ng-repeat='product in products | wishlistFilter'>
-    <span class='product-brand'> {{ product.brand_name }}</span>
-    <span class='product-name'> {{ product.product_name }}</span>
-    <span>{{product.product_size}}</span>
-    <span>{{product.product_status}}</span>
-    <span>{{product.product_notes}}</span>
-    <span>{{product.product_category}}</span>
-    <button ng-click='editModeFn(product)'>Edit</button>
-  </div>
-</div>
+    <tabset>
+        <tab heading="Search" select='addProductModeFn(false)'>
+        </tab>
+        <tab heading="Add Product to Wishlist" select='addProductModeFn(true)'>
+            <input type='text' ng-model='newProduct.brand_name' placeholder='Brand name'/>
+            <input type='text' ng-model='newProduct.product_name' placeholder='Product name'/>
+            <label for='category'>Category</label>
+            <select class='productSelect' name='category' ng-model='newProduct.product_category'>
+                <option  value='Makeup'>Makeup</option>
+                <option value='Skin Care'>Skin Care</option>
+                <option value='Hair'>Hair</option>
+                <option value='Bath and Body'>Bath and Body</option>
+                <option value='Fragrance'>Fragrance</option>
+                <option value='Tools|Brushes'>Tools|Brushes</option>
+            </select><br>
+            <label for='size'>Size</label>
+            <select class='productSelect' name='size' ng-model='newProduct.product_size'>
+                <option value='Full'>Full</option>
+                <option value='Travel'>Travel</option>
+            </select>
+            <label for='status'>Status</label>
+            <select class='productSelect' name='status' ng-model='newProduct.product_status'>
+                <option value='Wishlist'>Wishlist</option>
+            </select><br>
+            <label>Notes</label><br>
+                <input ng-model='newProduct.product_notes'></input><br>
+            <label for='notes'>Color:</label><br>
+            <input ng-model='newProduct.product_color'></input><br>
+            <button type='submit' ng-click='addProduct(newProduct)'>Save Product</button>
+        </tab>
+    </tabset>
+    <!-- Search tab scoped to product list -->
+    <input ng-hide='addProductMode' type='text' ng-model="filter" placeholder='Browser by keywords'/>
+    <h2>Wishlist</h2>
+    <ul>
+        <li ng-repeat="product in products | wishlistFilter | filter : filter">
+            <span class='product-brand'> {{product.brand_name}}</span>
+            <span class='product-name'> {{product.product_name}}</span>
+            <span>{{product.product_size}}</span>
+            <span>{{product.product_status}}</span>
+            <span>{{product.product_notes}}</span>
+            <span>{{product.product_color}}</span>
+            <span>{{product.product_category}}</span>
+            <button ng-click='editProductModal(product)'>Edit</button>
+            <button ng-click='deleteProduct(product)'>x</button>
+    </ul>

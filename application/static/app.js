@@ -5,7 +5,9 @@ var app = angular.module('beautystash',[
   'beautystash.auth',
   'beautystash.settings',
   'beautystash.profile',
-  'ui.router'
+  'ui.router',
+  'ui.bootstrap',
+  'ui.bootstrap.tabs'
 ]);
 
 app.config(function($stateProvider, $urlRouterProvider) {
