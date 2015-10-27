@@ -242,7 +242,7 @@ button:focus {
     color: #eee;
     text-shadow: 0 0 5px rgba(0,0,0,1);
     float: left;
-    margin-top: 200px;
+    margin-top: 160px;
     margin-left: 30px;
 }
 
@@ -267,7 +267,7 @@ button:focus {
     color: black;
     display: inline;
     font-size: 120%;
-    margin-bottom: 0px;
+    margin-bottom: 0;
     padding-left: 15px;
     padding-right: 15px;
     padding-bottom: 20px;
@@ -277,6 +277,22 @@ button:focus {
 
 .selectTab {
     border-bottom: 5px solid #E8E8E8;
+}
+
+/*Followers*/
+.friendProfilePic {
+    float: left;
+    height: 150px;
+    width: 150px;
+    margin-top: 100px;
+    margin-left: 150px;
+    margin-right: 25px;
+    padding:3px;
+    border:1px solid #E8E8E8;
+    background-color:white;
+    /*border-radius: 150px;*/
+    /*-webkit-border-radius: 150px;*/
+    /*-moz-border-radius: 150px*/
 }
 
 /* Login */
