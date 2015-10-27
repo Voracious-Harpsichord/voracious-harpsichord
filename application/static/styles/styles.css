@@ -294,3 +294,7 @@ button:focus {
     -webkit-border-radius: 150px;
     -moz-border-radius: 150px
 }
+
+input.ng-invalid {
+  border: 1px solid red;
+}
