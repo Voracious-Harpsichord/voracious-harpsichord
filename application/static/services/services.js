@@ -1,41 +1,79 @@
 var services = angular.module('beautystash.services', []);
 
-services.factory('Friends', function($http, Auth) {
+services.factory('Follow', function($http, Auth) {
 
-  var userFriends = [
-  {'name_first': 'Laura', 'name_last': 'Weaver', 'profilePic': '../photos/weaver.jpg', 'status': 'Following'},
-  {'name_first': 'John', 'name_last': 'Knox', 'profilePic': '../photos/knox.jpg', 'status': 'Follower'},
-  {'name_first': 'Michael', 'name_last': 'Sova', 'profilePic': '../photos/sova.jpg', 'status': 'Follower'}
+  var userFollowers = [
+  {'name_first': 'Laura', 'name_last': 'Weaver', 'profilePic': '../photos/weaver.jpg'},
+  {'name_first': 'John', 'name_last': 'Knox', 'profilePic': '../photos/knox.jpg'},
+  {'name_first': 'Michael', 'name_last': 'Sova', 'profilePic': '../photos/sova.jpg'}
   ];
 
-  var getFriends = function() {
+  var userFollowing = [];
+
+  //Get user's followers
+  var getFollowers = function() {
     //check if userid exists first
     if (Auth.userData.userid) {
-      //Send GET request to /userFriends/:user_id
+      //Send GET request to /api/user/follow/:user_id
       return $http({
         method: 'GET',
-        url: '/api/userFriends' + Auth.userData.userid,
+        url: '/api/user/follow/' + Auth.userData.userid,
         headers: {
           'Content-Type': 'application/json'
         }
       })
       .then(function(resp) {
-        while(userFriends.length) {userFriends.pop();}
-        resp.data.userFriends.forEach(function(item) {userFriends.push(item);});
+        angular.extend(userFollowers, resp.data.followers);
         return resp.data;
       });
     }
   };
 
-  var follow = function(userid) {
-    //Send POST request to /userFriends/:user_id
+  //Get who user is following
+  var getFollowing = function() {
+    //check if userid exists first
+    if (Auth.userData.userid) {
+      //Send GET request to /api/user/follow/:user_id
+      return $http({
+        method: 'GET',
+        url: '/api/user/follow/' + Auth.userData.userid,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(function(resp) {
+        angular.extend(userFollowing, resp.data.following);
+        return resp.data;
+      });
+    }
+  };
+
+  //To follow someone
+  var follow = function(user) {
+    //Send POST request to /api/user/following/:user_id
     return $http({
       method: 'POST',
-      url: '/api/userFriends' + userid,
+      url: '/api/user/follow/' + Auth.userData.userid,
       headers: {
         'Content-Type': 'application/json'
       },
-      data: user_id
+      data: user
+    })
+    .then(function(resp) {
+      return resp.data;
+    });
+  };
+
+  //To unfollow someone
+  var unfollow = function(user) {
+    //Send DELETE request /api/user/following/:user_id
+    return $http({
+      method: 'DELETE',
+      url: '/api/user/follow/' + Auth.userData.userid,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: user
     })
     .then(function(resp) {
       return resp.data;
@@ -43,63 +81,70 @@ services.factory('Friends', function($http, Auth) {
   };
 
   return {
-    getFriends: getFriends,
+    getFollowers: getFollowers,
     follow: follow,
+    unfollow: unfollow,
     userFriends: userFriends
   };
 });
 
-// services.factory('Sites', function($http, Auth) {
+services.factory('Sites', function($http, Auth) {
 
-//   var userSites = [];
+  var userSites = [];
 
-//   var getSites = function() {
-//     //check if userid exists first
-//     if (Auth.userData.userid) {
-//       //Send GET request to /userSites/:user_id
-//       return $http({
-//         method: 'GET',
-//         url: '/api/userSites' + Auth.userData.userid,
-//         headers: {
-//           'Content-Type': 'application/json'
-//         }
-//       })
-//       .then(function(resp) {
-//         while(userSites.length) {userSites.pop();}
-//         resp.data.userSites.forEach(function(item) {userSites.push(item);});
-//         return resp.data;
-//       });
-//     }
-//   };
+  var getSites = function() {
+    //check if userid exists first
+    if (Auth.userData.userid) {
+      //Send GET request to /userSites/:user_id
+      return $http({
+        method: 'GET',
+        url: '/api/userSites' + Auth.userData.userid,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(function(resp) {
+        while(userSites.length) {userSites.pop();}
+        resp.data.userSites.forEach(function(item) {userSites.push(item);});
+        return resp.data;
+      });
+    }
+  };
 
-  // var getSite = function() {
-  //   return $http({
-  //     method: 'GET',
-  //     url: '/'
-  //   });
+  var getSite = function(url) {
+    return $http({
+      method: 'GET',
+      url: 'http://' + url,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(function(resp) {
+      return resp.data;
+    });
+  };
 
-//   });
+  var addSite = function(site) {
+    //Send POST request to /userSites/:user_id
+    return $http({
+      method: 'POST',
+      url: '/api/userSites/' + Auth.userData.userid,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: site
+    })
+    .then(function(resp) {
+      return resp.data;
+    });
+  };
 
-//   var addSite = function(site) {
-//     //Send POST request to /userSites/:user_id
-//     return $http({
-//       method: 'POST',
-//       url: '/api/userSites/' + Auth.userData.userid,
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       data: site
-//     })
-//     .then(function(resp) {
-//       return resp.data;
-//     });
-//   };
-
-//   return {
-//     getSites: getSites,
-//     addSite: addSite
-//   };
-// });
+  return {
+    getSites: getSites,
+    getSite: getSite,
+    addSite: addSite
+  };
+});
 
 
 services.factory('Products', function($http, Auth) {
