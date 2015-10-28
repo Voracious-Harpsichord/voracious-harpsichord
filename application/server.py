@@ -103,7 +103,7 @@ def followers(user_id):
     if request.method == 'DELETE':
         body = request.get_json()
         id_to_unfollow = body.get('user_id')
-        if (u_ctrl.remove_follower(user_id, id_to_unfollow): #add_follower methodneeds to be added to user_controller
+        if u_ctrl.remove_follower(user_id, id_to_unfollow): #add_follower methodneeds to be added to user_controller
             return jsonify({'user_id': id_to_follow}), 201
         return "Follower relationship not found", 404
 
@@ -156,7 +156,7 @@ def userProducts(user_id):
         return "Product Removed", 204
 
 @app.route('/api/userSites/<user_id>',methods=['GET','POST','PUT','DELETE'])
-    def userSites(user_id):
+def userSites(user_id):
 
     if request.method == 'GET':
         response = jsonify(userSites=s_ctrl.get_sites_by_user_id(user_id))
