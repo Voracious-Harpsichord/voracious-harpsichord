@@ -42,7 +42,7 @@ def verify_user(username, password):
     return bcrypt.check_password_hash(user.pw_hash, password)
 
 # Verify that user exists in user table, returning true or false
-def user_exists(username):
+def username_exists(username):
     # lookup user by user name
     user = session.query(User).filter(User.username == username)
     #return if user exists

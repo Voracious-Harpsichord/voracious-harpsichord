@@ -43,7 +43,7 @@ def user():
     if request.method == 'POST':
         body = request.get_json()
         #if user does not exist in database
-        if not u_ctrl.user_exists(body['username']):
+        if not u_ctrl.username_exists(body['username']):
             return 'User does not exist', 404
         #if user has correct password
         if u_ctrl.verify_user(body['username'], body['password']):
@@ -68,7 +68,7 @@ def user():
 def newUser():
     body = request.get_json()
     #if user is not already in db
-    if not u_ctrl.user_exists(body['username']):
+    if not u_ctrl.username_exists(body['username']):
         #add user to db
         u_ctrl.make_new_user(body)
         #make response
@@ -81,6 +81,30 @@ def newUser():
     #else return a 302 for Found
     else:
         return 'Username already exists', 302
+
+@app.route('/api/user/follow/<user_id>', methods=['GET', 'POST', 'DELETE'])
+def followers(user_id):
+    if request.method == 'GET':
+        following = u_ctrl.get_followings(user_id) #add this method to controller. should return array of user objects
+        followers = u_ctrl.get_followers(user_id) #add this method to controller. should return array of user objects
+        response = jsonify({'followers': followers, 'following': following})
+        return response, 200
+
+    if request.method == 'POST':
+        body = request.get_json()
+        id_to_follow = body.get('user_id')
+        if not u_ctrl.userid_exists(id_to_follow): #add userid_exists to controller
+            return "User to follow not found", 404
+        u_ctrl.add_follower(user_id, id_to_follow) #add_follower method needs to be added to user_controller
+        response = jsonify(u_ctrl.get_user_as_dictionary(user_id))
+        return response, 201
+
+    if request.method == 'DELETE':
+        body = request.get_json()
+        id_to_unfollow = body.get('user_id')
+        if (u_ctrl.remove_follower(user_id, id_to_unfollow): #add_follower methodneeds to be added to user_controller
+            return jsonify({'user_id': id_to_follow}), 201
+        return "Follower relationship not found", 404
 
 
 @app.route('/api/userProducts/<user_id>',methods=['GET','POST','PUT','DELETE'])
