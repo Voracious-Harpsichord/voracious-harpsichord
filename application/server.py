@@ -19,6 +19,7 @@ db = SQLAlchemy(app)
 #db controllers
 from db_controller import user_controller as u_ctrl
 from db_controller import product_controller as p_ctrl
+from db_controller import sites_controller as s_ctrl
 #END DB SETUP
 
 @app.route('/')
@@ -137,8 +138,6 @@ def userProducts(user_id):
     if request.method == 'PUT':
         body = request.get_json()
         product = body['product']
-        print(body)
-        print(product)
         product_id = p_ctrl.verify_product_by_name_and_brand(product['product_name'], product['brand_name'])
         response = jsonify(p_ctrl.edit_user_to_product(
             product['product_id'],
@@ -155,6 +154,40 @@ def userProducts(user_id):
         body = request.get_json()
         p_ctrl.remove_user_from_product(body['product_id'])
         return "Product Removed", 204
+
+@app.route('/api/userSites/<user_id>',methods=['GET','POST','PUT','DELETE'])
+    def userSites(user_id):
+
+    if request.method == 'GET':
+        response = jsonify(userSites=s_ctrl.get_sites_by_user_id(user_id))
+        return response, 200
+
+    if request.method == 'POST':
+        body = request.get_json()
+        site_id = s_ctrl.verify_site(body['site_name'], body['article_name'])
+        if site_id == None:    
+            site_id = s_ctrl.add_site_to_sites(body['site_name'], body['url'], body['article_name'])
+        response = jsonify(p_ctrl.add_user_to_site(
+            user_id, 
+            site_id, 
+            body['comment']
+        ))
+        return response, 201
+
+    if request.method == 'PUT':
+        body = request.get_json()
+        site_id = s_ctrl.verify_site(body['site_name'], body['article_name'])
+        response = jsonify(p_ctrl.edit_user_to_site(
+            body['user_id'],
+            body['site_id'],
+            body['comment']
+        ))
+        return response, 202
+
+    if request.method == 'DELETE':
+        body = request.get_json()
+        p_ctrl.remove_user_from_site(body['site_id'])
+        return "Blog/Article Removed", 204
 
 @app.route('/api/products/<product_id>',methods=['GET'])
 def products(product_id):

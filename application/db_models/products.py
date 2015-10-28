@@ -32,7 +32,7 @@ class User_product(db.Model):
     notes = db.Column(db.String(500))
     color = db.Column(db.String(40))
     stars = db.Column(db.Integer)
-    review = db.Column(db.String(500))
+    review = db.Column(db.String(1000))
     user_product_image_url = db.Column(db.String(240))
 
     def __init__(self, user_id, product_id, size, status, notes, color, stars, review, user_product_image_url):
