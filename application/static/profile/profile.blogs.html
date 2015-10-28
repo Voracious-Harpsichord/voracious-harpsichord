@@ -1,27 +1,41 @@
 <div class='container'>
   <h1>Your Sites</h1>
-  <div class='row'>
-    <div class='col-md-4'>
-      <textarea class='form-control' rows='5'></textarea>
-      <input type='text' ng-model='site.url' class="form-control form-input-box" placeholder='Enter a blog or article' required />
-      <div class='col-lg-6 col-lg-offset-7'>
-        <label class="radio-inline">
-          <input type="radio" name="site-type" ng-model='site.type' id="blog" value="false"> Blog
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="site-type" ng-model='site.type' id="article" value="true"> Article
-        </label>
+  <tabset>
+    <!-- Search Tab -->
+    <tab heading="Search" select='addSiteModeFn(false)'>
+      <div class='row'>
+        <!-- Search tab scoped to product list -->
+        <div class="col-sm-10">
+          <input ng-hide='addSiteMode' type='text' class="form-control form-input-box" ng-model='filter' placeholder='Browse blogs and articles'/>
+          <div class='col-md-10' ng-repeat='site in sites track by $index'>
+            <div class='site'>
+              <h3 class='site-name'>{{site.name}}</h3>
+              <a ng-href='http://{{site.url}}'>{{site.url}}</a>
+              <p>{{site.type}}</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class='col-md-6 col-md-offset-10'>
-        <button ng-click='addSite(site)'>Add</button>
+    </tab>
+    <!-- Add Product Tab -->
+    <tab heading="Add Blog/Article" select='addSiteModeFn(true)'>
+      <div class='row'>
+        <div class='col-md-4'>
+          <textarea class='form-control' rows='5'></textarea>
+          <input type='text' ng-model='site.url' class="form-control form-input-box" placeholder='Enter a blog or article' required />
+          <div class='col-lg-6 col-lg-offset-7'>
+            <label class="radio-inline">
+              <input type="radio" name="site-type" ng-model='site.article' id="blog" value="false"> Blog
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="site-type" ng-model='site.article' id="article" value="true"> Article
+            </label>
+          </div>
+          <div class='col-md-6 col-md-offset-10'>
+            <button ng-click='addSite(site)'>Add</button>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class='col-md-offset-1' ng-repeat='site in sites track by $index'>
-      <div class='site'>
-        <h3 class='site-name'>{{site.name}}</h3>
-        <a ng-href='http://{{site.url}}'>{{site.url}}</a>
-        <p>{{site.type}}</p>
-      </div>
-    </div>
-  </div>
+    </tab>
+  </tabset>
 </div>
