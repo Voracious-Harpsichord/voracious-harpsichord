@@ -8,12 +8,12 @@ session = sessionmaker(bind=engine)()
 session._model_changes = {}
 
 #import tables
-from db_models.sites import sites, User_sites
+from db_models.sites import Site, User_site
 
 def get_site_by_site_id(site_id):
     return session.query(Site).filter(Site.id == site_id).one()
 
-def verify_site = function(site_name, article=''):
+def verify_site(site_name, article=''):
     site = session.query(Site).filter(Site.name == site_name, Site.article == site_article)
     if site.count() > 0:
         return site.first().id
