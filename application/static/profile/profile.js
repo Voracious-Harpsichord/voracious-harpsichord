@@ -12,7 +12,7 @@ var stash = angular.module('beautystash.profile', [
 //   });
 // }]);
 
-stash.controller('ProfileController', function ($scope, $window, Products, Friends, $stateParams, Auth, ModalService) {
+stash.controller('ProfileController', function ($scope, $window, Products, Friends, Sites, $stateParams, Auth, ModalService) {
   //General variables
   $scope.user = Auth.userData;
   //Display all products in user's stash
@@ -53,14 +53,14 @@ stash.controller('ProfileController', function ($scope, $window, Products, Frien
   $scope.addProductMode = false;
 
   $scope.addProductModeFn = function(bool) {
-    $scope.addProductMode = bool
+    $scope.addProductMode = bool;
     if ($scope.addProductMode === true) {
-      $scope.filter = ''
-    }   
-  }
+      $scope.filter = '';
+    };
+  };
 
   $scope.addProduct = function(product) {
-    if (product.brand_name !== null && product.product_name !== null) {    
+    if (product.brand_name !== null && product.product_name !== null) {   
       Products.addProduct(product)
       .then(function(addedProduct) {
         $scope.products.unshift(addedProduct);
@@ -83,7 +83,7 @@ stash.controller('ProfileController', function ($scope, $window, Products, Frien
   };
 
   $scope.editProductModal = function(product) {
-    $scope.editModeFn(product)
+    $scope.editModeFn(product);
     ModalService.showModal({
       templateUrl: "profile/profile.editModal.html",
       controller: "ModalController",
@@ -93,8 +93,8 @@ stash.controller('ProfileController', function ($scope, $window, Products, Frien
     }).then(function(modal) {
       modal.element.modal();
       modal.close.then(function(product) {
-        console.log('Modal Closes:', product)
-        $scope.editProduct(product)
+        console.log('Modal Closes:', product);
+        $scope.editProduct(product);
       });
     });
   };
@@ -104,12 +104,12 @@ stash.controller('ProfileController', function ($scope, $window, Products, Frien
     $scope.editMode = false;
     Products.editProduct(product)
       .then(function(editedProduct){
-        resetFields()
+        resetFields();
       })
       .catch(function(error) {
         console.error('Error with editing product:', error);
-      })
-  }
+      });
+  };
 
   //Variables and fns relating to delete product
 
@@ -118,7 +118,7 @@ stash.controller('ProfileController', function ($scope, $window, Products, Frien
   $scope.deleteModeFn = function(product) {
     $scope.deleteMode = true;
     $scope.currentItemIndex = $scope.products.indexOf(product);
-  }
+  };
 
   $scope.deleteProductModal = function(product) {
     $scope.deleteModeFn(product);
@@ -138,7 +138,7 @@ stash.controller('ProfileController', function ($scope, $window, Products, Frien
 
   $scope.deleteProduct = function(product) {
     $scope.products.splice($scope.currentItemIndex, 1);
-    $scope.editMode = false
+    $scope.editMode = false;
     Products.deleteProduct(product.product)
       .then(function(response) {
         console.log('Product Deletion Success');
@@ -149,20 +149,33 @@ stash.controller('ProfileController', function ($scope, $window, Products, Frien
   };
 
 
-  $scope.friends = Friends.userFriends;
+  $scope.followers = Follow.userFollowers;
+  $scope.following = Follow.userFollowing;
   
   $scope.follow = function() {
-    console.log('userid', Auth.userData.userid);
-    $scope.friends.push({
-      'name_first': 'Cynthia', 'name_last': 'Chen', 'profilePic': '../photos/chen.jpg', 'status': 'Following'
-    });
-    // Friends.follow(Auth.userData.userid)
-    //   .then(function(user) {
-    //     $scope.friends.push(user);
-    //   })
-    //   .catch(function(error) {
-    //     console.error('Error with following user:', error);
-    //   });
+    // console.log('userid', Auth.userData.userid);
+    // $scope.friends.push({
+    //   'name_first': 'Cynthia', 'name_last': 'Chen', 'profilePic': '../photos/chen.jpg', 'status': 'Following'
+    // });
+    Follow.follow({'user_id': 1})
+      .then(function(user) {
+        $scope.following.push(user);
+      })
+      .catch(function(error) {
+        console.error('Error with following user:', error);
+      });
+  };
+
+  $scope.unfollow = function() {
+    Follow.unfollow({'user_id': 1})
+      .then(function(resp) {
+        $scope.following.filter(function(userObject) {
+          return userObject.userid !== resp.data.user_id;
+        });
+      })
+      .catch(function(error) {
+        console.error('Error with unfollowing user:', error);
+      });
   };
 
   // $scope.sites = Sites.userSites;
@@ -170,8 +183,19 @@ stash.controller('ProfileController', function ($scope, $window, Products, Frien
   $scope.site = {};
   $scope.site.url = '';
 
+  $scope.addSiteModeFn = function(bool) {
+    $scope.addSiteMode = bool;
+    // if ($scope.addSiteMode === true) {
+    //   $scope.filter = '';
+    // }
+  };
+
   $scope.addSite = function(site) {
     $scope.sites.push({'name': 'BeautyBlog', 'url': site.url, 'article': site.type});
+    Sites.getSite(site.url)
+      .then(function(resp) {
+        console.log(resp);
+      });
     console.log($scope.sites);
     $scope.site.url = '';
     // Sites.addSite()
