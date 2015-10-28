@@ -86,27 +86,35 @@ def destroy_session(response):
     return response
 
 # FOLLOWER FUNCTIONS
-def get_following(user_id):
+def get_followings(user_id):
     results = []
     #in follwer table lookup all entries where user_id matches user_id field
     following_Q = session.query(Follower).filter(Follower.user_id == user_id)
+    print("following count: ", following_Q.count())
     #make a 'is_following' array (of 'is_following' IDs)
-    following_IDs = [f.is_following for f in following_Q.fecthall()]
+    following_IDs = [f.is_following for f in following_Q.all()]
     #for each id#
     for f in following_IDs:
         #lookup the entire user object for that id
         # add the user object the results
-        is_following.append(get_user_as_dictionary(f))
+        results.append(get_user_as_dictionary(f))
+    print("following results: ", + str(results))
     return results
 
 def get_followers(user_id):
-    #make a 'followed_by' array
+    results = []
     #in follwer table lookup all entries where user_id matches is_following field
+    follower_Q = session.query(Follower).filter(Follower.is_following == user_id)
+    print("following count:" follower_Q.count())
+    #make a 'followed_by' array (of user_id IDs)
+    follower_IDs = [f.user_id for f in follower_Q.all()]
     #for each entry (an id#)
+    for f in follower_IDs:
         #lookup the entire user object for that id
         #add the user object to the 'followed_by' array
-    #return that array
-    return [] # Don't forget to remove this after implementing
+        results.append(get_user_as_dictionary(f))
+    print("follower results: " + str(results))
+    return results
 
 def add_follower(user_id):
     return None # Don't forget to remove this after implementing
