@@ -1,5 +1,36 @@
 /*Generic Specs*/
 
+@font-face { font-family: Lovelo; src: url('/lib/lovelo/Lovelo%20Line%20Light.otf'); } 
+
+/* https://daneden.github.io/animate.css/ */
+@-webkit-keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
 body {
     margin:0;
     padding:0;
@@ -21,7 +52,7 @@ button:focus {
 }
 
 .nav {
-    background-color: #000000;
+    background-color: #707175;
 }
 
 .search {
@@ -35,19 +66,20 @@ button:focus {
 
 .homeImage {
     background-image: url("/photos/homePhoto.jpg");
+    background-position: fixed;
     background-size: cover;
     height: 600px;
     opacity: 0.8;
 }
 
 .navName {
-    color: white;
-    font-family: 'Abril Fatface', cursive;
+    color: #E7D5AA;
+    font-family: 'Lovelo';
     font-size: 500%;
     letter-spacing: 2px;
     float: left;
     margin-left: 40px;
-    margin-top: 20px;
+    margin-top: 30px;
     cursor: pointer; 
 }
 
@@ -65,8 +97,21 @@ button:focus {
 }
 
 .navButton:hover {
-    color: black;
+    /*Make color consistent with photo*/
+    color: #707175;
     background-color: white;
+}
+
+.subtitle1 {
+    color: white;
+    font-family: 'Helvetica Neue';
+    margin-left: 0px;
+    margin-top: 100px; 
+}
+
+.fadeInDown {
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
 }
 
 .searchFocal {
@@ -74,18 +119,19 @@ button:focus {
     display: block;
     margin-left: 460px;
     margin-right: auto;
-    padding-top: 375px;
+    padding-top: 450px;
 }
 
 #search-box {
     width: 90%;
+    background-color: transparent;
 }
 
 /*No Auth Scroll Bar*/
 
 .navNameScroll {
-    color: white;
-    font-family: 'Abril Fatface', cursive;
+    color: #E7D5AA;
+    font-family: 'Lovelo';
     letter-spacing: 1px;
     float: left;
     padding-left:25px;
@@ -107,7 +153,7 @@ button:focus {
 }
 
 .navButtonScroll:hover {
-    color: black;
+    color: #707175;
     background-color: white;
 }
 
@@ -115,8 +161,7 @@ button:focus {
 
 .homePostAuth {
     color: white;
-    background-size: cover;
-    background-image: url("/photos/homePhoto.jpg");
+    background-color: #707175;
     height: 80px;
 }
 
@@ -162,7 +207,7 @@ button:focus {
 .profileMainPhoto {
     background-size: cover;
     background-image: url("/photos/backgroundProfilePhoto.jpg");
-    background-position: -70px;
+    opacity: .8;
     height: 300px;
 }
 
@@ -181,7 +226,7 @@ button:focus {
 }
 
 .profileInfo {
-    font-family: 'Abril Fatface', cursive;
+    font-family: 'Lovelo';
     color: #eee;
     text-shadow: 0 0 5px rgba(0,0,0,1);
     float: left;
@@ -236,7 +281,7 @@ button:focus {
 }
 
 .header{
-    font-family: 'Abril Fatface', cursive;
+    font-family: 'Lovelo';
     margin-bottom: 30px;
 }
 
@@ -265,7 +310,7 @@ button:focus {
 #link {
     text-decoration: none;
     color: #606d9f;
-    font-family: 'Abril Fatface', cursive;
+    font-family: 'Lovelo';
     font-size: 25px;
 }
 
@@ -277,6 +322,14 @@ button:focus {
 
 .searchAddButton {
     border-radius: 20px;
+}
+
+input.ng-invalid {
+  border: 1px solid red;
+}
+
+.searchBoxes {
+    display: block;
 }
 
 /*About Page*/
@@ -295,6 +348,5 @@ button:focus {
     -moz-border-radius: 150px
 }
 
-input.ng-invalid {
-  border: 1px solid red;
-}
+
+

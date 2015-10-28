@@ -1,91 +1,99 @@
-<div class='container'>
-    <tabset>
-        <!-- Search Tab -->
-        <tab heading="Search" select='addProductModeFn(false)'>
-        </tab>
-        <!-- Add Product Tab -->
-        <tab heading="Add Product" select='addProductModeFn(true)'>
-            <form novalidate class="simple-form" name="myForm">
-                <div class="form-group col-sm-10" ng-form>  
-                  <label class="control-label" for="Brand">Brand</label>
-                  <input type="text" ng-model='newProduct.brand_name' name="brand" class="form-control" placeholder='Chanel, Nars, Clinque...' required/>
-                  <label class="control-label" for="email">Product</label>
-                  <input type="text" ng-model='newProduct.product_name' name="product" class="form-control" placeholder='Vitalumiere, Blush, Cleansing Balm...' required/>
-                </div>
-                <div class="form-group">
-                    <label for='category'>Category</label>
-                    <select class='productSelect' name='category' ng-model='newProduct.product_category'>
-                        <option  value='Makeup'>Makeup</option>
-                        <option value='Skin Care'>Skin Care</option>
-                        <option value='Hair'>Hair</option>
-                        <option value='Bath and Body'>Bath and Body</option>
-                        <option value='Fragrance'>Fragrance</option>
-                        <option value='Tools|Brushes'>Tools|Brushes</option>
-                    </select><br>
-                </div>
-                <div class="form-group">
-                    <label for='size'>Size</label>
-                    <select class='productSelect' name='size' ng-model='newProduct.product_size'>
-                        <option value='Full'>Full</option>
-                        <option value='Travel'>Travel</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for='status'>Status</label>
-                    <select class='productSelect' name='status' ng-model='newProduct.product_status'>
-                        <option value='Own'>Currently Own</option>
-                        <option value='Finished'>Finished</option>
-                        <option value='Wishlist'>Wishlist</option>
-                    </select><br>
-                </div>
-                <div class="col-sm-6 form-group">
-                    <label>Color:</label><br>
-                    <input type='text' class="form-control" ng-model='newProduct.product_color'/>
-                </div>
-                <div class="col-sm-6 form-group">
-                    <label>Notes</label><br>
-                      <input type='text' class="form-control" ng-model='newProduct.product_notes'/>
-                </div>
-                <div class="form-group">
-                    <button type='submit' ng-click='addProduct(newProduct)'>Save Product</button>
-                </div>
-                <small class="error" 
-                    ng-show="myForm.$invalid">
-                    You are missing a brand and/or product name.
-                </small>
-            </form>
-        </tab>
-    </tabset>
-    <!-- Search tab scoped to product list -->
-    <div class="col-sm-10">
-        <input ng-hide='addProductMode' type='text' class="form-control" ng-model='filter' placeholder='Browse products'/>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span4">
+            <tabset>
+                <!-- Search Tab -->
+                <tab heading="Search" select='addProductModeFn(false)'>
+                </tab>
+                <!-- Add Product Tab -->
+                <tab heading="Add Product" select='addProductModeFn(true)'>
+                    <form novalidate class="simple-form" name="myForm">
+                        <div class="searchBoxes col-sm-2 form-group" ng-form>  
+                          <label class="control-label" for="Brand">Brand</label>
+                          <input type="text" ng-model='newProduct.brand_name' name="brand" class="form-control" placeholder='Chanel, Nars, Clinque...' required/>
+                          <label class="control-label" for="email">Product</label>
+                          <input type="text" ng-model='newProduct.product_name' name="product" class="form-control" placeholder='Vitalumiere, Blush, Cleansing Balm...' required/>
+                        </div>
+                        <div class="searchBoxes form-group">
+                            <label for='category'>Category</label>
+                            <select class='productSelect' name='category' ng-model='newProduct.product_category'>
+                                <option  value='Makeup'>Makeup</option>
+                                <option value='Skin Care'>Skin Care</option>
+                                <option value='Hair'>Hair</option>
+                                <option value='Bath and Body'>Bath and Body</option>
+                                <option value='Fragrance'>Fragrance</option>
+                                <option value='Tools|Brushes'>Tools|Brushes</option>
+                            </select><br>
+                        </div>
+                        <div class="searchBoxes form-group">
+                            <label for='size'>Size</label>
+                            <select class='productSelect' name='size' ng-model='newProduct.product_size'>
+                                <option value='Full'>Full</option>
+                                <option value='Travel'>Travel</option>
+                            </select>
+                        </div>
+                        <div class="searchBoxes form-group">
+                            <label for='status'>Status</label>
+                            <select class='productSelect' name='status' ng-model='newProduct.product_status'>
+                                <option value='Own'>Currently Own</option>
+                                <option value='Finished'>Finished</option>
+                                <option value='Wishlist'>Wishlist</option>
+                            </select><br>
+                        </div>
+                        <div class="searchBoxes col-sm-2 form-group">
+                            <label>Color:</label><br>
+                            <input type='text' class="form-control" ng-model='newProduct.product_color'/>
+                        </div>
+                        <div class="searchBoxes col-sm-2 form-group">
+                            <label>Notes</label><br>
+                              <input type='text' class="form-control" ng-model='newProduct.product_notes'/>
+                        </div>
+                        <div class="searchBoxes form-group">
+                            <button type='submit' ng-click='addProduct(newProduct)'>Save Product</button>
+                        </div>
+                        <small class="error" 
+                            ng-show="myForm.$invalid">
+                            You are missing a brand and/or product name.
+                        </small>
+                    </form>
+                </tab>
+            </tabset>
+            <!-- Search tab scoped to product list -->
+            <div class="col-sm-10">
+                <input ng-hide='addProductMode' type='text' class="form-control" ng-model='filter' placeholder='Browse products'/>
+            </div>
+        </div>
+
+        <!-- Products Lists -->
+        
+        <div class="span8">
+            <h3>My Products</h3>
+            <ul>
+                <li ng-repeat="product in products | myStashFilter | filter : filter">
+                    <span class='product-brand'> {{product.brand_name}}</span>
+                    <span class='product-name'> {{product.product_name}}</span>
+                    <span>{{product.product_size}}</span>
+                    <span>{{product.product_status}}</span>
+                    <span>{{product.product_notes}}</span>
+                    <span>{{product.product_color}}</span>
+                    <span>{{product.product_category}}</span>
+                    <button ng-click='editProductModal(product)'>Edit</button>
+                    <button ng-click='deleteProductModal(product)'>x</button>
+            </ul>
+            <h3>Finished</h3>
+            <ul>
+                <li ng-repeat="product in products | finishedFilter | filter : filter">
+                    <span class='product-brand'> {{product.brand_name}}</span>
+                    <span class='product-name'> {{product.product_name}}</span>
+                    <span>{{product.product_size}}</span>
+                    <span>{{product.product_status}}</span>
+                    <span>{{product.product_notes}}</span>
+                    <span>{{product.product_color}}</span>
+                    <span>{{product.product_category}}</span>
+                    <button ng-click='editProductModal(product)'>Edit</button>
+                    <button ng-click='deleteProductModal(product)'>x</button>
+            </ul>
+        </div>
     </div>
-    <!-- Products Lists -->
-    <h3>My Products</h3>
-    <ul>
-        <li ng-repeat="product in products | myStashFilter | filter : filter">
-            <span class='product-brand'> {{product.brand_name}}</span>
-            <span class='product-name'> {{product.product_name}}</span>
-            <span>{{product.product_size}}</span>
-            <span>{{product.product_status}}</span>
-            <span>{{product.product_notes}}</span>
-            <span>{{product.product_color}}</span>
-            <span>{{product.product_category}}</span>
-            <button ng-click='editProductModal(product)'>Edit</button>
-            <button ng-click='deleteProductModal(product)'>x</button>
-    </ul>
-    <h3>Finished</h3>
-    <ul>
-        <li ng-repeat="product in products | finishedFilter | filter : filter">
-            <span class='product-brand'> {{product.brand_name}}</span>
-            <span class='product-name'> {{product.product_name}}</span>
-            <span>{{product.product_size}}</span>
-            <span>{{product.product_status}}</span>
-            <span>{{product.product_notes}}</span>
-            <span>{{product.product_color}}</span>
-            <span>{{product.product_category}}</span>
-            <button ng-click='editProductModal(product)'>Edit</button>
-            <button ng-click='deleteProductModal(product)'>x</button>
-    </ul>
 </div>
 
