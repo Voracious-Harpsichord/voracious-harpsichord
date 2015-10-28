@@ -8,7 +8,7 @@ session = sessionmaker(bind=engine)()
 session._model_changes = {}
 
 #import users model
-from db_models.users import User
+from db_models.users import User, Follower
 #additional libs
 from server import bcrypt
 import datetime
@@ -43,13 +43,18 @@ def verify_user(username, password):
 
 # Verify that user exists in user table, returning true or false
 def username_exists(username):
-    # lookup user by user name
-    user = session.query(User).filter(User.username == username)
     #return if user exists
     if session.query(User).filter(User.username == username).count() > 0:
         return True
     else:
         return False
+
+def userid_exists(userid):
+     #return if user exists
+     if session.query(User).filter(User.id == userid).count() > 0:
+         return True
+     else:
+         return False   
 
 # Get user id from username
 def get_user_id(username):
@@ -79,4 +84,33 @@ def destroy_session(response):
     # Destory session-cookie
     response.set_cookie('beauty', expires=0)
     return response
+
+# FOLLOWER FUNCTIONS
+def get_following(user_id):
+    results = []
+    #in follwer table lookup all entries where user_id matches user_id field
+    following_Q = session.query(Follower).filter(Follower.user_id == user_id)
+    #make a 'is_following' array (of 'is_following' IDs)
+    following_IDs = [f.is_following for f in following_Q.fecthall()]
+    #for each id#
+    for f in following_IDs:
+        #lookup the entire user object for that id
+        # add the user object the results
+        is_following.append(get_user_as_dictionary(f))
+    return results
+
+def get_followers(user_id):
+    #make a 'followed_by' array
+    #in follwer table lookup all entries where user_id matches is_following field
+    #for each entry (an id#)
+        #lookup the entire user object for that id
+        #add the user object to the 'followed_by' array
+    #return that array
+    return [] # Don't forget to remove this after implementing
+
+def add_follower(user_id):
+    return None # Don't forget to remove this after implementing
+
+def remove_follower(user_id):
+    return None # Don't forget to remove this after implementing
 

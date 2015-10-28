@@ -28,4 +28,16 @@ class User(db.Model):
     def __repr__(self):
         return '<User %r>' % self.username
 
+class Follower(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    is_following = db.Column(db.Integer)
+
+    def __init__(self, user_id, is_following):
+        self.user_id = user_id
+        self.is_following = is_following
+
+    def __repr__(self):
+        return '<Follower %r>' % str(self.user_id) +'>'+ str(self.is_following)
+
 db.create_all()
