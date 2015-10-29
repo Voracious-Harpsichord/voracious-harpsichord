@@ -1,55 +1,55 @@
 angular.module('beautystash.auth', [])
 
-.controller('AuthController', function($scope, $window, $state, Auth, Products, Friends, $document) {
+.controller('AuthController', function($scope, $window, $state, Auth, Products, Follow, $document) {
 
     $scope.user = Auth.userData;
     $scope.loginStatus = Auth.userData.loggedIn;
 
     $scope.signup = function() {
-      //Invoke signup function from Auth factory
-      Auth.signup($scope.user)
-      .then(function() {
-        //Fetch user's products
-        Products.getAllProducts();
-        //Fetch user's friends
-        // Friends.getFriends();
-        //Delete password property on $scope.user
-        delete $scope.user.password;
-        //Transition to stash page
-        $state.go('home');
-      })
-      .catch(function(error) {
-        console.error(error);
-        if (error.data === "Username already exists") {
+      if ($scope.user.username === undefined || $scope.user.password === undefined || $scope.user.email === undefined) {
+        console.error = 'Enter a valid username, password, and email address';
+      } else {
+        //Invoke signup function from Auth factory
+        Auth.signup($scope.user)
+        .then(function() {
+          //Fetch user's products
+          Products.getAllProducts();
+          //Fetch user followers and following
+          // Follow.getFollowers();
+          // Follow.getFollowing();
+          //Delete password property on $scope.user
+          delete $scope.user.password;
+          //Transition to stash page
+          $state.go('home');
+        })
+        .catch(function(error) {
+          console.error(error);
           $scope.error = error.data;
-        } else {
-          $scope.error = 'Please input required fields';
-        }
-      });
-
+        });
+      }
     };
 
     $scope.signin = function() {
-      //Invoke signin function from Auth factory
-      Auth.signin($scope.user)
-      .then(function() {
-        //Fetch user's products
-        Products.getAllProducts();
-        //Fetch user's friends
-        // Friends.getFriends();
-        //Delete password property on $scope.user
-        delete $scope.user.password;
-        //Transition to stash page
-        $state.go('home');
-      })
-      .catch(function(error) {
-        console.log(error.data)
-        if (error.data === "User does not exist") {
+      if ($scope.user.username === undefined || $scope.user.password === undefined) {
+        $scope.error = 'Enter a valid username and password';
+      } else {
+        //Invoke signin function from Auth factory
+        Auth.signin($scope.user)
+        .then(function() {
+          //Fetch user's products
+          Products.getAllProducts();
+          //Fetch user followers and following
+          // Follow.getFollowers();
+          // Follow.getFollowing();
+          //Delete password property on $scope.user
+          delete $scope.user.password;
+          //Transition to stash page
+          $state.go('home');
+        })
+        .catch(function(error) {
           $scope.error = error.data;
-        } else {
-          $scope.error = 'Please input required fields';
-        }
-      });
+        });
+      }
     };
 
     $scope.signout = function() {
