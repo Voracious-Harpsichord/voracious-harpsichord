@@ -1,5 +1,9 @@
 <div class='feed'>
-    <ul infinite-scroll='loadMore()' infinite-scroll-distance='2'>
-        <li class='feedItem' ng-repeat="i in items">{{i}}</li>
-    </ul>
+    <div class='container'>
+        <ul infinite-scroll='loadMore()' infinite-scroll-distance='2'>
+            <li class='feedItem' ng-repeat="i in items">
+                <img class='feedItemImage' src="photos/sample1.jpg">
+            </li>
+        </ul>
+    </div>
 </div>

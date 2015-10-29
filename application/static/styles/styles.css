@@ -75,7 +75,7 @@ button:focus {
     background-position: fixed;
     background-size: cover;
     height: 600px;
-    opacity: 0.7;
+    opacity: 0.8;
 }
 
 .navName {
@@ -206,12 +206,23 @@ button:focus {
 /*Home feed*/
 
 .feed {
-    padding-top: 100px;
+    background-color: #F2F2F2;
 }
 
 .feedItem {
-    height: 120px;
-    border-bottom: 1px solid gray;
+    height: 390px;
+    width: 1050px;
+    border: 1px solid #707175;
+    background-color: #FFFFFF;
+    margin-top: 15px;
+}
+
+.feedItemImage {
+    height: 350px;
+    width:350px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
 }
 
 /*Stash and Profile*/
