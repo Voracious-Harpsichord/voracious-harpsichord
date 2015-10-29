@@ -1,3 +1,24 @@
-<div>
-  Friends
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-5'>
+      <h1>Following</h1>
+      <div ng-repeat='user in following'>
+        <div class='col-md-5 following'>
+          <img class='userProfilePic' ng-src="{{user.profilePic}}" alt="Description"/>
+          <div class='user-name'>{{user.name_first}} {{user.name_last}}</div>
+        </div>
+      </div>
+    </div>
+    <div class='col-md-5 col-md-offset-2'>
+  <h1>Followers</h1>
+  <div ng-repeat='user in followers'>
+    <div class='col-md-5 follower'>
+      <img class='userProfilePic' ng-src="{{user.profilePic}}" alt="Description"/>
+      <div class='user-name'>{{user.name_first}} {{user.name_last}}</div>
+    </div>
+  </div>
+
 </div>
+
+
+

@@ -136,7 +136,6 @@ def followers(user_id):
         else:
             return "Could not unfollow user", 500
 
-
 @app.route('/api/userProducts/<user_id>',methods=['GET','POST','PUT','DELETE'])
 def userProducts(user_id):
 
@@ -157,8 +156,8 @@ def userProducts(user_id):
         response = jsonify(p_ctrl.add_user_to_product(
             user_id, 
             product_id, 
-            body['product_size'], 
-            body['product_status'], 
+            body['product_size'],
+            body['product_status'],
             body['product_notes'],
             body['product_color']
         ))

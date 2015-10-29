@@ -10,14 +10,14 @@
       <div class='text-center header'><h1>Sign Up</h1></div>
       <form name='signupForm' novalidate>
         <div class='col-md-10 col-md-offset-1'>
-          <input id='title' type='text' ng-model='user.name_title' class="form-control form-input-box" placeholder='Mr., Mrs., Ms, etc...' required />
+          <input id='title' type='text' ng-model='user.name_title' class="form-control form-input-box" placeholder='Mr., Mrs., Ms, etc...' />
           <input type='text' ng-model='user.name_first' placeholder='First Name' class="form-control form-input-box" required />
           <input type='text' ng-model='user.name_last' placeholder='Last Name' class="form-control form-input-box" required /><br>
-          <input id='email' type='text' ng-model='user.email' placeholder='Email address' class="form-control form-input-box"required />
+          <input id='email' type='email' ng-model='user.email' placeholder='Email address' class="form-control form-input-box"required />
           <input type='text' ng-model='user.username' placeholder='Username' class="form-control form-input-box" required />
           <input type='password' ng-model='user.password' placeholder='Password' class="form-control form-input-box" required /><br>
-          <input type='text' ng-model='user.birthday' placeholder='Birthday (MM/DD/YYYY)' class="form-control form-input-box"required />
-          <input type='text' ng-model='user.location' placeholder='Current City' class="form-control form-input-box" required />
+          <input type='text' ng-model='user.birthday' placeholder='Birthday (MM/DD/YYYY)' class="form-control form-input-box" />
+          <input type='text' ng-model='user.location' placeholder='Current City' class="form-control form-input-box" />
           <div class='text-center'><button ng-click='signup()' class="btn btn-block text-center" type="button" id='login'>Sign up</button></div>
           <div class='text-center error' ng-show='error'>{{error}}</div>
         </div>

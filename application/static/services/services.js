@@ -1,5 +1,151 @@
 var services = angular.module('beautystash.services', []);
 
+services.factory('Follow', function($http, Auth) {
+
+  var userFollowers = [
+  {'name_first': 'Laura', 'name_last': 'Weaver', 'profilePic': '../photos/weaver.jpg'},
+  {'name_first': 'John', 'name_last': 'Knox', 'profilePic': '../photos/knox.jpg'},
+  {'name_first': 'Michael', 'name_last': 'Sova', 'profilePic': '../photos/sova.jpg'}
+  ];
+
+  var userFollowing = [];
+
+  //Get user's followers
+  var getFollowers = function() {
+    //check if userid exists first
+    if (Auth.userData.userid) {
+      //Send GET request to /api/user/follow/:user_id
+      return $http({
+        method: 'GET',
+        url: '/api/user/follow/' + Auth.userData.userid,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(function(resp) {
+        angular.extend(userFollowers, resp.data.followers);
+        return resp.data;
+      });
+    }
+  };
+
+  //Get who user is following
+  var getFollowing = function() {
+    //check if userid exists first
+    if (Auth.userData.userid) {
+      //Send GET request to /api/user/follow/:user_id
+      return $http({
+        method: 'GET',
+        url: '/api/user/follow/' + Auth.userData.userid,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(function(resp) {
+        angular.extend(userFollowing, resp.data.following);
+        return resp.data;
+      });
+    }
+  };
+
+  //To follow someone
+  var follow = function(user) {
+    //Send POST request to /api/user/following/:user_id
+    return $http({
+      method: 'POST',
+      url: '/api/user/follow/' + Auth.userData.userid,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: user
+    })
+    .then(function(resp) {
+      return resp.data;
+    });
+  };
+
+  //To unfollow someone
+  var unfollow = function(user) {
+    //Send DELETE request /api/user/following/:user_id
+    return $http({
+      method: 'DELETE',
+      url: '/api/user/follow/' + Auth.userData.userid,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: user
+    })
+    .then(function(resp) {
+      return resp.data;
+    });
+  };
+
+  return {
+    getFollowers: getFollowers,
+    follow: follow,
+    unfollow: unfollow,
+    userFollowers: userFollowers,
+    userFollowing: userFollowing,
+  };
+});
+
+services.factory('Sites', function($http, Auth) {
+
+  var userSites = [];
+
+  var getSites = function() {
+    //check if userid exists first
+    if (Auth.userData.userid) {
+      //Send GET request to /userSites/:user_id
+      return $http({
+        method: 'GET',
+        url: '/api/userSites' + Auth.userData.userid,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(function(resp) {
+        while(userSites.length) {userSites.pop();}
+        resp.data.userSites.forEach(function(item) {userSites.push(item);});
+        return resp.data;
+      });
+    }
+  };
+
+  var getSite = function(url) {
+    return $http({
+      method: 'GET',
+      url: 'http://' + url,
+      headers: {'Access-Control-Allow-Origin': 'http://localhost:5000'}
+    })
+    .then(function(resp) {
+      return resp.data;
+    });
+  };
+
+  var addSite = function(site) {
+    //Send POST request to /userSites/:user_id
+    return $http({
+      method: 'POST',
+      url: '/api/userSites/' + Auth.userData.userid,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: site
+    })
+    .then(function(resp) {
+      return resp.data;
+    });
+  };
+
+  return {
+    getSites: getSites,
+    getSite: getSite,
+    addSite: addSite
+  };
+});
+
+
 services.factory('Products', function($http, Auth) {
 
   var userProducts = [];
@@ -48,7 +194,6 @@ services.factory('Products', function($http, Auth) {
 
   //Update a product in user's stash
   var editProduct = function(product) {
-    console.log(product)
     return $http({
       method: 'PUT',
       url: '/api/userProducts/' + Auth.userData.userid,
@@ -59,19 +204,6 @@ services.factory('Products', function($http, Auth) {
     });
   };
 
-  // //Retrieve product information for product profile page
-  // var retrieveProduct = function(product_id) {
-
-  //   //Send GET request to /api/products/:product_id
-  //   return $http({
-  //     method: 'GET',
-  //     url: '/api/products/' + product_id,
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     }
-  //   });
-  // };
-
   var deleteProduct = function(product) {
     return $http({
       method: 'DELETE',
@@ -80,8 +212,8 @@ services.factory('Products', function($http, Auth) {
         'Content-Type': 'application/json'
       },
       data: product
-    })
-  }
+    });
+  };
 
   return {
     userProducts: userProducts,
