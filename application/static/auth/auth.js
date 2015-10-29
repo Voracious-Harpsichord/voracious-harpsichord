@@ -18,7 +18,11 @@ angular.module('beautystash.auth', [])
       })
       .catch(function(error) {
         console.error(error);
-        $scope.error = error.data;
+        if (error.data === "Username already exists") {
+          $scope.error = error.data;
+        } else {
+          $scope.error = 'Please input required fields';
+        }
       });
 
     };
@@ -35,8 +39,12 @@ angular.module('beautystash.auth', [])
         $state.go('home');
       })
       .catch(function(error) {
-        console.error(error);
-        $scope.error = error.data;
+        console.log(error.data)
+        if (error.data === "User does not exist") {
+          $scope.error = error.data;
+        } else {
+          $scope.error = 'Please input required fields';
+        }
       });
     };
 

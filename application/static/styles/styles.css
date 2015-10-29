@@ -59,7 +59,8 @@ button:focus {
     float: left;
     width: 500px;
     padding-left: 25px;
-    padding-top: 10px;
+    padding-top: 9px;
+    background-color: transparent;
 }
 
 /*No Auth Opening Page*/
@@ -69,7 +70,7 @@ button:focus {
     background-position: fixed;
     background-size: cover;
     height: 600px;
-    opacity: 0.8;
+    opacity: 0.7;
 }
 
 .navName {
@@ -114,14 +115,6 @@ button:focus {
   animation-name: fadeInDown;
 }
 
-.searchFocal {
-    width: 500px;
-    display: block;
-    margin-left: 460px;
-    margin-right: auto;
-    padding-top: 450px;
-}
-
 #search-box {
     width: 90%;
     background-color: transparent;
@@ -130,23 +123,26 @@ button:focus {
 /*No Auth Scroll Bar*/
 
 .navNameScroll {
+    vertical-align: top;
     color: #E7D5AA;
     font-family: 'Lovelo';
     letter-spacing: 1px;
     float: left;
     padding-left:25px;
+    padding-top: 5px;
     font-size: 250%;
     cursor: pointer;
 }
 
 .navButtonScroll {
+    vertical-align: top;
     color: white;
     border-radius: 5px;
     font-size: 130%;
     margin-right: 25px;
-    margin-top: 5px;
     float: right;
     padding:7px;
+    margin-top: 10px;
     background-color: transparent;
     cursor: pointer;
 
@@ -162,14 +158,25 @@ button:focus {
 .homePostAuth {
     color: white;
     background-color: #707175;
-    height: 80px;
+    height: 60px;
+}
+
+.navAuthNameScroll {
+    color: #E7D5AA;
+    font-family: 'Lovelo';
+    letter-spacing: 1px;
+    float: left;
+    padding-left:25px;
+    margin-top: 10px;
+    font-size: 250%;
+    cursor: pointer;
 }
 
 .navButtonScrollAuth {
     border-radius: 5px;
     font-size: 150%;
     margin-right: 25px;
-    margin-top: 25px;
+    margin-top: 15px;
     float: right;
     cursor: pointer;
 }
@@ -179,7 +186,7 @@ button:focus {
 }
 
 .searchAuth {
-    margin-top: 10px;
+    margin-top: 4px;
 }
 
 .nameButton {
@@ -291,7 +298,7 @@ button:focus {
 }
 
 #login {
-    background-color: #FA5A47;
+    background-color: #707175;
     font-weight: bold;
     font-family: 'Helvetica Neue';
     color: #fff;
