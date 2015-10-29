@@ -65,6 +65,21 @@ def user():
         response = u_ctrl.destroy_session(response)
         return response, 204
 
+@app.route('/api/profile/<user_id>', method=['GET', 'POST', 'PUT', 'DELETE'])
+def userProfile(user_id):
+    if request.method == 'GET':
+        response = request.get_json()
+
+    if request.method == 'POST':
+        response = request.get_json()
+
+    if request.method == 'PUT':
+        response = request.get_json()
+
+    if request.method == 'DELETE':
+        response = request.get_json()
+
+
 @app.route('/api/newUser',methods=['POST'])
 def newUser():
     body = request.get_json()
