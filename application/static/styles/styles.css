@@ -34,13 +34,13 @@
 body {
     margin:0;
     padding:0;
-    font-family: 'Helvetica Neue';
+    font-family: 'Roboto Slab', serif;
     font-weight: bold;
 }
 
 h1 {
-    font-family: 'Abril Fatface', cursive;
-
+    font-family: 'Roboto Slab', serif;
+/*    text-transform: uppercase;*/
 }
 
 ul {
@@ -79,7 +79,7 @@ button:focus {
 }
 
 .navName {
-    color: #E7D5AA;
+    color: #F9DE9F;
     font-family: 'Lovelo';
     font-size: 500%;
     letter-spacing: 2px;
@@ -109,10 +109,11 @@ button:focus {
 }
 
 .subtitle1 {
+    position: relative;
     color: white;
-    font-family: 'Helvetica Neue';
-    margin-left: 0px;
-    margin-top: 100px; 
+    width: 500px;
+    margin: 0 auto;
+    font-family: 'Roboto Slab', serif;
 }
 
 .fadeInDown {
@@ -150,7 +151,6 @@ button:focus {
     margin-top: 10px;
     background-color: transparent;
     cursor: pointer;
-
 }
 
 .navButtonScroll:hover {
@@ -279,6 +279,10 @@ button:focus {
     border-bottom: 5px solid #E8E8E8;
 }
 
+.side-bar {
+    border-radius: 5px;
+}
+
 /*Followers*/
 .friendProfilePic {
     float: left;
@@ -318,7 +322,7 @@ button:focus {
 #login {
     background-color: #707175;
     font-weight: bold;
-    font-family: 'Helvetica Neue';
+    font-family: 'Roboto Slab', serif;
     color: #fff;
     margin-top: 15px;
 }
@@ -345,16 +349,45 @@ button:focus {
 
 /* Profile Stash and Wishlist */
 
+ul {
+    background-color: #FFF;
+    color: #000;
+}
+
+.nav-tabs {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.search-box {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.product-button {
+    padding-left: 0;
+    padding-right: 0;
+}
+
 .searchAddButton {
     border-radius: 20px;
 }
 
 input.ng-invalid {
-  border: 1px solid red;
+    border: 1px solid #FA5A47;
 }
 
 .searchBoxes {
     display: block;
+}
+
+
+.stash-error {
+    margin-left: 10px;
+}
+
+.product-list {
+    margin-top: 10px;
 }
 
 /* Blogs */
@@ -378,6 +411,8 @@ input.ng-invalid {
     -webkit-border-radius: 150px;
     -moz-border-radius: 150px
 }
+
+
 
 
 
