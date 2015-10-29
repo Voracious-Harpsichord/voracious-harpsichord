@@ -85,27 +85,56 @@ def newUser():
 
 @app.route('/api/user/follow/<user_id>', methods=['GET', 'POST', 'DELETE'])
 def followers(user_id):
+    #ERROR HANDLING
+    #if user_id in params does not exists
+    if not u_ctrl.userid_exists(user_id):
+        return "Invalid user_id", 404
+
+    #GET
     if request.method == 'GET':
-        following = u_ctrl.get_followings(user_id) #add this method to controller. should return array of user objects
-        followers = u_ctrl.get_followers(user_id) #add this method to controller. should return array of user objects
+        following = u_ctrl.get_followings(user_id)
+        followers = u_ctrl.get_followers(user_id)
         response = jsonify({'followers': followers, 'following': following})
         return response, 200
 
+    #POST
     if request.method == 'POST':
         body = request.get_json()
         id_to_follow = body.get('user_id')
-        if not u_ctrl.userid_exists(id_to_follow): #add userid_exists to controller
-            return "User to follow not found", 404
-        u_ctrl.add_follower(user_id, id_to_follow) #add_follower method needs to be added to user_controller
-        response = jsonify(u_ctrl.get_user_as_dictionary(user_id))
-        return response, 201
 
+        #errors
+        #make sure following real user
+        if not u_ctrl.userid_exists(id_to_follow): #add userid_exists to controller
+            return "Could not find user to follow", 404
+        #keep user from following self
+        if user_id == id_to_follow:
+            return "Cannot follow self", 401
+        #keep user from following multiple times
+        if u_ctrl.verify_follow(u_ctrl, id_to_follow):
+            return "Already following", 401
+        
+        following_id = u_ctrl.add_follow(user_id, id_to_follow)
+        if following_id:
+            response = jsonify(u_ctrl.get_user_as_dictionary(following_id))
+            return response, 201
+        else:
+            return "Could not follow user", 500
+
+    #DELETE
     if request.method == 'DELETE':
         body = request.get_json()
         id_to_unfollow = body.get('user_id')
-        if u_ctrl.remove_follower(user_id, id_to_unfollow): #add_follower methodneeds to be added to user_controller
-            return jsonify({'user_id': id_to_follow}), 201
-        return "Follower relationship not found", 404
+
+        #errors
+        if not u_ctrl.verify_follow(user_id, id_to_unfollow):
+            return "Follower relationship not found", 404
+
+        unfollowed_id = u_ctrl.remove_follow(user_id, id_to_unfollow)
+        if unfollowed_id:
+            response = jsonify({'user_id': id_to_unfollow})
+            return response, 201
+        else:
+            return "Could not unfollow user", 500
 
 
 @app.route('/api/userProducts/<user_id>',methods=['GET','POST','PUT','DELETE'])
