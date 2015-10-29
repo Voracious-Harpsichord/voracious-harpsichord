@@ -68,6 +68,7 @@ def get_user_as_dictionary(id):
     u = session.query(User).filter(User.id == id).one()
     return {'userid':u.id, 'created_at':u.created_at, 'username':u.username, 'name_title':u.name_title, 'name_first':u.name_first, 'name_last':u.name_last, 'gender':u.gender, 'location':u.location, 'birthday':u.birthday}
 
+# SESSIONS
 # Add a sessions cookie on to the
 def create_session(response, user_id):
     #Attach session-cookie to response
@@ -90,7 +91,6 @@ def get_followings(user_id):
     results = []
     #in follwer table lookup all entries where user_id matches user_id field
     following_Q = session.query(Follower).filter(Follower.user_id == user_id)
-    print("following count: ", following_Q.count())
     #make a 'is_following' array (of 'is_following' IDs)
     following_IDs = [f.is_following for f in following_Q.all()]
     #for each id#
@@ -98,14 +98,12 @@ def get_followings(user_id):
         #lookup the entire user object for that id
         # add the user object the results
         results.append(get_user_as_dictionary(f))
-    print("following results: ", + str(results))
     return results
 
 def get_followers(user_id):
     results = []
     #in follwer table lookup all entries where user_id matches is_following field
     follower_Q = session.query(Follower).filter(Follower.is_following == user_id)
-    print("following count:" follower_Q.count())
     #make a 'followed_by' array (of user_id IDs)
     follower_IDs = [f.user_id for f in follower_Q.all()]
     #for each entry (an id#)
@@ -113,12 +111,30 @@ def get_followers(user_id):
         #lookup the entire user object for that id
         #add the user object to the 'followed_by' array
         results.append(get_user_as_dictionary(f))
-    print("follower results: " + str(results))
     return results
 
-def add_follower(user_id):
-    return None # Don't forget to remove this after implementing
+def add_follow(user_id, is_following):
+    try:
+        session.add(Follower(user_id, is_following))
+        session.commit()
+        return is_following
+    except:
+        return None
 
-def remove_follower(user_id):
-    return None # Don't forget to remove this after implementing
+def remove_follow(user_id, not_following):
+    try:
+        session.query(Follower).filter(Follower.user_id == user_id and Follower.is_following == not_following).delete()
+        session.commit()
+        return not_following
+    except:
+        return None
+
+def verify_follow(user_id, maybe_following):
+    following_Q = session.query(Follower)
+    following_Q.filter(Follower.user_id == user_id)
+    following_Q.filter(Follower.is_following == maybe_following)
+    if following_Q.count() > 0:
+        return True
+    else:
+        return False
 
