@@ -84,7 +84,8 @@ services.factory('Follow', function($http, Auth) {
     getFollowers: getFollowers,
     follow: follow,
     unfollow: unfollow,
-    userFriends: userFriends
+    userFollowers: userFollowers,
+    userFollowing: userFollowing,
   };
 });
 
@@ -115,9 +116,7 @@ services.factory('Sites', function($http, Auth) {
     return $http({
       method: 'GET',
       url: 'http://' + url,
-      headers: {
-        'Content-Type': 'application/json'
-      }
+      headers: {'Access-Control-Allow-Origin': 'http://localhost:5000'}
     })
     .then(function(resp) {
       return resp.data;
@@ -195,7 +194,6 @@ services.factory('Products', function($http, Auth) {
 
   //Update a product in user's stash
   var editProduct = function(product) {
-    console.log(product)
     return $http({
       method: 'PUT',
       url: '/api/userProducts/' + Auth.userData.userid,
@@ -205,19 +203,6 @@ services.factory('Products', function($http, Auth) {
       data: product
     });
   };
-
-  // //Retrieve product information for product profile page
-  // var retrieveProduct = function(product_id) {
-
-  //   //Send GET request to /api/products/:product_id
-  //   return $http({
-  //     method: 'GET',
-  //     url: '/api/products/' + product_id,
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     }
-  //   });
-  // };
 
   var deleteProduct = function(product) {
     return $http({
@@ -331,41 +316,3 @@ services.factory('Auth', function($http) {
     checkCookie: checkCookie
   };
 });
-
-// services.factory('Cookie', function(Auth, Friends, Products) {
-//   //Send GET request to /api/user upon loading services.js file in index.html
-//   var checkCookie = function() {
-//     return $http({
-//       method: 'GET',
-//       url: '/api/user',
-//       headers: {'Content-Type': 'application/json'}
-//     })
-//     .then(function(resp) {
-//       //if status code is 200, then extend userData
-//       if (resp.status === 200) {
-//         console.log('200');
-//         angular.extend(Auth.userData, resp.data);
-//         Auth.userData.loggedIn = true;
-//         Auth.userData.created_at = Auth.userData.created_at.substring(0, 4);
-//         Products.getAllProducts();
-//         // Friends.getFriends();
-//         return resp;
-//       }
-//       //if status code is 204, then do nothing
-//       if (resp.status === 204) {
-//         console.log('204');
-//         return resp;
-//       }
-//     })
-//     .catch(function(error) {
-//       console.error(error);
-//     });
-//   };
-
-//   checkCookie();
-
-//   return {
-//     checkCookie: checkCookie
-//   };
-
-// });
