@@ -144,13 +144,9 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
 
   $scope.followers = Follow.userFollowers;
   $scope.following = Follow.userFollowing;
-  
-  $scope.follow = function() {
-    // console.log('userid', Auth.userData.userid);
-    // $scope.friends.push({
-    //   'name_first': 'Cynthia', 'name_last': 'Chen', 'profilePic': '../photos/chen.jpg', 'status': 'Following'
-    // });
-    Follow.follow({'user_id': 1})
+
+  $scope.follow = function(userId) {
+    Follow.follow({'user_id': userId})
       .then(function(user) {
         $scope.following.push(user);
       })
@@ -159,8 +155,8 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
       });
   };
 
-  $scope.unfollow = function() {
-    Follow.unfollow({'user_id': 1})
+  $scope.unfollow = function(userId) {
+    Follow.unfollow({'user_id': userId})
       .then(function(resp) {
         $scope.following.filter(function(userObject) {
           return userObject.userid !== resp.data.user_id;

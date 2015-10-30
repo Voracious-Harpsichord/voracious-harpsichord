@@ -12,6 +12,30 @@ var services = angular.module('beautystash.services', []);
 
 // };
 
+services.factory('User', function($http) {
+  var getInfo = function(userid) {
+    return $http({
+      method: 'GET',
+      url: '/api/profile/' + userid,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(function(resp) {
+      return resp.data;
+    })
+    .catch(function(error) {
+      console.error(error);
+    })
+  }
+
+  return {
+    getInfo: getInfo
+  };
+
+})
+>>>>>>> Basic implementation of other user profiles
+
 services.factory('Follow', function($http, Auth) {
 
   var userFollowers = [
