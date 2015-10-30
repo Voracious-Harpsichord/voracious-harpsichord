@@ -372,13 +372,14 @@ button:focus {
 }
 
 .nav-tabs {
-    margin-top: 30px;
+    margin-top: 20px;
     margin-bottom: 10px;
 }
 
 .search-box {
     padding-left: 0;
     padding-right: 0;
+    margin-top: 10px;
 }
 
 .brand-box {
@@ -479,10 +480,6 @@ input.ng-invalid {
     background-color: #F2F2F2;
 }
 
-#reads {
-    margin-left: 25px;
-}
-
 .radio-buttons {
     margin-left: 10px;
 }
@@ -531,8 +528,13 @@ input.ng-invalid {
     margin-left: 10px;
 }
 
-#site-bar {
-    height: 400px;
+.sites-bar {
+    border-radius: 3px;
+    border: 1px solid #afafaf;
+    margin-top: 30px;
+    margin-left: 25px;
+    height: 375px;
+    background-color: #FFF;
 }
 
 /*About Page*/
