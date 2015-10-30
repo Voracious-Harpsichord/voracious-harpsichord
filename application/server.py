@@ -208,23 +208,24 @@ def userSites(user_id):
         if not site_info:
             return "Bad Link", 404            
         site_id = s_ctrl.add_or_update_site(site_info)
-        response = s_ctrl.add_user_to_site(user_id, site_id, body.get("comment"))
+        response = s_ctrl.add_user_to_site(user_id, site_id, site_info['site_type'], body.get("comment"))
         return jsonify(response), 201
 
-    # if request.method == 'PUT':
-    #     body = request.get_json()
-    #     site_id = s_ctrl.verify_site(body['site_name'], body['article_name'])
-    #     response = jsonify(p_ctrl.edit_user_to_site(
-    #         body['user_id'],
-    #         body['site_id'],
-    #         body['comment']
-    #     ))
-    #     return response, 202
+    if request.method == 'PUT':
+        body = request.get_json()
+        user_site_id = body['user_site_id']
+        response = p_ctrl.edit_user_to_site(user_site_id, body.get("comment"))
+        if not response:
+            return "Site not found", 404
+        return jsonfiy(response), 201
 
-    # if request.method == 'DELETE':
-    #     body = request.get_json()
-    #     p_ctrl.remove_user_from_site(body['site_id'])
-    #     return "Blog/Article Removed", 204
+    if request.method == 'DELETE':
+        body = request.get_json()
+        removed = p_ctrl.remove_user_from_site(body['user_site_id'])
+        if removed:
+            return "Site "+ str(removed) +" Removed", 204
+        else:
+            return "Site not found", 404
 
 @app.route('/api/products/<product_id>',methods=['GET'])
 def products(product_id):
