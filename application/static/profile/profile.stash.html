@@ -11,10 +11,10 @@
                         <div class='row'>
                             <div class='searchBoxes col-sm-12 form-group' ng-form>  
                               <label class='control-label' for='Brand'>Brand</label>
-                              <input type='text' ng-model='newProduct.brand_name' name='brand' class='form-control' placeholder='Chanel, Nars, Clinque...' required/>
+                              <input type='text' ng-model='newProduct.brand_name' name='brand' class='form-control brand-box' placeholder='Chanel, Nars, Clinque...' required/>
                               <label class='control-label' for='email'>Product</label>
-                              <input type='text' ng-model='newProduct.product_name' name='product' class='form-control' placeholder='Vitalumiere, Blush, Cleansing Balm...' required/>
-                              <small class='stash-error' ng-show='myForm.$invalid'>You are missing a brand and/or product name.</small>
+                              <input type='text' ng-model='newProduct.product_name' name='product' class='form-control product-box' placeholder='Vitalumiere, Blush, Cleansing Balm...' required/>
+                              <small class='stash-error' ng-show='myForm.$invalid'>Missing brand and/or product name</small>
                             </div>
                         </div>
                         <div class='row'>
@@ -27,7 +27,7 @@
                                     <option value='Bath and Body'>Bath and Body</option>
                                     <option value='Fragrance'>Fragrance</option>
                                     <option value='Tools|Brushes'>Tools|Brushes</option>
-                                </select><br>
+                                </select>
                             </div>
                             <div class='searchBoxes col-sm-4 col-sm-offset-1 form-group'>
                                 <label for='size'>Size</label><br>
@@ -63,15 +63,15 @@
             </tabset>
             <!-- Search tab scoped to product list -->
             <div class='col-md-12 search-box'>
-                <input ng-hide='addProductMode' type='text' class='form-control' ng-model='filter' placeholder='Browse products'/>
+                <input ng-hide='addProductMode' type='text' class='form-control' ng-model='filter' placeholder='Browse your products'/>
             </div>
         </div>
 
         <!-- Products Lists -->
         
         <div class='col-md-6 col-md-offset-1 product-list'>
-            <h3>My Products</h3>
-            <ul>
+            <h2>My Products</h2>
+            <ul class='list'>
                 <li ng-repeat='product in products | myStashFilter | filter : filter'>
                     <span class='product-brand'> {{product.brand_name}}</span>
                     <span class='product-name'> {{product.product_name}}</span>
@@ -84,8 +84,8 @@
                     <button ng-click='deleteProductModal(product)'>x</button>
             </ul>
             <div class='finished'>
-                <h3>Finished</h3>
-                <ul>
+                <h2>Finished</h2>
+                <ul class='list'>
                     <li ng-repeat='product in products | finishedFilter | filter : filter'>
                         <span class='product-brand'> {{product.brand_name}}</span>
                         <span class='product-name'> {{product.product_name}}</span>
