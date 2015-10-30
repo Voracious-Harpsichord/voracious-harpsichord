@@ -56,10 +56,6 @@ button:focus {
     outline:0 !important;
 }
 
-.nav {
-    background-color: #707175;
-}
-
 .search {
     float: left;
     width: 500px;
@@ -128,6 +124,10 @@ button:focus {
 
 /*No Auth Scroll Bar*/
 
+.navBackground {
+    background-color: #707175;
+}
+
 .navNameScroll {
     vertical-align: top;
     color: #E7D5AA;
@@ -164,6 +164,7 @@ button:focus {
     color: white;
     background-color: #707175;
     height: 60px;
+    background-color: #707175;
 }
 
 .navAuthNameScroll {

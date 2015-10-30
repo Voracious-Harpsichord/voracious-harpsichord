@@ -8,7 +8,7 @@ var user = angular.module('beautystash.user', [
 user.controller('UserController', function($scope, $window, $stateParams, User, Products) {
   $scope.userId = $stateParams.userId
   $scope.user;
-  $scope.products;
+  $scope.userProducts;
 
   $scope.tabs = [
     {name: 'Stash', path: 'stash'},
@@ -23,7 +23,7 @@ user.controller('UserController', function($scope, $window, $stateParams, User, 
     User.getInfo($scope.userId)
       .then(function(data) {
         $scope.user = data.user;
-        $scope.products = data.userProducts;
+        $scope.userProducts = data.userProducts;
       })
   }
 
@@ -55,7 +55,7 @@ user.filter('finishedFilter', function() {
   };
 });
 
-user.filter('myStashFilter', function() {
+user.filter('stashFilter', function() {
   return function(input) {
     var output = [];
     angular.forEach(input, function(product) {
