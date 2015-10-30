@@ -1,5 +1,5 @@
-<div class='container'>
-    <div class='row'>
+<div class='container-fluid' id='stash'>
+    <div class='row-fluid'>
         <div class='col-md-3 side-bar'>
             <tabset>
                 <!-- Search Tab -->
@@ -52,7 +52,7 @@
                             </div>
                             <div class='searchBoxes col-sm-12 form-group'>
                                 <label>Notes</label><br>
-                                  <input type='text' class='form-control' ng-model='newProduct.product_notes'/>
+                                  <textarea rows='3' type='text' class='form-control' ng-model='newProduct.product_notes'></textarea>
                             </div>
                         </div>
                         <div class='searchBoxes form-group col-sm-6 product-button'>
@@ -69,33 +69,47 @@
 
         <!-- Products Lists -->
         
-        <div class='col-md-6 col-md-offset-1 product-list'>
-            <h2>My Products</h2>
-            <ul class='list'>
-                <li ng-repeat='product in products | myStashFilter | filter : filter'>
-                    <span class='product-brand'> {{product.brand_name}}</span>
-                    <span class='product-name'> {{product.product_name}}</span>
-                    <span>{{product.product_size}}</span>
-                    <span>{{product.product_status}}</span>
-                    <span>{{product.product_notes}}</span>
-                    <span>{{product.product_color}}</span>
-                    <span>{{product.product_category}}</span>
-                    <button ng-click='editProductModal(product)'>Edit</button>
-                    <button ng-click='deleteProductModal(product)'>x</button>
-            </ul>
-            <div class='finished'>
-                <h2>Finished</h2>
+        <div class='col-md-8 product-list'>
+            <div class='col-md-12 wrapper'>
                 <ul class='list'>
-                    <li ng-repeat='product in products | finishedFilter | filter : filter'>
-                        <span class='product-brand'> {{product.brand_name}}</span>
-                        <span class='product-name'> {{product.product_name}}</span>
-                        <span>{{product.product_size}}</span>
-                        <span>{{product.product_status}}</span>
-                        <span>{{product.product_notes}}</span>
-                        <span>{{product.product_color}}</span>
-                        <span>{{product.product_category}}</span>
-                        <button ng-click='editProductModal(product)'>Edit</button>
-                        <button ng-click='deleteProductModal(product)'>x</button>
+                    <h2>My Products</h2>
+                    <li class='col-sm-12 product-item' ng-repeat='product in products | myStashFilter | filter : filter'>
+                        <img class='productImage col-sm-3' src="photos/sample1.jpg">
+                        <div class='col-sm-8 product-content'>
+                            <div class='product-brand'>{{product.brand_name}}</div>
+                            <span class='product-name'>{{product.product_name}}</span><br>
+                            <span>{{product.product_category}}</span>
+                            <span>{{product.product_size}}</span>
+                            <span>{{product.product_status}}</span><br>
+                            <span>{{product.product_color}}</span>
+                            <span>Notes: {{product.product_notes}}</span>
+                        </div>
+                        <div class='col-sm-1'>
+                            <button class='btn edit' ng-click='editProductModal(product)'>Edit</button>
+                            <button class='btn edit-x' ng-click='deleteProductModal(product)'>x</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class='col-md-12 wrapper'>
+                <ul class='list'>
+                    <h2>Finished</h2>
+                    <li class='col-sm-12 product-item' ng-repeat='product in products | finishedFilter | filter : filter'>
+                        <img class='productImage col-sm-3' src="photos/sample1.jpg">
+                        <div class='col-sm-8 product-content'>
+                            <div class='product-brand'>{{product.brand_name}}</div>
+                            <span class='product-name'>{{product.product_name}}</span><br>
+                            <span>{{product.product_category}}</span>
+                            <span>{{product.product_size}}</span>
+                            <span>{{product.product_status}}</span><br>
+                            <span>{{product.product_color}}</span>
+                            <span>Notes: {{product.product_notes}}</span>
+                        </div>
+                        <div class='col-sm-1'>
+                            <button class='btn edit' ng-click='editProductModal(product)'>Edit</button>
+                            <button class='btn edit-x' ng-click='deleteProductModal(product)'>x</button>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -8,6 +8,7 @@ session = sessionmaker(bind=engine)()
 session._model_changes = {}
 
 #import tables
+# tested on my machine
 from db_models.recommendations import Recommendation 
 
 def get_recommendation_by_user_id(user_id):

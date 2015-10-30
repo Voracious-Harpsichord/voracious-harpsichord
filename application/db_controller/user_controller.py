@@ -63,7 +63,7 @@ def get_user_id(username):
     return session.query(User).filter(User.username == username).one().id
 
 def get_user_as_dictionary(id):
-    # lookup user in table by username
+    # lookup user in table by usernamed
     # return user id of user
     u = session.query(User).filter(User.id == id).one()
     return {'userid':u.id, 'created_at':u.created_at, 'username':u.username, 'name_title':u.name_title, 'name_first':u.name_first, 'name_last':u.name_last, 'gender':u.gender, 'location':u.location, 'birthday':u.birthday}
@@ -123,7 +123,7 @@ def add_follow(user_id, is_following):
 
 def remove_follow(user_id, not_following):
     try:
-        session.query(Follower).filter(Follower.user_id == user_id and Follower.is_following == not_following).delete()
+        session.query(Follower).filter(Follower.user_id == user_id, Follower.is_following == not_following).delete()
         session.commit()
         return not_following
     except:
@@ -131,8 +131,9 @@ def remove_follow(user_id, not_following):
 
 def verify_follow(user_id, maybe_following):
     following_Q = session.query(Follower)
-    following_Q.filter(Follower.user_id == user_id)
-    following_Q.filter(Follower.is_following == maybe_following)
+    following_Q.filter(Follower.user_id == user_id, Follower.is_following == maybe_following)
+    print(following_Q)
+    # following_Q.filter(Follower.is_following == maybe_following)
     if following_Q.count() > 0:
         return True
     else:

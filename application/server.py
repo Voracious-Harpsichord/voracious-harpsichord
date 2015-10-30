@@ -109,7 +109,9 @@ def followers(user_id):
     #POST
     if request.method == 'POST':
         body = request.get_json()
-        id_to_follow = body.get('user_id')
+        id_to_follow = body.get('userid')
+        print(user_id)
+        print(id_to_follow)
 
         #errors
         #make sure following real user
@@ -119,8 +121,8 @@ def followers(user_id):
         if user_id == id_to_follow:
             return "Cannot follow self", 401
         #keep user from following multiple times
-        if u_ctrl.verify_follow(u_ctrl, id_to_follow):
-            return "Already following", 401
+        # if u_ctrl.verify_follow(user_id, id_to_follow):
+        #     return "Already following", 401
         
         following_id = u_ctrl.add_follow(user_id, id_to_follow)
         if following_id:
@@ -192,39 +194,38 @@ def userProducts(user_id):
         p_ctrl.remove_user_from_product(body['product_id'])
         return "Product Removed", 204
 
-@app.route('/api/userSites/<user_id>',methods=['GET','POST','PUT','DELETE'])
+@app.route('/api/sites/<user_id>',methods=['GET','POST','PUT','DELETE'])
 def userSites(user_id):
 
     if request.method == 'GET':
-        response = jsonify(userSites=s_ctrl.get_sites_by_user_id(user_id))
+        response = jsonify(s_ctrl.get_sites_by_user_id(user_id))
         return response, 200
 
     if request.method == 'POST':
         body = request.get_json()
-        site_id = s_ctrl.verify_site(body['site_name'], body['article_name'])
-        if site_id == None:    
-            site_id = s_ctrl.add_site_to_sites(body['site_name'], body['url'], body['article_name'])
-        response = jsonify(p_ctrl.add_user_to_site(
-            user_id, 
-            site_id, 
-            body['comment']
-        ))
-        return response, 201
+        url = body["url"]
+        site_info = s_ctrl.get_site_info(url)
+        if not site_info:
+            return "Bad Link", 404            
+        site_id = s_ctrl.add_or_update_site(site_info)
+        response = s_ctrl.add_user_to_site(user_id, site_id, site_info['site_type'], body.get("comment"))
+        return jsonify(response), 201
 
     if request.method == 'PUT':
         body = request.get_json()
-        site_id = s_ctrl.verify_site(body['site_name'], body['article_name'])
-        response = jsonify(p_ctrl.edit_user_to_site(
-            body['user_id'],
-            body['site_id'],
-            body['comment']
-        ))
-        return response, 202
+        user_site_id = body['user_site_id']
+        response = s_ctrl.edit_user_to_site(user_site_id, body.get("comment"))
+        if not response:
+            return "Site not found", 404
+        return jsonify(response), 201
 
     if request.method == 'DELETE':
         body = request.get_json()
-        p_ctrl.remove_user_from_site(body['site_id'])
-        return "Blog/Article Removed", 204
+        removed = s_ctrl.remove_user_from_site(body['user_site_id'])
+        if removed:
+            return "Site "+ str(removed) +" Removed", 204
+        else:
+            return "Site not found", 404
 
 @app.route('/api/products/<product_id>',methods=['GET'])
 def products(product_id):

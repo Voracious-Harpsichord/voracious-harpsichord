@@ -1,22 +1,19 @@
 <div class='container'>
     <div class='row'>
         <div class='col-md-3 side-bar'>
-            <tabset>
-                <!-- Search Tab -->
-                <tab heading='Search' select='addProductModeFn(false)' class='tabs'>
-                </tab>
+            <tabset class='profileUserInternalNav'>
+                <tab heading='Search' class='tabs'></tab>
             </tabset>
-            <!-- Search tab scoped to product list -->
             <div class='col-md-12 search-box'>
-                <input ng-hide='addProductMode' type='text' class='form-control' ng-model='filter' placeholder='Browse products'/>
+                <input type='text' class='form-control' ng-model='filter' placeholder='Browse products'/>
             </div>
         </div>
 
         <!-- Products Lists -->
         <div class='col-md-6 col-md-offset-1 product-list'>
-            <h3>My Products</h3>
+            <h3>Products</h3>
             <ul>
-                <li ng-repeat='product in products | myStashFilter | filter : filter'>
+                <li ng-repeat='product in userProducts | stashFilter | filter : filter'>
                     <span class='product-brand'> {{product.brand_name}}</span>
                     <span class='product-name'> {{product.product_name}}</span>
                     <span>{{product.product_size}}</span>
@@ -24,13 +21,11 @@
                     <span>{{product.product_notes}}</span>
                     <span>{{product.product_color}}</span>
                     <span>{{product.product_category}}</span>
-                    <button ng-click='editProductModal(product)'>Edit</button>
-                    <button ng-click='deleteProductModal(product)'>x</button>
             </ul>
             <div class='finished'>
                 <h3>Finished</h3>
                 <ul>
-                    <li ng-repeat='product in products | finishedFilter | filter : filter'>
+                    <li ng-repeat='product in userProducts | finishedFilter | filter : filter'>
                         <span class='product-brand'> {{product.brand_name}}</span>
                         <span class='product-name'> {{product.product_name}}</span>
                         <span>{{product.product_size}}</span>

@@ -141,31 +141,23 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
       });
   };
 
+  // Following Variable and Controllers
 
-  $scope.followers = Follow.userFollowers;
-  $scope.following = Follow.userFollowing;
+  $scope.profileFollowers;
+  $scope.profileFollowing;
 
-  $scope.follow = function(userId) {
-    Follow.follow({'user_id': userId})
-      .then(function(user) {
-        $scope.following.push(user);
+  getFollowersFollowing = function() {
+    console.log('here')
+    Follow.getProfileFollowersFollowing()
+      .then(function(data) {
+        $scope.profileFollowing = data.following;
+        $scope.profileFollowers = data.followers;
       })
-      .catch(function(error) {
-        console.error('Error with following user:', error);
-      });
-  };
+  }
 
-  $scope.unfollow = function(userId) {
-    Follow.unfollow({'user_id': userId})
-      .then(function(resp) {
-        $scope.following.filter(function(userObject) {
-          return userObject.userid !== resp.data.user_id;
-        });
-      })
-      .catch(function(error) {
-        console.error('Error with unfollowing user:', error);
-      });
-  };
+  getFollowersFollowing()
+
+  //Blogs and Article Variable and Controllers
 
   // $scope.sites = Sites.userSites;
   $scope.sites = [];
@@ -198,6 +190,7 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
     //     console.error('Error with adding site:', error);
     //   });
   };
+});
 
 
 stash.controller('ModalController', function($scope, $element, product, close) {
