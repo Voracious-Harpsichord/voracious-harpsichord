@@ -5,6 +5,7 @@ var app = angular.module('beautystash',[
   'beautystash.auth',
   'beautystash.settings',
   'beautystash.profile',
+  'beautystash.user',
   'ui.router',
   'ui.bootstrap',
   'ui.bootstrap.tabs'
@@ -59,7 +60,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     }
   });
 
-  $stateProvider.state('settings', {
+  $stateProvider.state('profile.settings', {
     url: '/settings',
     views: {
       'nav': {
@@ -176,6 +177,84 @@ app.config(function($stateProvider, $urlRouterProvider) {
     },
     data: {
       requireLogin: false
+    }
+  });
+
+  //View user profiles and their subviews
+  $stateProvider.state('user', {
+    url: '/user/:userId',
+    views: {
+      'nav': {
+        templateUrl: 'nav/nav.html',
+        controller: 'AuthController'
+      },
+      'page': {
+        templateUrl: 'user/user.html',
+        controller: 'UserController'
+      }
+    },
+    data: {
+      requireLogin: false
+    }
+  });
+
+  $stateProvider.state('user.stash', {
+    url: '/stash',
+    views: {
+      'subview': {
+        templateUrl: 'user/user.stash.html',
+        controller: 'UserController'
+      }
+    }
+  });
+
+  $stateProvider.state('user.explore', {
+    url: '/explore',
+    views: {
+      'subview': {
+        templateUrl: 'user/user.exploreStash.html',
+        controller: 'UserController'
+      }
+    }
+  });
+
+  $stateProvider.state('user.recs', {
+    url: '/recs',
+    views: {
+      'subview': {
+        templateUrl: 'user/user.recs.html',
+        controller: 'UserController'
+      }
+    }
+  });
+
+  $stateProvider.state('user.wishlist', {
+    url: '/wishlist',
+    views: {
+      'subview': {
+        templateUrl: 'user/user.wishlist.html',
+        controller: 'UserController'
+      }
+    }
+  });
+
+  $stateProvider.state('user.friends', {
+    url: '/friends',
+    views: {
+      'subview': {
+        templateUrl: 'user/user.friends.html',
+        controller: 'UserController'
+      }
+    }
+  });
+
+  $stateProvider.state('user.blogs', {
+    url: '/blogs',
+    views: {
+      'subview': {
+        templateUrl: 'user/user.blogs.html',
+        controller: 'UserController'
+      }
     }
   });
 

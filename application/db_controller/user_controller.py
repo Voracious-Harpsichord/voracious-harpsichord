@@ -63,7 +63,7 @@ def get_user_id(username):
     return session.query(User).filter(User.username == username).one().id
 
 def get_user_as_dictionary(id):
-    # lookup user in table by usernamed
+    # lookup user in table by username
     # return user id of user
     u = session.query(User).filter(User.id == id).one()
     return {'userid':u.id, 'created_at':u.created_at, 'username':u.username, 'name_title':u.name_title, 'name_first':u.name_first, 'name_last':u.name_last, 'gender':u.gender, 'location':u.location, 'birthday':u.birthday}

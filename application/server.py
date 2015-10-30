@@ -26,7 +26,7 @@ from db_controller import sites_controller as s_ctrl
 def send_index():
     return send_from_directory('static', 'index.html')
 
-@app.route('/api/user',methods=['GET', 'POST', 'DELETE'])
+@app.route('/api/user', methods=['GET', 'POST', 'DELETE'])
 def user():
     #Cookie Authentication
     if request.method == 'GET':
@@ -65,19 +65,13 @@ def user():
         response = u_ctrl.destroy_session(response)
         return response, 204
 
-# @app.route('/api/profile/<user_id>', method=['GET', 'POST', 'PUT', 'DELETE'])
-# def userProfile(user_id):
-#     if request.method == 'GET':
-#         response = request.get_json()
-
-#     if request.method == 'POST':
-#         response = request.get_json()
-
-#     if request.method == 'PUT':
-#         response = request.get_json()
-
-#     if request.method == 'DELETE':
-#         response = request.get_json()
+@app.route('/api/profile/<user_id>', methods=['GET'])
+def userProfile(user_id):
+    if request.method == 'GET':
+        user = u_ctrl.get_user_as_dictionary(user_id)
+        userProducts = p_ctrl.get_products_by_user_id(user_id)
+        response = jsonify({'user': user, 'userProducts': userProducts})
+        return response, 200
 
 
 @app.route('/api/newUser',methods=['POST'])
@@ -107,8 +101,8 @@ def followers(user_id):
 
     #GET
     if request.method == 'GET':
-        following = u_ctrl.get_followings(user_id)
         followers = u_ctrl.get_followers(user_id)
+        following = u_ctrl.get_followings(user_id)
         response = jsonify({'followers': followers, 'following': following})
         return response, 200
 
