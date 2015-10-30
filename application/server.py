@@ -214,7 +214,7 @@ def userSites(user_id):
     if request.method == 'PUT':
         body = request.get_json()
         user_site_id = body['user_site_id']
-        response = p_ctrl.edit_user_to_site(user_site_id, body.get("comment"))
+        response = s_ctrl.edit_user_to_site(user_site_id, body.get("comment"))
         if not response:
             return "Site not found", 404
         return jsonfiy(response), 201

@@ -129,11 +129,16 @@ def query_by_id_and_type(site_id, site_type):
 def get_id_from_url(url):
     site_type = type_of(url)
     if site_type == 'article':
-        return session.query(Article).filter(Article.url == url).one().id
+        try:
+            Q = session.query(Article).filter(Article.url == url).one().id
+        except:
+            Q = None
     elif site_type == 'blog':
-        return session.query(Blog).filter(Blog.url == url).one().id
-    else:
-        return None
+        try:
+            Q = session.query(Blog).filter(Blog.url == url).one().id
+        except:
+            Q = None
+    return Q
 
 # # Depreciated
 # def verify_site_by_id_and_type(site_id, site_type):
@@ -148,7 +153,7 @@ def get_sites_by_user_id(user_id):
         site['user_site_id'] = s.id
         site['type'] = s.site_type
         site['comment'] = s.comment
-        site_Q = get_sites_by_user_id_and_type(s.site_id, s.site_type)
+        site_Q = query_by_id_and_type(s.site_id, s.site_type).one()
         for column in site_Q.__table__.columns:
             site[column.name] = getattr(site_Q, column.name)
         sites.append(site)   
@@ -197,7 +202,7 @@ def add_user_to_site(user_id, site_id, site_type, comment):
     user_site_id = session.query(User_site).order_by(User_site.id.desc()).first().id
 
     response = {'user_site_id': user_site_id, 'site_id': site_id, 'site_type': site_type, 'comment': comment}
-    site_info_Q = query_by_id_and_type(site_id, site_type)
+    site_info_Q = query_by_id_and_type(site_id, site_type).one()
     print(dir(site_info_Q))
     for column in site_info_Q.__table__.columns:
         response[column.name] = getattr(site_info_Q, column.name)
@@ -205,17 +210,20 @@ def add_user_to_site(user_id, site_id, site_type, comment):
 
 def edit_user_to_site(id, comment):
     user_site_Q = session.query(User_site).filter(User_site.id == id)
+    user_site = user_site_Q.one()
+    site_id = user_site.site_id
+
     if not user_site_Q.count() > 0:
         return None
     else:
         user_site_Q.update({'comment':comment})
         session.commit()
 
-    response = {'user_site_id': id, 'site_id': site_id, 'site_type': site_type, 'comment': comment}
+    site = {'user_site_id': id, 'site_id': site_id, 'site_type': site_type, 'comment': comment}
     site_info_Q = query_by_id_and_type(site_id, site_type)
     for column in site_info_Q.__table__.columns:
         respons[column.name] = getattr(site_info_Q, column.name)
-    return response
+    return site
 
 def remove_user_from_site(id):
     user_site_Q = session.query(User_site).filter(User_site.id == id).one()
