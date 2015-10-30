@@ -198,7 +198,8 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
     //     console.error('Error with adding site:', error);
     //   });
   };
-})
+});
+
 
 stash.controller('ModalController', function($scope, $element, product, close) {
 

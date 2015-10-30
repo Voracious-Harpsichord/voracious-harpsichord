@@ -1,6 +1,6 @@
-<div class='container sites-page'>
-  <div class='row'>
-    <div class='col-md-3 side-bar'>
+<div class='container-fluid' id='sites'>
+  <div class='row-fluid'>
+    <div class='col-md-3 sites-bar'>
       <tabset>
         <!-- Search Tab -->
         <tab heading='Search' select='addSiteModeFn(false)'>
@@ -43,12 +43,12 @@
 
     <!-- Sites Lists -->
 
-    <div class='col-md-9 sites-list'>
-      <h3>My Reads</h3>
+    <div class='col-md-8 sites-list'>
       <div class='container'>
         <div class='row'>
-          <ul>
-            <li class='col-sm-9' id= 'siteItem' ng-repeat='site in sites track by $index'>
+          <ul class='list'>
+            <h2>My Reads</h2>
+            <li class='col-sm-8' id= 'siteItem' ng-repeat='site in sites track by $index'>
               <div class='row'>
                 <img class='blogItemImage col-sm-4' src="photos/sample1.jpg">
                 <div class='site-content col-sm-8'>
