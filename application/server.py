@@ -109,7 +109,9 @@ def followers(user_id):
     #POST
     if request.method == 'POST':
         body = request.get_json()
-        id_to_follow = body.get('user_id')
+        id_to_follow = body.get('userid')
+        print(user_id)
+        print(id_to_follow)
 
         #errors
         #make sure following real user
@@ -119,8 +121,8 @@ def followers(user_id):
         if user_id == id_to_follow:
             return "Cannot follow self", 401
         #keep user from following multiple times
-        if u_ctrl.verify_follow(u_ctrl, id_to_follow):
-            return "Already following", 401
+        # if u_ctrl.verify_follow(user_id, id_to_follow):
+        #     return "Already following", 401
         
         following_id = u_ctrl.add_follow(user_id, id_to_follow)
         if following_id:
