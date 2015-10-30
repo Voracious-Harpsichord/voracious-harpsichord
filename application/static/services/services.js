@@ -1,5 +1,17 @@
 var services = angular.module('beautystash.services', []);
 
+// services.factory('Recs', function($http, Auth) {
+
+//   var userUniversalRecs = [];
+//   var userPersonalizedRecs = [];
+
+//   //Get user's univeral recs
+//   var getUniversal = function() {
+//   }
+
+
+// };
+
 services.factory('Follow', function($http, Auth) {
 
   var userFollowers = [
@@ -115,8 +127,10 @@ services.factory('Sites', function($http, Auth) {
   var getSite = function(url) {
     return $http({
       method: 'GET',
-      url: 'http://' + url,
-      headers: {'Access-Control-Allow-Origin': 'http://localhost:5000'}
+      url: '/api/sites',
+      headers: {
+        'Content-Type': 'application/json'
+      }
     })
     .then(function(resp) {
       return resp.data;

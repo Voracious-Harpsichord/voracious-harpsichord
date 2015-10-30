@@ -375,6 +375,14 @@ ul {
     padding-right: 0;
 }
 
+.brand-box {
+    margin-bottom: 15px;
+}
+
+.product-box {
+    margin-bottom: 5px;
+}
+
 .product-button {
     padding-left: 0;
     padding-right: 0;
@@ -394,16 +402,60 @@ input.ng-invalid {
 
 
 .stash-error {
-    margin-left: 10px;
+    margin-top: 5px;
+    /*margin-left: 25px;*/
 }
 
 .product-list {
     margin-top: 10px;
 }
 
-/* Blogs */
+/* Sites */
+
+.sites-page {
+    margin-bottom: 25px;
+}
 
 .radio-buttons {
+    margin-left: 10px;
+}
+
+.site-type {
+    padding-left: 25px;
+    padding-right: 0;
+    margin-bottom: 10px;
+}
+
+.site-button {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.site-notes {
+    margin-bottom: 10px;
+}
+
+.site-error {
+    margin-top: 5px;
+    /*margin-left: 35px;*/
+}
+
+.sites-list {
+    margin-top: 10px;
+}
+
+#siteItem {
+    border: 1px solid #707175;
+    background-color: #FFFFFF;
+    margin-top: 15px;
+    padding-bottom: 10px;
+}
+
+.blogItemImage {
+    height: 250px;
+    width: 250px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     margin-left: 10px;
 }
 
