@@ -8,7 +8,7 @@ session = sessionmaker(bind=engine)()
 session._model_changes = {}
 
 #import tables
-from db_models.users import User,Recommendation 
+from db_models.recommendations import Recommendation 
 
 def get_recommendation_by_user_id(user_id):
     return session.query(Recommendation).filter(Recommendation.user_id == user_id).all()
