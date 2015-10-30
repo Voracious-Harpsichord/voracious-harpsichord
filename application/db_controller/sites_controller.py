@@ -107,12 +107,13 @@ def get_site_info(url):
 
 #DB READ/WRITE
 def query_by_id_and_type(site_id, site_type):
-    if site_type == 'article':
-        return session.query(Article).filter(Article.id == site_id).one()
-    elif site_type == 'blog':
-        return session.query(Blog).filter(Blog.id == site_id).one()
-    else:
-        return None 
+    query = session.query(Article).filter(Article.id == site_id)
+    if query.count() > 0:
+        if site_type == 'article':
+            return session.query(Article).filter(Article.id == site_id)
+        elif site_type == 'blog':
+            return session.query(Blog).filter(Blog.id == site_id)
+    return None 
 
 # # Depreciated
 # def verify_site_by_url(url):
@@ -128,9 +129,9 @@ def query_by_id_and_type(site_id, site_type):
 def get_id_from_url(url):
     site_type = type_of(url)
     if site_type == 'article':
-        return session.query(Article).filter(Article.url == url).count() > 0
+        return session.query(Article).filter(Article.url == url).one().id
     elif site_type == 'blog':
-        return session.query(Blog).filter(Blog.url == url).count() > 0
+        return session.query(Blog).filter(Blog.url == url).one().id
     else:
         return None
 
@@ -197,6 +198,7 @@ def add_user_to_site(user_id, site_id, site_type, comment):
 
     response = {'user_site_id': user_site_id, 'site_id': site_id, 'site_type': site_type, 'comment': comment}
     site_info_Q = query_by_id_and_type(site_id, site_type)
+    print(dir(site_info_Q))
     for column in site_info_Q.__table__.columns:
         response[column.name] = getattr(site_info_Q, column.name)
     return response
