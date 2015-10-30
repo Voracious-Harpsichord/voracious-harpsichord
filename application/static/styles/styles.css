@@ -1,6 +1,9 @@
 /*Generic Specs*/
 
-@font-face { font-family: Lovelo; src: url('/lib/lovelo/Lovelo%20Line%20Light.otf'); } 
+@font-face { font-family: Lovelo; src: url('/lib/lovelo/Lovelo%20Line%20Light.otf'); }
+
+@font-face { font-family: 'Roboto Slab Light'; src: url('/lib/roboto-slab/RobotoSlab-Light.ttf'); }
+
 
 /* https://daneden.github.io/animate.css/ */
 @-webkit-keyframes fadeInDown {
@@ -34,12 +37,12 @@
 body {
     margin:0;
     padding:0;
-    font-family: 'Roboto Slab', 'Helvetica Neue';
+    font-family: 'Roboto Slab Light', 'Helvetica Neue';
     font-weight: bold;
 }
 
 h1 {
-    font-family: 'Roboto Slab', 'Helvetica Neue';
+    font-family: 'Roboto Slab Light', 'Helvetica Neue';
 /*    text-transform: uppercase;*/
 }
 
@@ -109,7 +112,7 @@ button:focus {
     color: white;
     width: 500px;
     margin: 0 auto;
-    font-family: 'Roboto Slab', serif;
+    font-family: 'Roboto Slab Light', serif;
 }
 
 .fadeInDown {
@@ -295,7 +298,6 @@ button:focus {
     border-radius: 3px;
     border: 1px solid #afafaf;
     margin-top: 30px;
-    margin-left: 25px;
     height: 550px;
     background-color: #FFF;
 }
@@ -339,7 +341,7 @@ button:focus {
 #login {
     background-color: #707175;
     font-weight: bold;
-    font-family: 'Roboto Slab', serif;
+    font-family: 'Roboto Slab Light', serif;
     color: #fff;
     margin-top: 15px;
 }
@@ -434,7 +436,6 @@ input.ng-invalid {
 .wishlist {
     margin-top: 30px;
     padding-bottom: 20px;
-    margin-left: 15px;
     border: 1px solid #afafaf;
     border-radius: 3px;
     background-color: #FFF;
@@ -445,7 +446,7 @@ input.ng-invalid {
     border-radius: 3px;
     background-color: #FFF;
     margin-bottom: 30px;
-    padding: 0 15px 25px 15px;
+    padding-bottom: 25px;
 }
 
 .product-content {
@@ -484,12 +485,6 @@ input.ng-invalid {
     margin-left: 10px;
 }
 
-.site-type {
-    padding-left: 25px;
-    padding-right: 0;
-    margin-bottom: 10px;
-}
-
 .site-button {
     padding-left: 0;
     padding-right: 0;
@@ -506,7 +501,6 @@ input.ng-invalid {
 .sites-list {
     margin-top: 30px;
     padding-bottom: 20px;
-    margin-left: 15px;
     border: 1px solid #afafaf;
     border-radius: 3px;
     background-color: #FFF;
@@ -532,11 +526,20 @@ input.ng-invalid {
     border-radius: 3px;
     border: 1px solid #afafaf;
     margin-top: 30px;
-    margin-left: 25px;
     height: 375px;
     background-color: #FFF;
 }
 
+
+/*Recommendations Page*/
+
+.recs-tab {
+    border-radius: 3px;
+    border: 1px solid #afafaf;
+    margin-top: 30px;
+    height: 800px;
+    background-color: #FFF;
+}
 /*About Page*/
 
 .teamMemberProfile {
