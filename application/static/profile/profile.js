@@ -184,13 +184,16 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
   };
 
   $scope.addSite = function(site) {
-    $scope.sites.push({'name': 'BeautyBlog', 'url': site.url, 'article': site.type});
+    $scope.sites.push({'name': 'BeautyBlog', 'url': site.url, 'type': site.type, 'notes': site.notes});
     Sites.getSite(site.url)
       .then(function(resp) {
         console.log(resp);
+        // $scope.sites.push(resp);
       });
     console.log($scope.sites);
-    $scope.site.url = '';
+    $scope.site.url = null;
+    $scope.site.type = null;
+    $scope.site.notes = null;
     // Sites.addSite()
     //   .then(function(addedSite) {
     //     $scope.sites.push(addedSite);
@@ -199,7 +202,7 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
     //     console.error('Error with adding site:', error);
     //   });
   };
-});
+
 
 stash.controller('ModalController', function($scope, $element, product, close) {
 
