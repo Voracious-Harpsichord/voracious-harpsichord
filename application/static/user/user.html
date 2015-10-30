@@ -6,6 +6,9 @@
   </div>
 </div>
 
+<button type='submit' ng-click='follow(user)' ng-show='!following'>Follow</button>
+<button type='submit' ng-click='unfollow(user)' ng-show='following'>Following</button>
+
 <div class='dashboardTabs'>  
   <ul>
     <li class='dashboardTab' ng-repeat="tab in tabs">

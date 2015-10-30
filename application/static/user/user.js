@@ -5,10 +5,12 @@ var user = angular.module('beautystash.user', [
   'ngMessages'
 ]);
 
-user.controller('UserController', function($scope, $window, $stateParams, User, Products) {
+user.controller('UserController', function($scope, $window, $stateParams, User, Products, Follow) {
   $scope.userId = $stateParams.userId
   $scope.user;
   $scope.userProducts;
+  $scope.userFollowing;
+  $scope.userFollowers;
 
   $scope.tabs = [
     {name: 'Stash', path: 'stash'},
@@ -25,10 +27,46 @@ user.controller('UserController', function($scope, $window, $stateParams, User, 
         $scope.user = data.user;
         $scope.userProducts = data.userProducts;
       })
+      .catch(function(error) {
+        console.error(error)
+      })
+  }
+
+  getUserFollowingFollowers = function(userId) {
+    Follow.getUserFollowersFollowing(userId)
+      .then(function(data) {
+        $scope.userFollowing = data.following;
+        $scope.userFollowers = data.followers;
+      })
+      .catch(function(error) {
+        console.error(error)
+      })
   }
 
   getUserData($scope.userId)
+  getUserFollowingFollowers($scope.userId)
 
+  $scope.follow = function(user) {
+    Follow.follow(user)
+      .then(function(user) {
+        console.log('success')
+      })
+      .catch(function(error) {
+        console.error('Error with following user:', error);
+      });
+  };
+
+  $scope.unfollow = function(user) {
+    Follow.unfollow(user)
+      .then(function(resp) {
+        $scope.following.filter(function(userObject) {
+          return userObject.userid !== resp.data.user_id;
+        });
+      })
+      .catch(function(error) {
+        console.error('Error with unfollowing user:', error);
+      });
+  };
 })
 
 user.filter('wishlistFilter', function() {

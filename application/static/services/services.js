@@ -36,19 +36,8 @@ services.factory('User', function($http) {
 
 services.factory('Follow', function($http, Auth) {
 
-  var userFollowers = [
-  {'name_first': 'Laura', 'name_last': 'Weaver', 'profilePic': '../photos/weaver.jpg'},
-  {'name_first': 'John', 'name_last': 'Knox', 'profilePic': '../photos/knox.jpg'},
-  {'name_first': 'Michael', 'name_last': 'Sova', 'profilePic': '../photos/sova.jpg'}
-  ];
-
-  var userFollowing = [];
-
-  //Get user's followers
-  var getFollowers = function() {
-    //check if userid exists first
+  var getProfileFollowersFollowing = function() {
     if (Auth.userData.userid) {
-      //Send GET request to /api/user/follow/:user_id
       return $http({
         method: 'GET',
         url: '/api/user/follow/' + Auth.userData.userid,
@@ -57,27 +46,32 @@ services.factory('Follow', function($http, Auth) {
         }
       })
       .then(function(resp) {
-        angular.extend(userFollowers, resp.data.followers);
         return resp.data;
       });
     }
   };
 
-  //Get who user is following
-  var getFollowing = function() {
-    //check if userid exists first
+  var userFollowing = {}
+  var userFollowers = {}
+
+  var getUserFollowersFollowing = function(user_id) {
     if (Auth.userData.userid) {
-      //Send GET request to /api/user/follow/:user_id
       return $http({
         method: 'GET',
-        url: '/api/user/follow/' + Auth.userData.userid,
+        url: '/api/user/follow/' + user_id,
         headers: {
           'Content-Type': 'application/json'
         }
       })
       .then(function(resp) {
-        angular.extend(userFollowing, resp.data.following);
-        return resp.data;
+        for (key in resp.data.following) {
+          userFollowing[resp.data.following[key]] = true
+        }
+        for (key in resp.data.followers) {
+          userFollowers[resp.data.followers[key]] = true
+        }
+        console.log(resp.data)
+        return {following: resp.data.following, followers: resp.data.followers};
       });
     }
   };
@@ -115,11 +109,12 @@ services.factory('Follow', function($http, Auth) {
   };
 
   return {
-    getFollowers: getFollowers,
-    follow: follow,
-    unfollow: unfollow,
-    userFollowers: userFollowers,
+    getProfileFollowersFollowing: getProfileFollowersFollowing,
+    getUserFollowersFollowing: getUserFollowersFollowing,
     userFollowing: userFollowing,
+    userFollowers: userFollowers,
+    follow: follow,
+    unfollow: unfollow
   };
 });
 
