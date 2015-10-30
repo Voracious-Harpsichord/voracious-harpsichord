@@ -32,9 +32,7 @@ services.factory('User', function($http) {
   return {
     getInfo: getInfo
   };
-
 })
->>>>>>> Basic implementation of other user profiles
 
 services.factory('Follow', function($http, Auth) {
 
