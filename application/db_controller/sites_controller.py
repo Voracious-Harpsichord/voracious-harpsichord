@@ -176,7 +176,7 @@ def add_or_update_site(info):
         session.commit()
     else:
         if site_type == 'article':
-            session.add(Article(info['site_name'], info['article_name'], info['url'], info['image'], info['description']))
+            session.add(Article(info['site_name'], info['article_name'], info['author_name'], info['url'], info['image'], info['description']))
         if site_type == 'blog':
             session.add(Blog(info['blog_name'], info['url'], info['image'], info['description']))
         session.commit()
