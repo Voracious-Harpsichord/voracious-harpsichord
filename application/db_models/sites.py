@@ -5,16 +5,16 @@ class Article(db.Model):
     site_name = db.Column(db.String(120)) #Name of publicaction ie. NY times
     article_name = db.Column(db.String(120)) #Name of specific article
     author_name = db.Column(db.String(60))
-    url = db.Column(db.String(500))
-    img = db.Column(db.String(500))
+    url = db.Column(db.String(500), unique=True)
+    image = db.Column(db.String(500))
     description = db.Column(db.String(500))
 
-    def __init__(self, site_name, article_name, author_name, url, img, description):
+    def __init__(self, site_name, article_name, author_name, url, image, description):
         self.site_name = site_name
         self.article_name = article_name
         self.author_name = author_name
         self.url = url
-        self.img = img
+        self.image = image
         self.article = description
 
     def __repr__(self):
@@ -23,14 +23,14 @@ class Article(db.Model):
 class Blog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     blog_name = db.Column(db.String(120))
-    url = db.Column(db.String(500))
-    img = db.Column(db.String(500))
+    url = db.Column(db.String(500), unique=True)
+    image = db.Column(db.String(500))
     description = db.Column(db.String(500))
 
-    def __init__(self, blog_name, url, img, description):
+    def __init__(self, blog_name, url, image, description):
         self.blog_name = blog_name
         self.url = url
-        self.img = img
+        self.image = image
         self.article = article
 
     def __repr__(self):

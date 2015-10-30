@@ -194,39 +194,37 @@ def userProducts(user_id):
         p_ctrl.remove_user_from_product(body['product_id'])
         return "Product Removed", 204
 
-@app.route('/api/userSites/<user_id>',methods=['GET','POST','PUT','DELETE'])
+@app.route('/api/sites/<user_id>',methods=['GET','POST','PUT','DELETE'])
 def userSites(user_id):
 
     if request.method == 'GET':
-        response = jsonify(userSites=s_ctrl.get_sites_by_user_id(user_id))
+        response = jsonify(s_ctrl.get_sites_by_user_id(user_id))
         return response, 200
 
     if request.method == 'POST':
         body = request.get_json()
-        site_id = s_ctrl.verify_site(body['site_name'], body['article_name'])
-        if site_id == None:    
-            site_id = s_ctrl.add_site_to_sites(body['site_name'], body['url'], body['article_name'])
-        response = jsonify(p_ctrl.add_user_to_site(
-            user_id, 
-            site_id, 
-            body['comment']
-        ))
-        return response, 201
+        url = body["url"]
+        site_info = s_ctrl.get_site_info(url)
+        if not site_info:
+            return "Bad Link", 404            
+        site_id = s_ctrl.add_or_update_site(site_info)
+        response = s_ctrl.add_user_to_site(user_id, site_id, body.get("comment"))
+        return jsonify(response), 201
 
-    if request.method == 'PUT':
-        body = request.get_json()
-        site_id = s_ctrl.verify_site(body['site_name'], body['article_name'])
-        response = jsonify(p_ctrl.edit_user_to_site(
-            body['user_id'],
-            body['site_id'],
-            body['comment']
-        ))
-        return response, 202
+    # if request.method == 'PUT':
+    #     body = request.get_json()
+    #     site_id = s_ctrl.verify_site(body['site_name'], body['article_name'])
+    #     response = jsonify(p_ctrl.edit_user_to_site(
+    #         body['user_id'],
+    #         body['site_id'],
+    #         body['comment']
+    #     ))
+    #     return response, 202
 
-    if request.method == 'DELETE':
-        body = request.get_json()
-        p_ctrl.remove_user_from_site(body['site_id'])
-        return "Blog/Article Removed", 204
+    # if request.method == 'DELETE':
+    #     body = request.get_json()
+    #     p_ctrl.remove_user_from_site(body['site_id'])
+    #     return "Blog/Article Removed", 204
 
 @app.route('/api/products/<product_id>',methods=['GET'])
 def products(product_id):
