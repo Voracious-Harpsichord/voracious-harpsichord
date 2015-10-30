@@ -203,7 +203,6 @@ def add_user_to_site(user_id, site_id, site_type, comment):
 
     response = {'user_site_id': user_site_id, 'site_id': site_id, 'site_type': site_type, 'comment': comment}
     site_info_Q = query_by_id_and_type(site_id, site_type).one()
-    print(dir(site_info_Q))
     for column in site_info_Q.__table__.columns:
         response[column.name] = getattr(site_info_Q, column.name)
     return response
@@ -212,6 +211,7 @@ def edit_user_to_site(id, comment):
     user_site_Q = session.query(User_site).filter(User_site.id == id)
     user_site = user_site_Q.one()
     site_id = user_site.site_id
+    site_type = user_site.site_type
 
     if not user_site_Q.count() > 0:
         return None
@@ -220,16 +220,16 @@ def edit_user_to_site(id, comment):
         session.commit()
 
     site = {'user_site_id': id, 'site_id': site_id, 'site_type': site_type, 'comment': comment}
-    site_info_Q = query_by_id_and_type(site_id, site_type)
-    for column in site_info_Q.__table__.columns:
-        respons[column.name] = getattr(site_info_Q, column.name)
+    site_info = query_by_id_and_type(site_id, site_type).one()
+    for column in site_info.__table__.columns:
+        site[column.name] = getattr(site_info, column.name)
     return site
 
 def remove_user_from_site(id):
-    user_site_Q = session.query(User_site).filter(User_site.id == id).one()
+    user_site_Q = session.query(User_site).filter(User_site.id == id)
     if not user_site_Q.count() > 0:
         return None
     else:
-        session.delete(user_site_Q)
+        session.delete(user_site_Q.one())
         session.commit()
         return id

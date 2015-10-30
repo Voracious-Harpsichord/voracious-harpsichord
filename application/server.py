@@ -217,11 +217,11 @@ def userSites(user_id):
         response = s_ctrl.edit_user_to_site(user_site_id, body.get("comment"))
         if not response:
             return "Site not found", 404
-        return jsonfiy(response), 201
+        return jsonify(response), 201
 
     if request.method == 'DELETE':
         body = request.get_json()
-        removed = p_ctrl.remove_user_from_site(body['user_site_id'])
+        removed = s_ctrl.remove_user_from_site(body['user_site_id'])
         if removed:
             return "Site "+ str(removed) +" Removed", 204
         else:
