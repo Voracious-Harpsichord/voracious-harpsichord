@@ -1,12 +1,14 @@
-<div class='container-fluid' id='sites'>
+<div class='container-fluid' id='wishlist'>
   <div class='row-fluid'>
-    <div class='col-md-3 sites-bar'>
-      <tabset>
-        <!-- Search Tab -->
-        <tab heading='Search' select='addSiteModeFn(false)'>
-        </tab>
-        <!-- Add Site Tab -->
-        <tab heading='Add Blog/Article' select='addSiteModeFn(true)'>
+    <div class='col-md-12'>
+      <div class='row'>
+        <div class='col-md-3 sites-bar'>
+          <tabset>
+          <!-- Search Tab -->
+          <tab heading='Search' select='addSiteModeFn(false)'>
+          </tab>
+          <!-- Add Site Tab -->
+          <tab heading='Add Blog/Article' select='addSiteModeFn(true)'>
           <form novalidate class='simple-form' name='myForm'>
             <div class='row'>
               <div class='col-sm-12 form-group' ng-form>
@@ -33,33 +35,33 @@
               </div>
             </div>
           </form>
-        </tab>
-      </tabset>
-      <!-- Search tab scoped to sites list -->
-      <div class='col-sm-12 search-box'>
-        <input ng-hide='addSiteMode' type='text' class='form-control form-input-box' ng-model='filter' placeholder='Browse blogs and articles'/>
-      </div>
-    </div>
-
-    <!-- Sites Lists -->
-
-    <div class='col-md-8 sites-list'>
-      <div class='container'>
-        <div class='row'>
-          <ul class='list'>
-            <h2>My Reads</h2>
-            <li class='col-sm-8' id= 'siteItem' ng-repeat='site in sites track by $index'>
-              <div class='row'>
-                <img class='blogItemImage col-sm-4' src="photos/sample1.jpg">
-                <div class='site-content col-sm-8'>
-                  <h3 class='site-name'>{{site.name}}</h3>
-                  <!-- <div>{{site.type}}</div> -->
-                  <a ng-href='http://{{site.url}}'>{{site.url}}</a>
-                  <div>Notes: {{site.notes}}</div>
-                </div>
-              </div>
-            </li>
-          </ul>
+          </tab>
+          </tabset>
+          <!-- Search tab scoped to sites list -->
+          <div class='col-sm-12 search-box'>
+            <input ng-hide='addSiteMode' type='text' class='form-control form-input-box' ng-model='filter' placeholder='Browse blogs and articles'/>
+          </div>
+        </div>
+        <!-- Sites Lists -->
+        <div class='col-md-9 sites-list'>
+          <div class='container'>
+            <div class='row'>
+              <ul class='list'>
+                <h2>My Reads</h2>
+                <li class='col-sm-8' id= 'siteItem' ng-repeat='site in sites track by $index'>
+                  <div class='row'>
+                    <img class='blogItemImage col-sm-4' src="photos/sample1.jpg">
+                    <div class='site-content col-sm-8'>
+                      <h3 class='site-name'>{{site.name}}</h3>
+                      <!-- <div>{{site.type}}</div> -->
+                      <a ng-href='http://{{site.url}}'>{{site.url}}</a>
+                      <div>Notes: {{site.notes}}</div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
