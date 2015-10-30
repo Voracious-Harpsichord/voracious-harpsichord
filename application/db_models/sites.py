@@ -31,7 +31,7 @@ class Blog(db.Model):
         self.blog_name = blog_name
         self.url = url
         self.image = image
-        self.article = article
+        self.description = description
 
     def __repr__(self):
         return '<blog %r>' % self.blog_name

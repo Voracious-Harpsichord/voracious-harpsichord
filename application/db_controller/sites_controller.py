@@ -38,8 +38,8 @@ def make_absolute(full_url, partial_url):
 
 #FETCHTING/PARSING META DATA
 def fetch_html(full_url):
-    r = requests.get(full_url).text
-    if r.status_code != 200:
+    r = requests.get(full_url)
+    if r.status_code == 200:
         return r.text
     else:
         return None
@@ -73,7 +73,7 @@ def get_author(html):
     return ""
 
 def get_article_title(html):
-    title = re.search(r'<title>(.+?)</title>')
+    title = re.search(r'<title>(.+?)</title>', html)
     if title:
         return title.group(1)
     return ""
@@ -97,11 +97,11 @@ def get_site_info(url):
         site["site_name"] = source
         site["article_name"] = title
         site["author_name"] = author
-        site["image"] = image 
+        site["image"] = image_ref
         site["description"] = description
     if site_type == 'blog':
         site["blog_name"] = source
-        site["image"] = image 
+        site["image"] = image_ref
         site["description"] = description
     return site
 
@@ -127,11 +127,10 @@ def query_by_id_and_type(site_id, site_type):
 
 def get_id_from_url(url):
     site_type = type_of(url)
-    url = remove_protocol(url)
     if site_type == 'article':
-        return session.query(Article).filter(remove_protocol(Article.url) == url).count() > 0
+        return session.query(Article).filter(Article.url == url).count() > 0
     elif site_type == 'blog':
-        return session.query(Blog).filter(remove_protocol(Blog.url) == url).count() > 0
+        return session.query(Blog).filter(Blog.url == url).count() > 0
     else:
         return None
 
@@ -199,7 +198,7 @@ def add_user_to_site(user_id, site_id, site_type, comment):
     response = {'user_site_id': user_site_id, 'site_id': site_id, 'site_type': site_type, 'comment': comment}
     site_info_Q = query_by_id_and_type(site_id, site_type)
     for column in site_info_Q.__table__.columns:
-        respons[column.name] = getattr(site_info_Q, column.name)
+        response[column.name] = getattr(site_info_Q, column.name)
     return response
 
 def edit_user_to_site(id, comment):
