@@ -15,26 +15,26 @@ class Article(db.Model):
         self.author_name = author_name
         self.url = url
         self.image = image
-        self.article = description
+        self.description = description
 
     def __repr__(self):
         return '<article %r>' % self.article_name
 
 class Blog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    blog_name = db.Column(db.String(120))
+    site_name = db.Column(db.String(120))
     url = db.Column(db.String(500), unique=True)
     image = db.Column(db.String(500))
     description = db.Column(db.String(500))
 
-    def __init__(self, blog_name, url, image, description):
-        self.blog_name = blog_name
+    def __init__(self, site_name, url, image, description):
+        self.site_name = site_name
         self.url = url
         self.image = image
         self.description = description
 
     def __repr__(self):
-        return '<blog %r>' % self.blog_name
+        return '<blog %r>' % self.site_name
 
 class User_site(db.Model):
     id = db.Column(db.Integer, primary_key=True)
