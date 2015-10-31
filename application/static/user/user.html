@@ -2,12 +2,12 @@
   <img class='profilePhoto' ng-src="{{user.photo}}" alt="Description"/>
   <div class='profileInfo'>
     <h1>{{user.name_first}} {{user.name_last}} </h1>
-    <h5> {{user.location}} | Member since {{user.created_at}}</h5>
+    <h5> {{location}} | Member since {{membershipYear}}</h5>
+    <button type='submit' ng-click='follow(user)' ng-show='!following'>Follow</button>
+    <button type='submit' ng-click='unfollow(user)' ng-show='following'>Following</button>
   </div>
 </div>
 
-<button type='submit' ng-click='follow(user)' ng-show='!following'>Follow</button>
-<button type='submit' ng-click='unfollow(user)' ng-show='following'>Following</button>
 
 <div class='dashboardTabs'>  
   <ul>

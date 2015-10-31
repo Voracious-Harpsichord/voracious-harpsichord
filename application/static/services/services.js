@@ -370,6 +370,9 @@ services.factory('Auth', function($http) {
       userData.loggedIn = true;
       //Use substring to get year
       userData.created_at = userData.created_at.substring(0, 4);
+      if (userData.location === '') {
+        userData.location === 'Elsewhere'
+      }
       return resp;
     });
   };
@@ -387,6 +390,9 @@ services.factory('Auth', function($http) {
       userData.loggedIn = true;
       //Use substring to get year
       userData.created_at = userData.created_at.substring(0, 4);
+      if (userData.location === '') {
+        userData.location === 'Elsewhere'
+      }
       return resp.data;
     });
   };

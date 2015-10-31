@@ -6,9 +6,8 @@ var stash = angular.module('beautystash.profile', [
 ]);
 
 stash.controller('ProfileController', function ($scope, $window, Products, Follow, Sites, $stateParams, Auth, ModalService) {
-  //General variables
+
   $scope.user = Auth.userData;
-  //Display all products in user's stash
   $scope.products = Products.userProducts;
 
   $scope.newProduct = {

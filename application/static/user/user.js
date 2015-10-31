@@ -11,6 +11,8 @@ user.controller('UserController', function($scope, $window, $stateParams, User, 
   $scope.userProducts;
   $scope.userFollowing;
   $scope.userFollowers;
+  $scope.membershipYear;
+  $scope.location;
 
   $scope.tabs = [
     {name: 'Stash', path: 'stash'},
@@ -26,6 +28,11 @@ user.controller('UserController', function($scope, $window, $stateParams, User, 
       .then(function(data) {
         $scope.user = data.user;
         $scope.userProducts = data.userProducts;
+        $scope.membershipYear = $scope.user.created_at.substring(0, 4);
+        console.log($scope.user)
+        if (data.user.location === '') {
+          $scope.location = 'Elsewhere'
+        }
       })
       .catch(function(error) {
         console.error(error)
