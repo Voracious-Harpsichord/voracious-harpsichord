@@ -20,6 +20,7 @@ db = SQLAlchemy(app)
 from db_controller import user_controller as u_ctrl
 from db_controller import product_controller as p_ctrl
 from db_controller import sites_controller as s_ctrl
+from db_controller import recommendation_controller as r_ctrl
 #END DB SETUP
 
 @app.route('/')

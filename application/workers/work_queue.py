@@ -6,9 +6,11 @@ from threading import *
 
 #workers
 import test_worker
+import recEngine
 
 tasks = {
-    "test": test_worker.testing
+    "test": test_worker.testing,
+    "find_prob":recEngine.find_prob
 }
 
 #RYAN WHOLEY IS AWESOME!!!
