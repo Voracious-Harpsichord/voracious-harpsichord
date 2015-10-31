@@ -10,6 +10,7 @@ def similarityIndex1(user1,user2):
 	# get all products that =
 	D1 = set()
 	D2 = set()
+
 	for review in user1['reviews']:
 		if int(review['rating'])>2:
 			L1.add(review['productID'])
@@ -35,31 +36,24 @@ def similarityIndex2(user1,user2):
 	c2=0.3
 	c3=0.4
 	summ = 0
-	if (user1['location'] != ''):
-		if (user1['location'] == user2['location']):
-			summ+=c1
-	if (user1['skin_tone'] != ''):
-		if (user1['skin_tone'] == user2['skin_tone']):
-			summ+=c2
-	if (user1['age'] != ''):
-		if (user1['age'] == user2['age']):
-			summ+=c3
 
+	if 'location' in user1:
+		if (user1['location'] != ''):
+			if (user1['location'] == user2['location']):
+				summ+=c1
+	if 'skin_tone' in user1:
+		if (user1['skin_tone'] != ''):
+			if (user1['skin_tone'] == user2['skin_tone']):
+				summ+=c2
+	if 'age' in user1:
+		if (user1['age'] != ''):
+			if (user1['age'] == user2['age']):
+				summ+=c3
 	return summ/3
-	# res=[]
-	# for key in user1:
-	# 	if len(user1[key])>0:
-	# 		if user1[key] == user2[key]:
-	# 			res.append((key,user1[key]))
-	# print(res)		
 
 # tot sim index
 def compoundSimilarityIndex(user1,user2):
-	return (similarityIndex1(user1,user2)+similarityIndex2(user1,user2))/2
-# get similarity between user1 and all other users
-# 
-
-
+	return (similarityIndex1(user1,user2)+similarityIndex2(user1,user2))/2 
 
 def prob_user_likes_product(product,users_who_like,users_who_dislike):
 	# sumL sum of similarity indices of users who like product
@@ -80,24 +74,39 @@ def prob_user_likes_product(product,users_who_like,users_who_dislike):
 	
 	return (sumL - sumD)/(totalL + totalD)
 
-
 # perform lookups on these
-all_prod_likes_file = open('number_all_prod_likes.json','r')
-all_prod_likes = json.loads(all_prod_likes_file.read())
-all_prod_likes_file.close()
-
-all_users_file = open('number_all_user_reviews.json','r')
-all_users = json.loads(all_users_file.read())
-all_users_file.close()
-
 # prodID = 'P215930'
-# current_user = all_users['1885'	]
+def find_prob(productNum,current_user_id):
 
-def find_prob(productIDs,current_user):
+	# 1885																																										
+	# fetch user from database																																																		
+	all_prod_likes_file = open('../../data/number_all_prod_likes.json','r')
+	all_prod_likes = json.loads(all_prod_likes_file.read())
+	all_prod_likes_file.close()
+
+	all_users_file = open('../../data/number_all_user_reviews.json','r')
+	all_users = json.loads(all_users_file.read())
+	all_users_file.close()
+	counter = 0
+	current_user = all_users[str(current_user_id)]
+
+	productIDs = []
+	for prod in all_prod_likes:
+		counter +=1
+		productIDs.append(prod)
+		# if counter > 11004:
+		if counter > productNum:
+			break
 
 	storage = {}
 	# keep store here
-	max_value = (0,0)
+	# max_value = (0,0)
+	# max_value2 = (0,0)
+	# max_value3 = (0,0)
+	# max_value4 = (0,0)
+	# max_value5 = (0,0)
+	res = [(0,0),(0,0),(0,0),(0,0),(0,0)]
+
 	for productID in productIDs:
 		prod_like_ref = all_prod_likes[productID]
 		user_prod_likes = prod_like_ref['L']
@@ -109,42 +118,49 @@ def find_prob(productIDs,current_user):
 		for name in user_prod_likes:
 			# name = str(name)
 			b = str(name)
-			print(b)
+			# print(b)
 			user = all_users[b]
 			index = compoundSimilarityIndex(current_user,user)
 			storage_like_simIndex[b] = index
 
 		for name in user_prod_dislikes:
-			# name = str[name]
+			# name = str[name]python3
 			b = str(name)
-			print(b)
+			# print(b)
 			user = all_users[b]
 			index = compoundSimilarityIndex(current_user,user)
 			storage_dislike_simIndex[b] = index
 
 		probability = prob_user_likes_product(productID,storage_like_simIndex,storage_dislike_simIndex)
-		if probability > max_value[1]:
-			max_value = (productID,probability)
-		storage[productID] = probability
-	return (storage,max_value)
 
-counter = 0
-productIDs = []
-for prod in all_prod_likes:
-	counter +=1
-	productIDs.append(prod)
-	# if counter > 11004:
-	if counter > 110:
-		break
+		nextTupl = False
+		for index,tupl in enumerate(res):
+			# cascade change
+			if nextTupl != False:
+				temp = res[index] 
+				res[index] = nextTupl
+				nextTupl = temp
+			elif probability>tupl[0]:
+				nextTupl = res[index]
+				res[index] = (probability,productID)
+		# if probability > max_value[1]:
+			# max_value = (productID,probability)
+
+		storage[productID] = probability
+
+	#return top 5 in a tuple
+	print(res)
+	return res
+
 
 # print(productIDs)
-start = time.clock()
-probs  = find_prob(productIDs,current_user)
-print(probs)
-end = time.clock()
-interval = end - start
-print(interval)
-print(probs[1])
+# start = time.clock()
+# probs  = find_prob(productIDs,current_user)
+# print(probs)
+# end = time.clock()
+# interval = end - start
+# print(interval)
+# print(probs[1])
 
 # get rid of anons 
 
