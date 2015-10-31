@@ -79,7 +79,7 @@ def prob_user_likes_product(product,users_who_like,users_who_dislike):
 
 # perform lookups on these
 # prodID = 'P215930'
-def find_prob(productNum,current_user_id):
+def find_prob(user_id):
 
 	# 1885																																										
 	# fetch user from database																																																		
@@ -91,15 +91,20 @@ def find_prob(productNum,current_user_id):
 	all_users = json.loads(all_users_file.read())
 	all_users_file.close()
 	counter = 0
-	current_user = all_users[str(current_user_id)]
+
+	# ******** fetch user info from database *********
+	from db_controller import user_controller as u_ctrl
+	current_user = us_ctrl.get_user_as_dictionary(user_id)
 
 	productIDs = []
 	for prod in all_prod_likes:
 		counter +=1
 		productIDs.append(prod)
+		if counter > 1100:
+				break
 		# if counter > 11004:
-		if counter > productNum:
-			break
+		# 	break
+		# if counter > productNum:
 
 	storage = {}
 	# keep store here
@@ -152,7 +157,7 @@ def find_prob(productNum,current_user_id):
 		storage[productID] = probability
 
 	#return top 5 in a tuple
-	# print(res)
+	print(res)
 	# unpack and push to db
 	for index,tupl in enumerate(res):
 		rank = index+1
