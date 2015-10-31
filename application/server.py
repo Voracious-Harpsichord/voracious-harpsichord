@@ -210,7 +210,10 @@ def userSites(user_id):
             return "Bad Link", 404            
         site_id = s_ctrl.add_or_update_site(site_info)
         response = s_ctrl.add_user_to_site(user_id, site_id, site_info['site_type'], body.get("comment"))
-        return jsonify(response), 201
+        if response:
+            return jsonify(response), 201
+        else:
+            return 'Site has already been added', 302
 
     if request.method == 'PUT':
         body = request.get_json()
