@@ -26,13 +26,13 @@ services.factory('User', function($http) {
     })
     .catch(function(error) {
       console.error(error);
-    })
-  }
+    });
+  };
 
   return {
     getInfo: getInfo
   };
-})
+});
 
 services.factory('Follow', function($http, Auth) {
 
@@ -51,8 +51,8 @@ services.factory('Follow', function($http, Auth) {
     }
   };
 
-  var userFollowing = {}
-  var userFollowers = {}
+  var userFollowing = {};
+  var userFollowers = {};
 
   var getUserFollowersFollowing = function(user_id) {
     if (Auth.userData.userid) {
@@ -65,12 +65,12 @@ services.factory('Follow', function($http, Auth) {
       })
       .then(function(resp) {
         for (key in resp.data.following) {
-          userFollowing[resp.data.following[key]] = true
+          userFollowing[resp.data.following[key]] = true;
         }
         for (key in resp.data.followers) {
-          userFollowers[resp.data.followers[key]] = true
+          userFollowers[resp.data.followers[key]] = true;
         }
-        console.log(resp.data)
+        console.log(resp.data);
         return {following: resp.data.following, followers: resp.data.followers};
       });
     }
@@ -123,7 +123,6 @@ services.factory('Sites', function($http, Auth) {
   var userSites = [];
 
   var getSites = function() {
-    console.log('got called!');
     //check if userid exists first
     if (Auth.userData.userid) {
       //Send GET request to /userSites/:user_id
@@ -137,8 +136,6 @@ services.factory('Sites', function($http, Auth) {
       .then(function(resp) {
         while(userSites.length) {userSites.pop();}
         resp.data.sites.forEach(function(item) {userSites.push(item);});
-        console.log('user sites:', userSites);
-        console.log('response:', resp.data);
         return resp.data;
       });
     }
@@ -153,7 +150,6 @@ services.factory('Sites', function($http, Auth) {
 
   var addSite = function(site) {
     //Send POST request to /userSites/:user_id
-    console.log('site object', site);
     return $http({
       method: 'POST',
       url: '/api/sites/' + Auth.userData.userid,
@@ -163,7 +159,6 @@ services.factory('Sites', function($http, Auth) {
       data: site
     })
     .then(function(resp) {
-      console.log('data from service', resp.data);
       return resp.data;
     });
   };
