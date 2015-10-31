@@ -238,6 +238,20 @@ def products(product_id):
     else:
         return "Product Not Found", 404
 
+@app.route('/api/recommendations/<user_id>',methods=['GET','POST','DELETE'])
+def recommendations(user_id):
+    #retrieve top 5 recommendations from db
+    if request.method == 'GET':
+        array = r_ctrl.get_recommendation_by_user_id(user_id)
+        response = {}
+        for index,rec in enumerate(array):
+            response[index+1] = array[index]
+        return jsonify(response),200
+
+    # 'POST' to recomendations should be triggered in other routes
+
+
+
 #start server
 if __name__ == "__main__":
     app.run(debug=True)
