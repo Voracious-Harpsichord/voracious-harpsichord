@@ -242,8 +242,6 @@ def products(product_id):
 def recommendations(user_id):
     #retrieve top 5 recommendations from db
     if request.method == 'GET':
-        print(user_id)
-        import json
         array = r_ctrl.get_recommendation_by_user_id(user_id)
         response = {}
         for index,rec in enumerate(array):

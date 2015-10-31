@@ -152,7 +152,7 @@ def find_prob(productNum,current_user_id):
 		storage[productID] = probability
 
 	#return top 5 in a tuple
-	print(res)
+	# print(res)
 	# unpack and push to db
 	for index,tupl in enumerate(res):
 		rank = index+1
