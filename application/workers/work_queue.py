@@ -5,8 +5,8 @@
 from threading import *
 
 #workers
-import test_worker
-import recEngine
+from workers import test_worker
+from workers import recEngine
 
 tasks = {
     "test": test_worker.testing,

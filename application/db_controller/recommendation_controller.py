@@ -16,13 +16,13 @@ def get_recommendation_by_user_id(user_id):
 
 # 
 def add_recommendation(user_id, product_id, rank):
-    recommendation = Recommendation(int(user_id),int(product_id),int(rank))
-    session.add(product)
+    recommendation = Recommendation(user_id,product_id,rank)
+    session.add(recommendation)
     session.commit()
     return {
-        'user_id':int(user_id),
-        'product_id':int(user_id),
-        'rank':int(rank)
+        'user_id':user_id,
+        'product_id':user_id,
+        'rank':rank
     }
 
 #Delete all recommendations a user has

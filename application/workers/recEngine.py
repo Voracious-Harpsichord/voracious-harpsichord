@@ -3,6 +3,9 @@
 # or productid : [userid, ratings]
 import time
 import json
+
+from db_controller import recommendation_controller as r_ctrl
+
 def similarityIndex1(user1,user2):
 	# get all products that users like
 	L1 = set()
@@ -80,11 +83,11 @@ def find_prob(productNum,current_user_id):
 
 	# 1885																																										
 	# fetch user from database																																																		
-	all_prod_likes_file = open('../../data/number_all_prod_likes.json','r')
+	all_prod_likes_file = open('../data/number_all_prod_likes.json','r')
 	all_prod_likes = json.loads(all_prod_likes_file.read())
 	all_prod_likes_file.close()
 
-	all_users_file = open('../../data/number_all_user_reviews.json','r')
+	all_users_file = open('../data/number_all_user_reviews.json','r')
 	all_users = json.loads(all_users_file.read())
 	all_users_file.close()
 	counter = 0
@@ -150,6 +153,16 @@ def find_prob(productNum,current_user_id):
 
 	#return top 5 in a tuple
 	print(res)
+	# unpack and push to db
+	for index,tupl in enumerate(res):
+		rank = index+1
+		product_id = tupl[1]
+		user_id = current_user_id
+		# save to db
+		res = r_ctrl.add_recommendation(user_id, product_id, rank)
+		print(res)
+
+	# is async so no need to return 
 	return res
 
 
