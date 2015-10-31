@@ -9,9 +9,11 @@ angular.module('beautystash.auth', [])
       if ($scope.user.username === undefined || $scope.user.password === undefined || $scope.user.email === undefined) {
         console.error = 'Enter a valid username, password, and email address';
       } else {
+        $scope.user.location = $scope.user.city + ', ' + $scope.user.state;
         //Invoke signup function from Auth factory
         Auth.signup($scope.user)
         .then(function() {
+          console.log('user data', $scope.user);
           //Fetch user's products
           Products.getAllProducts();
           //Fetch user followers and following
