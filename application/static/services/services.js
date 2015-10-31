@@ -123,56 +123,55 @@ services.factory('Sites', function($http, Auth) {
   var userSites = [];
 
   var getSites = function() {
+    console.log('got called!');
     //check if userid exists first
     if (Auth.userData.userid) {
       //Send GET request to /userSites/:user_id
       return $http({
         method: 'GET',
-        url: '/api/userSites' + Auth.userData.userid,
+        url: '/api/sites/' + Auth.userData.userid,
         headers: {
           'Content-Type': 'application/json'
         }
       })
       .then(function(resp) {
         while(userSites.length) {userSites.pop();}
-        resp.data.userSites.forEach(function(item) {userSites.push(item);});
+        resp.data.sites.forEach(function(item) {userSites.push(item);});
+        console.log('user sites:', userSites);
+        console.log('response:', resp.data);
         return resp.data;
       });
     }
   };
 
-  var getSite = function(url) {
-    return $http({
-      method: 'GET',
-      url: '/api/sites',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(function(resp) {
-      return resp.data;
-    });
-  };
+  Auth.checkCookie()
+  .then(function(resp) {
+    if (resp.status === 200) {
+      getSites();
+    }
+  });
 
   var addSite = function(site) {
     //Send POST request to /userSites/:user_id
+    console.log('site object', site);
     return $http({
       method: 'POST',
-      url: '/api/userSites/' + Auth.userData.userid,
+      url: '/api/sites/' + Auth.userData.userid,
       headers: {
         'Content-Type': 'application/json'
       },
       data: site
     })
     .then(function(resp) {
+      console.log('data from service', resp.data);
       return resp.data;
     });
   };
 
   return {
     getSites: getSites,
-    getSite: getSite,
-    addSite: addSite
+    addSite: addSite,
+    userSites: userSites
   };
 });
 
