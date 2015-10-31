@@ -26,7 +26,7 @@ def make_new_user(u):
     # make new user entry
     # add new user entry to the table
     #__init__(self, created_at, username, pw_hash, email, name_title, name_first, name_last, gender, location, birthday)
-    session.add(User(str(datetime.datetime.now()), u['username'], hashed, u.get('email', ''), u.get('name_title', ''), u.get('name_first', ''), u.get('name_last', ''), u.get('gender', ''), u.get('location', ''), u.get('birthday', '')))
+    session.add(User(str(datetime.datetime.now()), u['username'], hashed, u.get('email', ''), u.get('name_title', ''), u.get('name_first', ''), u.get('name_last', ''), u.get('gender', ''), u.get('location', ''), u.get('birthday', ''),u.get('age', ''),u.get('skin_tone', '')))
     session.commit()
     return None
 
