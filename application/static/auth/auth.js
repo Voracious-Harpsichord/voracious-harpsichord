@@ -1,6 +1,6 @@
 angular.module('beautystash.auth', [])
 
-.controller('AuthController', function($scope, $window, $state, Auth, Products, Follow, $document) {
+.controller('AuthController', function($scope, $window, $state, Auth, Products, Follow, Sites, $document) {
 
     $scope.user = Auth.userData;
     $scope.loginStatus = Auth.userData.loggedIn;
@@ -41,6 +41,8 @@ angular.module('beautystash.auth', [])
           //Fetch user followers and following
           // Follow.getFollowers();
           // Follow.getFollowing();
+          //Fetch user sites data
+          Sites.getSites();
           //Delete password property on $scope.user
           delete $scope.user.password;
           //Transition to stash page
