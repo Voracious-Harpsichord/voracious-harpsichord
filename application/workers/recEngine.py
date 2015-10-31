@@ -79,6 +79,8 @@ def prob_user_likes_product(product,users_who_like,users_who_dislike):
 
 # perform lookups on these
 # prodID = 'P215930'
+# main function call
+
 def find_prob(user_id):
 
 	# 1885																																										
@@ -94,8 +96,31 @@ def find_prob(user_id):
 
 	# ******** fetch user info from database *********
 	from db_controller import user_controller as u_ctrl
-	current_user = us_ctrl.get_user_as_dictionary(user_id)
+	user_info = u_ctrl.get_user_as_dictionary(user_id)
 
+	from db_controller import product_controller as p_ctrl
+	products = p_ctrl.get_products_by_user_id(user_id)
+
+	# age processing
+	birthday = user_info['age']
+	from datetime import date
+	age = date.today().year - birthday[0:4]
+
+	current_user = {
+		'age':age,
+		'location':user_info['location'],
+		'skin_tone':user_info['skin_tone'],
+		'reviews':[]
+	}
+	# 'reviews':[{'rating':1,'productID':'sephorid'}]
+	# ********* built up current user from db fetch **************
+	for product in products:
+		current_user['reviews'].append({
+			'rating':product['product_rating'],
+			'productID':product['sephora_id']
+			})
+
+	# ******** fetch products ids to check against from file **********
 	productIDs = []
 	for prod in all_prod_likes:
 		counter +=1
@@ -106,15 +131,10 @@ def find_prob(user_id):
 		# 	break
 		# if counter > productNum:
 
-	storage = {}
 	# keep store here
-	# max_value = (0,0)
-	# max_value2 = (0,0)
-	# max_value3 = (0,0)
-	# max_value4 = (0,0)
-	# max_value5 = (0,0)
 	res = [(0,0),(0,0),(0,0),(0,0),(0,0)]
 
+	# iterate over specified prodicts and return probability values
 	for productID in productIDs:
 		prod_like_ref = all_prod_likes[productID]
 		user_prod_likes = prod_like_ref['L']
@@ -141,6 +161,7 @@ def find_prob(user_id):
 
 		probability = prob_user_likes_product(productID,storage_like_simIndex,storage_dislike_simIndex)
 
+		# select maximum values algo
 		nextTupl = False
 		for index,tupl in enumerate(res):
 			# cascade change
@@ -151,8 +172,6 @@ def find_prob(user_id):
 			elif probability>tupl[0]:
 				nextTupl = res[index]
 				res[index] = (probability,productID)
-		# if probability > max_value[1]:
-			# max_value = (productID,probability)
 
 		storage[productID] = probability
 
@@ -163,12 +182,9 @@ def find_prob(user_id):
 		rank = index+1
 		product_id = tupl[1]
 		user_id = current_user_id
-		# save to db
+		# save to database
 		res = r_ctrl.add_recommendation(user_id, product_id, rank)
 		print(res)
-
-	# is async so no need to return 
-	return res
 
 
 # print(productIDs)

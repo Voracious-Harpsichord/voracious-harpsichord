@@ -26,7 +26,9 @@ def get_products_by_user_id(user_id):
             'product_size': p.size,
             'product_status': p.status,
             'product_notes': p.notes,
-            'product_color': p.color
+            'product_color': p.color,
+            'product_rating': user_product.stars,
+            'sephora_id': p.sephora_id
         })
     
     return results
