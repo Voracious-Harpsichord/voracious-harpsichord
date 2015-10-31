@@ -12,8 +12,8 @@
           <form novalidate class='simple-form' name='myForm'>
             <div class='row'>
               <div class='col-sm-12 form-group' ng-form>
-                <label>Notes</label><br>
-                <textarea class='form-control site-notes' rows='5' ng-model='site.notes'></textarea>
+                <label>Comments</label><br>
+                <textarea class='form-control site-notes' rows='5' ng-model='site.comment'></textarea>
                 <label for='site-url'>Blog/Article url</label><br>
                 <input type='text' ng-model='site.url' id='site-url' class="form-control form-input-box" placeholder='Enter a blog or article' required />
                 <small class='site-error' ng-show='myForm.$invalid'>Missing blog/article url</small>
@@ -32,6 +32,7 @@
             <div class='row'>
               <div class='col-sm-6 col-sm-offset-6 site-button'>
                 <button class='btn' ng-click='addSite(site)'>Add blog/article</button>
+                <div class='error' ng-show='error'>{{error}}</div>
               </div>
             </div>
           </form>
@@ -50,12 +51,12 @@
                 <h2>My Reads</h2>
                 <li class='col-sm-8' id= 'siteItem' ng-repeat='site in sites track by $index'>
                   <div class='row'>
-                    <img class='blogItemImage col-sm-4' src="photos/sample1.jpg">
+                    <img class='blogItemImage col-sm-4' src="{{site.image || photos/sample1.jpg}}">
                     <div class='site-content col-sm-8'>
-                      <h3 class='site-name'>{{site.name}}</h3>
-                      <!-- <div>{{site.type}}</div> -->
-                      <a ng-href='http://{{site.url}}'>{{site.url}}</a>
-                      <div>Notes: {{site.notes}}</div>
+                      <a ng-href='{{site.url}}'>{{ site.article_name || site.site_name}}</a>
+                      <div>{{site.description}}</div>
+                      <h3 class='site-name'>{{site.site_name}}</h3>
+                      <div>Comments: {{site.comment}}</div>
                     </div>
                   </div>
                 </li>
