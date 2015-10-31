@@ -12,10 +12,9 @@ class User(db.Model):
     gender = db.Column(db.String(40))
     location = db.Column(db.String(80))
     birthday = db.Column(db.String(40))
-    age = db.Column(db.Integer)
     skin_tone = db.Column(db.String(100))
     
-    def __init__(self, created_at, username, pw_hash, email, name_title, name_first, name_last, gender, location, birthday, skin_tone, age):
+    def __init__(self, created_at, username, pw_hash, email, name_title, name_first, name_last, gender, location, birthday, skin_tone):
         self.created_at = created_at
         self.username = username
         self.pw_hash = pw_hash
@@ -26,7 +25,6 @@ class User(db.Model):
         self.gender = gender
         self.location = location
         self.birthday = birthday
-        self.age = age
         self.skin_tone = skin_tone
 
     def __repr__(self):

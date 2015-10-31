@@ -101,8 +101,13 @@ def find_prob(user_id):
 	from db_controller import product_controller as p_ctrl
 	products = p_ctrl.get_products_by_user_id(user_id)
 
+	# age processing
+	birthday = user_info['age']
+	from datetime import date
+	age = date.today().year - birthday[0:4]
+
 	current_user = {
-		'age':user_info['age'],
+		'age':age,
 		'location':user_info['location'],
 		'skin_tone':user_info['skin_tone'],
 		'reviews':[]
