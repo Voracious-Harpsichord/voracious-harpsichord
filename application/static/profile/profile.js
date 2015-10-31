@@ -40,6 +40,9 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
     $scope.newProduct.product_size = null;
     $scope.newProduct.product_status = null;
     $scope.newProduct.product_category = null;
+    $scope.error = null;
+    $scope.site.url = null;
+    $scope.site.comment = null;
   };
 
   //Variables and fns relating to adding product 
@@ -155,14 +158,12 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
       })
   }
 
-  getFollowersFollowing()
+  getFollowersFollowing();
 
   //Blogs and Article Variable and Controllers
 
-  // $scope.sites = Sites.userSites;
-  $scope.sites = [];
+  $scope.sites = Sites.userSites;
   $scope.site = {};
-  $scope.site.url = '';
 
   $scope.addSiteModeFn = function(bool) {
     $scope.addSiteMode = bool;
@@ -172,23 +173,16 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
   };
 
   $scope.addSite = function(site) {
-    $scope.sites.push({'name': 'BeautyBlog', 'url': site.url, 'type': site.type, 'notes': site.notes});
-    Sites.getSite(site.url)
-      .then(function(resp) {
-        console.log(resp);
-        // $scope.sites.push(resp);
+    Sites.addSite(site)
+      .then(function(addedSite) {
+        $scope.sites.push(addedSite);
+        resetFields();
+      })
+      .catch(function(error) {
+        console.error('Error with adding site:', error);
+        $scope.error = error.data;
+        resetFields();
       });
-    console.log($scope.sites);
-    $scope.site.url = null;
-    $scope.site.type = null;
-    $scope.site.notes = null;
-    // Sites.addSite()
-    //   .then(function(addedSite) {
-    //     $scope.sites.push(addedSite);
-    //   })
-    //   .catch(function(error) {
-    //     console.error('Error with adding site:', error);
-    //   });
   };
 });
 
