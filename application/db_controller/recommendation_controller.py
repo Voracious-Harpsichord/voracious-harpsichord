@@ -12,7 +12,16 @@ session._model_changes = {}
 from db_models.recommendations import Recommendation 
 
 def get_recommendation_by_user_id(user_id):
-    return session.query(Recommendation).filter(Recommendation.user_id == user_id).all()
+    recommendations = session.query(Recommendation).filter(Recommendation.user_id == user_id).all()
+    results = []
+    for r in recommendations:
+        results.append({
+            'user_id':r.user_id,
+            'product_id':r.product_id,
+            'rank':r.rank
+        })
+    return results
+    
 
 # 
 def add_recommendation(user_id, product_id, rank):
