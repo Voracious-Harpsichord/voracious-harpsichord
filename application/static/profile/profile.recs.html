@@ -1,3 +1,56 @@
-<div>
-  Recs
+<div class='container-fluid' id='sites'>
+  <div class='row-fluid'>
+    <div class='col-md-12 recs-tab'>
+      <tabset>
+      <!-- Universal Tab -->
+      <tab heading='Universal' select='addSiteModeFn(false)'>
+      </tab>
+      <!-- Personal Tab -->
+      <tab heading='Personal' select='addSiteModeFn(true)'>
+      <div class='col-md-12 wrapper'>
+        <ul class='list'>
+          <h2>Recommended for You by Friends</h2>
+          <li class='col-sm-12 product-item' ng-repeat='product in products | myStashFilter | filter : filter'>
+            <img class='productImage col-sm-3' src="photos/sample1.jpg">
+            <div class='col-sm-8 product-content'>
+              <div class='product-brand'>{{product.brand_name}}</div>
+              <span class='product-name'>{{product.product_name}}</span><br>
+              <span>{{product.product_category}}</span>
+              <span>{{product.product_size}}</span>
+              <span>{{product.product_status}}</span><br>
+              <span>{{product.product_color}}</span>
+              <span>Notes: {{product.product_notes}}</span>
+            </div>
+            <div class='col-sm-1'>
+              <button class='btn edit' ng-click='addProduct(newProduct)'>Add to wishlist</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+      </tab>
+      </tabset>
+      <!-- Personalized tab -->
+      <div class='col-md-12 wrapper'>
+        <ul class='list'>
+          <h2>Recommended for You</h2>
+          <li class='col-sm-12 product-item' ng-repeat='product in products | finishedFilter | filter : filter'>
+            <img class='productImage col-sm-3' src="photos/sample1.jpg">
+            <div class='col-sm-8 product-content'>
+              <div class='product-brand'>{{product.brand_name}}</div>
+              <span class='product-name'>{{product.product_name}}</span><br>
+              <span>{{product.product_category}}</span>
+              <span>{{product.product_size}}</span>
+              <span>{{product.product_status}}</span><br>
+              <span>{{product.product_color}}</span>
+              <span>Notes: {{product.product_notes}}</span>
+            </div>
+            <div class='col-sm-1'>
+              <button class='btn edit' ng-click='addProduct(newProduct)'>Add to wishlist</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 </div>

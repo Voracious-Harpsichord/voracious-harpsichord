@@ -26,7 +26,7 @@ def add_protocol(unsure_url):
         return unsure_url
 
 def type_of(full_url):
-    if "/" in remove_protocol(full_url):
+    if re.search(r'/.', remove_protocol(full_url)):
         return 'article'
     else:
         return 'blog'
@@ -100,20 +100,22 @@ def get_site_info(url):
         site["image"] = image_ref
         site["description"] = description
     if site_type == 'blog':
-        site["blog_name"] = source
+        site["site_name"] = source
         site["image"] = image_ref
         site["description"] = description
     return site
 
 #DB READ/WRITE
 def query_by_id_and_type(site_id, site_type):
-    query = session.query(Article).filter(Article.id == site_id)
-    if query.count() > 0:
-        if site_type == 'article':
-            return session.query(Article).filter(Article.id == site_id)
-        elif site_type == 'blog':
-            return session.query(Blog).filter(Blog.id == site_id)
-    return None 
+    if site_type == 'article':
+        query = session.query(Article).filter(Article.id == site_id)
+        if query.count() > 0:
+            return query
+    elif site_type == 'blog':
+        query = session.query(Blog).filter(Blog.id == site_id)
+        if query.count() > 0:
+            return query
+    return None
 
 # # Depreciated
 # def verify_site_by_url(url):
@@ -156,7 +158,7 @@ def get_sites_by_user_id(user_id):
         site_Q = query_by_id_and_type(s.site_id, s.site_type).one()
         for column in site_Q.__table__.columns:
             site[column.name] = getattr(site_Q, column.name)
-        sites.append(site)   
+        sites.append(site)
     return {'sites':sites}
 
 def add_or_update_site(info):
@@ -175,7 +177,7 @@ def add_or_update_site(info):
             })
         if site_type == 'blog':
             site_Q.update({
-                'blog_name': info['site_name'],
+                'site_name': info['site_name'],
                 'image': info['image'],
                 'description': info['description']
             })
@@ -184,7 +186,7 @@ def add_or_update_site(info):
         if site_type == 'article':
             session.add(Article(info['site_name'], info['article_name'], info['author_name'], info['url'], info['image'], info['description']))
         if site_type == 'blog':
-            session.add(Blog(info['blog_name'], info['url'], info['image'], info['description']))
+            session.add(Blog(info['site_name'], info['url'], info['image'], info['description']))
         session.commit()
         site_id = get_id_from_url(url)
     return site_id
@@ -196,11 +198,16 @@ def add_or_update_site(info):
 #     return session.query(Site).filter(Site.id == id).one().id
 
 def add_user_to_site(user_id, site_id, site_type, comment):
-    site = User_site(int(user_id), int(site_id), site_type, comment)
-    session.add(site)
-    session.commit()
-    user_site_id = session.query(User_site).order_by(User_site.id.desc()).first().id
+    Q = session.query(User_site).filter(User_site.user_id == user_id, User_site.site_id == site_id, User_site.site_type == site_type)
 
+    #Check if user hasn't already added site
+    if Q.count() == 0:
+        site = User_site(int(user_id), int(site_id), site_type, comment)
+        session.add(site)
+        session.commit()
+    else:
+        return None
+    user_site_id = session.query(User_site).order_by(User_site.id.desc()).first().id
     response = {'user_site_id': user_site_id, 'site_id': site_id, 'site_type': site_type, 'comment': comment}
     site_info_Q = query_by_id_and_type(site_id, site_type).one()
     for column in site_info_Q.__table__.columns:
