@@ -246,15 +246,23 @@ def products(product_id):
 
 @app.route('/api/recommendations/<user_id>',methods=['GET','POST','DELETE'])
 def recommendations(user_id):
-    #retrieve top 5 recommendations from db
+    #retrive personal and universal recommendations
     if request.method == 'GET':
-        array = r_ctrl.get_recommendation_by_user_id(user_id)
-        response = {}
-        for index,rec in enumerate(array):
-            response[index+1] = array[index]
-        return jsonify(response),200
+        universals = r_ctrl.get_recommendation_by_user_id(user_id)
+        personals = r_ctrl.get_personal_recs(user_id)
+        return jsonify({
+            'personal': personals,
+            'universal': universals
+            }), 200
 
-    # 'POST' to recomendations should be triggered in other routes
+    #add a personal reccomendation
+    if request.method == 'POST':
+        body = request.get_json()
+        response = r_ctrl.add_personal_rec(user_id, body['to_user_id'], body['product_id'])
+        if response:
+            return jsonify(response), 201
+        else:
+            return "Recommendation already exists", 302
 
 @app.route('/api/events',methods=['GET'])
 def events():
