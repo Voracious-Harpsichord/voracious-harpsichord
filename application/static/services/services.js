@@ -1,16 +1,56 @@
 var services = angular.module('beautystash.services', []);
 
-// services.factory('Recs', function($http, Auth) {
+services.factory('Rec', function($http, Auth) {
+  var recommendations = {  
+    'personal': [],
+    'universal': []
+  };
 
-//   var userUniversalRecs = [];
-//   var userPersonalizedRecs = [];
+  //Get user's univeral recs
+  var loadRecs = function() {
+    return $http({
+      method: 'GET',
+      url: '/api/recommendations/' + Auth.userData.userid,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(function(resp) {
+      recommendations.personal = resp.data.personal;
+      recommendations.universal = resp.data.universal;
+      //no need to chain anything after this, just a courtesy return
+      return recommendations;
+    })
+    .catch(function(error) {
+      console.error(error);
+    });
+  };
 
-//   //Get user's univeral recs
-//   var getUniversal = function() {
-//   }
+  var addRec = function(product_id, to_user_id) {
+    return $http({
+      method: 'POST',
+      url: '/api/recommendations/' + Auth.userData.userid,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(function(resp) {
+      return resp.data; //newly added recommendation
+    })
+    .catch(function(error) {
+      console.error(error);
+    });
+  };
 
+  loadRecs();
 
-// };
+  return {
+    recommendations: recommendations,
+    loadRecs: loadRecs,
+    addRec: addRec
+  };
+
+});
 
 services.factory('User', function($http) {
   var getInfo = function(userid) {
