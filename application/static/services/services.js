@@ -127,9 +127,6 @@ services.factory('Follow', function($http, Auth) {
     }
   };
 
-  var userFollowing = {};
-  var userFollowers = {};
-
   var getUserFollowersFollowing = function(user_id) {
     if (Auth.userData.userid) {
       return $http({
@@ -140,13 +137,6 @@ services.factory('Follow', function($http, Auth) {
         }
       })
       .then(function(resp) {
-        for (key in resp.data.following) {
-          userFollowing[resp.data.following[key]] = true;
-        }
-        for (key in resp.data.followers) {
-          userFollowers[resp.data.followers[key]] = true;
-        }
-        console.log(resp.data);
         return {following: resp.data.following, followers: resp.data.followers};
       });
     }
@@ -187,8 +177,6 @@ services.factory('Follow', function($http, Auth) {
   return {
     getProfileFollowersFollowing: getProfileFollowersFollowing,
     getUserFollowersFollowing: getUserFollowersFollowing,
-    userFollowing: userFollowing,
-    userFollowers: userFollowers,
     follow: follow,
     unfollow: unfollow
   };

@@ -112,8 +112,6 @@ def followers(user_id):
     if request.method == 'POST':
         body = request.get_json()
         id_to_follow = body.get('userid')
-        print(user_id)
-        print(id_to_follow)
 
         #errors
         #make sure following real user
@@ -136,7 +134,7 @@ def followers(user_id):
     #DELETE
     if request.method == 'DELETE':
         body = request.get_json()
-        id_to_unfollow = body.get('user_id')
+        id_to_unfollow = body.get('userid')
 
         #errors
         if not u_ctrl.verify_follow(user_id, id_to_unfollow):
