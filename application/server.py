@@ -256,7 +256,10 @@ def recommendations(user_id):
 
     # 'POST' to recomendations should be triggered in other routes
 
-
+@app.route('/api/events',methods=['GET'])
+def events():
+    response = jsonify(e_ctrl.get_events())
+    return response, 200
 
 #start server
 if __name__ == "__main__":

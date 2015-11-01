@@ -48,4 +48,4 @@ def get_events():
         
         results.append(event)
 
-    return results
+    return {'events':results}
