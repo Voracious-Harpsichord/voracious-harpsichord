@@ -174,6 +174,7 @@ def userProducts(user_id):
             body['product_notes'],
             body['product_color']
         ))
+        e_ctrl.add_event(user_id, "added a product", "product", product_id)
         return response, 201
 
     if request.method == 'PUT':
@@ -212,6 +213,7 @@ def userSites(user_id):
         site_id = s_ctrl.add_or_update_site(site_info)
         response = s_ctrl.add_user_to_site(user_id, site_id, site_info['site_type'], body.get("comment"))
         if response:
+            e_ctrl.add_event(user_id, "added a " +site_info['site_type'], site_info['site_type'], site_id)
             return jsonify(response), 201
         else:
             return 'Site has already been added', 302
