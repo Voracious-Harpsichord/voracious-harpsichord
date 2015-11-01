@@ -17,10 +17,11 @@ app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
 db = SQLAlchemy(app)
 
 #db controllers
-from db_controller import user_controller as u_ctrl
+from db_controller import event_controller as e_ctrl
 from db_controller import product_controller as p_ctrl
-from db_controller import sites_controller as s_ctrl
 from db_controller import recommendation_controller as r_ctrl
+from db_controller import sites_controller as s_ctrl
+from db_controller import user_controller as u_ctrl
 #END DB SETUP
 
 @app.route('/')
@@ -173,6 +174,7 @@ def userProducts(user_id):
             body['product_notes'],
             body['product_color']
         ))
+        e_ctrl.add_event(user_id, "added a product", "product", product_id)
         return response, 201
 
     if request.method == 'PUT':
@@ -211,6 +213,7 @@ def userSites(user_id):
         site_id = s_ctrl.add_or_update_site(site_info)
         response = s_ctrl.add_user_to_site(user_id, site_id, site_info['site_type'], body.get("comment"))
         if response:
+            e_ctrl.add_event(user_id, "added a " +site_info['site_type'], site_info['site_type'], site_id)
             return jsonify(response), 201
         else:
             return 'Site has already been added', 302
@@ -253,7 +256,10 @@ def recommendations(user_id):
 
     # 'POST' to recomendations should be triggered in other routes
 
-
+@app.route('/api/events',methods=['GET'])
+def events():
+    response = jsonify(e_ctrl.get_events())
+    return response, 200
 
 #start server
 if __name__ == "__main__":
