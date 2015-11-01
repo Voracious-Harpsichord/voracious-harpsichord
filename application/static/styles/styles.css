@@ -206,6 +206,15 @@ button:focus {
     display: block;
 }
 
+.input-group-addon {
+    padding: 0;
+    border: none;
+}
+
+.search-icon {
+    border: none;
+}
+
 
 /*Home feed*/
 
@@ -328,6 +337,10 @@ button:focus {
     padding-bottom: 20px;
 }
 
+.contents {
+    padding-bottom: 10px;
+}
+
 .header{
     font-family: 'Lovelo';
     margin-bottom: 30px;
@@ -349,6 +362,16 @@ button:focus {
 .btn-block {
     margin-bottom: 15px;
     font-size: 16px;
+}
+
+.first-name-box {
+    padding-left: 0;
+    padding-right: 2.5px;
+}
+
+.last-name-box {
+    padding-left: 2.5px;
+    padding-right: 0;
 }
 
 .form-input-box {
@@ -481,18 +504,19 @@ input.ng-invalid {
     background-color: #F2F2F2;
 }
 
-.radio-buttons {
-    margin-left: 10px;
+.sites-bar {
+    border-radius: 3px;
+    border: 1px solid #afafaf;
+    margin-top: 30px;
+    height: 375px;
+    background-color: #FFF;
 }
 
 .site-button {
-    padding-left: 0;
+    padding-left: 15px;
     padding-right: 0;
 }
 
-.site-notes {
-    margin-bottom: 10px;
-}
 
 .site-error {
     margin-top: 5px;
@@ -504,7 +528,6 @@ input.ng-invalid {
     border: 1px solid #afafaf;
     border-radius: 3px;
     background-color: #FFF;
-    height: 800px;
 }
 
 #siteItem {
@@ -512,6 +535,11 @@ input.ng-invalid {
     background-color: #FFFFFF;
     margin-top: 15px;
     padding-bottom: 10px;
+}
+
+.site-content {
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .blogItemImage {
@@ -522,12 +550,23 @@ input.ng-invalid {
     margin-left: 10px;
 }
 
-.sites-bar {
-    border-radius: 3px;
-    border: 1px solid #afafaf;
-    margin-top: 30px;
-    height: 375px;
-    background-color: #FFF;
+.site-link {
+    font-size: x-large;}
+
+.site-description {
+    font-size: small;
+    padding-top: 5px;
+    padding-bottom: 15px;
+}
+
+.site-name {
+    font-size: medium;
+    padding-bottom: 15px;
+}
+
+.site-comments {
+    margin-bottom: 10px;
+    font-size: small;
 }
 
 
