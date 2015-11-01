@@ -62,11 +62,7 @@ services.factory('Feed', function($http) {
     });
   };
 
-  loadEvents() //remove console.log after testing
-  .then(function () {
-    console.log("feeds:", feeds);
-  });
-
+  loadEvents();
 
   return {
     loadEvents: loadEvents,
