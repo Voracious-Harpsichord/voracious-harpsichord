@@ -33,6 +33,19 @@ def get_products_by_user_id(user_id):
     
     return results
 
+#currently only being used by event controller
+def get_product_as_dictionary(product_id):
+    p = session.query(Product).filter(Product.id == product_id).one()
+    product = {
+        'product_id': p.id,
+        'name': p.name,
+        'brand': p.brand,
+        'category': p.category,
+        'image_url': p.image_url,
+        'description': p.description
+    }
+    return product
+
 #Get a product by product_id
 def get_product_by_product_id(product_id):
     return session.query(Product).filter(Product.id == product_id).one()

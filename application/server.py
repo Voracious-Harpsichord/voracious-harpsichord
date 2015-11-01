@@ -17,10 +17,11 @@ app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
 db = SQLAlchemy(app)
 
 #db controllers
-from db_controller import user_controller as u_ctrl
+from db_controller import event_controller as e_ctrl
 from db_controller import product_controller as p_ctrl
-from db_controller import sites_controller as s_ctrl
 from db_controller import recommendation_controller as r_ctrl
+from db_controller import sites_controller as s_ctrl
+from db_controller import user_controller as u_ctrl
 #END DB SETUP
 
 @app.route('/')

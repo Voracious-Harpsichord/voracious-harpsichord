@@ -20,7 +20,7 @@ class Product(db.Model):
         self.description = description
 
     def __repr__(self):
-        return '<product %r>' % self.product_name
+        return '<product %r>' % self.name
 
 
 class User_product(db.Model):
