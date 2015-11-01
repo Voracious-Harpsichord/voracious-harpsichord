@@ -34,6 +34,42 @@ services.factory('User', function($http) {
   };
 });
 
+services.factory('Feed', function($http) {
+  var feeds = [];
+
+  var loadEvents = function() {
+    return $http({
+      method: 'GET',
+      url: '/api/events',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(function(resp) {
+      while (feeds.length) {feeds.pop();}
+      if (resp.data.events) {
+        events = resp.data.events;
+      }
+      while (events.length) {
+        feeds.push(events.pop());
+      }
+      //nothing needs to be chained after this,
+      //just a courtesy return
+      return feeds;
+    })
+    .catch(function(error) {
+      console.error(error);
+    });
+  };
+
+  loadEvents();
+
+  return {
+    loadEvents: loadEvents,
+    feeds : feeds
+  };
+});
+
 services.factory('Follow', function($http, Auth) {
 
   var getProfileFollowersFollowing = function() {
