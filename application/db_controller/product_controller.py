@@ -13,22 +13,22 @@ from db_models.products import Product, User_product
 #Get a list of product by user_id
 def get_products_by_user_id(user_id):
     
-    product_ids = session.query(User_product).filter(User_product.user_id == user_id).all()
+    user_products = session.query(User_product).filter(User_product.user_id == user_id).all()
     
     results = []
-    for p in product_ids:
-        user_product = session.query(Product).filter(Product.id == p.product_id).one()
+    for user_product in user_products:
+        product = session.query(Product).filter(Product.id == user_product.product_id).one()
         results.append({
-            'product_id': p.id, 
-            'brand_name': user_product.brand, 
-            'product_name': user_product.name,
-            'product_category': user_product.category,
-            'product_size': p.size,
-            'product_status': p.status,
-            'product_notes': p.notes,
-            'product_color': p.color,
+            'product_id': product.id, 
+            'brand_name': product.brand, 
+            'product_name': product.name,
+            'product_category': product.category,
+            'product_size': user_product.size,
+            'product_status': user_product.status,
+            'product_notes': user_product.notes,
+            'product_color': user_product.color,
             'product_rating': user_product.stars,
-            'sephora_id': p.sephora_id
+            'sephora_id': product.sephora_id
         })
     
     return results
