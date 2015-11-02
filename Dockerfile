@@ -1,5 +1,11 @@
 FROM        python:3.5
 
+RUN         DEBIAN_FRONTEND=noninteractive \
+            apt-get -qq update && \
+            apt-get -qq install libpq-dev && \
+            apt-get -qq clean && \
+            rm -rf /var/lib/apt/lists/*
+
 RUN         useradd -m stashmeister
 
 ADD         application /home/stashmeister/application
