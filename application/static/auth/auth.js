@@ -38,13 +38,16 @@ angular.module('beautystash.auth', [])
         //Invoke signin function from Auth factory
         Auth.signin($scope.user)
         .then(function() {
+
           //Fetch user's products
           Products.getAllProducts();
           //Fetch user followers and following
           // Follow.getFollowers();
           // Follow.getFollowing();
+
           //Fetch user sites data
           Sites.getSites();
+
           //Delete password property on $scope.user
           delete $scope.user.password;
           //Transition to stash page
