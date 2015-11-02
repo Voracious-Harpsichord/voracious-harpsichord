@@ -1,13 +1,14 @@
 var home = angular.module('beautystash.home', ['infinite-scroll'])
 
-home.controller('HomeController', function($scope){
-    $scope.items = [];
-    $scope.counter = 0;
+home.controller('HomeController', function($scope, Feed){
+  $scope.items = [];
+  $scope.counter = 0;
 
-    $scope.loadMore = function () {
-        for (var i = 0; i < 15; i++) {
-            $scope.items.push(++$scope.counter);
-        };
-    }
-    $scope.loadMore();
+  $scope.loadMore = function() {
+    Feed.loadEvents()
+      .then(function(feed) {
+        $scope.items.concat(feed)
+      })
+  }
+  $scope.loadMore();
 }); 

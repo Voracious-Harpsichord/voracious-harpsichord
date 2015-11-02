@@ -1,14 +1,24 @@
+import os
+
 # Statement for enabling the development environment
 DEBUG = True
 
 # Define the application directory
-import os
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))  
 
-# Define the database - we are working with
-# SQLite for this example
-SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'app.db')
-DATABASE_CONNECT_OPTIONS = {}
+# Define the database connection URL
+if 'RDS_HOSTNAME' in os.environ:
+    # We're on AWS, so PostgreSQL
+    SQLALCHEMY_DATABASE_URI = 'postgresql://{username}:{password}@{host}:{port}/{database}'.format(
+        username=os.environ['RDS_USERNAME'],
+        password=os.environ['RDS_PASSWORD'],
+        host=os.environ['RDS_HOSTNAME'],
+        port=os.environ['RDS_PORT'],
+        database=os.environ['RDS_DB_NAME'],
+    )
+else:
+    # SQLite
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'app.db')
 
 # Application threads. A common general assumption is
 # using 2 per available processor cores - to handle

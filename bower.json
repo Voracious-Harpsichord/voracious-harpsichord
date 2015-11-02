@@ -26,6 +26,7 @@
     "fontawesome": "~4.4.0",
     "bootstrap-social": "~4.10.1",
     "angular-modal-service": "~0.6.9",
-    "angular-messages": "~1.4.7"
+    "angular-messages": "~1.4.7",
+    "angular-file-upload": "~2.2.0"
   }
 }

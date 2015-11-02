@@ -270,7 +270,7 @@ button:focus {
     color: #eee;
     text-shadow: 0 0 5px rgba(0,0,0,1);
     float: left;
-    margin-top: 180px;
+    margin-top: 160px;
     margin-left: 30px;
 }
 
@@ -608,7 +608,6 @@ input.ng-invalid {
 /* User Profile Template */
 
 .followButton {
-    margin-left: 20px;
     color: white;
     border-radius: 5px;
     font-size: 100%;

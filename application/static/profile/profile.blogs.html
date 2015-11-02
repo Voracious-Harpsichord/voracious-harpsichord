@@ -1,56 +1,58 @@
-<div class='container-fluid' id='sites'>
-  <div class='row-fluid'>
-    <div class='col-md-12'>
-      <div class='row'>
-        <div class='col-md-3 sites-bar'>
-          <tabset>
-          <!-- Search Tab -->
-          <tab heading='Search' select='addSiteModeFn(false)'>
-          </tab>
-          <!-- Add Site Tab -->
-          <tab heading='Add Blog/Article' select='addSiteModeFn(true)'>
-          <form novalidate class='simple-form' name='myForm'>
-            <div class='row'>
-              <div class='col-sm-12 form-group' ng-form>
-                <label>Comments</label><br>
-                <textarea class='form-control site-notes' rows='5' ng-model='site.comment'></textarea>
-                <label for='site-url'>Blog/Article url</label><br>
-                <input type='text' ng-model='site.url' id='site-url' class="form-control form-input-box" placeholder='Enter a blog or article' required />
-                <small class='site-error' ng-show='myForm.$invalid'>Missing blog/article url</small>
-              </div>
-            </div>
-            <div class='row'>
-              <div class='col-sm-6 col-sm-offset-5 site-button'>
-                <button class='btn' ng-click='addSite(site)'>Add blog/article</button>
-                <div class='error' ng-show='error'>{{error}}</div>
-              </div>
-            </div>
-          </form>
-          </tab>
-          </tabset>
-          <!-- Search tab scoped to sites list -->
-          <div class='col-sm-12 search-box'>
-            <input ng-hide='addSiteMode' type='text' class='form-control form-input-box' ng-model='filter' placeholder='Browse blogs and articles'/>
-          </div>
-        </div>
-        
-        <!-- Sites Lists -->
-        <div class='col-md-9 product-list'>
-          <div class='col-md-12 wrapper'>
-            <ul class='list'>
-              <h2>My Reads</h2>
-              <li class='col-sm-12' id= 'siteItem' ng-repeat='site in sites track by $index'>
-                <div class='row'>
-                  <img class='blogItemImage col-sm-4' src="{{site.image || photos/sample1.jpg}}">
-                  <div class='site-content col-sm-8'>
-                    <a class='site-link' ng-href='{{site.url}}'>{{ site.article_name || site.site_name}}</a>
-                    <div class='site-description'>{{site.description}}</div>
-                    <div class='site-name'>{{site.site_name}}</div>
-                    <div class='site-comments'>Comments: {{site.comment}}</div>
-                  </div>
+<div class="backgroundFill">
+  <div class='container' id='sites'>
+    <div class='row-fluid'>
+      <div class='col-md-12'>
+        <div class='row'>
+          <div class='col-md-3 sites-bar'>
+            <tabset>
+            <!-- Search Tab -->
+            <tab heading='Search' select='addSiteModeFn(false)'>
+            </tab>
+            <!-- Add Site Tab -->
+            <tab heading='Add Blog/Article' select='addSiteModeFn(true)'>
+            <form novalidate class='simple-form' name='myForm'>
+              <div class='row'>
+                <div class='col-sm-12 form-group' ng-form>
+                  <label>Comments</label><br>
+                  <textarea class='form-control site-notes' rows='5' ng-model='site.comment'></textarea>
+                  <label for='site-url'>Blog/Article url</label><br>
+                  <input type='text' ng-model='site.url' id='site-url' class="form-control form-input-box" placeholder='Enter a blog or article' required />
+                  <small class='site-error' ng-show='myForm.$invalid'>Missing blog/article url</small>
                 </div>
-              </li>
-            </ul>
+              </div>
+              <div class='row'>
+                <div class='col-sm-6 col-sm-offset-5 site-button'>
+                  <button class='btn' ng-click='addSite(site)'>Add blog/article</button>
+                  <div class='error' ng-show='error'>{{error}}</div>
+                </div>
+              </div>
+            </form>
+            </tab>
+            </tabset>
+            <!-- Search tab scoped to sites list -->
+            <div class='col-sm-12 search-box'>
+              <input ng-hide='addSiteMode' type='text' class='form-control form-input-box' ng-model='filter' placeholder='Browse blogs and articles'/>
+            </div>
+          </div>
+          
+          <!-- Sites Lists -->
+          <div class='col-md-9 product-list'>
+            <div class='col-md-12 wrapper'>
+              <ul class='list'>
+                <h2>My Reads</h2>
+                <li class='col-sm-12' id= 'siteItem' ng-repeat='site in sites track by $index'>
+                  <div class='row'>
+                    <img class='blogItemImage col-sm-4' src="{{site.image || photos/sample1.jpg}}">
+                    <div class='site-content col-sm-8'>
+                      <a class='site-link' ng-href='{{site.url}}'>{{ site.article_name || site.site_name}}</a>
+                      <div class='site-description'>{{site.description}}</div>
+                      <div class='site-name'>{{site.site_name}}</div>
+                      <div class='site-comments'>Comments: {{site.comment}}</div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

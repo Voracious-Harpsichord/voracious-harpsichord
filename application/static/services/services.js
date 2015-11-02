@@ -86,6 +86,7 @@ services.factory('Feed', function($http) {
       }
     })
     .then(function(resp) {
+      console.log(resp.data)
       while (feeds.length) {feeds.pop();}
       if (resp.data.events) {
         events = resp.data.events;
