@@ -1,11 +1,5 @@
 FROM        python:3.5
 
-RUN         DEBIAN_FRONTEND=noninteractive \
-            apt-get -qq update && \
-            apt-get install sqlite3 && \
-            apt-get -qq clean && \
-            rm -rf /var/lib/apt/lists/*
-
 RUN         useradd -m stashmeister
 
 ADD         application /home/stashmeister/application
