@@ -1,5 +1,4 @@
 Flask-Bcrypt==0.6.0
-Flask-Bower==1.2.1
 Flask-HTTPAuth==2.2.1
 Flask-RESTful==0.2.12
 Flask-SQLAlchemy==1.0

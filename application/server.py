@@ -1,5 +1,4 @@
 from flask import Flask, request, send_from_directory, jsonify
-from flask.ext.bower import Bower
 from flask.ext.bcrypt import Bcrypt
 from flask.ext.sqlalchemy import SQLAlchemy
 
@@ -9,7 +8,6 @@ from config import SQLALCHEMY_DATABASE_URI
 app = Flask(__name__, static_url_path='')
 
 #utilities
-bower = Bower(app)
 bcrypt = Bcrypt(app)
 
 #Config path and instantiate
