@@ -81,28 +81,28 @@ def get_article_title(html):
 def get_site_info(url):
     full_url = add_protocol(url)
     site_type = type_of(full_url)
-    source = get_host(full_url)
+    source = get_host(full_url)    
+    site = {
+        'url': full_url,
+        'site_type': site_type,
+        'site_name': source,
+        #defaults
+        'article_name': '',
+        'author_name': '',
+        'image': '',
+        'description': ''
+    }
     html = fetch_html(full_url)
-    if not html:
-        return None
-    image_ref = get_image_ref(html, full_url)
-    author = get_author(html)
-    title = get_article_title(html)
-    description = get_description(html)
-    
-    site = {}
-    site["url"] = full_url
-    site['site_type'] = site_type
-    if site_type == 'article':
-        site["site_name"] = source
-        site["article_name"] = title
-        site["author_name"] = author
+    if html:
+        image_ref = get_image_ref(html, full_url)
+        author = get_author(html)
+        title = get_article_title(html)
+        description = get_description(html)
         site["image"] = image_ref
         site["description"] = description
-    if site_type == 'blog':
-        site["site_name"] = source
-        site["image"] = image_ref
-        site["description"] = description
+        if site_type == 'article':
+            site["article_name"] = title
+            site["author_name"] = author
     return site
 
 #DB READ/WRITE
