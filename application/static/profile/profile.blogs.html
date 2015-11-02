@@ -34,13 +34,12 @@
               <input ng-hide='addSiteMode' type='text' class='form-control form-input-box' ng-model='filter' placeholder='Browse blogs and articles'/>
             </div>
           </div>
-          
           <!-- Sites Lists -->
           <div class='col-md-9 product-list'>
             <div class='col-md-12 wrapper'>
               <ul class='list'>
                 <h2>My Reads</h2>
-                <li class='col-sm-12' id= 'siteItem' ng-repeat='site in sites track by $index'>
+                <li class='col-sm-12' id= 'siteItem' ng-repeat='site in sites | filter: filter'>
                   <div class='row'>
                     <img class='blogItemImage col-sm-4' src="{{site.image || photos/sample1.jpg}}">
                     <div class='site-content col-sm-8'>
@@ -48,6 +47,10 @@
                       <div class='site-description'>{{site.description}}</div>
                       <div class='site-name'>{{site.site_name}}</div>
                       <div class='site-comments'>Comments: {{site.comment}}</div>
+                    </div>
+                    <div class='col-sm-1'>
+                        <button class='btn edit' ng-click='editProductModal(product)'>Edit</button>
+                        <button class='btn edit-x' ng-click='deleteProductModal(product)'>x</button>
                     </div>
                   </div>
                 </li>
