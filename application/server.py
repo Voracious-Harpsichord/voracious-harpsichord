@@ -4,11 +4,6 @@ from flask.ext.bcrypt import Bcrypt
 from flask.ext.sqlalchemy import SQLAlchemy
 
 from config import SQLALCHEMY_DATABASE_URI
-from db_controller import event_controller as e_ctrl
-from db_controller import product_controller as p_ctrl
-from db_controller import recommendation_controller as r_ctrl
-from db_controller import sites_controller as s_ctrl
-from db_controller import user_controller as u_ctrl
 
 # set the project root directory as the static folder, you can set others.
 app = Flask(__name__, static_url_path='')
@@ -20,6 +15,12 @@ bcrypt = Bcrypt(app)
 #Config path and instantiate
 app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
 db = SQLAlchemy(app)
+
+from db_controller import event_controller as e_ctrl
+from db_controller import product_controller as p_ctrl
+from db_controller import recommendation_controller as r_ctrl
+from db_controller import sites_controller as s_ctrl
+from db_controller import user_controller as u_ctrl
 
 @app.route('/')
 def send_index():
