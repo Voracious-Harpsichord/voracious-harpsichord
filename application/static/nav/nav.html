@@ -12,14 +12,6 @@
             <span class='navButton' ui-sref='signin'>Log In</span>
             <span class='navButton' ui-sref='signup'>Sign Up</span>
             <span class='navButton' ui-sref='about'>About</span>
-<!--             <span class="searchFocal input-group">
-                <input type="text" class="form-control" id ='search-box' placeholder="Search for...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">
-                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                    </button>
-                </span>
-            </span> -->
         </nav>
         <nav class='navBackground nav navbar-fixed-top' ng-hide="!showContent">
             <span class='navNameScroll' ui-sref='home'>BeautyStash</span>
@@ -40,8 +32,8 @@
     <!-- Navigation bar for logged in user -->
     <nav class='homePostAuth navbar navbar-fixed-top' ng-switch-when='true'>
         <span  class='navAuthNameScroll' ui-sref='home'>BeautyStash</span>
-        <span class='navButtonScrollAuth glyphicon glyphicon-star-empty' id ='nav-star' ui-sref='profile.wishlist'></span>
         <span  class='navButtonScrollAuth' ui-sref='home'>Discover</span>
+        <span class='navButtonScrollAuth glyphicon glyphicon-star-empty' id ='nav-star' ui-sref='profile.wishlist'></span>
         <span class='navButtonScrollAuth' ui-sref='profile.stash'>My Stash</span>
         <span class="navButtonScrollAuth dropdown">
             <button class="nameButton dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ui-sref='profile.stash'>

@@ -67,6 +67,10 @@ button:focus {
     background-color: transparent;
 }
 
+.backgroundFill {
+    background-color: #F2F2F2;
+}
+
 /*No Auth Opening Page*/
 
 .homeImage {
@@ -262,7 +266,7 @@ button:focus {
 }
 
 .profileInfo {
-    font-family: 'Lovelo';
+    font-family: 'Roboto Slab Light', serif;
     color: #eee;
     text-shadow: 0 0 5px rgba(0,0,0,1);
     float: left;
@@ -270,8 +274,14 @@ button:focus {
     margin-left: 30px;
 }
 
+.profileInfo span {
+    font-size: 30px;
+    font-family: 'Roboto Slab Light', serif;
+}
+
 .profileInfo h5 {
-    font-size: 16px;
+    font-size: 18px;
+    font-family: 'Roboto Slab Light', serif;
 }
 
 .dashboardTabs {
@@ -593,4 +603,15 @@ input.ng-invalid {
     border-radius: 150px;
     -webkit-border-radius: 150px;
     -moz-border-radius: 150px
+}
+
+/* User Profile Template */
+
+.followButton {
+    color: white;
+    border-radius: 5px;
+    font-size: 100%;
+    padding:5px;
+    background-color: #707175;
+    border:1px solid #707175;
 }

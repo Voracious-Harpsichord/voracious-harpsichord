@@ -5,7 +5,7 @@
       <div ng-repeat='user in profileFollowing'>
         <div class='col-md-10 following'>
           <!-- <img class='userProfilePic' ng-src="{{user.profilePic}}" alt="Description"/> -->
-          <div class='user-name' ui-sref="user({userId: {{user.userid}}})">{{user.name_first}} {{user.name_last}}</div>
+          <div class='user-name' ui-sref="user.stash({userId: {{user.userid}}})">{{user.name_first}} {{user.name_last}}</div>
         </div>
       </div>
     </div>
@@ -14,7 +14,7 @@
   <div ng-repeat='user in profileFollowers'>
     <div class='col-md-10 follower'>
       <!-- <img class='userProfilePic' ng-src="{{user.profilePic}}" alt="Description"/> -->
-      <div class='user-name'>{{user.name_first}} {{user.name_last}}</div>
+      <div class='user-name' ui-sref="user.stash({userId: {{user.userid}}})">{{user.name_first}} {{user.name_last}}</div>
     </div>
   </div>
 

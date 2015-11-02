@@ -86,6 +86,7 @@ services.factory('Feed', function($http) {
       }
     })
     .then(function(resp) {
+      console.log(resp.data)
       while (feeds.length) {feeds.pop();}
       if (resp.data.events) {
         events = resp.data.events;
@@ -127,9 +128,6 @@ services.factory('Follow', function($http, Auth) {
     }
   };
 
-  var userFollowing = {};
-  var userFollowers = {};
-
   var getUserFollowersFollowing = function(user_id) {
     if (Auth.userData.userid) {
       return $http({
@@ -140,13 +138,6 @@ services.factory('Follow', function($http, Auth) {
         }
       })
       .then(function(resp) {
-        for (key in resp.data.following) {
-          userFollowing[resp.data.following[key]] = true;
-        }
-        for (key in resp.data.followers) {
-          userFollowers[resp.data.followers[key]] = true;
-        }
-        console.log(resp.data);
         return {following: resp.data.following, followers: resp.data.followers};
       });
     }
@@ -187,8 +178,6 @@ services.factory('Follow', function($http, Auth) {
   return {
     getProfileFollowersFollowing: getProfileFollowersFollowing,
     getUserFollowersFollowing: getUserFollowersFollowing,
-    userFollowing: userFollowing,
-    userFollowers: userFollowers,
     follow: follow,
     unfollow: unfollow
   };
@@ -370,6 +359,9 @@ services.factory('Auth', function($http) {
       userData.loggedIn = true;
       //Use substring to get year
       userData.created_at = userData.created_at.substring(0, 4);
+      if (userData.location === '') {
+        userData.location === 'Elsewhere'
+      }
       return resp;
     });
   };
@@ -387,6 +379,9 @@ services.factory('Auth', function($http) {
       userData.loggedIn = true;
       //Use substring to get year
       userData.created_at = userData.created_at.substring(0, 4);
+      if (userData.location === '') {
+        userData.location === 'Elsewhere'
+      }
       return resp.data;
     });
   };

@@ -5,12 +5,15 @@ var user = angular.module('beautystash.user', [
   'ngMessages'
 ]);
 
-user.controller('UserController', function($scope, $window, $stateParams, User, Products, Follow) {
+user.controller('UserController', function($scope, $window, $stateParams, User, Products, Follow, Auth) {
   $scope.userId = $stateParams.userId
   $scope.user;
   $scope.userProducts;
   $scope.userFollowing;
   $scope.userFollowers;
+  $scope.membershipYear;
+  $scope.location;
+  $scope.following = false
 
   $scope.tabs = [
     {name: 'Stash', path: 'stash'},
@@ -26,6 +29,7 @@ user.controller('UserController', function($scope, $window, $stateParams, User, 
       .then(function(data) {
         $scope.user = data.user;
         $scope.userProducts = data.userProducts;
+        $scope.membershipYear = $scope.user.created_at.substring(0, 4);
       })
       .catch(function(error) {
         console.error(error)
@@ -37,6 +41,11 @@ user.controller('UserController', function($scope, $window, $stateParams, User, 
       .then(function(data) {
         $scope.userFollowing = data.following;
         $scope.userFollowers = data.followers;
+        for (var i=0; i < $scope.userFollowers.length; i++) {
+          if ($scope.userFollowers[i].userid === Auth.userData.userid) {
+            $scope.following = true
+          }
+        }
       })
       .catch(function(error) {
         console.error(error)
@@ -49,7 +58,8 @@ user.controller('UserController', function($scope, $window, $stateParams, User, 
   $scope.follow = function(user) {
     Follow.follow(user)
       .then(function(user) {
-        console.log('success')
+        $scope.userFollowers.push(Auth.userData)
+        $scope.following = true
       })
       .catch(function(error) {
         console.error('Error with following user:', error);
@@ -59,9 +69,7 @@ user.controller('UserController', function($scope, $window, $stateParams, User, 
   $scope.unfollow = function(user) {
     Follow.unfollow(user)
       .then(function(resp) {
-        $scope.following.filter(function(userObject) {
-          return userObject.userid !== resp.data.user_id;
-        });
+        $scope.following = false
       })
       .catch(function(error) {
         console.error('Error with unfollowing user:', error);

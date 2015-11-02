@@ -1,28 +1,24 @@
 from flask import Flask, request, send_from_directory, jsonify
-from flask.ext.bower import Bower
 from flask.ext.bcrypt import Bcrypt
+from flask.ext.sqlalchemy import SQLAlchemy
+
+from config import SQLALCHEMY_DATABASE_URI
+
 # set the project root directory as the static folder, you can set others.
 app = Flask(__name__, static_url_path='')
 
 #utilities
-bower = Bower(app)
 bcrypt = Bcrypt(app)
-
-#BEGIN DB SETUP
-from flask.ext.sqlalchemy import SQLAlchemy
-from config import SQLALCHEMY_DATABASE_URI
 
 #Config path and instantiate
 app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
 db = SQLAlchemy(app)
 
-#db controllers
 from db_controller import event_controller as e_ctrl
 from db_controller import product_controller as p_ctrl
 from db_controller import recommendation_controller as r_ctrl
 from db_controller import sites_controller as s_ctrl
 from db_controller import user_controller as u_ctrl
-#END DB SETUP
 
 @app.route('/')
 def send_index():
@@ -112,8 +108,6 @@ def followers(user_id):
     if request.method == 'POST':
         body = request.get_json()
         id_to_follow = body.get('userid')
-        print(user_id)
-        print(id_to_follow)
 
         #errors
         #make sure following real user
@@ -136,7 +130,7 @@ def followers(user_id):
     #DELETE
     if request.method == 'DELETE':
         body = request.get_json()
-        id_to_unfollow = body.get('user_id')
+        id_to_unfollow = body.get('userid')
 
         #errors
         if not u_ctrl.verify_follow(user_id, id_to_unfollow):
@@ -271,4 +265,4 @@ def events():
 
 #start server
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=8080, debug=True)
