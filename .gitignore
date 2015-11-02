@@ -2,7 +2,8 @@
 *.DS_Store
 
 #database file
-application/app.db*
+*.db
+*.sqlite
 
 #compiled python files
 *.pyc

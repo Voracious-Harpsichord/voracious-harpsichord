@@ -1,0 +1,6 @@
+.gitignore
+.gitattributes
+.editorconfig
+.bowerrc
+*.md
+*.sqlite

@@ -18,7 +18,7 @@ if 'RDS_HOSTNAME' in os.environ:
     )
 else:
     # SQLite
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'app.db')
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'app.sqlite')
 
 # Application threads. A common general assumption is
 # using 2 per available processor cores - to handle
