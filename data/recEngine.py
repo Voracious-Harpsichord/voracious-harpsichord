@@ -3,9 +3,6 @@
 # or productid : [userid, ratings]
 import time
 import json
-
-from db_controller import recommendation_controller as r_ctrl
-
 def similarityIndex1(user1,user2):
 	# get all products that users like
 	L1 = set()
@@ -79,62 +76,39 @@ def prob_user_likes_product(product,users_who_like,users_who_dislike):
 
 # perform lookups on these
 # prodID = 'P215930'
-# main function call
-
-def find_prob(user_id):
+def find_prob(productNum,current_user_id):
 
 	# 1885																																										
 	# fetch user from database																																																		
-	all_prod_likes_file = open('../data/number_all_prod_likes.json','r')
+
+
+	all_prod_likes_file = open('number_all_prod_likes.json','r')
 	all_prod_likes = json.loads(all_prod_likes_file.read())
 	all_prod_likes_file.close()
 
-	all_users_file = open('../data/number_all_user_reviews.json','r')
+	all_users_file = open('number_all_user_reviews.json','r')
 	all_users = json.loads(all_users_file.read())
 	all_users_file.close()
 	counter = 0
+	current_user = all_users[str(current_user_id)]
 
-	# ******** fetch user info from database *********
-	from db_controller import user_controller as u_ctrl
-	user_info = u_ctrl.get_user_as_dictionary(user_id)
-
-	from db_controller import product_controller as p_ctrl
-	products = p_ctrl.get_products_by_user_id(user_id)
-
-	# age processing
-	birthday = user_info['age']
-	from datetime import date
-	age = date.today().year - birthday[0:4]
-
-	current_user = {
-		'age':age,
-		'location':user_info['location'],
-		'skin_tone':user_info['skin_tone'],
-		'reviews':[]
-	}
-	# 'reviews':[{'rating':1,'productID':'sephorid'}]
-	# ********* built up current user from db fetch **************
-	for product in products:
-		current_user['reviews'].append({
-			'rating':product['product_rating'],
-			'productID':product['sephora_id']
-			})
-
-	# ******** fetch products ids to check against from file **********
 	productIDs = []
 	for prod in all_prod_likes:
 		counter +=1
 		productIDs.append(prod)
-		if counter > 1100:
-				break
 		# if counter > 11004:
-		# 	break
-		# if counter > productNum:
+		if counter > productNum:
+			break
 
+	storage = {}
 	# keep store here
+	# max_value = (0,0)
+	# max_value2 = (0,0)
+	# max_value3 = (0,0)
+	# max_value4 = (0,0)
+	# max_value5 = (0,0)
 	res = [(0,0),(0,0),(0,0),(0,0),(0,0)]
 
-	# iterate over specified prodicts and return probability values
 	for productID in productIDs:
 		prod_like_ref = all_prod_likes[productID]
 		user_prod_likes = prod_like_ref['L']
@@ -161,7 +135,6 @@ def find_prob(user_id):
 
 		probability = prob_user_likes_product(productID,storage_like_simIndex,storage_dislike_simIndex)
 
-		# select maximum values algo
 		nextTupl = False
 		for index,tupl in enumerate(res):
 			# cascade change
@@ -172,21 +145,13 @@ def find_prob(user_id):
 			elif probability>tupl[0]:
 				nextTupl = res[index]
 				res[index] = (probability,productID)
+		# if probability > max_value[1]:
+			# max_value = (productID,probability)
 
 		storage[productID] = probability
 
 	#return top 5 in a tuple
-	print(res)
-	# unpack and push to db
-	for index,tupl in enumerate(res):
-		rank = index+1
-		product_id = tupl[1]
-		user_id = current_user_id
-		# save to database
-		# make sure this saves the other id, not the sephora id
-		db_product = p_ctrl.get_product_by_sephora_product_id(sephora_product_id)
-		res = r_ctrl.add_recommendation(user_id, db_product, rank)
-		print(res)
+	return res
 
 
 # print(productIDs)

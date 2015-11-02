@@ -50,6 +50,11 @@ def get_product_as_dictionary(product_id):
 def get_product_by_product_id(product_id):
     return session.query(Product).filter(Product.id == product_id).one()
 
+
+#Get a product by product_id
+def get_product_by_sephora_product_id(sephora_product_id):
+    return session.query(Product).filter(Product.sephora_id == sephora_product_id).one()
+
 #Verify if a product exists by name and brand and return the product_id or None
 def verify_product_by_name_and_brand(product_name, product_brand):
     q = session.query(Product).filter(Product.name == product_name, Product.brand == product_brand)
