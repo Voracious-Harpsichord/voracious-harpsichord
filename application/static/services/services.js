@@ -26,13 +26,14 @@ services.factory('Rec', function($http, Auth) {
     });
   };
 
-  var addRec = function(product_id, to_user_id) {
+  var addRec = function(rec) {
     return $http({
       method: 'POST',
       url: '/api/recommendations/' + Auth.userData.userid,
       headers: {
         'Content-Type': 'application/json'
-      }
+      },
+      data: rec
     })
     .then(function(resp) {
       return resp.data; //newly added recommendation
@@ -157,46 +158,6 @@ services.factory('Follow', function($http, Auth) {
     unfollow: unfollow
   };
 });
-
-// services.factory('Recs', function($http, Auth) {
-
-//   var userUniversalRecs = [];
-//   var userPersonalizedRecs = [];
-
-//   //Get user's univeral recs
-//   var getUniversal = function() {
-//     //check if userid exists first
-//     if (Auth.userData.userid) {
-//       //Send GET request to /api/recommendations/<user_id>
-//     return $http({
-//       method: 'GET',
-//       url: '/api/recommendations/' + Auth.userid,
-//       headers: {
-//         'Content-Type': 'application/json'
-//       }
-//     })
-//     .then(function(resp) {
-//       //resp.data is object of objects
-//       //resp.data = {
-//       //   '1': {}, <-- look at product object
-//       //   '2': {},
-//       //   '3': {},
-//       //   '4': {},
-//       //   '5': {}
-//       // }
-//       while(userUniversalRecs.length) {userUniversalRecs.pop();}
-//       for (var key in resp.data) {
-//         userUniversalRecs.push(resp.data[key]);
-//       }
-//       return resp.data;
-//     })
-//     .catch(function(error) {
-//       console.error(error);
-//     });
-//   };
-
-
-// };
 
 services.factory('Sites', function($http, Auth) {
 
