@@ -9,6 +9,7 @@ RUN         DEBIAN_FRONTEND=noninteractive \
 RUN         useradd -m stashmeister
 
 ADD         application /home/stashmeister/application
+ADD         application/static/bower_components /home/stashmeister/application/static/bower_components
 ADD         data /home/stashmeister/data
 ADD         bower.json requirements.txt /home/stashmeister/
 
