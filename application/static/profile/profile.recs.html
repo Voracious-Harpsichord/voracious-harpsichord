@@ -9,20 +9,20 @@
       <tab heading='Personal' select='addSiteModeFn(true)'>
       <div class='col-md-12 wrapper'>
         <ul class='list'>
-          <h2>Recommended for You by Friends</h2>
-          <li class='col-sm-12 product-item' ng-repeat='product in products | myStashFilter | filter : filter'>
+          <h2>Recommended to You by Friends</h2>
+          <li class='col-sm-12 product-item' ng-repeat='personalRec in personalRecs'>
             <img class='productImage col-sm-3' src="photos/sample1.jpg">
             <div class='col-sm-8 product-content'>
-              <div class='product-brand'>{{product.brand_name}}</div>
-              <span class='product-name'>{{product.product_name}}</span><br>
-              <span>{{product.product_category}}</span>
-              <span>{{product.product_size}}</span>
-              <span>{{product.product_status}}</span><br>
-              <span>{{product.product_color}}</span>
-              <span>Notes: {{product.product_notes}}</span>
+              <div class='product-brand'>{{personalRec.brand_name}}</div>
+              <span class='product-name'>{{personalRec.product_name}}</span><br>
+              <span>{{personalRec.product_category}}</span>
+              <span>{{personalRec.product_size}}</span>
+              <span>{{personalRec.product_status}}</span><br>
+              <span>{{personalRec.product_color}}</span>
+              <span>Message: {{personalRec.message}}</span>
             </div>
             <div class='col-sm-1'>
-              <button class='btn edit' ng-click='addProduct(newProduct)'>Add to wishlist</button>
+              <button class='btn edit' ng-click='addProduct(recommendation)'>Add to wishlist</button>
             </div>
           </li>
         </ul>
@@ -30,22 +30,21 @@
       </tab>
       </tabset>
       <!-- Universal tab -->
-      <div class='col-md-12 wrapper'>
+      <div ng-hide='addSiteMode' class='col-md-12 wrapper'>
         <ul class='list'>
           <h2>Recommended for You</h2>
-          <li class='col-sm-12 product-item' ng-repeat='product in products | finishedFilter | filter : filter'>
+          <li class='col-sm-12 product-item' ng-repeat='universalRec in universalRecs'>
             <img class='productImage col-sm-3' src="photos/sample1.jpg">
             <div class='col-sm-8 product-content'>
-              <div class='product-brand'>{{product.brand_name}}</div>
-              <span class='product-name'>{{product.product_name}}</span><br>
-              <span>{{product.product_category}}</span>
-              <span>{{product.product_size}}</span>
-              <span>{{product.product_status}}</span><br>
-              <span>{{product.product_color}}</span>
-              <span>Notes: {{product.product_notes}}</span>
+              <div class='product-brand'>{{universalRec.brand_name}}</div>
+              <span class='product-name'>{{universalRec.product_name}}</span><br>
+              <span>{{universalRec.product_category}}</span>
+              <span>{{universalRec.product_size}}</span>
+              <span>{{universalRec.product_status}}</span><br>
+              <span>{{universalRec.product_color}}</span>
             </div>
             <div class='col-sm-1'>
-              <button class='btn edit' ng-click='addProduct(newProduct)'>Add to wishlist</button>
+              <button class='btn edit' ng-click='addProduct(universalRec)'>Add to wishlist</button>
             </div>
           </li>
         </ul>
