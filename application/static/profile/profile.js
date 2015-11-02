@@ -5,8 +5,8 @@ var stash = angular.module('beautystash.profile', [
   'ngMessages'
 ]);
 
-stash.controller('ProfileController', function ($scope, $window, Products, Follow, Sites, $stateParams, Auth, ModalService) {
-
+stash.controller('ProfileController', function ($scope, $window, Products, Follow, Rec, Sites, $stateParams, Auth, ModalService) {
+  //General variables
   $scope.user = Auth.userData;
   $scope.products = Products.userProducts;
 
@@ -40,6 +40,9 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
     $scope.newProduct.product_status = null;
     $scope.newProduct.product_category = null;
     $scope.error = null;
+    $scope.recommendation.brand_name = null;
+    $scope.recommendation.product_name = null;
+    $scope.recommendation.comment = null;
     $scope.site.url = null;
     $scope.site.comment = null;
   };
@@ -159,6 +162,23 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
 
   getFollowersFollowing();
 
+  //Recommendations Controller
+
+  $scope.universalRecs = Rec.recommendations.univeral;
+  $scope.personalRecs = Rec.recommendations.personal;
+
+  $scope.recommendation = {
+    product_id: null,
+    product_name: null,
+    brand_name: null,
+    message: null
+  };
+
+  //Function to recommend product to friend
+  $scope.recommend = function(recommendation) {
+    Rec.addRec(recommendation);
+  };
+
   //Blogs and Article Variable and Controllers
 
   $scope.sites = Sites.userSites;
@@ -166,9 +186,6 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
 
   $scope.addSiteModeFn = function(bool) {
     $scope.addSiteMode = bool;
-    // if ($scope.addSiteMode === true) {
-    //   $scope.filter = '';
-    // }
   };
 
   $scope.addSite = function(site) {
