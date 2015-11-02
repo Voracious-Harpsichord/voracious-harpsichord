@@ -202,8 +202,6 @@ def userSites(user_id):
         body = request.get_json()
         url = body["url"]
         site_info = s_ctrl.get_site_info(url)
-        if not site_info:
-            return "Bad Link", 404            
         site_id = s_ctrl.add_or_update_site(site_info)
         response = s_ctrl.add_user_to_site(user_id, site_id, site_info['site_type'], body.get("comment"))
         if response:
