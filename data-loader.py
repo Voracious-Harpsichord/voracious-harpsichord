@@ -69,5 +69,8 @@ if __name__ == '__main__':
     jsonProducts.close()
 
     for p in products:
-        # name,             brand,      category='', price='', sephora_id='', image_url='', description=''
-        add_product_to_products(p.get('display_name', ''), p.get('brand_name',''), '', 0, p.get('id', ''), '', p.get('quick_look_desc', ''))
+        image_url = p.get('logo_path','')
+        if image_url:
+            image_url = "http://www.sephora.com" + image_url
+                                # name,                 brand,    category='', price='', sephora_id='', image_url='', description=''
+        add_product_to_products(p.get('display_name', ''), p.get('brand_name',''), '', 0, p.get('id', ''), image_url, p.get('quick_look_desc', ''))
