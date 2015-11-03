@@ -41,14 +41,14 @@
                 <h2>My Reads</h2>
                 <li class='col-sm-12' id= 'siteItem' ng-repeat='site in sites | filter: filter'>
                   <div class='row'>
-                    <img class='blogItemImage col-sm-4' src="{{site.image || photos/sample1.jpg}}">
-                    <div class='site-content col-sm-8'>
+                    <img class='blogItemImage col-sm-4' src="{{site.image}}">
+                    <div class='site-content col-sm-7'>
                       <a class='site-link' ng-href='{{site.url}}'>{{ site.article_name || site.site_name}}</a>
                       <div class='site-description'>{{site.description}}</div>
                       <div class='site-name'>{{site.site_name}}</div>
                       <div class='site-comments'>Comments: {{site.comment}}</div>
                     </div>
-                    <div class='col-sm-1'>
+                    <div class='col-sm-1 edit-btns'>
                         <button class='btn edit' ng-click='editProductModal(product)'>Edit</button>
                         <button class='btn edit-x' ng-click='deleteProductModal(product)'>x</button>
                     </div>
