@@ -109,7 +109,6 @@ def find_prob(user_id):
 	products = p_ctrl.get_products_by_user_id(user_id)
 
 	# age processing
-	# print(user_info)
 	if user_info['birthday'] != '':
 		birthday = user_info['birthday']
 		from datetime import date
@@ -123,7 +122,6 @@ def find_prob(user_id):
 		'skin_tone':user_info['skin_tone'],
 		'reviews':[]
 	}
-	print(current_user)
 	# 'reviews':[{'rating':1,'productID':'sephorid'}]
 	# ********* built up current user from db fetch **************
 	for product in products:
@@ -158,7 +156,6 @@ def find_prob(user_id):
 		for name in user_prod_likes:
 			# name = str(name)
 			b = str(name)
-			# print(b)
 			user = all_users[b]
 			index = compoundSimilarityIndex(current_user,user)
 			storage_like_simIndex[b] = index
@@ -166,7 +163,6 @@ def find_prob(user_id):
 		for name in user_prod_dislikes:
 			# name = str[name]python3
 			b = str(name)
-			# print(b)
 			user = all_users[b]
 			index = compoundSimilarityIndex(current_user,user)
 			storage_dislike_simIndex[b] = index
@@ -188,7 +184,7 @@ def find_prob(user_id):
 		storage[productID] = probability
 
 	#return top 5 in a tuple
-	print(res)
+	# print(res)
 	# unpack and push to db
 	r_ctrl.remove_recommendation(user_id)
 	# remove all recommendations from db
@@ -197,14 +193,11 @@ def find_prob(user_id):
 		sephora_product_id = tupl[1]
 		# save to database
 		# make sure this saves the other id, not the sephora id
-		print(sephora_product_id)
 		product_id = p_ctrl.get_product_id_by_sephora_product_id(sephora_product_id)
-		print(product_id)
 		# product = p_ctrl.get_product_as_dictionary(product_id)
 		res = r_ctrl.add_recommendation(user_id, product_id, rank)
-		print(res)
 
-
+	print res
 # print(productIDs)
 # start = time.clock()
 # probs  = find_prob(productIDs,current_user)
