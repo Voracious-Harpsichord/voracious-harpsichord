@@ -157,8 +157,8 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
       .then(function(data) {
         $scope.profileFollowing = data.following;
         $scope.profileFollowers = data.followers;
-      })
-  }
+      });
+  };
 
   getFollowersFollowing();
 
@@ -171,11 +171,16 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
     product_id: null,
     product_name: null,
     brand_name: null,
-    message: null
+    product_size: null,
+    product_status:null,
+    product_message: null,
+    product_color: null,
+    product_category: null
   };
 
   //Function to recommend product to friend
   $scope.recommend = function(recommendation) {
+    console.log(recommendation);
     Rec.addRec(recommendation);
   };
 
@@ -191,6 +196,9 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
   $scope.addSite = function(site) {
     Sites.addSite(site)
       .then(function(addedSite) {
+        console.log(addedSite);
+        addedSite.description = addedSite.description || 'Into The Gloss - Beauty Tips, Trends, And Product Reviews';
+        addedSite.image = addedSite.image || 'photos/sample1.jpg';
         $scope.sites.push(addedSite);
         resetFields();
       })
