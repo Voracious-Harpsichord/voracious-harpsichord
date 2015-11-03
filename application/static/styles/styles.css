@@ -219,30 +219,6 @@ button:focus {
     border: none;
 }
 
-
-/*Home feed*/
-
-.feed {
-    background-color: #F2F2F2;
-    margin-top: 50px;
-}
-
-.feedItem {
-    height: 390px;
-    width: 1050px;
-    border: 1px solid #707175;
-    background-color: #FFFFFF;
-    margin-top: 15px;
-}
-
-.feedItemImage {
-    height: 350px;
-    width:350px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-left: 20px;
-}
-
 /*Stash and Profile*/
 
 .profileMainPhoto {
@@ -491,6 +467,7 @@ input.ng-invalid {
     font-size: 12px;
     padding: 2px 5px;
     margin-top: 10px;
+    display:inline;
 }
 
 .edit-x {
@@ -498,6 +475,7 @@ input.ng-invalid {
     padding: 2px 5px;
     margin-left: 20px;
     margin-top: 10px;
+    display:inline;
 }
 
 .productImage {
@@ -615,4 +593,47 @@ input.ng-invalid {
     padding:5px;
     background-color: #707175;
     border:1px solid #707175;
+}
+
+/*Home feed*/
+
+.feed {
+    background-color: #F2F2F2;
+    margin-top: 60px;
+}
+
+.feedItem {
+    border: 1px solid #707175;
+    background-color: #FFFFFF;
+    margin-top: 20px;
+    height: 400px;
+}
+
+.feedItemImage {
+    float: left;
+    height: 350px;
+    width:350px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-left: 25px;
+}
+
+.feedUserName {
+
+}
+
+.feedTypeListing {
+
+}
+
+.feedHeading {
+
+}
+
+.feedSubheading1 {
+
+}
+
+.feedSubheading2 {
+
 }

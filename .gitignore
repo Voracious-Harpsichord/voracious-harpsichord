@@ -14,5 +14,4 @@
 .env
 
 # production folders
-
-./application/static/bower_components
+bower_components

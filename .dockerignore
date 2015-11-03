@@ -1,6 +1,6 @@
-.gitignore
-.gitattributes
-.editorconfig
-.bowerrc
 *.md
 *.sqlite
+.editorconfig
+.gitattributes
+.gitignore
+bower_components
