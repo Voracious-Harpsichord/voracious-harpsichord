@@ -95,13 +95,29 @@ class ServerTestCase(unittest.TestCase):
 
     #RECOMMENDATIONS (/recommendations)
     def test_5_reccomendations(self):
+        #more mock-up products to be reccomended
+        self.app.post('/api/userProducts/1',content_type='application/json',data=json.dumps({'product_name': 'a','brand_name': 'a','product_category': '','product_size': '','product_status': '','product_notes': '','product_color': ''}))
+        self.app.post('/api/userProducts/1',content_type='application/json',data=json.dumps({'product_name': 'b','brand_name': 'b','product_category': '','product_size': '','product_status': '','product_notes': '','product_color': ''}))
+        self.app.post('/api/userProducts/1',content_type='application/json',data=json.dumps({'product_name': 'c','brand_name': 'c','product_category': '','product_size': '','product_status': '','product_notes': '','product_color': ''}))
+        self.app.post('/api/userProducts/1',content_type='application/json',data=json.dumps({'product_name': 'd','brand_name': 'd','product_category': '','product_size': '','product_status': '','product_notes': '','product_color': ''}))
+        self.app.post('/api/userProducts/1',content_type='application/json',data=json.dumps({'product_name': 'e','brand_name': 'e','product_category': '','product_size': '','product_status': '','product_notes': '','product_color': ''}))
+
+        self.app.post('/api/newUser',
+            content_type='application/json',
+            data=json.dumps({'username': 'test3','password': 'test3'}))
+
         #should have default recomendations
-        rv = self.app.get('api/recomendations/1', content_type='application/json')
+        rv = self.app.get('api/recomendations/3', content_type='application/json')
         assert len(json.loads(rv.data.decode())['universal']) > 0
 
         #should be able to reccomend
+        self.app.post('api/recomendations/3',
+            content_type='application/json',
+            data=json.dumps({'to_user_id': 2, 'product_id':1}))
 
         #should be able view reccomended products
+        rv = self.app.get('api/recomendations/2', content_type='application/json')
+        assert len(json.loads(rv.data.decode())['personal']) > 1
 
     #NEWS FEED (/events)
     def test_6_feed(self):
