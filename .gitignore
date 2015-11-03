@@ -15,3 +15,4 @@
 
 # production folders
 
+./application/static/bower_components
