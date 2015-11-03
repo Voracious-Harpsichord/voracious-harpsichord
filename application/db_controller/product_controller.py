@@ -157,6 +157,12 @@ def edit_user_to_product(user_id, product_id, size='full', status='own', notes='
         'product_image_url': product_universal.image_url
     }
 
+def get_notes(user_id, product_id):
+    try:
+        return session.query(User_product).filter(User_product.id == user_id, User_product.product_id == product_id).one().notes
+    except:
+        return ""
+
 #Delete a relationship between user and product
 def remove_user_from_product(product_id):
     session.delete(session.query(User_product).filter(User_product.id == product_id).one())
