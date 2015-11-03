@@ -88,15 +88,8 @@ def newUser():
         #add session-cookie to response
         response = u_ctrl.create_session(response, user_id)
         #return user object with a 201
-
-        # *************** Trigger recs ****************
         # when creating a new user save some mock recommendations
         r_ctrl.populate_new_user_recommendations(user_id)
-        # also trigger async worker after this happens
-        # pass in as an array
-        from workers import work_queue
-        from workers import recEngine
-        recEngine.find_prob(user_id)
         # work_queue.enqueue("find_prob",[user_id])
 
         return response, 201

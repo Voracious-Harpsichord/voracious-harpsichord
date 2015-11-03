@@ -24,8 +24,6 @@ def get_recommendation_by_user_id(user_id):
     return results
     
 
-
-
 def add_recommendation(user_id, product_id, rank):
     recommendation = Recommendation(user_id,product_id,rank)
     session.add(recommendation)
