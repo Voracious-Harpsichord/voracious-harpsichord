@@ -20,6 +20,9 @@ from db_controller import recommendation_controller as r_ctrl
 from db_controller import sites_controller as s_ctrl
 from db_controller import user_controller as u_ctrl
 
+# async jobs
+from workers import work_queue
+
 @app.route('/')
 def send_index():
     return send_from_directory('static', 'index.html')
@@ -85,6 +88,10 @@ def newUser():
         #add session-cookie to response
         response = u_ctrl.create_session(response, user_id)
         #return user object with a 201
+        # when creating a new user save some mock recommendations
+        r_ctrl.populate_new_user_recommendations(user_id)
+        # work_queue.enqueue("find_prob",[user_id])
+
         return response, 201
     #else return a 302 for Found
     else:
