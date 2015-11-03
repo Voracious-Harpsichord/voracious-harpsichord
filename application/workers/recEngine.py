@@ -40,6 +40,7 @@ def similarityIndex2(user1,user2):
 	c3=0.4
 	summ = 0
 
+	# print(user2)
 	if 'location' in user1:
 		if (user1['location'] != ''):
 			if (user1['location'] == user2['location']):
@@ -49,8 +50,14 @@ def similarityIndex2(user1,user2):
 			if (user1['skin_tone'] == user2['skin_tone']):
 				summ+=c2
 	if 'age' in user1:
-		if (user1['age'] != ''):
-			if (user1['age'] == user2['age']):
+		if (user1['age'] != '' and user2['age'] != ''):
+			if user2['age'] == 'over 54':
+				ageboundary2 = 999
+				ageboundary1 = 54
+			else:
+				ageboundary1 = int(user2['age'][:2])
+				ageboundary2 = int(user2['age'][-2:])
+			if ( user1['age']>ageboundary1 and user1['age']<ageboundary2):
 				summ+=c3
 	return summ/3
 
@@ -102,9 +109,13 @@ def find_prob(user_id):
 	products = p_ctrl.get_products_by_user_id(user_id)
 
 	# age processing
-	birthday = user_info['age']
-	from datetime import date
-	age = date.today().year - birthday[0:4]
+	# print(user_info)
+	if user_info['birthday'] != '':
+		birthday = user_info['birthday']
+		from datetime import date
+		age = int(date.today().year) - int(birthday[0:4])
+	else: 
+		age = None
 
 	current_user = {
 		'age':age,
@@ -112,6 +123,7 @@ def find_prob(user_id):
 		'skin_tone':user_info['skin_tone'],
 		'reviews':[]
 	}
+	print(current_user)
 	# 'reviews':[{'rating':1,'productID':'sephorid'}]
 	# ********* built up current user from db fetch **************
 	for product in products:
@@ -133,7 +145,7 @@ def find_prob(user_id):
 
 	# keep store here
 	res = [(0,0),(0,0),(0,0),(0,0),(0,0)]
-
+	storage={}
 	# iterate over specified prodicts and return probability values
 	for productID in productIDs:
 		prod_like_ref = all_prod_likes[productID]
@@ -178,14 +190,18 @@ def find_prob(user_id):
 	#return top 5 in a tuple
 	print(res)
 	# unpack and push to db
+	r_ctrl.remove_recommendation(user_id)
+	# remove all recommendations from db
 	for index,tupl in enumerate(res):
 		rank = index+1
-		product_id = tupl[1]
-		user_id = current_user_id
+		sephora_product_id = tupl[1]
 		# save to database
 		# make sure this saves the other id, not the sephora id
-		db_product = p_ctrl.get_product_by_sephora_product_id(sephora_product_id)
-		res = r_ctrl.add_recommendation(user_id, db_product, rank)
+		print(sephora_product_id)
+		product_id = p_ctrl.get_product_id_by_sephora_product_id(sephora_product_id)
+		print(product_id)
+		# product = p_ctrl.get_product_as_dictionary(product_id)
+		res = r_ctrl.add_recommendation(user_id, product_id, rank)
 		print(res)
 
 

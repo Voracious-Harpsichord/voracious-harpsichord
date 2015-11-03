@@ -23,11 +23,12 @@ class Asyncifyer():
   def run(self):
     try:
       self.func(*self.args)
-    except: 
-      try:
-        self.func()
-      except:
-        print('error with func:', self.func)
+    except Exception as e:
+      print(e) 
+      # try:
+        # self.func()
+      # except:
+        # print('error with func:', self.func)
 
   def start(self):
     self.t.start()

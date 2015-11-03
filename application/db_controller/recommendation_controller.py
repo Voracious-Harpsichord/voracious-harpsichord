@@ -18,28 +18,34 @@ def get_recommendation_by_user_id(user_id):
     recommendations = session.query(Recommendation).filter(Recommendation.user_id == user_id).all()
     results = []
     for r in recommendations:
-        results.append({
-            'user_id':r.user_id,
-            'product_id':r.product_id,
-            'rank':r.rank
-        })
+        results.append(
+            p_ctrl.get_product_as_dictionary(r.product_id)
+            )
     return results
     
 
-# 
+
+
 def add_recommendation(user_id, product_id, rank):
     recommendation = Recommendation(user_id,product_id,rank)
     session.add(recommendation)
     session.commit()
     return {
         'user_id':user_id,
-        'product_id':user_id,
+        'product_id':product_id,
         'rank':rank
     }
+# improve this later
+def populate_new_user_recommendations(user_id):
+    for i in range(1,6):
+        product_id = i
+        rank = i
+        add_recommendation(user_id, product_id, rank)
 
 #Delete all recommendations a user has
 def remove_recommendation(user_id):
-    session.delete(session.query(Recommendation).filter(Recommendation.user_id == user_id).all())
+    session.query(Recommendation).filter(Recommendation.user_id == user_id).delete()
+
     session.commit()
     return None
 
