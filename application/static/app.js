@@ -8,7 +8,8 @@ var app = angular.module('beautystash',[
   'beautystash.user',
   'ui.router',
   'ui.bootstrap',
-  'ui.bootstrap.tabs'
+  'ui.bootstrap.tabs',
+  'angularSpinner'
 ]);
 
 app.config(function($stateProvider, $urlRouterProvider) {
