@@ -16,6 +16,9 @@ if 'RDS_HOSTNAME' in os.environ:
         port=os.environ['RDS_PORT'],
         database=os.environ['RDS_DB_NAME'],
     )
+elif os.environ.get('test') == 'test':
+    print("loading test DB")
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'testDB.sqlite')
 else:
     # SQLite
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'app.sqlite')
