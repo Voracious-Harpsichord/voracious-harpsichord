@@ -28,7 +28,6 @@ def make_new_user(u):
     #__init__(self, created_at, username, pw_hash, email, name_title, name_first, name_last, gender, location, birthday)
     session.add(User(str(datetime.datetime.now()), u['username'], hashed, u.get('email', ''), u.get('name_title', ''), u.get('name_first', ''), u.get('name_last', ''), u.get('gender', ''), u.get('location', ''), u.get('birthday', ''),u.get('skin_tone', '')))
     session.commit()
-
     return None
 
 # Verify that user exists in user table, returning true or false
