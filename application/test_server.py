@@ -95,7 +95,13 @@ class ServerTestCase(unittest.TestCase):
 
     #RECOMMENDATIONS (/recommendations)
     def test_5_reccomendations(self):
-        assert True
+        #should have default recomendations
+        rv = self.app.get('api/recomendations/1', content_type='application/json')
+        assert len(json.loads(rv.data.decode())['universal']) > 0
+
+        #should be able to reccomend
+
+        #should be able view reccomended products
 
     #NEWS FEED (/events)
     def test_6_feed(self):
