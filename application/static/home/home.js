@@ -7,7 +7,6 @@ home.controller('HomeController', function($scope, Feed){
   $scope.loadMore = function() {
     Feed.loadEvents()
       .then(function(data) {
-        console.log(data)
         for (var i=0; i < data.length; i++) {
           var timestamp = data[i].time_stamp
 
@@ -58,7 +57,6 @@ home.controller('HomeController', function($scope, Feed){
             }
           }
         }
-        console.log($scope.items)
       })
       .catch(function(error) {
         console.error('Error:', error)
