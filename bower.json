@@ -27,7 +27,9 @@
     "bootstrap-social": "~4.10.1",
     "angular-modal-service": "~0.6.9",
     "angular-messages": "~1.4.7",
-    "angular-file-upload": "~2.2.0"
+    "angular-file-upload": "~2.2.0",
+    "moment": "~2.10.6",
+    "angular-moment": "~0.10.3"
   },
   "resolutions": {
     "angular": ">= 1.0.8"

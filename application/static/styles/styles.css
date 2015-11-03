@@ -224,6 +224,7 @@ button:focus {
 
 .feed {
     background-color: #F2F2F2;
+    margin-top: 50px;
 }
 
 .feedItem {
