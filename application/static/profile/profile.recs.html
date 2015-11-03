@@ -34,14 +34,11 @@
         <ul class='list'>
           <h2>Recommended for You</h2>
           <li class='col-sm-12 product-item' ng-repeat='universalRec in universalRecs'>
-            <img class='productImage col-sm-3' src="photos/sample1.jpg">
+            <img class='productImage col-sm-3' src="{{universalRec.image_url || photos/sample1.jpg}}">
             <div class='col-sm-8 product-content'>
               <div class='product-brand'>{{universalRec.brand_name}}</div>
               <span class='product-name'>{{universalRec.product_name}}</span><br>
               <span>{{universalRec.product_category}}</span>
-              <span>{{universalRec.product_size}}</span>
-              <span>{{universalRec.product_status}}</span><br>
-              <span>{{universalRec.product_color}}</span>
             </div>
             <div class='col-sm-1'>
               <button class='btn edit' ng-click='addProduct(universalRec)'>Add to wishlist</button>
