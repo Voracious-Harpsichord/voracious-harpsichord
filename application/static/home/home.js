@@ -23,7 +23,7 @@ home.controller('HomeController', function($scope, Feed){
                 user_id: data[i].user.userid,
                 type: 'product',
                 time_stamp: timestamp,
-                comments: 'comments',
+                comments: data[i].data.comments,
                 image: imageUrl,
                 heading: data[i].data.brand,
                 subheading1: data[i].data.name,
@@ -37,7 +37,7 @@ home.controller('HomeController', function($scope, Feed){
                 user_id: data[i].user.userid,
                 type: 'article',
                 time_stamp: timestamp,
-                comments: 'comments',
+                comments: data[i].data.comments,
                 image: imageArticle,
                 heading: data[i].data.article_name,
                 subheading1: data[i].data.url
@@ -50,7 +50,7 @@ home.controller('HomeController', function($scope, Feed){
                 user_id: data[i].user.userid,
                 type: 'blog',
                 time_stamp: timestamp,
-                comments: 'comments',
+                comments: data[i].data.comments,
                 image: imageBlog,
                 heading: data[i].data.site_name,
                 subheading1: data[i].data.url
