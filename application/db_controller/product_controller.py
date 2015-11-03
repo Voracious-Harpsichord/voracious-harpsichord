@@ -38,9 +38,13 @@ def get_product_as_dictionary(product_id):
     p = session.query(Product).filter(Product.id == product_id).one()
     product = {
         'product_id': p.id,
-        'product_name': p.name,
         'brand_name': p.brand,
+        'product_name': p.name,
         'product_category': p.category,
+        'product_size': '',
+        'product_status': 'Wishlist',
+        'product_notes': '',
+        'product_color': '',
         'product_image_url': p.image_url,
         'product_description': p.description
     }
