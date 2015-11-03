@@ -7,7 +7,6 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-
 if __name__ == '__main__':
     parser = ArgumentParser('Load data into database')
 
