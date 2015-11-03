@@ -16,7 +16,7 @@ home.controller('HomeController', function($scope, Feed){
             $scope.hashItems[data[i].time_stamp] = data[i]
 
             if (data[i].view_type === 'product') {
-              var imageUrl = (data[i].data.image_url === '' ? '../photos/sample2.jpg' : 'www.sephora.com' + data[i].image_url)
+              var imageUrl = (data[i].data.image_url === '' ? '../photos/sample2.jpg' : data[i].data.image_url)
               $scope.items.unshift({
                 user_first: data[i].user.name_first,
                 user_last: data[i].user.name_last,
