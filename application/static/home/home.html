@@ -3,21 +3,20 @@
         <ul infinite-scroll='loadMore()' infinite-scroll-distance='2'>
             <li ng-repeat="i in items">
                 <div class='feedItem'>
-                    <!-- <img class='feedItemImage' src="photos/sample1.jpg"> -->
-                    <span am-time-ago="{{i}}.time_stamp"></span>
-                    <span style='height:200px;'>{{i}}</span>
+                    <img class='feedItemImage' src="{{i.image}}">
+                    <span>
+                        <div>
+                            <span  ui-sref="user.stash({userId: {{i.user_id}}})">{{i.user_first}} {{i.user_last}}</span>
+                            <span>shared this {{i.type}}.</span>
+                        </div>
+                        <div am-time-ago="{{i}}.time_stamp"></div>
+                        <div>{{i.comments}}</div>
+                        <div>{{i.heading}}</div>
+                        <div>{{i.subheading1}}</div>
+                        <div>{{i.subheading2}}</div>
+                    </span>
                 </div>
             </li>
         </ul>
     </div>
 </div>
-
-<!-- <div class='feed'>
-    <div class='container'>
-        <ul>
-            <li class='feedItem' ng-repeat="i in items">
-                <img class='feedItemImage' src="photos/sample1.jpg">
-            </li>
-        </ul>
-    </div>
-</div> -->
