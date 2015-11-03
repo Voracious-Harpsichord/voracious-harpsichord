@@ -36,6 +36,7 @@ services.factory('Rec', function($http, Auth) {
       data: rec
     })
     .then(function(resp) {
+      console.log('response', resp.data);
       return resp.data; //newly added recommendation
     })
     .catch(function(error) {
@@ -336,7 +337,7 @@ services.factory('Auth', function($http) {
       //Use substring to get year
       userData.created_at = userData.created_at.substring(0, 4);
       if (userData.location === '') {
-        userData.location === 'Elsewhere'
+        userData.location = 'Elsewhere';
       }
       return resp;
     });
@@ -356,7 +357,7 @@ services.factory('Auth', function($http) {
       //Use substring to get year
       userData.created_at = userData.created_at.substring(0, 4);
       if (userData.location === '') {
-        userData.location === 'Elsewhere'
+        userData.location = 'Elsewhere';
       }
       return resp.data;
     });
