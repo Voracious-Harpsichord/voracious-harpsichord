@@ -25,7 +25,7 @@ class ServerTestCase(unittest.TestCase):
 
     """test functions need to start with 'test' for TestCase class to automatically run them"""
     #Test that app serves index.html
-    def test_empty_db(self):
+    def test_0_index(self):
         rv = self.app.get('/')
         assert '<!DOCTYPE html>' in str(rv.data)
 
@@ -71,6 +71,13 @@ class ServerTestCase(unittest.TestCase):
                 'product_notes': 'TEST',
                 'product_color': 'TEST'
                 }))
+
+        # more mock-up products to be reccomended
+        self.app.post('/api/userProducts/1',content_type='application/json',data=json.dumps({'product_name': 'a','brand_name': 'a','product_category': '','product_size': '','product_status': '','product_notes': '','product_color': ''}))
+        self.app.post('/api/userProducts/1',content_type='application/json',data=json.dumps({'product_name': 'b','brand_name': 'b','product_category': '','product_size': '','product_status': '','product_notes': '','product_color': ''}))
+        self.app.post('/api/userProducts/1',content_type='application/json',data=json.dumps({'product_name': 'c','brand_name': 'c','product_category': '','product_size': '','product_status': '','product_notes': '','product_color': ''}))
+        self.app.post('/api/userProducts/1',content_type='application/json',data=json.dumps({'product_name': 'd','brand_name': 'd','product_category': '','product_size': '','product_status': '','product_notes': '','product_color': ''}))
+        self.app.post('/api/userProducts/1',content_type='application/json',data=json.dumps({'product_name': 'e','brand_name': 'e','product_category': '','product_size': '','product_status': '','product_notes': '','product_color': ''}))
         
         #user should be able to retrieve that product information
         rv = self.app.get('/api/userProducts/1', content_type='application/json')
@@ -95,29 +102,22 @@ class ServerTestCase(unittest.TestCase):
 
     #RECOMMENDATIONS (/recommendations)
     def test_5_reccomendations(self):
-        #more mock-up products to be reccomended
-        self.app.post('/api/userProducts/1',content_type='application/json',data=json.dumps({'product_name': 'a','brand_name': 'a','product_category': '','product_size': '','product_status': '','product_notes': '','product_color': ''}))
-        self.app.post('/api/userProducts/1',content_type='application/json',data=json.dumps({'product_name': 'b','brand_name': 'b','product_category': '','product_size': '','product_status': '','product_notes': '','product_color': ''}))
-        self.app.post('/api/userProducts/1',content_type='application/json',data=json.dumps({'product_name': 'c','brand_name': 'c','product_category': '','product_size': '','product_status': '','product_notes': '','product_color': ''}))
-        self.app.post('/api/userProducts/1',content_type='application/json',data=json.dumps({'product_name': 'd','brand_name': 'd','product_category': '','product_size': '','product_status': '','product_notes': '','product_color': ''}))
-        self.app.post('/api/userProducts/1',content_type='application/json',data=json.dumps({'product_name': 'e','brand_name': 'e','product_category': '','product_size': '','product_status': '','product_notes': '','product_color': ''}))
-
         self.app.post('/api/newUser',
             content_type='application/json',
             data=json.dumps({'username': 'test3','password': 'test3'}))
 
         #should have default recomendations
-        rv = self.app.get('api/recomendations/3', content_type='application/json')
+        rv = self.app.get('api/recommendations/3', content_type='application/json')
         assert len(json.loads(rv.data.decode())['universal']) > 0
 
         #should be able to reccomend
-        self.app.post('api/recomendations/3',
+        self.app.post('api/recommendations/3',
             content_type='application/json',
             data=json.dumps({'to_user_id': 2, 'product_id':1}))
 
         #should be able view reccomended products
-        rv = self.app.get('api/recomendations/2', content_type='application/json')
-        assert len(json.loads(rv.data.decode())['personal']) > 1
+        rv = self.app.get('api/recommendations/2', content_type='application/json')
+        assert len(json.loads(rv.data.decode())['personal']) > 0
 
     #NEWS FEED (/events)
     def test_6_feed(self):
@@ -126,7 +126,7 @@ class ServerTestCase(unittest.TestCase):
         events = json.loads(rv.data.decode())['events']
         #and served in the reverse order they occured
         assert events[0]['data']['url'] == 'http://www.xkcd.com'
-        assert events[1]['data']['name'] == 'HELLO'
+        assert events[-1]['data']['name'] == 'HELLO'
 
 if __name__ == '__main__':
     unittest.main()
