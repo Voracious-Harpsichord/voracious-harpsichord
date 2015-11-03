@@ -223,7 +223,7 @@ button:focus {
 
 .profileMainPhoto {
     background-size: cover;
-    background-image: url("/photos/backgroundProfilePhoto.jpg");
+    background-image: url("/photos/option4.jpeg");
     opacity: .8;
     height: 300px;
 }
@@ -316,12 +316,22 @@ button:focus {
 
 /* Login */
 
+.homeImage-auth {
+    background-image: url("/photos/homePhoto.jpg");
+    background-color: #F2F2F2;
+    background-position: fixed;
+    background-size: cover;
+    height: 700px;
+    opacity: 0.8;
+}
+
 .content {
-    margin-top: 85px;
+    margin-top: 80px;
     margin-bottom: 50px;
-    border: 1px solid #bebebe;
+    border: 3px solid #bebebe;
     border-radius: 7px;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
+    background-color: #fff;
 }
 
 .contents {
@@ -463,11 +473,16 @@ input.ng-invalid {
     margin-top: 10px;
 }
 
+.edit-btns {
+    padding-left: 40px;
+}
+
 .edit {
     font-size: 12px;
     padding: 2px 5px;
     margin-top: 10px;
     display:inline;
+    margin-left: 10px;
 }
 
 .edit-x {
@@ -570,12 +585,27 @@ input.ng-invalid {
 }
 /*About Page*/
 
+.title {
+    margin-top: 100px;
+/*    background-color: #FFF;*/
+    height: 200px;
+    color: #FFF;
+}
+
+.aboutImage {
+    background-image: url("/photos/homePhoto.jpg");
+    background-position: fixed;
+    background-size: cover;
+    height: 1060px;
+    opacity: 0.8;
+}
+
 .teamMemberProfile {
     float: left;
-    height: 250px;
-    width: 250px;
+    height: 200px;
+    width: 200px;
     margin-top: 100px;
-    margin-left: 150px;
+    margin-right: 30px;
     padding:3px;
     border:1px solid #E8E8E8;
     background-color:white;
