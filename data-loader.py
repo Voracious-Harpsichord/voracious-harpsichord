@@ -43,7 +43,7 @@ if __name__ == '__main__':
         price = db.Column(db.Integer)
         sephora_id = db.Column(db.String(20))
         image_url = db.Column(db.String(240))
-        description = db.Column(db.String(500))
+        description = db.Column(db.String(2000))
 
         def __init__(self, name, brand, category, price, sephora_id, image_url, description):
             self.name = name
