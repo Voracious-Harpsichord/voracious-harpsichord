@@ -2,10 +2,11 @@ var stash = angular.module('beautystash.profile', [
   'ui.bootstrap',
   'ui.bootstrap.tabs',
   'angularModalService',
-  'ngMessages'
+  'ngMessages',
+  'angularSpinner'
 ]);
 
-stash.controller('ProfileController', function ($scope, $window, Products, Follow, Rec, Sites, $stateParams, Auth, ModalService) {
+stash.controller('ProfileController', function ($scope, $window, Products, Follow, Rec, Sites, usSpinnerService, $stateParams, Auth, ModalService) {
   //General variables
   $scope.user = Auth.userData;
   $scope.products = Products.userProducts;
@@ -193,10 +194,19 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
     $scope.addSiteMode = bool;
   };
 
+  //Spinner controller
+  $scope.startSpin = function(){
+    console.log('starting spinner!');
+    usSpinnerService.spin('spinner-1');
+  };
+  $scope.stopSpin = function(){
+    usSpinnerService.stop('spinner-1');
+  };
+
   $scope.addSite = function(site) {
     Sites.addSite(site)
       .then(function(addedSite) {
-        console.log(addedSite);
+        $scope.stopSpin();
         addedSite.description = addedSite.description || 'Into The Gloss - Beauty Tips, Trends, And Product Reviews';
         addedSite.image = addedSite.image || 'photos/sample1.jpg';
         $scope.sites.push(addedSite);
