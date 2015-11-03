@@ -2,12 +2,11 @@ var stash = angular.module('beautystash.profile', [
   'ui.bootstrap',
   'ui.bootstrap.tabs',
   'angularModalService',
-  'ngMessages',
-  'angularSpinner'
+  'ngMessages'
 ]);
 
-stash.controller('ProfileController', function ($scope, $window, Products, Follow, Rec, Sites, usSpinnerService, $stateParams, Auth, ModalService) {
-  //General variables
+stash.controller('ProfileController', function ($scope, $window, Products, Follow, Sites, Rec, $stateParams, Auth, ModalService) {
+
   $scope.user = Auth.userData;
   $scope.products = Products.userProducts;
 
@@ -41,9 +40,6 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
     $scope.newProduct.product_status = null;
     $scope.newProduct.product_category = null;
     $scope.error = null;
-    $scope.recommendation.brand_name = null;
-    $scope.recommendation.product_name = null;
-    $scope.recommendation.comment = null;
     $scope.site.url = null;
     $scope.site.comment = null;
   };
@@ -59,7 +55,7 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
   };
 
   $scope.addProduct = function(product) {
-    if (product.brand_name !== null && product.product_name !== null) {   
+    if (product.brand_name !== null && product.product_name !== null) {
       Products.addProduct(product)
       .then(function(addedProduct) {
         $scope.products.unshift(addedProduct);
@@ -92,7 +88,6 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
     }).then(function(modal) {
       modal.element.modal();
       modal.close.then(function(product) {
-        console.log('Modal Closes:', product);
         $scope.editProduct(product);
       });
     });
@@ -140,7 +135,6 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
     $scope.editMode = false;
     Products.deleteProduct(product.product)
       .then(function(response) {
-        console.log('Product Deletion Success');
       })
       .catch(function(error) {
         console.error('Error with deleting product:', error);
@@ -153,7 +147,6 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
   $scope.profileFollowing;
 
   getFollowersFollowing = function() {
-    console.log('here')
     Follow.getProfileFollowersFollowing()
       .then(function(data) {
         $scope.profileFollowing = data.following;
@@ -163,27 +156,10 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
 
   getFollowersFollowing();
 
-  //Recommendations Controller
+  //Recommendations
 
-  $scope.universalRecs = Rec.recommendations.univeral;
+  $scope.universalRecs = Rec.recommendations.universal;
   $scope.personalRecs = Rec.recommendations.personal;
-
-  $scope.recommendation = {
-    product_id: null,
-    product_name: null,
-    brand_name: null,
-    product_size: null,
-    product_status:null,
-    product_message: null,
-    product_color: null,
-    product_category: null
-  };
-
-  //Function to recommend product to friend
-  $scope.recommend = function(recommendation) {
-    console.log(recommendation);
-    Rec.addRec(recommendation);
-  };
 
   //Blogs and Article Variable and Controllers
 
@@ -194,21 +170,9 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
     $scope.addSiteMode = bool;
   };
 
-  //Spinner controller
-  $scope.startSpin = function(){
-    console.log('starting spinner!');
-    usSpinnerService.spin('spinner-1');
-  };
-  $scope.stopSpin = function(){
-    usSpinnerService.stop('spinner-1');
-  };
-
   $scope.addSite = function(site) {
     Sites.addSite(site)
       .then(function(addedSite) {
-        $scope.stopSpin();
-        addedSite.description = addedSite.description || 'Into The Gloss - Beauty Tips, Trends, And Product Reviews';
-        addedSite.image = addedSite.image || 'photos/sample1.jpg';
         $scope.sites.push(addedSite);
         resetFields();
       })
