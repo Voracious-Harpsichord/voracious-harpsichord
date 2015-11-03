@@ -44,8 +44,6 @@ services.factory('Rec', function($http, Auth) {
     });
   };
 
-  loadRecs();
-
   return {
     recommendations: recommendations,
     loadRecs: loadRecs,
