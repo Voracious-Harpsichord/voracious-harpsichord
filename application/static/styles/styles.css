@@ -713,13 +713,22 @@ input.ng-invalid {
     margin-top: 25px;
     margin-bottom: 25px;
     margin-left: 25px;
+    margin-right: 25px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .41);
+}
+
+.feedBox {
 }
 
 .feedUserName {
-
+    margin-top: 25px;
 }
 
 .feedTypeListing {
+
+}
+
+.feedComments {
 
 }
 
@@ -732,6 +741,15 @@ input.ng-invalid {
 }
 
 .feedSubheading2 {
+
+}
+.feedSubheading3 {
+
+}
+.feedSubheading4 {
+
+}
+.feedSubheading5 {
 
 }
 

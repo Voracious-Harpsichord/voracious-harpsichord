@@ -51,6 +51,28 @@ services.factory('Rec', function($http, Auth) {
 
 });
 
+services.factory('User', function($http) {
+  var getInfo = function(userid) {
+    return $http({
+      method: 'GET',
+      url: '/api/profile/' + userid,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(function(resp) {
+      return resp.data;
+    })
+    .catch(function(error) {
+      console.error(error);
+    });
+  };
+
+  return {
+    getInfo: getInfo
+  };
+});
+
 services.factory('Feed', function($http) {
   var feeds = [];
 

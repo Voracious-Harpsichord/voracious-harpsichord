@@ -1,4 +1,4 @@
-var app = angular.module('beautystash',[
+ app = angular.module('beautystash',[
   'beautystash.services',
   'beautystash.home',
   'beautystash.product',
