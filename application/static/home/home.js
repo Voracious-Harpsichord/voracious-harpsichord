@@ -7,6 +7,7 @@ home.controller('HomeController', function($scope, Feed){
   $scope.loadMore = function() {
     Feed.loadEvents()
       .then(function(data) {
+        console.log("Events from Feed Factory:", data)
         for (var i=0; i < data.length; i++) {
           var timestamp = data[i].time_stamp
 
