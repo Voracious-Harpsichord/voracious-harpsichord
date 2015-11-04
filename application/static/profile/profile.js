@@ -94,15 +94,11 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
   };
 
   $scope.editProduct = function(product) {
-    console.log('before:', $scope.products[$scope.currentItemIndex]);
     $scope.products[$scope.currentItemIndex] = angular.copy(product).product;
-    console.log('after:', $scope.products[$scope.currentItemIndex]);
     $scope.editMode = false;
     Products.editProduct(product)
       .then(function(editedProduct){
-        console.log('edited response:', editedProduct);
         $scope.products[$scope.currentItemIndex] = editedProduct.data;
-        console.log('scope products array', $scope.products);
         resetFields();
       })
       .catch(function(error) {
