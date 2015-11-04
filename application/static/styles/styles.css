@@ -713,56 +713,46 @@ input.ng-invalid {
     margin-top: 25px;
     margin-bottom: 25px;
     margin-left: 25px;
+    margin-right: 25px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, .41);
 }
 
 .feedBox {
-   margin-top: 25px;
-   margin-left: 25px; 
 }
-/*
+
 .feedUserName {
     margin-top: 25px;
-    margin-left: 25px;
-}*/
-
-/*.feedTypeListing {
-    margin-top: 25px;
-    margin-left: 25px;
 }
-*/
-/*.feedComments {
-    margin-top: 25px;
-    margin-left: 25px;
+
+.feedTypeListing {
+
+}
+
+.feedComments {
+
 }
 
 .feedHeading {
-    margin-top: 25px;
-    margin-left: 25px;
+
 }
 
 .feedSubheading1 {
-    margin-top: 5px;
-    margin-left: 25px;
+
 }
 
 .feedSubheading2 {
-    margin-top: 5px;
-    margin-left: 25px;
+
 }
 .feedSubheading3 {
-    margin-top: 5px;
-    margin-left: 25px;
+
 }
 .feedSubheading4 {
-    margin-top: 5px;
-    margin-left: 25px;
+
 }
 .feedSubheading5 {
-    margin-top: 5px;
-    margin-left: 25px;
+
 }
-*/
+
 /* AUTOCOMPLETE */
 
 .autocomplete{
