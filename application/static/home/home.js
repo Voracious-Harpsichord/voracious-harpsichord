@@ -7,7 +7,6 @@ home.controller('HomeController', function($scope, Feed){
   $scope.loadMore = function() {
     Feed.loadEvents()
       .then(function(data) {
-        console.log("Events from Feed Factory:", data)
         for (var i=0; i < data.length; i++) {
           var timestamp = data[i].time_stamp
 
@@ -16,7 +15,6 @@ home.controller('HomeController', function($scope, Feed){
             $scope.hashItems[data[i].time_stamp] = data[i]
 
             if (data[i].view_type === 'product') {
-              console.log('product data for feed:', data[i])
               var imageUrl = (data[i].data.product_image_url === '' ? '../photos/sample2.jpg' : data[i].data.product_image_url)
               $scope.items.unshift({
                 user_first: data[i].user.name_first,
