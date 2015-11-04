@@ -54,184 +54,172 @@ bower install
 
 ###### GET
 
-**Description**
-Verify that user is logged in through cookie data, and return user info.
+**Description:**
+Verify that user is logged in through cookie data, and respond with user info.
 
 ###### POST
 
-**Description**
-Verify that user is logged in by checking username and password
-**Request Body**
+**Description:**
+
+Verify that user is logged in by checking username and password, and respond with user info
+
+**Request Body:**
+
 ```json
-{
-	"username": "<required>",
-	"password": "<required>"
+{   
+    "username": <required>,
+    "password": <required>
 }
 ```
 
 ###### DELETE
 
+**Description:**
+Destroy user session for logging out.
+
 ##### /api/newUser
 
 ###### POST
 
-**Description**
+**Description:**
 
-**Params**
+Create new user account.
 
-**Request Body**
+**Request Body:**
+
+```json
+{   
+    "username": <required>,
+    "password": <required>,
+    "email": <optional>,
+    "name_title": <optional>,
+    "name_first": <optional>,
+    "name_last": <optional>,
+    "gender": <optional>,
+    "location": <optional>,
+    "birthday": <optional>,
+    "skin_tone": <optional>
+}
+```
 
 ##### /api/profile
 
 ###### GET
 
-**Description**
+**Description:**
 
-**Params**
+**Request Body:**
 
-**Request Body**
-
-##### /api/follow
+##### /api/follow/<user_id>
 
 ###### GET
 
-**Description**
+**Description:**
+Retrieve information about other users
 
-**Params**
-
-**Request Body**
+**Request Body:**
 
 ###### POST
 
-**Description**
+**Description:**
 
-**Params**
-
-**Request Body**
+**Request Body:**
 
 ###### DELETE
 
-**Description**
+**Description:**
 
-**Params**
-
-**Request Body**
+**Request Body:**
 
 ##### /api/userProducts
 
 ###### GET
 
-**Description**
+**Description:**
 
-**Params**
-
-**Request Body**
+**Request Body:**
 
 ###### POST
 
-**Description**
+**Description:**
 
-**Params**
-
-**Request Body**
+**Request Body:**
 
 ###### PUT
 
-**Description**
+**Description:**
 
-**Params**
-
-**Request Body**
+**Request Body:**
 
 ###### DELETE
 
-**Description**
+**Description:**
 
-**Params**
-
-**Request Body**
+**Request Body:**
 
 ##### /api/products
 
 ###### GET
 
-**Description**
+**Description:**
 
-**Params**
-
-**Request Body**
+**Request Body:**
 
 ##### /api/sites
 
 ###### GET
 
-**Description**
+**Description:**
 
-**Params**
-
-**Request Body**
+**Request Body:**
 
 ###### POST
 
-**Description**
+**Description:**
 
-**Params**
-
-**Request Body**
+**Request Body:**
 
 ###### PUT
 
-**Description**
+**Description:**
 
-**Params**
-
-**Request Body**
+**Request Body:**
 
 ###### DELETE
 
-**Description**
+**Description:**
 
-**Params**
-
-**Request Body**
+**Request Body:**
 
 ##### /api/recommendations
 
 ###### GET
 
-**Description**
+**Description:**
 
-**Params**
-
-**Request Body**
+**Request Body:**
 
 ###### POST
 
-**Description**
+**Description:**
 
-**Params**
-
-**Request Body**
+**Request Body:**
 
 ##### /api/events
 
 ###### GET
 
-**Description**
+**Description:**
 
-**Params**
-
-**Request Body**
+**Request Body:**
 
 ##### /api/brands
 
 ###### GET
 
-**Description**
+**Description:**
 
-**Params**
-
-**Request Body**
+**Request Body:**
 
 #### Database
 
