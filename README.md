@@ -64,7 +64,7 @@ Verify that user is logged in by checking username and password
 **Request Body**
 ```json
 {
-	"username": "<required>"
+	"username": "<required>",
 	"password": "<required>"
 }
 ```
