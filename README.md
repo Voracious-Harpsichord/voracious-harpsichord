@@ -46,6 +46,193 @@ pip3 install -r application/requirements.txt
 bower install
 ```
 
+### Back-end Code
+
+#### API End-points
+
+##### /api/user
+
+###### GET
+
+**Description**
+Verify that user is logged in user cookie data, and return user info.
+
+###### POST
+
+**Description**
+
+**Params**
+
+**Request Body**
+
+##### /api/newUser
+
+###### POST
+
+**Description**
+
+**Params**
+
+**Request Body**
+
+##### /api/profile
+
+###### GET
+
+**Description**
+
+**Params**
+
+**Request Body**
+
+##### /api/follow
+
+###### GET
+
+**Description**
+
+**Params**
+
+**Request Body**
+
+###### POST
+
+**Description**
+
+**Params**
+
+**Request Body**
+
+###### DELETE
+
+**Description**
+
+**Params**
+
+**Request Body**
+
+##### /api/userProducts
+
+###### GET
+
+**Description**
+
+**Params**
+
+**Request Body**
+
+###### POST
+
+**Description**
+
+**Params**
+
+**Request Body**
+
+###### PUT
+
+**Description**
+
+**Params**
+
+**Request Body**
+
+###### DELETE
+
+**Description**
+
+**Params**
+
+**Request Body**
+
+##### /api/products
+
+###### GET
+
+**Description**
+
+**Params**
+
+**Request Body**
+
+##### /api/sites
+
+###### GET
+
+**Description**
+
+**Params**
+
+**Request Body**
+
+###### POST
+
+**Description**
+
+**Params**
+
+**Request Body**
+
+###### PUT
+
+**Description**
+
+**Params**
+
+**Request Body**
+
+###### DELETE
+
+**Description**
+
+**Params**
+
+**Request Body**
+
+##### /api/recommendations
+
+###### GET
+
+**Description**
+
+**Params**
+
+**Request Body**
+
+###### POST
+
+**Description**
+
+**Params**
+
+**Request Body**
+
+##### /api/events
+
+###### GET
+
+**Description**
+
+**Params**
+
+**Request Body**
+
+##### /api/brands
+
+###### GET
+
+**Description**
+
+**Params**
+
+**Request Body**
+
+#### Database
+
+
+
+### Front-end Code
+
 ### Roadmap
 
 View the project roadmap [here](https://github.com/Voracious-Harpsichord/voracious-harpsichord/issues)
