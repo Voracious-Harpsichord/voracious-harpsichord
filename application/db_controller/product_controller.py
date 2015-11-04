@@ -140,7 +140,7 @@ def edit_user_to_product(user_id, product_id, size='full', status='own', notes='
 
 def get_notes(user_id, product_id):
     try:
-        return session.query(User_product).filter(User_product.id == user_id, User_product.product_id == product_id).one().notes
+        return session.query(User_product).filter(User_product.user_id == user_id, User_product.product_id == product_id).one().notes
     except:
         return ""
 
