@@ -471,6 +471,10 @@ section.module.parallax-3 {
     margin-top: 10px;
 }
 
+.autocomplete input {
+    margin-bottom: 10px;
+}
+
 .brand-box {
     margin-bottom: 15px;
 }
@@ -566,6 +570,15 @@ input.ng-invalid {
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: 10px;
+}
+
+.modal-contents {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.left-margin {
+    margin-left: 15px;
 }
 
 /* Sites */
