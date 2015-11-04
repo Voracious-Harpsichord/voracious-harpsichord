@@ -376,23 +376,20 @@ stash.controller('ProfileTreeController', function($scope, Products, Follow, Sit
 
     // for every node append a circle at that place
     nodeEnter.append("circle")
-        .attr("r", 25)
+        .attr("r", 10)
         .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; })
         // add tooltip
         .append("svg:title")
         .text(function(d, i) { return JSON.stringify(d.products) });
 
     nodeEnter.append("text")
-        // .attr("y", function(d) {return d.children || d._children ? -10 : 10; })
-        .attr("x", function(d) { return -30})
-        .attr("y", function(d) { return -30})
+        .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
         .attr("dy", ".35em")
-        // .attr("text-anchor",function(d){return d})
-          // function(d) { return d.children || d._children ? "end" : "start"; })
-        // .text(function(d{ return JSON.stringify(pluck(d.products,'product_name')) })
+        .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
+        // .text(function(d) { return JSON.stringify(pluck(d.products,'product_name')) })
         .text(function(d) { return d.value })
-        // .attr("transform", function(d) { return "rotate(20)"; })
-        .style("fill-opacity", 1e-5);
+        .attr("transform", function(d) { return "rotate(20)"; })
+        .style("fill-opacity", 1e-6);
 
     // Transition nodes to their new position.
     var duration = 750;
@@ -401,7 +398,7 @@ stash.controller('ProfileTreeController', function($scope, Products, Follow, Sit
         .attr("transform", function(d) { return "translate(" + d.x + "," + d.y  + ")"; });
 
     nodeUpdate.select("circle")
-        .attr("r", 25)
+        .attr("r", 4.5)
         .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
 
     nodeUpdate.select("text")
