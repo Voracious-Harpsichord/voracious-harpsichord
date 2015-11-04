@@ -209,7 +209,7 @@ angular.module('beautystash.profileTree', [])
         .attr('color', 'light-blue')
         .append('xhtml:p')
         .text(function(d){return d.value})
-        .attr('style','text-align:center;padding:2px;margin:2px;word-wrap: break-word;')
+        .attr('style','text-align:center;padding:2px;margin:2px;')
 
 
 
