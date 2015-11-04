@@ -36,7 +36,6 @@ services.factory('Rec', function($http, Auth) {
       data: rec
     })
     .then(function(resp) {
-      console.log('response', resp.data);
       return resp.data; //newly added recommendation
     })
     .catch(function(error) {
@@ -68,7 +67,6 @@ services.factory('Feed', function($http) {
       if (resp.data.events) {
         events = resp.data.events;
       }
-      console.log("Feed events from factory:", resp.data.events);
       while (events.length) {
         feeds.push(events.pop());
       }

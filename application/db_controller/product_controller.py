@@ -127,8 +127,6 @@ def add_user_to_product(user_id, product_id, size='Full', status='Own', notes=''
     }
 
 def edit_user_to_product(user_id, product_id, size='full', status='own', notes='', color='', stars='', review='', user_product_image_url=''):
-    print('product id:', product_id)
-
     session.query(User_product).\
         filter(User_product.product_id == product_id).\
         update({
