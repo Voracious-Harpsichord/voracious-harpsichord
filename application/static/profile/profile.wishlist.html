@@ -14,11 +14,11 @@
                             <div class='row'>
                                 <div class='searchBoxes col-sm-12 form-group' ng-form>
                                     <label class='control-label' for='Brand'>Brand</label>
-                                    <autocomplete data='searchedBrands' on-type='getBrands' ng-model='newProduct.brand_name' attr-placeholder="Search brands..." required>
+                                    <autocomplete data='searchedBrands' on-type='getBrands' class='brand-box' ng-model='newProduct.brand_name' attr-placeholder="Search brands..." required>
                                     </autocomplete>
 
                                     <label class='control-label' for='email'>Product</label>
-                                    <autocomplete data='searchProducts' on-type='selectBrandProducts' ng-model='newProduct.product_name' attr-placeholder="Search products..." required>
+                                    <autocomplete data='searchProducts' on-type='selectBrandProducts' class='brand-box' ng-model='newProduct.product_name' attr-placeholder="Search products..." required>
                                     </autocomplete>
 
                                     <small class='stash-error' ng-show='myForm.$invalid'>Missing brand and/or product name</small>
