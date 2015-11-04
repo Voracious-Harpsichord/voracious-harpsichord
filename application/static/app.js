@@ -92,7 +92,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     views: {
       'subview': {
         templateUrl: 'profile/profile.exploreStash.html',
-        controller: 'ProfileTreeController'
+        controller: 'ProfileController'
       }
     }
   });
