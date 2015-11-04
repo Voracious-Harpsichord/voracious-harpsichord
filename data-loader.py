@@ -13,6 +13,7 @@ if __name__ == '__main__':
     parser.add_argument('--aws', action='store_true', help='if provided, add data to AWS database instead of local sqlite database')
     args = parser.parse_args()
 
+<<<<<<< HEAD
     if 'RDS_HOSTNAME' in os.environ:
         # We're on AWS, so PostgreSQL
         SQLALCHEMY_DATABASE_URI = 'postgresql://{username}:{password}@{host}:{port}/{database}'.format(
@@ -25,6 +26,9 @@ if __name__ == '__main__':
     else:
         BASE_DIR = os.path.abspath(os.path.dirname(__file__))
         SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'application/app.sqlite')
+=======
+SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'application/app.sqlite')
+>>>>>>> d3merge
 
     app = Flask(__name__, static_url_path='')
 
