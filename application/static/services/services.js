@@ -68,6 +68,7 @@ services.factory('Feed', function($http) {
       if (resp.data.events) {
         events = resp.data.events;
       }
+      console.log("Feed events from factory:", resp.data.events);
       while (events.length) {
         feeds.push(events.pop());
       }
