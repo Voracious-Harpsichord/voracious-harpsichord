@@ -40,7 +40,6 @@ def populate_new_user_recommendations(user_id):
         product_id = randint(1, 100)
         rank = i
         add_recommendation(user_id, product_id, rank)
-        print(product_id)
 
 #Delete all recommendations a user has
 def remove_recommendation(user_id):
