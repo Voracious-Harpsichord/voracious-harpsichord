@@ -55,15 +55,21 @@ bower install
 ###### GET
 
 **Description**
-Verify that user is logged in user cookie data, and return user info.
+Verify that user is logged in through cookie data, and return user info.
 
 ###### POST
 
 **Description**
-
-**Params**
-
+Verify that user is logged in by checking username and password
 **Request Body**
+```json
+{
+	"username": "<required>"
+	"password": "<required>"
+}
+```
+
+###### DELETE
 
 ##### /api/newUser
 
