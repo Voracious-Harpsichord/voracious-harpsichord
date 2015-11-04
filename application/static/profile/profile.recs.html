@@ -1,52 +1,53 @@
-<div class='container-fluid' id='sites'>
-  <div class='row-fluid'>
-    <div class='col-md-12 recs-tab'>
-      <tabset>
-      <!-- Universal Tab -->
-      <tab heading='Universal' select='addSiteModeFn(false)'>
-      </tab>
-      <!-- Personal Tab -->
-      <tab heading='Personal' select='addSiteModeFn(true)'>
-      <div class='col-md-12 wrapper'>
-        <ul class='list'>
-          <h2>Recommended to You by Friends</h2>
-          <li class='col-sm-12 product-item' ng-repeat='personalRec in personalRecs'>
-            <img class='productImage col-sm-3' src="photos/sample1.jpg">
-            <div class='col-sm-8 product-content'>
-              <div class='product-brand'>{{personalRec.brand_name}}</div>
-              <span class='product-name'>{{personalRec.product_name}}</span><br>
-              <span>{{personalRec.product_category}}</span>
-              <span>{{personalRec.product_size}}</span>
-              <span>{{personalRec.product_status}}</span><br>
-              <span>{{personalRec.product_color}}</span>
-              <span>Message: {{personalRec.message}}</span>
-            </div>
-            <div class='col-sm-1'>
-              <button class='btn edit' ng-click='addProduct(recommendation)'>Add to wishlist</button>
-            </div>
-          </li>
-        </ul>
-      </div>
-      </tab>
-      </tabset>
-      <!-- Universal tab -->
-      <div ng-hide='addSiteMode' class='col-md-12 wrapper'>
-        <ul class='list'>
-          <h2>Recommended for You</h2>
-          <li class='col-sm-12 product-item' ng-repeat='universalRec in universalRecs'>
-            <img class='productImage col-sm-3' src="{{universalRec.product_image_url}}">
-            <div class='col-sm-8 product-content'>
-              <div class='product-brand'>{{universalRec.brand_name}}</div>
-              <span class='product-name'>{{universalRec.product_name}}</span><br>
-              <span>{{universalRec.product_category}}</span>
-            </div>
-            <div class='col-sm-1'>
-              <button class='btn edit' ng-click='addProduct(universalRec)'>Add to wishlist</button>
-            </div>
-          </li>
-        </ul>
+<div class="backgroundFill">
+  <div class='container' id='sites'>
+    <div class='row'>
+      <div class='col-md-12 recs-tab'>
+        <tabset>
+        <!-- Universal Tab -->
+        <tab heading='Universal' select='addSiteModeFn(false)'>
+        </tab>
+        <!-- Personal Tab -->
+        <tab heading='Personal' select='addSiteModeFn(true)'>
+        <div class='col-md-12 wrapper'>
+          <ul class='list'>
+            <h2>Recommended to You by Friends</h2>
+            <li class='col-sm-12 product-item' ng-repeat='personalRec in personalRecs'>
+              <img class='productImage col-sm-3' src="photos/sample1.jpg">
+              <div class='col-sm-8 product-content'>
+                <div class='product-brand'>{{personalRec.brand_name}}</div>
+                <span class='product-name'>{{personalRec.product_name}}</span><br>
+                <span>{{personalRec.product_category}}</span>
+                <span>{{personalRec.product_size}}</span>
+                <span>{{personalRec.product_status}}</span><br>
+                <span>{{personalRec.product_color}}</span>
+                <span>Message: {{personalRec.message}}</span>
+              </div>
+              <div class='col-sm-1'>
+                <button class='btn edit' ng-click='addProduct(recommendation)'>Add to wishlist</button>
+              </div>
+            </li>
+          </ul>
+        </div>
+        </tab>
+        </tabset>
+        <!-- Universal tab -->
+        <div ng-hide='addSiteMode' class='col-md-12 wrapper'>
+          <ul class='list'>
+            <h2>Recommended for You</h2>
+            <li class='col-sm-12 product-item' ng-repeat='universalRec in universalRecs'>
+              <img class='productImage col-sm-3' src="{{universalRec.product_image_url}}">
+              <div class='col-sm-8 product-content'>
+                <div class='product-brand'>{{universalRec.brand_name}}</div>
+                <span class='product-name'>{{universalRec.product_name}}</span><br>
+                <span>{{universalRec.product_category}}</span>
+              </div>
+              <div class='col-sm-1'>
+                <button class='btn edit' ng-click='addProduct(universalRec)'>Add to wishlist</button>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>
