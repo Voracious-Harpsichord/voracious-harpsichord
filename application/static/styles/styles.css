@@ -219,20 +219,87 @@ button:focus {
     border: none;
 }
 
+/*About*/
+section.module:last-child {
+  margin-bottom: 0;
+}
+section.module h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 30px;
+}
+section.module p {
+  margin-bottom: 40px;
+  font-size: 16px;
+  font-weight: 300;
+}
+section.module p:last-child {
+  margin-bottom: 0;
+}
+section.module.about-content {
+  padding: 40px 0;
+}
+section.module.parallax {
+  height: 600px;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+section.module.parallax h1 {
+  color: #000;
+  font-family: 'Lovelo';
+  font-size: 80px;
+  line-height: 600px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+section.module.parallax h2 {
+  color: #000;
+  font-family: 'Lovelo';
+  font-size: 60px;
+  line-height: 400px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+section.module.parallax-2 h2 {
+  color: #FFF;
+}
+section.module.parallax-1 {
+  background-image: url('/photos/option1.jpeg');
+}
+section.module.parallax-2 {
+  background-image: url('/photos/option2.jpeg');
+}
+section.module.parallax-3 {
+  background-image: url('/photos/option3.jpeg');
+}
+
 /*Stash and Profile*/
 
 .profileMainPhoto {
     background-size: cover;
-    background-image: url("/photos/option4.jpeg");
+    background-image: url('/photos/option1.jpeg');
+    margin-top: 10px;
     opacity: .8;
     height: 300px;
+    border-bottom: 1px solid #E8E8E8;
 }
 
 .profilePhoto {
     float: left;
     height: 250px;
     width: 250px;
-    margin-top: 100px;
+    margin-top: 120px;
     margin-left: 150px;
     padding:3px;
     border:1px solid #E8E8E8;
@@ -247,7 +314,7 @@ button:focus {
     color: #eee;
     text-shadow: 0 0 5px rgba(0,0,0,1);
     float: left;
-    margin-top: 160px;
+    margin-top: 205px;
     margin-left: 30px;
 }
 
@@ -262,10 +329,10 @@ button:focus {
 }
 
 .dashboardTabs {
-    margin-top: 20px;
+    /*margin-top: 15px;*/
     padding-left: 375px;
     padding-bottom: 0px;
-    padding-top: 0px;
+    padding-top: 20px;
     border-bottom: 1px solid #E8E8E8;
     font-size: 12px;
 }
@@ -317,7 +384,7 @@ button:focus {
 /* Login */
 
 .homeImage-auth {
-    background-image: url("/photos/homePhoto.jpg");
+    background-image: url('/photos/homePhoto.jpg');
     background-color: #F2F2F2;
     background-position: fixed;
     background-size: cover;
