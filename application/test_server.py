@@ -69,7 +69,8 @@ class ServerTestCase(unittest.TestCase):
                 'product_size': 'TEST',
                 'product_status': 'TEST',
                 'product_notes': 'TEST',
-                'product_color': 'TEST'
+                'product_color': 'TEST',
+                'product_notes': 'Commenting on a product'
                 }))
 
         # more mock-up products to be reccomended
@@ -94,7 +95,10 @@ class ServerTestCase(unittest.TestCase):
         #user can add a site
         self.app.post('/api/sites/1',
             content_type='application/json',
-            data=json.dumps({'url':'http://www.xkcd.com'}))
+            data=json.dumps({
+                'url': 'http://www.xkcd.com',
+                'comment': 'Commenting on a site'
+                }))
 
         #user can view the sites they have added
         rv = self.app.get('/api/sites/1', content_type='application/json')
@@ -127,6 +131,9 @@ class ServerTestCase(unittest.TestCase):
         #and served in the reverse order they occured
         assert events[0]['data']['url'] == 'http://www.xkcd.com'
         assert events[-1]['data']['product_name'] == 'HELLO'
+        #and those events will have user generated comments
+        assert events[0]['comments'] == 'Commenting on a site'
+        assert events[-1]['comments'] == 'Commenting on a product'
 
 if __name__ == '__main__':
     unittest.main()

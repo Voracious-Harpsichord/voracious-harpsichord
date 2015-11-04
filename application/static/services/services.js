@@ -36,7 +36,6 @@ services.factory('Rec', function($http, Auth) {
       data: rec
     })
     .then(function(resp) {
-      console.log('response', resp.data);
       return resp.data; //newly added recommendation
     })
     .catch(function(error) {

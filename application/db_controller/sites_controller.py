@@ -240,3 +240,9 @@ def remove_user_from_site(id):
         session.delete(user_site_Q.one())
         session.commit()
         return id
+
+def get_comments(user_id, site_type, site_id):
+    try:
+        return session.query(User_site).filter(User_site.user_id == user_id, User_site.site_type == site_type, User_site.site_id == site_id).one().comment
+    except:
+        return ""

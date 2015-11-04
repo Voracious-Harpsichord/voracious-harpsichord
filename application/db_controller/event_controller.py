@@ -36,6 +36,7 @@ def get_events():
         }
         if e.view_type == 'product':
             event['data'] = p_ctrl.get_product_as_dictionary(e.data_id)
+            event['comments'] = p_ctrl.get_notes(e.user_id, e.data_id)
         if e.view_type in ['article', 'blog']:
             try:
                 site_info_Q = s_ctrl.query_by_id_and_type(e.data_id, e.view_type).one()
@@ -45,6 +46,7 @@ def get_events():
                 event['data'] = site_info
             except:
                 None
+            event['comments'] = s_ctrl.get_comments(e.user_id, e.view_type, e.data_id)
         
         results.append(event)
 
