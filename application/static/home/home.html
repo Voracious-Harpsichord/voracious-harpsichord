@@ -4,16 +4,18 @@
             <li ng-repeat="i in items">
                 <div class='feedItem'>
                     <img class='feedItemImage' src="{{i.image}}">
-                    <span>
+                    <span class='feedBox'>
                         <div>
-                            <span  ui-sref="user.stash({userId: {{i.user_id}}})">{{i.user_first}} {{i.user_last}}</span>
-                            <span>shared this {{i.type}}.</span>
+                            <span  class='feedUserName' ui-sref="user.stash({userId: {{i.user_id}}})">{{i.user_first}} {{i.user_last}} shared this {{i.type}}.</span>
                         </div>
-                        <div am-time-ago="{{i}}.time_stamp"></div>
-                        <div>{{i.comments}}</div>
-                        <div>{{i.heading}}</div>
-                        <div>{{i.subheading1}}</div>
-                        <div>{{i.subheading2}}</div>
+                        <span am-time-ago="{{i}}.time_stamp"></span><span> | {{i.location}}</span>
+                        <div class='feedComments'>{{i.comments}}</div>
+                        <div class='feedHeading'>{{i.heading}}</div>
+                        <div class='feedSubheading1'>{{i.subheading1}}</div>
+                        <div class='feedSubheading2'>{{i.subheading2}}</div>
+                        <div class='feedSubheading3'>{{i.subheading3}}</div>
+                        <div class='feedSubheading4'>{{i.subheading4}}</div>
+                        <div class='feedSubheading5'>{{i.subheading5}}</div>
                     </span>
                 </div>
             </li>

@@ -13,6 +13,7 @@ home.controller('HomeController', function($scope, Feed){
           if (!$scope.hashItems.hasOwnProperty(data[i].time_stamp)) {
 
             $scope.hashItems[data[i].time_stamp] = data[i]
+            console.log(data[i])
 
             if (data[i].view_type === 'product') {
               var imageUrl = (data[i].data.product_image_url ? '../photos/sample2.jpg' : data[i].data.product_image_url)
@@ -21,12 +22,16 @@ home.controller('HomeController', function($scope, Feed){
                 user_last: data[i].user.name_last,
                 user_id: data[i].user.userid,
                 type: 'product',
+                location: data[i].user.location,
                 time_stamp: timestamp,
                 comments: data[i].comments,
                 image: imageUrl,
-                heading: data[i].data.brand,
-                subheading1: data[i].data.name,
-                subheading2: data[i].data.category
+                heading: data[i].data.brand_name,
+                subheading1: data[i].data.product_name,
+                subheading2: data[i].data.product_category,
+                subheading3: data[i].data.product_description,
+                subheading4: data[i].data.product_color,
+                subheading5: data[i].data.product_status,
               })
             } else if (data[i].view_type === 'article') {
               var imageArticle = (data[i].data.image ? '../photos/sample2.jpg' : data[i].data.image)
@@ -35,6 +40,7 @@ home.controller('HomeController', function($scope, Feed){
                 user_last: data[i].user.name_last,
                 user_id: data[i].user.userid,
                 type: 'article',
+                location: data[i].user.location,
                 time_stamp: timestamp,
                 comments: data[i].comments,
                 image: imageArticle,
@@ -48,6 +54,7 @@ home.controller('HomeController', function($scope, Feed){
                 user_last: data[i].user.name_last,
                 user_id: data[i].user.userid,
                 type: 'blog',
+                location: data[i].user.location,
                 time_stamp: timestamp,
                 comments: data[i].comments,
                 image: imageBlog,

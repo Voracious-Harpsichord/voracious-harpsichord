@@ -5,9 +5,11 @@
                 <div class='row'>
                     <div class='col-md-3 side-bar'>
                         <tabset>
+
                         <!-- Search Tab -->
                         <tab heading='Search' select='addProductModeFn(false)'>
                         </tab>
+
                         <!-- Add Product Tab -->
                         <tab heading='Add Product' select='addProductModeFn(true)'>
                         <form novalidate class='simple-form' name='myForm'>
@@ -69,13 +71,16 @@
                         </form>
                         </tab>
                         </tabset>
+
                         <!-- Search tab scoped to product list -->
                         <div class='col-md-12 search-box'>
                             <input ng-hide='addProductMode' type='text' class='form-control' ng-model='filter' placeholder='Browse your products'/>
                         </div>
+
+
                     </div>
+
                     <!-- Products Lists -->
-                    
                     <div class='col-md-9 product-list'>
                         <div class='col-md-12 wrapper'>
                             <ul class='list'>
