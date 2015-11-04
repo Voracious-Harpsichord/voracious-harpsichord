@@ -129,7 +129,6 @@ class ServerTestCase(unittest.TestCase):
         rv = self.app.get('/api/events', content_type='application/json')
         events = json.loads(rv.data.decode())['events']
         #and served in the reverse order they occured
-        print("events", events)
         assert events[0]['data']['url'] == 'http://www.xkcd.com'
         assert events[-1]['data']['product_name'] == 'HELLO'
         #and those events will have user generated comments

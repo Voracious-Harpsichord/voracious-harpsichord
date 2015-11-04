@@ -16,7 +16,7 @@ home.controller('HomeController', function($scope, Feed){
             $scope.hashItems[data[i].time_stamp] = data[i]
 
             if (data[i].view_type === 'product') {
-              console.log('product data for feed:', data[i].data)
+              console.log('product data for feed:', data[i])
               var imageUrl = (data[i].data.product_image_url === '' ? '../photos/sample2.jpg' : data[i].data.product_image_url)
               $scope.items.unshift({
                 user_first: data[i].user.name_first,
@@ -24,7 +24,7 @@ home.controller('HomeController', function($scope, Feed){
                 user_id: data[i].user.userid,
                 type: 'product',
                 time_stamp: timestamp,
-                comments: data[i].data.comments,
+                comments: data[i].comments,
                 image: imageUrl,
                 heading: data[i].data.brand,
                 subheading1: data[i].data.name,
@@ -38,7 +38,7 @@ home.controller('HomeController', function($scope, Feed){
                 user_id: data[i].user.userid,
                 type: 'article',
                 time_stamp: timestamp,
-                comments: data[i].data.comments,
+                comments: data[i].comments,
                 image: imageArticle,
                 heading: data[i].data.article_name,
                 subheading1: data[i].data.url
@@ -51,7 +51,7 @@ home.controller('HomeController', function($scope, Feed){
                 user_id: data[i].user.userid,
                 type: 'blog',
                 time_stamp: timestamp,
-                comments: data[i].data.comments,
+                comments: data[i].comments,
                 image: imageBlog,
                 heading: data[i].data.site_name,
                 subheading1: data[i].data.url
