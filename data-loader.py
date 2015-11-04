@@ -64,13 +64,46 @@ if __name__ == '__main__':
         session.add(Product(name, brand, category, price, sephora_id, image_url, description))
         session.commit()
 
+    def cleanup(s):
+
+        #just a bunch of edge cases, add more as they appear
+        
+        
+        # LancĂ´me = Lancôme
+        s = s.replace("Ă´", "ô")
+        # BĂŠsame Cosmetics = Bésame Cosmetics
+        # CiatĂŠ London = Ciaté London
+        # EstĂŠe Lauder = Estée Lauder
+        s = s.replace("ĂŠ", "é")
+        # HERMĂS = HERMÈS
+        s = s.replace("Ă", "È")
+        # WENÂŽ by Chaz Dean = WEN by Chaz Dean
+        s = s.replace("ÂŽ", "")
+        # Zirh = ZUCA
+        s = s.replace("Zirh", "ZUCA")
+        #misc 
+        s = s.replace("\"", "")
+        s = s.replace("<br>", "")
+        s = s.replace("<br />", "")
+        s = s.replace("  ", " ")
+        return s
+
     jsonProducts = open('data/products.json', 'r')
     products = json.loads(jsonProducts.read())
     jsonProducts.close()
 
+    #friendly counter, note there's about 11,000 products
+    counter = 0
+
     for p in products:
+        counter += 1
+        if counter % 1000 == 0:
+            print(counter, "complete")
+        name = cleanup(p.get('display_name', ''))
+        brand = cleanup(p.get('brand_name',''))
+        description = cleanup(p.get('quick_look_desc', ''))
         image_url = p.get('logo_path','')
         if image_url:
             image_url = "http://www.sephora.com" + image_url
-                                # name,                 brand,    category='', price='', sephora_id='', image_url='', description=''
-        add_product_to_products(p.get('display_name', ''), p.get('brand_name',''), '', 0, p.get('id', ''), image_url, p.get('quick_look_desc', ''))
+                                #name, brand, category, price, sephora_id, image_url, description=''
+        add_product_to_products(name, brand, '', 0, p.get('id', ''), image_url, description)
