@@ -183,11 +183,10 @@ def userProducts(user_id):
         product = body['product']
         product_id = p_ctrl.verify_product_by_name_and_brand(product['product_name'], product['brand_name'])
         response = jsonify(p_ctrl.edit_user_to_product(
-            product['product_id'],
             user_id,
             product_id,
             product['product_size'], 
-            product['product_status'], 
+            product['product_status'],
             product['product_notes'],
             product['product_color']
         ))

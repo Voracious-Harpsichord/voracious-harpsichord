@@ -5,7 +5,7 @@ var stash = angular.module('beautystash.profile', [
   'ngMessages'
 ]);
 
-stash.controller('ProfileController', function ($scope, $window, Products, Follow, Sites, $stateParams, Auth, ModalService) {
+stash.controller('ProfileController', function ($scope, $window, Products, Follow, Sites, Rec, $stateParams, Auth, ModalService) {
 
   $scope.user = Auth.userData;
   $scope.products = Products.userProducts;
@@ -55,7 +55,7 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
   };
 
   $scope.addProduct = function(product) {
-    if (product.brand_name !== null && product.product_name !== null) {   
+    if (product.brand_name !== null && product.product_name !== null) {
       Products.addProduct(product)
       .then(function(addedProduct) {
         $scope.products.unshift(addedProduct);
@@ -88,7 +88,6 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
     }).then(function(modal) {
       modal.element.modal();
       modal.close.then(function(product) {
-        console.log('Modal Closes:', product);
         $scope.editProduct(product);
       });
     });
@@ -99,6 +98,7 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
     $scope.editMode = false;
     Products.editProduct(product)
       .then(function(editedProduct){
+        $scope.products[$scope.currentItemIndex] = editedProduct.data;
         resetFields();
       })
       .catch(function(error) {
@@ -136,7 +136,6 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
     $scope.editMode = false;
     Products.deleteProduct(product.product)
       .then(function(response) {
-        console.log('Product Deletion Success');
       })
       .catch(function(error) {
         console.error('Error with deleting product:', error);
@@ -149,15 +148,19 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
   $scope.profileFollowing;
 
   getFollowersFollowing = function() {
-    console.log('here')
     Follow.getProfileFollowersFollowing()
       .then(function(data) {
         $scope.profileFollowing = data.following;
         $scope.profileFollowers = data.followers;
-      })
-  }
+      });
+  };
 
   getFollowersFollowing();
+
+  //Recommendations
+
+  $scope.universalRecs = Rec.recommendations.universal;
+  $scope.personalRecs = Rec.recommendations.personal;
 
   //Blogs and Article Variable and Controllers
 
@@ -166,9 +169,6 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
 
   $scope.addSiteModeFn = function(bool) {
     $scope.addSiteMode = bool;
-    // if ($scope.addSiteMode === true) {
-    //   $scope.filter = '';
-    // }
   };
 
   $scope.addSite = function(site) {

@@ -2,6 +2,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from config import SQLALCHEMY_DATABASE_URI
+from random import randint
 
 engine = create_engine(SQLALCHEMY_DATABASE_URI)
 session = sessionmaker(bind=engine)()
@@ -36,7 +37,7 @@ def add_recommendation(user_id, product_id, rank):
 # improve this later
 def populate_new_user_recommendations(user_id):
     for i in range(1,6):
-        product_id = i
+        product_id = randint(1, 100)
         rank = i
         add_recommendation(user_id, product_id, rank)
 

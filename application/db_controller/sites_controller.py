@@ -38,11 +38,11 @@ def make_absolute(full_url, partial_url):
 
 #FETCHTING/PARSING META DATA
 def fetch_html(full_url):
-    r = requests.get(full_url)
-    if r.status_code == 200:
-        return r.text
-    else:
+    try:
+        r = requests.get(full_url)
+    except:
         return None
+    return r.text
 
 def get_host(full_url):
     return re.sub(r'/.*', '', remove_protocol(full_url))

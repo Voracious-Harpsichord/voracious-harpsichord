@@ -1,7 +1,7 @@
 var services = angular.module('beautystash.services', []);
 
 services.factory('Rec', function($http, Auth) {
-  var recommendations = {  
+  var recommendations = {
     'personal': [],
     'universal': []
   };
@@ -26,15 +26,17 @@ services.factory('Rec', function($http, Auth) {
     });
   };
 
-  var addRec = function(product_id, to_user_id) {
+  var addRec = function(rec) {
     return $http({
       method: 'POST',
       url: '/api/recommendations/' + Auth.userData.userid,
       headers: {
         'Content-Type': 'application/json'
-      }
+      },
+      data: rec
     })
     .then(function(resp) {
+      console.log('response', resp.data);
       return resp.data; //newly added recommendation
     })
     .catch(function(error) {
@@ -42,36 +44,12 @@ services.factory('Rec', function($http, Auth) {
     });
   };
 
-  loadRecs();
-
   return {
     recommendations: recommendations,
     loadRecs: loadRecs,
     addRec: addRec
   };
 
-});
-
-services.factory('User', function($http) {
-  var getInfo = function(userid) {
-    return $http({
-      method: 'GET',
-      url: '/api/profile/' + userid,
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(function(resp) {
-      return resp.data;
-    })
-    .catch(function(error) {
-      console.error(error);
-    });
-  };
-
-  return {
-    getInfo: getInfo
-  };
 });
 
 services.factory('Feed', function($http) {
@@ -357,7 +335,7 @@ services.factory('Auth', function($http) {
       //Use substring to get year
       userData.created_at = userData.created_at.substring(0, 4);
       if (userData.location === '') {
-        userData.location === 'Elsewhere'
+        userData.location = 'Elsewhere';
       }
       return resp;
     });
@@ -377,7 +355,7 @@ services.factory('Auth', function($http) {
       //Use substring to get year
       userData.created_at = userData.created_at.substring(0, 4);
       if (userData.location === '') {
-        userData.location === 'Elsewhere'
+        userData.location = 'Elsewhere';
       }
       return resp.data;
     });

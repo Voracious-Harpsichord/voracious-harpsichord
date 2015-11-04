@@ -72,19 +72,21 @@
                             <ul class='list'>
                                 <h2>Wishlist</h2>
                                 <li class='col-sm-12 product-item' ng-repeat='product in products | wishlistFilter | filter : filter'>
-                                    <img class='productImage col-sm-3' src="photos/sample1.jpg">
-                                    <div class='col-sm-8 product-content'>
-                                        <span class='product-brand'>{{product.brand_name}}</span>
-                                        <span class='product-name'>{{product.product_name}}</span><br>
-                                        <span>Category: {{product.product_category}}</span><br>
-                                        <span>Size: {{product.product_size}}</span><br>
-                                        <span>Status: {{product.product_status}}</span><br>
-                                        <span>Color: {{product.product_color}}</span><br>
-                                        <span>Notes: {{product.product_notes}}</span>
-                                    </div>
-                                    <div class='col-sm-1'>
-                                        <button class='btn edit' ng-click='editProductModal(product)'>Edit</button>
-                                        <button class='btn edit-x' ng-click='deleteProductModal(product)'>x</button>
+                                    <div class='row'>
+                                        <img class='productImage col-sm-3' src="{{product.product_image_url}}">
+                                        <div class='col-sm-8 product-content'>
+                                            <div class='product-brand'> {{product.brand_name}}</div>
+                                            <span class='product-name'> {{product.product_name}}</span><br>
+                                            <span>Category: {{product.product_category}}</span>
+                                            <span>Size: {{product.product_size}}</span>
+                                            <span>Status: {{product.product_status}}</span><br>
+                                            <span>Color: {{product.product_color}}</span>
+                                            <span>Notes: {{product.product_notes}}</span>
+                                        </div>
+                                        <div class='col-sm-1 edit-btns'>
+                                            <button class='btn edit' ng-click='editProductModal(product)'>Edit</button>
+                                            <button class='btn edit-x' ng-click='deleteProductModal(product)'>x</button>
+                                        </div>
                                     </div>
                                 </li>
                             </ul>

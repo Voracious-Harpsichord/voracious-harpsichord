@@ -28,6 +28,7 @@ def get_products_by_user_id(user_id):
             'product_notes': user_product.notes,
             'product_color': user_product.color,
             'product_rating': user_product.stars,
+            'product_image_url': product.image_url,
             'sephora_id': product.sephora_id
         })
     
@@ -38,11 +39,15 @@ def get_product_as_dictionary(product_id):
     p = session.query(Product).filter(Product.id == product_id).one()
     product = {
         'product_id': p.id,
-        'name': p.name,
-        'brand': p.brand,
-        'category': p.category,
-        'image_url': p.image_url,
-        'description': p.description
+        'brand_name': p.brand,
+        'product_name': p.name,
+        'product_category': p.category,
+        'product_size': '',
+        'product_status': 'Wishlist',
+        'product_notes': '',
+        'product_color': '',
+        'product_image_url': p.image_url,
+        'product_description': p.description
     }
     return product
 
@@ -102,23 +107,24 @@ def add_user_to_product(user_id, product_id, size='Full', status='Own', notes=''
         'product_user_product_image_url': product_user.user_product_image_url
     }
 
-def edit_user_to_product(id, user_id, product_id, size='full', status='own', notes='', color='', stars='', review='', user_product_image_url=''):
+def edit_user_to_product(user_id, product_id, size='full', status='own', notes='', color='', stars='', review='', user_product_image_url=''):
+    print('product id:', product_id)
 
     session.query(User_product).\
-        filter(User_product.id == id).\
+        filter(User_product.product_id == product_id).\
         update({
+            'user_product_image_url': user_product_image_url,
             'size': size,
             'status': status,
             'notes': notes,
             'color': color,
             'stars': stars,
-            'review': review,
-            'user_product_image_url': user_product_image_url
+            'review': review
         })
 
     session.commit()
     product_universal = session.query(Product).filter(Product.id == product_id).one()
-    product_user = session.query(User_product).filter(User_product.id == id).one()
+    product_user = session.query(User_product).filter(User_product.product_id == product_id).one()
 
     return {
         'product_id': product_user.id, 
@@ -128,7 +134,8 @@ def edit_user_to_product(id, user_id, product_id, size='full', status='own', not
         'product_size': product_user.size,
         'product_status': product_user.status,
         'product_notes': product_user.notes,
-        'product_color': product_user.color
+        'product_color': product_user.color,
+        'product_image_url': product_universal.image_url
     }
 
 #Delete a relationship between user and product

@@ -7,7 +7,6 @@ home.controller('HomeController', function($scope, Feed){
   $scope.loadMore = function() {
     Feed.loadEvents()
       .then(function(data) {
-        console.log(data)
         for (var i=0; i < data.length; i++) {
           var timestamp = data[i].time_stamp
 
@@ -16,7 +15,8 @@ home.controller('HomeController', function($scope, Feed){
             $scope.hashItems[data[i].time_stamp] = data[i]
 
             if (data[i].view_type === 'product') {
-              var imageUrl = (data[i].data.image_url === '' ? '../photos/sample2.jpg' : data[i].data.image_url)
+              console.log('product data for feed:', data[i].data)
+              var imageUrl = (data[i].data.product_image_url === '' ? '../photos/sample2.jpg' : data[i].data.product_image_url)
               $scope.items.unshift({
                 user_first: data[i].user.name_first,
                 user_last: data[i].user.name_last,
@@ -58,7 +58,6 @@ home.controller('HomeController', function($scope, Feed){
             }
           }
         }
-        console.log($scope.items)
       })
       .catch(function(error) {
         console.error('Error:', error)
