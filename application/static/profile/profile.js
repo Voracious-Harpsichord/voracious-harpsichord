@@ -149,6 +149,7 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
   $scope.profileFollowing;
 
   getFollowersFollowing = function() {
+    console.log('here')
     Follow.getProfileFollowersFollowing()
       .then(function(data) {
         $scope.profileFollowing = data.following;
@@ -275,7 +276,7 @@ stash.controller('ProfileTreeController', function($scope, Products, Follow, Sit
   }
   // helper to toggle all nodes bfs
   var toggleToDepthBFS = function(tree,depth){
-    // svg.selectAll('.productImage').remove();
+    svg.selectAll('.productImage').remove();
 
     // go n-1 deep
     // root always toggle on
@@ -323,10 +324,6 @@ stash.controller('ProfileTreeController', function($scope, Products, Follow, Sit
   var margin = {top: 20, right: 120, bottom: 20, left: 120},
       width = 1000 - margin.right - margin.left,
       height = 1000 - margin.top - margin.bottom;
-  var god = {
-    width : width,
-    height : height
-  }
   // moves the particles from a source to an end point
   var diagonal = d3.svg.diagonal()
       .projection(function(d) { return [d.x, d.y]; });
@@ -366,11 +363,11 @@ stash.controller('ProfileTreeController', function($scope, Products, Follow, Sit
         .attr("class", "node")
         .attr("transform", function(d) { return "translate(" + source.x0 + "," +  source.y0+ ")"; })
         .on("click", function(d){
-          // svg.selectAll('.productImage').remove();
-          // if (d.depth === maxDepth){
+          svg.selectAll('.productImage').remove();
+          if (d.depth === maxDepth){
             // buildImage(d.)
-            // buildImage(d)
-          // }
+            buildImage(d)
+          }
           toggleChildren(d,root)
         });
 
@@ -468,13 +465,12 @@ stash.controller('ProfileTreeController', function($scope, Products, Follow, Sit
     var config_table = []
     var height = 50;
     var y = margin.top
-    // console.log(god.width,margin.right)
-    var offset = god.width - 3/2*margin.right;
+    var offset = 0;
     for (var i = 0; i < config.length; i++) {
-      offset-=10
+      offset+=10
       config_table.push({
         value:config[i],
-        x: offset-i*width,
+        x:i*width+offset,
         y:y,
         width:width,
         height:height,
@@ -506,13 +502,12 @@ stash.controller('ProfileTreeController', function($scope, Products, Follow, Sit
 
   var buildLabeledRectangles = function(data,classed,fill){
     // build rectangles
-    // console.log(data,classed,fill)
     svg.selectAll(classed)
       .data(data)
       .enter()
       .append("rect")
       .classed(classed,true)
-      .attr("x", function(d) {return d.x-10})
+        .attr("x", function(d) { return d.x-10})
       .attr("y", function(d) { return d.y-10})
       .attr("width", function(d) { return d.width})
       .attr("height", function(d) { return d.height})
@@ -525,7 +520,7 @@ stash.controller('ProfileTreeController', function($scope, Products, Follow, Sit
       .classed(classed,true)
       .attr("x", function(d) { return d.x})
       .attr("y", function(d) { return d.y})
-      .attr("dy", ".8em")
+      .attr("dy", ".35em")
       .text(function(d) { return d.value})
   }
 
@@ -601,13 +596,10 @@ stash.controller('ProfileTreeController', function($scope, Products, Follow, Sit
     //render Tree
     update(root,root)
 
-    var labels = createLabels(tree_config,50,150,root);
-    // console.log(labels)
-    var options_table = createConfigTable(options,50,150)
-    // console.log(options_table)
-    var buildButton = {x:width, y:margin.top, width:150, height:50, value:'build tree'}
+    var labels = createLabels(tree_config,20,100,root);
+    var options_table = createConfigTable(options,20,100)
+    var buildButton = {x:width, y:margin.top, width:100, height:50, value:'build tree'}
     // render labels and buttons
-
     buildLabeledRectangles(labels,'label')
     buildLabeledRectangles(options_table,'options_table','darksalmon')
     buildLabeledRectangles([buildButton],'build','lightblue')
@@ -619,9 +611,7 @@ stash.controller('ProfileTreeController', function($scope, Products, Follow, Sit
     addHover('.build')
 
     // bfs toggle
-    selectLabel = svg.selectAll('.label')
-    // console.log(selectLabel)
-    selectLabel
+    svg.selectAll('.label')
     .data(labels)
     .on('click',function(d){
       toggleToDepthBFS(root,d.depth)
@@ -658,16 +648,20 @@ stash.controller('ProfileTreeController', function($scope, Products, Follow, Sit
   // define globals here
   // get parsed data from helper function
 
-  var options_table =  ['product_category','brand_name','product_status','product_size']
+  var options_table =  ['category','brand_name','status','size']
   // this will get changed
-  var initial_tree_config = ['brand_name','product_category','product_size','product_status']
+  var initial_tree_config = ['brand_name','category','size','status']
   // stores order of configurations
 
   // ***************** BUILD APP *****************
-    Products.getAllProducts(Auth).then(function(data){
-    product_data = data['userProducts']
-    buildApp(product_data,initial_tree_config,options_table);
+  Products.getAllProducts(Auth).then(function(data){
+
+    buildApp(data,initial_tree_config,options_table);
+    
   })
+
+  
+
 
 })
 
