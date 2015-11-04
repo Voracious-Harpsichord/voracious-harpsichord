@@ -15,7 +15,7 @@ home.controller('HomeController', function($scope, Feed){
             $scope.hashItems[data[i].time_stamp] = data[i]
 
             if (data[i].view_type === 'product') {
-              var imageUrl = (data[i].data.product_image_url === '' ? '../photos/sample2.jpg' : data[i].data.product_image_url)
+              var imageUrl = (data[i].data.product_image_url ? '../photos/sample2.jpg' : data[i].data.product_image_url)
               $scope.items.unshift({
                 user_first: data[i].user.name_first,
                 user_last: data[i].user.name_last,
@@ -29,7 +29,7 @@ home.controller('HomeController', function($scope, Feed){
                 subheading2: data[i].data.category
               })
             } else if (data[i].view_type === 'article') {
-              var imageArticle = (data[i].data.image === ''? '../photos/sample2.jpg' : data[i].data.image)
+              var imageArticle = (data[i].data.image ? '../photos/sample2.jpg' : data[i].data.image)
               $scope.items.unshift({
                 user_first: data[i].user.name_first,
                 user_last: data[i].user.name_last,
@@ -42,7 +42,7 @@ home.controller('HomeController', function($scope, Feed){
                 subheading1: data[i].data.url
               })
             } else if (data[i].view_type === 'blog') {
-              var imageBlog = (data[i].data.image === ''? '../photos/sample2.jpg' : data[i].data.image)
+              var imageBlog = (data[i].data.image ? '../photos/sample2.jpg' : data[i].data.image)
               $scope.items.unshift({
                 user_first: data[i].user.name_first,
                 user_last: data[i].user.name_last,
