@@ -85,7 +85,7 @@ if __name__ == '__main__':
         s = s.replace("\"", "")
         s = s.replace("<br>", "")
         s = s.replace("<br />", "")
-        s = s.replace("  ", "")
+        s = s.replace("  ", " ")
         return s
 
     jsonProducts = open('data/products.json', 'r')
