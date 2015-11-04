@@ -13,10 +13,15 @@
                         <form novalidate class='simple-form' name='myForm'>
                             <div class='row'>
                                 <div class='searchBoxes col-sm-12 form-group' ng-form>
+
                                     <label class='control-label' for='Brand'>Brand</label>
-                                    <input type='text' ng-model='newProduct.brand_name' name='brand' class='form-control brand-box' placeholder='Chanel, Nars, Clinque...' required/>
+                                    <autocomplete data='searchedBrands' on-type='getBrands' ng-model='newProduct.brand_name' attr-placeholder="Search brands...">
+                                    </autocomplete>
+
                                     <label class='control-label' for='email'>Product</label>
-                                    <input type='text' ng-model='newProduct.product_name' name='product' class='form-control product-box' placeholder='Vitalumiere, Blush, Cleansing Balm...' required/>
+                                    <autocomplete data='searchProducts' on-type='selectBrandProducts' ng-model='newProduct.product_name' attr-placeholder="Search products...">
+                                    </autocomplete>
+
                                     <small class='stash-error' ng-show='myForm.$invalid'>Missing brand and/or product name</small>
                                 </div>
                             </div>

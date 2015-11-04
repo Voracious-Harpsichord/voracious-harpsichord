@@ -3,12 +3,31 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from config import SQLALCHEMY_DATABASE_URI
 
+from collections import defaultdict
+
 engine = create_engine(SQLALCHEMY_DATABASE_URI)
 session = sessionmaker(bind=engine)()
 session._model_changes = {}
 
 #import tables
 from db_models.products import Product, User_product
+
+def get_brands(first_letter):
+    matching_products = session.query(Product).filter(Product.brand.startswith(first_letter)).all()
+ 
+    brands = defaultdict(list)
+    for product in matching_products:
+        product_dict = {
+            'product_id': product.id,
+            'brand_name': product.brand,
+            'product_name': product.name,
+            'product_category': product.category,
+            'sephora_id': product.sephora_id
+        }
+ 
+        brands[product.brand].append(product_dict)
+    
+    return brands
 
 #Get a list of product by user_id
 def get_products_by_user_id(user_id):

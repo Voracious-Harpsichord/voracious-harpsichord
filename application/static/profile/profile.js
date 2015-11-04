@@ -2,10 +2,38 @@ var stash = angular.module('beautystash.profile', [
   'ui.bootstrap',
   'ui.bootstrap.tabs',
   'angularModalService',
-  'ngMessages'
+  'ngMessages',
+  'autocomplete'
 ]);
 
 stash.controller('ProfileController', function ($scope, $window, Products, Follow, Sites, Rec, $stateParams, Auth, ModalService) {
+
+  $scope.searchedBrandsWithProducts
+  $scope.searchedBrands = []
+  $scope.searchProducts = []
+
+  $scope.getBrands = function(firstLetter) {
+    if (firstLetter.length === 1) {
+      Products.getBrands(firstLetter)
+        .then(function(brands) {
+          $scope.searchedBrands = Object.keys(brands)
+          $scope.searchedBrandsWithProducts = brands
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
+    } else {
+      console.error('too many letters')
+    }
+  }
+
+  $scope.selectBrandProducts = function() {
+    var products = $scope.searchedBrandsWithProducts[$scope.newProduct.brand_name]
+    $scope.searchProducts = []
+    for (var i=0; i < products.length; i++) {
+      $scope.searchProducts.push(products[i].product_name)
+    }
+  }
 
   $scope.user = Auth.userData;
   $scope.products = Products.userProducts;

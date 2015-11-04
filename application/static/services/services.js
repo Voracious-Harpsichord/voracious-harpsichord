@@ -211,7 +211,20 @@ services.factory('Sites', function($http, Auth) {
 });
 
 
-services.factory('Products', function($http, Auth) {
+services.factory('Products', function($http, Auth, $q) {
+
+  var getBrands = function(letter) {
+    return $http({
+      method:'GET',
+      url: '/api/brands/' + letter,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(function(resp) {
+      return resp.data
+    })
+  }
 
   var userProducts = [];
   
@@ -281,6 +294,7 @@ services.factory('Products', function($http, Auth) {
   };
 
   return {
+    getBrands: getBrands,
     userProducts: userProducts,
     getAllProducts: getAllProducts,
     addProduct: addProduct,

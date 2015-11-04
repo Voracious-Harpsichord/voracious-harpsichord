@@ -267,6 +267,11 @@ def events():
     response = jsonify(e_ctrl.get_events())
     return response, 200
 
+@app.route('/api/brands/<first_letter>',methods=['GET'])
+def brands(first_letter):
+    response = jsonify(p_ctrl.get_brands(first_letter))
+    return response, 200
+
 #start server
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080, debug=True)
