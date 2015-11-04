@@ -213,10 +213,6 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
   };
 });
 
-<<<<<<< HEAD
-
-=======
->>>>>>> fixed tree
 stash.controller('ModalController', function($scope, $element, product, close) {
 
   $scope.product = {};
