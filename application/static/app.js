@@ -5,6 +5,7 @@ var app = angular.module('beautystash',[
   'beautystash.auth',
   'beautystash.settings',
   'beautystash.profile',
+  'beautystash.profileTree',
   'beautystash.user',
   'ui.router',
   'ui.bootstrap',
