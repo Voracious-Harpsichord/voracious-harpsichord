@@ -433,46 +433,46 @@ Create a new entry in Personal_Rec table.
 * *comment*: User created comment about article/blog
 
 ##### Methods
-*remove_protocol(full_url)*
 
-*get_protocol(full_url)*
+**remove_protocol***(full_url)*
 
-*add_protocol(unsure_url)*
+**get_protocol***(full_url)*
 
-*type_of(full_url)*
+**add_protocol***(unsure_url)*
 
-*make_absolute(full_url, partial_url)*
+**type_of***(full_url)*
 
-*fetch_html(full_url)*
+**make_absolute***(full_url, partial_url)*
 
-*get_host(full_url)*
+**fetch_html***(full_url)*
 
-*get_description(html)*
+**get_host***(full_url)*
 
-*get_image_ref(html, full_url)*
+**get_description***(html)*
 
-*get_author(html)*
+**get_image_ref***(html, full_url)*
 
-*get_article_title(html)*
+**get_author***(html)*
 
-*get_site_info(url)*
+**get_article_title***(html)*
 
-*query_by_id_and_type(site_id, site_type)*
+**get_site_info***(url)*
 
-*get_id_from_url(url)*
+**query_by_id_and_type***(site_id, site_type)*
 
-*get_sites_by_user_id(user_id)*
+**get_id_from_url***(url)*
 
-*add_or_update_site(info)*
+**get_sites_by_user_id***(user_id)*
 
-*add_user_to_site(user_id, site_id, site_type, comment)*
+**add_or_update_site***(info)*
 
-*edit_user_to_site(id, comment)*
+**add_user_to_site***(user_id, site_id, site_type, comment)*
 
-*remove_user_from_site(id)*
+**edit_user_to_site***(id, comment)*
 
+**remove_user_from_site***(id)*
 
-*get_comments(user_id, site_type, site_id)*
+**get_comments***(user_id, site_type, site_id)*
 
 #### Users
 
