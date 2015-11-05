@@ -1,0 +1,102 @@
+<div class="backgroundFill">
+  <div class='container' id='sites'>
+    <div class='row'>
+      <div class='col-md-12 recs-tab'>
+        <tabset>
+        <!-- Universal Tab -->
+        <tab heading='BeautyStash Recommends' select='addSiteModeFn(false)'>
+        <!-- Universal tab -->
+        <div ng-hide='addSiteMode' class='col-md-12 wrapper'>
+        <h2>Recommended by BeautyStash for {{user.name_first}}</h2>
+          <ul class='list'>
+            <li class='col-sm-12 product-item' ng-repeat='universalRec in userRecs.universal'>
+              <img class='productImage col-sm-3' src="{{universalRec.product_image_url}}">
+              <div class='col-sm-8 product-content'>
+                <div class='product-brand'>{{universalRec.brand_name}}</div>
+                <span class='product-name'>{{universalRec.product_name}}</span><br>
+                <span>{{universalRec.product_category}}</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+        </tab>
+        <!-- Personal Tab -->
+        <tab heading="{{user.name_first}}'s Friends Recommend" select="addSiteModeFn(true)">
+<div class='row'>
+            <div class='col-md-3'>
+                <form novalidate class='simple-form' name='myForm'>
+                    <div class='row'>
+                        <div class='searchBoxes col-sm-12 form-group' ng-form>
+                            <div>Recommend Product to {{user.name_first}}</div>
+                            <label class='control-label' for='Brand'>Brand</label>
+                            <autocomplete data='searchedBrands' on-type='getBrands' class='brand-box' ng-model='newProduct.brand_name' attr-placeholder="Search brands..." required>
+                            </autocomplete>
+
+                            <label class='control-label' for='Product'>Product</label>
+                            <autocomplete data='searchProducts' on-type='selectBrandProducts' class='brand-box' ng-model='newProduct.product_name' attr-placeholder="Search products..." required>
+                            </autocomplete>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class='searchBoxes col-sm-5 form-group'>
+                            <label for='category'>Category</label><br>
+                            <select class='productSelect' name='category' ng-model='newProduct.product_category'>
+                                <option  value='Makeup'>Makeup</option>
+                                <option value='Skin Care'>Skin Care</option>
+                                <option value='Hair'>Hair</option>
+                                <option value='Bath and Body'>Bath and Body</option>
+                                <option value='Fragrance'>Fragrance</option>
+                                <option value='Tools|Brushes'>Tools|Brushes</option>
+                            </select>
+                        </div>
+                        <div class='searchBoxes col-sm-4 col-sm-offset-1 form-group'>
+                            <label for='size'>Size</label><br>
+                            <select class='productSelect' name='size' ng-model='newProduct.product_size'>
+                                <option value='Full'>Full</option>
+                                <option value='Travel'>Travel</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class='autocomplete col-sm-10 form-group'>
+                            <label>Color</label><br>
+                            <input type='text' class='brand-box' ng-model='newProduct.product_color' attr-placeholder="List color..."/>
+                        </div>
+                        <div class='searchBoxes col-sm-12 form-group'>
+                            <label>Notes</label><br>
+                            <textarea rows='3' type='text' class='form-control' ng-model='newProduct.product_notes'></textarea>
+                        </div>
+                    </div>
+                    <div class='searchBoxes form-group col-sm-2 col-sm-offset-3 product-button'>
+                        <button class='btn' type='submit' ng-click='addRecommendation(newProduct)'>Save Product</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class='col-md-9 product-list'>
+                <div class='col-md-12 wrapper'>
+                    <ul class='list'>
+                        <h2>Products</h2>
+                        <li class='col-sm-12 product-item' ng-repeat='product in userRecs.personal'>
+                            <div class='row'>
+                                <img class='productImage col-sm-3' src="{{product.product_image_url}}">
+                                <div class='col-sm-8 product-content'>
+                                    <div class='product-brand'>{{product.brand_name}}</div>
+                                    <span class='product-name'>{{product.product_name}}</span><br>
+                                    <span>Cateory: {{product.product_category}}</span>
+                                    <span>Size: {{product.product_size}}</span>
+                                    <span>Status: {{product.product_status}}</span><br>
+                                    <span>Color: {{product.product_color}}</span>
+                                    <span>Notes: {{product.product_notes}}</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+</div>
