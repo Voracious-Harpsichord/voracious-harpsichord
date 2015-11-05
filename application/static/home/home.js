@@ -1,6 +1,6 @@
-var home = angular.module('beautystash.home', ['infinite-scroll', 'angularMoment'])
+var home = angular.module('beautystash.home', ['infinite-scroll', 'angularMoment', 'ui.router'])
 
-home.controller('HomeController', function($scope, Feed){
+home.controller('HomeController', function($scope, Feed, Auth, $state){
   $scope.items = [];
   $scope.hashItems = {}
   var photoOptions = ['photo1.jpg', 'photo2.jpg', 'photo3.jpg', 'photo4.jpg', 'photo5.jpg', 'photo6.jpg', 'photo7.jpg', 'photo8.jpg', 'photo9.jpg', 'photo10.jpg', 'photo11.jpg', 'photo12.jpg', 'photo13.jpg', 'photo14.jpg', 'photo15.jpg', 'photo16.jpg', 'photo17.jpg', 'photo18.jpg', 'photo19.jpg', 'photo20.jpg', 'photo21.jpg', 'photo22.jpg', 'photo23.jpg', 'photo24.jpg', 'photo25.jpg', 'photo26.jpg', 'photo27.jpg', 'photo28.jpg' ]
@@ -69,5 +69,14 @@ home.controller('HomeController', function($scope, Feed){
       .catch(function(error) {
         console.error('Error:', error)
       })
+  }
+
+  $scope.viewUser = function(user_id) {
+    if (Auth.userData.userid === user_id) {
+      $state.go('profile.stash');
+    }
+    else {
+      $state.go('user.stash', {userId: user_id});
+    }
   }
 }); 

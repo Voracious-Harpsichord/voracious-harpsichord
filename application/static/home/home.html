@@ -6,7 +6,7 @@
                     <img class='feedItemImage' src="{{i.image}}">
                     <span class='feedBox'>
                         <div>
-                            <span  class='feedUserName' ui-sref="user.stash({userId: {{i.user_id}}})">{{i.user_first}} {{i.user_last}} shared this {{i.type}}.</span>
+                            <span  class='feedUserName' ng-click="viewUser(i.user_id)">{{i.user_first}} {{i.user_last}} shared this {{i.type}}.</span>
                         </div>
                         <span am-time-ago="{{i}}.time_stamp"></span><span> | {{i.location}}</span>
                         <div class='feedComments'>{{i.comments}}</div>
