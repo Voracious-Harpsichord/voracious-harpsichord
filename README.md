@@ -572,12 +572,19 @@ Returns unique ID for username.
 
 **get_user_as_dictionary***(id)*
 
-
+Returns object of user information.
 
 **create_session***(response, user_id)*
+
+Middleware to add session cookie to response object.
+
 **verify_session***(request)*
 
+Returns boolean if session cookie on request object is valid.
+
 **destroy_session***(response)*
+
+
 
 **get_followings***(user_id)*
 
