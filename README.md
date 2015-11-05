@@ -3,39 +3,42 @@
 
 > A dashboard for your beauty products
 
+
+## Table of Contents
+
+1. [Team](#team)
+1. [Roadmap](#roadmap)
+1. [Contributing](#contributing)
+1. [Development](#development)
+    1. [Requirements](#requirements)
+    1. [Installing Dependencies](#installing-dependencies)
+1. [Usage](#Usage)
+    1. [API](#api)
+    1. [Database](#database) 
+
 ## Team
 
   - __Product Owner__: Cynthia Chen, Laura Weaver
   - __Scrum Master__: JT Knox
   - __Development Team Members__: Cynthia Chen, JT Knox, Michael Sova, Laura Weaver
 
-## Table of Contents
+## Roadmap
 
-1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
-    1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
-1. [Team](#team)
-1. [Contributing](#contributing)
+View the project roadmap [here](https://github.com/Voracious-Harpsichord/voracious-harpsichord/issues)
 
 
-## Requirements
+## Contributing
 
-- Python 3.4.x
-- Postgresql 9.1.x
-- Bower
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+
 
 ## Development
 
-To run locally:
-(from *application* folder)
+### Requirements
 
-```bash
-python3 server.py
-```
-
-Go to `localhost:5000`
+- Python 3.5.x
+- Postgresql 9.1.x
+- Bower
 
 ### Installing Dependencies
 
@@ -46,17 +49,26 @@ pip3 install -r application/requirements.txt
 bower install
 ```
 
-### Back-end Code
+## Usage
 
-#### API End-points
+To run locally:
+(from *application* folder)
 
-##### /api/user
+```bash
+python3 server.py
+```
 
-###### GET
+Go to `localhost:8080`
+
+### API
+
+#### /api/**user**
+
+##### GET
 
 Verify that user is logged in through cookie data, and respond with user info.
 
-###### POST
+##### POST
 
 Verify that user is logged in by checking username and password, and respond with user info
 
@@ -64,18 +76,18 @@ Verify that user is logged in by checking username and password, and respond wit
 
 ```json
 {   
-    "username": <required>,
-    "password": <required>
+    "username": required,
+    "password": required
 }
 ```
 
-###### DELETE
+##### DELETE
 
 Destroy user session for logging out.
 
-##### /api/newUser
+#### /api/**newUser**
 
-###### POST
+##### POST
 
 Create new user account.
 
@@ -83,76 +95,76 @@ Create new user account.
 
 ```json
 {   
-    "username": <required>,
-    "password": <required>,
-    "email": <optional>,
-    "name_title": <optional>,
-    "name_first": <optional>,
-    "name_last": <optional>,
-    "gender": <optional>,
-    "location": <optional>,
-    "birthday": <optional>,
-    "skin_tone": <optional>
+    "username": required,
+    "password": required,
+    "email": optional,
+    "name_title": optional,
+    "name_first": optional,
+    "name_last": optional,
+    "gender": optional,
+    "location": optional,
+    "birthday": optional,
+    "skin_tone": optional
 }
 ```
 
-##### /api/profile/<user_id>
+#### /api/**profile**/<user_id>
 
-###### GET
+##### GET
 
 Retrieve simplified info about `<user_id` to display on a profile other than the logged in user's.
 
-##### /api/follow/<user_id>
+#### /api/**follow**/<user_id>
 
-###### GET
+##### GET
 
 Retrieve users that `<user_id>` is following and a follower of. 
 
-###### POST
+##### POST
 
 Add `<user_id>` as a follower of the user passed in request body.
 
 **Request Body:**
 ```json
 {   
-    "userid": <required>,
+    "userid": required,
 }
 ```
 
-###### DELETE
+##### DELETE
 
 Remove `<user_id>` as of follower of the user passed in request body.
 
 **Request Body:**
 ```json
 {   
-    "userid": <required>,
+    "userid": required,
 }
 ```
 
-##### /api/userProducts/<user_id>
+#### /api/**userProducts**/<user_id>
 
-###### GET
+##### GET
 Retrieve all the products in `<user_id`'s collection, with user specific information included.
 
-###### POST
+##### POST
 
 Add a product to `<user_id`'s collection.
 
 **Request Body:**
 ```json
 {   
-    "product_name": <required>,
-    "brand_name": <required>,
-    "product_category": <optional>,
-    "product_size": <optional>,
-    "product_status": <optional>,
-    "product_notes": <optional>,
-    "product_color": <optional>
+    "product_name": required,
+    "brand_name": required,
+    "product_category": optional,
+    "product_size": optional,
+    "product_status": optional,
+    "product_notes": optional,
+    "product_color": optional
 }
 ```
 
-###### PUT
+##### PUT
 
 Edit a product in `<user_id>`'s collection.
 
@@ -160,84 +172,112 @@ Edit a product in `<user_id>`'s collection.
 ```json
 {   
     "product": {
-        "product_name": <required>,
-        "brand_name": <required>,
+        "product_name": required,
+        "brand_name": required,
     },
-    "product_category": <optional>,
-    "product_size": <optional>,
-    "product_status": <optional>,
-    "product_notes": <optional>,
-    "product_color": <optional>
+    "product_category": optional,
+    "product_size": optional,
+    "product_status": optional,
+    "product_notes": optional,
+    "product_color": optional
 }
 ```
-###### DELETE
+##### DELETE
 
 Remove a product from `<user_id>`'s collection.
 
 **Request Body:**
 ```json
 {
-    "prdouct_id" <required>
+    "prdouct_id" required
 }
 ```
 
-##### /api/products/<product_id>
+#### /api/**products**/<product_id>
 
-###### GET
+##### GET
 
 Retrieve non-user-specfic information about a specific product.
 
-##### /api/sites
+#### /api/**sites**/<user_id>
 
-###### GET
+##### GET
 
-**Request Body:**
+Retrieve articles and blogs in `<user_id>`'s collection.
 
-###### POST
+##### POST
 
-**Request Body:**
-
-###### PUT
+Add an article or blog to `<user_id>`'s collection. 
 
 **Request Body:**
+```json
+{
+    "url": required,
+    "comment": optional
+}
+```
 
-###### DELETE
+##### PUT
 
-**Request Body:**
-
-##### /api/recommendations
-
-###### GET
-
-**Request Body:**
-
-###### POST
+Edit comment on an article or blog to `<user_id>`'s collection.
 
 **Request Body:**
+```json
+{
+    "user_site_id": required,
+    "comment": optional
+}
+```
 
-##### /api/events
+##### DELETE
 
-###### GET
+Remove an article or blog to `<user_id>`'s collection.
 
 **Request Body:**
+```json
+{
+    "user_site_id": required
+}
+```
 
-##### /api/brands
+#### /api/**recommendations**/<user_id>
 
-###### GET
+##### GET
 
 **Request Body:**
+```json
+{
 
-#### Database
+}
+```
+
+##### POST
+
+**Request Body:**
+```json
+{
+
+}
+```
+
+#### /api/**events**
+
+##### GET
+
+**Request Body:**
+```json
+{
+
+}
+```
+
+#### /api/**brands**/<first_letter>
+
+##### GET
+
+### Database
 
 
 
 ### Front-end Code
 
-### Roadmap
-
-View the project roadmap [here](https://github.com/Voracious-Harpsichord/voracious-harpsichord/issues)
-
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
