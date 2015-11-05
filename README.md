@@ -436,43 +436,94 @@ Create a new entry in Personal_Rec table.
 
 **remove_protocol***(full_url)*
 
+Returns URL string without the 'http://' if one existed. 
+
 **get_protocol***(full_url)*
+
+Returns string of either 'http://' or 'https://'.
 
 **add_protocol***(unsure_url)*
 
+Retusn url string with 'http://' prepended, if it was not already.
+
 **type_of***(full_url)*
+
+Returns string 'article' or 'blog' depending on length of path of the URl given.
 
 **make_absolute***(full_url, partial_url)*
 
+Converts a relative path into an absolute path.
+Example:
+```python
+
+make_absolut('http://www.sephora.com/productInfo/P1234', '/images/P1234')
+# >> 'http://www.sephora.com/images/P1234'
+```
+
 **fetch_html***(full_url)*
+
+Returns string of full page source for given URL.
 
 **get_host***(full_url)*
 
+Returns URL string minus the protocol and path
+Example:
+```python
+get_host('https://www.google.com/webhp?ie=UTF-8#q=something')
+# >> 'www.google.com'
+```
+
 **get_description***(html)*
+
+Returns string for site description (from meta tag) if one exists, or empty string.
 
 **get_image_ref***(html, full_url)*
 
+Returns string for image source URL (from meta tag) if one exists, or empty string.
+
 **get_author***(html)*
+
+Returns string for author of article (from meta tag) if one exists, or empty string.
 
 **get_article_title***(html)*
 
+Returns string for article title (from meta tag) if one exists, or empty string.
+
 **get_site_info***(url)*
+
+Returns object containing information about website scraped from meta tags.
 
 **query_by_id_and_type***(site_id, site_type)*
 
+Returns query object.
+
 **get_id_from_url***(url)*
+
+Returns ID of site (in either Article or Blog table) or None.
 
 **get_sites_by_user_id***(user_id)*
 
+Returns a list of sites objects from User_site table, populated with fields from either Blog or Article table.
+
 **add_or_update_site***(info)*
+
+Creates a new entry in Article or Blog table or updates (determined by properties in info object) existing entry.
 
 **add_user_to_site***(user_id, site_id, site_type, comment)*
 
+Creates entry in User_site table.
+
 **edit_user_to_site***(id, comment)*
+
+Updates an entry in User_site table.
 
 **remove_user_from_site***(id)*
 
+Deletes an entry in User_site table.
+
 **get_comments***(user_id, site_type, site_id)*
+
+Retuns user-specific comments about an article/blog from the User_site table.
 
 #### Users
 
