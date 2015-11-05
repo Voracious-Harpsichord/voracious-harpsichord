@@ -108,13 +108,13 @@ Create new user account.
 }
 ```
 
-#### /api/**profile**/*<user_id>*
+#### /api/**profile**/`<user_id>`
 
 ##### GET
 
 Retrieve simplified info about `<user_id>` to display on a profile other than the logged in user's.
 
-#### /api/**follow**/*<user_id>*
+#### /api/**follow**/`<user_id>`
 
 ##### GET
 
@@ -142,7 +142,7 @@ Remove `<user_id>` as of follower of the user passed in request body.
 }
 ```
 
-#### /api/**userProducts**/*<user_id>*
+#### /api/**userProducts**/`<user_id>`
 
 ##### GET
 Retrieve all the products in `<user_id`'s collection, with user specific information included.
@@ -199,7 +199,7 @@ Remove a product from `<user_id>`'s collection.
 
 Retrieve non-user-specfic information about a specific product.
 
-#### /api/**sites**/*<user_id>*
+#### /api/**sites**/`<user_id>`
 
 ##### GET
 
@@ -240,7 +240,7 @@ Remove an article or blog to `<user_id>`'s collection.
 }
 ```
 
-#### /api/**recommendations**/*<user_id>*
+#### /api/**recommendations**/`<user_id>`
 
 ##### GET
 
