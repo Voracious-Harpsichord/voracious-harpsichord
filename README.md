@@ -380,17 +380,30 @@ Removes an entry from the User_product table.
 * *product_id*: Product being recommended
 
 ##### Methods
-*get_recommendation_by_user_id(user_id)*
 
-*add_recommendation(user_id, product_id, rank)*
+**get_recommendation_by_user_id***(user_id)*
 
-*populate_new_user_recommendations(user_id)*
+Returns a list of product objects from the top 5 ranked entries in the universal (non-user-generated) Recommendation table.
 
-*remove_recommendation(user_id)*
+**add_recommendation***(user_id, product_id, rank)*
 
-*get_personal_recs(user_id)*
+Creates a new entry in the Recommendation table.
 
-*add_personal_rec(from_user_id, to_user_id, product_id)*
+**populate_new_user_recommendations***(user_id)*
+
+Used for when a new user signs up. Pseudo-randomly picks product ID numbers and create entries in the Recommendation table.
+
+**remove_recommendation***(user_id)*
+
+Remove all entries in Recommendation table for user.
+
+**get_personal_recs***(user_id)*
+
+Returns from Personal_Rec table a list of recommendation objects indluding user who gave recommendation and a nested product object.
+
+**add_personal_rec***(from_user_id, to_user_id, product_id)*
+
+Create a new entry in Personal_Rec table.
 
 #### Sites
 
