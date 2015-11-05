@@ -5,7 +5,7 @@ var user = angular.module('beautystash.user', [
   'ngMessages'
 ]);
 
-user.controller('UserController', function($scope, $window, $stateParams, User, Products, Follow, Auth) {
+user.controller('UserController', function($scope, $window, $stateParams, User, Products, Follow, Auth, Rec) {
   $scope.userId = $stateParams.userId
   $scope.user;
   $scope.userProducts;
@@ -14,6 +14,7 @@ user.controller('UserController', function($scope, $window, $stateParams, User, 
   $scope.membershipYear;
   $scope.location;
   $scope.following = false
+  $scope.userRecs;
 
   $scope.tabs = [
     {name: 'Stash', path: 'stash'},
@@ -23,6 +24,78 @@ user.controller('UserController', function($scope, $window, $stateParams, User, 
     {name: 'Recommendations', path: 'recs'},
     {name: 'Blogs', path: 'blogs'}
   ];
+
+  $scope.newProduct = {
+    product_id: null,
+    product_name: null,
+    brand_name: null,
+    product_size: null,
+    product_status:null,
+    product_notes: null,
+    product_color: null,
+    product_category: null
+  };
+
+  resetFields = function() {
+    $scope.newProduct.product_id = null;
+    $scope.newProduct.brand_name = null;
+    $scope.newProduct.product_name = null;
+    $scope.newProduct.product_notes = null;
+    $scope.newProduct.product_color = null;
+    $scope.newProduct.product_size = null;
+    $scope.newProduct.product_status = null;
+    $scope.newProduct.product_category = null;
+  };
+
+  $scope.searchedBrandsWithProducts
+  $scope.searchedBrands = []
+  $scope.searchProducts = []
+
+  $scope.getBrands = function(firstLetter) {
+    if (firstLetter.length === 1) {
+      Products.getBrands(firstLetter)
+        .then(function(brands) {
+          $scope.searchedBrands = Object.keys(brands)
+          $scope.searchedBrandsWithProducts = brands
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
+    } else {
+      console.error('too many letters')
+    }
+  }
+
+  $scope.selectBrandProducts = function() {
+    var products = $scope.searchedBrandsWithProducts[$scope.newProduct.brand_name]
+    $scope.searchProducts = []
+    for (var i=0; i < products.length; i++) {
+      $scope.searchProducts.push(products[i].product_name)
+    }
+  }
+
+  $scope.addRecommendation = function(product) {
+    var userid = $scope.userId
+    if (product.brand_name !== null && product.product_name !== null) {
+      Rec.addRec(product, userid)
+      .then(function(addedProduct) {
+        $scope.userProducts.unshift(addedProduct);
+        resetFields();
+      })
+      .catch(function(error) {
+        console.error('Error with adding product:', error);
+        resetFields();
+      });
+    }
+  };
+
+  getUserRecs = function(userId) {
+    Rec.loadUserRecs(userId)
+      .then(function(data) {
+        console.log(data)
+        $scope.userRecs = data
+      })
+  }
 
   getUserData = function(userId) {
     User.getInfo($scope.userId)
@@ -53,6 +126,7 @@ user.controller('UserController', function($scope, $window, $stateParams, User, 
   }
 
   getUserData($scope.userId)
+  getUserRecs($scope.userId)
   getUserFollowingFollowers($scope.userId)
 
   $scope.follow = function(user) {
@@ -82,6 +156,18 @@ user.filter('wishlistFilter', function() {
     var output = [];
     angular.forEach(input, function(product) {
       if (product.product_status === 'Wishlist') {
+        output.push(product);
+      }
+    });
+    return output;
+  };
+});
+
+user.filter('recsFilter', function() {
+  return function(input) {
+    var output = [];
+    angular.forEach(input, function(product) {
+      if (product.product_status === 'Recommendation') {
         output.push(product);
       }
     });

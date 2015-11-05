@@ -26,14 +26,33 @@ services.factory('Rec', function($http, Auth) {
     });
   };
 
-  var addRec = function(rec) {
+  var loadUserRecs = function(userid) {
+    return $http({
+      method: 'GET',
+      url: '/api/recommendations/' + userid,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(function(resp) {
+      var userRecs = {}
+      userRecs.personal = resp.data.personal;
+      userRecs.universal = resp.data.universal;
+      return userRecs;
+    })
+    .catch(function(error) {
+      console.error(error);
+    });
+  };
+
+  var addRec = function(product, userId) {
     return $http({
       method: 'POST',
       url: '/api/recommendations/' + Auth.userData.userid,
       headers: {
         'Content-Type': 'application/json'
       },
-      data: rec
+      data: {product: product, to_user_id: userId}
     })
     .then(function(resp) {
       return resp.data; //newly added recommendation
@@ -46,6 +65,7 @@ services.factory('Rec', function($http, Auth) {
   return {
     recommendations: recommendations,
     loadRecs: loadRecs,
+    loadUserRecs:loadUserRecs,
     addRec: addRec
   };
 

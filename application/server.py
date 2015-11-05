@@ -256,7 +256,8 @@ def recommendations(user_id):
     #add a personal reccomendation
     if request.method == 'POST':
         body = request.get_json()
-        response = r_ctrl.add_personal_rec(user_id, body['to_user_id'], body['product_id'])
+        print(body)
+        response = r_ctrl.add_personal_rec(user_id, body.data['to_user_id'], body.data['product_id'])
         if response:
             return jsonify(response), 201
         else:
