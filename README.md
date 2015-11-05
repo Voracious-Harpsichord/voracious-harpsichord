@@ -262,20 +262,18 @@ Recommend products from `<user_id>` to user in request body.
 
 ##### GET
 
-**Request Body:**
-```application/json
-{
-
-}
-```
+Retrieve 100 most recent events from all user activities
 
 #### /api/**brands**/<first_letter>
 
 ##### GET
 
+Retrieve a list of product names and brand names based on the `<first_letter>` of a brand for auto-completes.
+
 ### Database
 
-
+**TBD**
 
 ### Front-end Code
 
+**TBD**
