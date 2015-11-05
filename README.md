@@ -285,6 +285,8 @@ Retrieve a list of product names and brand names based on the `<first_letter>` o
 * *time_stamp*: When the action took place
 
 ##### Methods
+*add_event(user_id, action, view_type, data_id)*
+*get_events()*
 
 #### Products
 
@@ -313,6 +315,54 @@ Retrieve a list of product names and brand names based on the `<first_letter>` o
 
 ##### Methods
 
+**get_brands***(first_letter)*
+
+Returns minimal list of brands and associative products to help auto-complete forms.
+
+**get_products_by_user_id***(user_id)*
+
+Returns a list of product objects with both user specific and universal product information.
+
+**get_product_as_dictionary***(product_id)*
+
+Returns non-user-specific product information as a key-value store.
+
+**get_product_by_product_id***(product_id)*
+
+Returns a query object of size 1 or less.
+
+**get_product_id_by_sephora_product_id***(sephora_product_id)*
+
+Returns a product ID number.
+
+**verify_product_by_name_and_brand***(product_name, product_brand)*
+
+Returns a boolean if product already exists in database.
+
+**verify_product_by_id***(product_id)*
+
+Returns a boolean if product already exists in database.
+
+**add_product_to_products***(name, brand, category='', price='', sephora_id='', image_url='', description='')*
+
+Creats a new entry in Product table.
+
+**add_user_to_product***(user_id, product_id, size='Full', status='Own', notes='', color='', stars='', review='', user_product_image_url='')*
+
+Creates a new entry in User_product table
+
+**edit_user_to_product***(user_id, product_id, size='full', status='own', notes='', color='', stars='', review='', user_product_image_url='')*
+
+Updates an entry in User_product table
+
+**get_notes***(user_id, product_id)*
+
+Retuns user-specific comments about a product from the User_product table.
+
+**remove_user_from_product***(product_id)*
+
+Removes an entry from the User_product table.
+
 #### Recommendations
 
 ##### Schema
@@ -330,6 +380,17 @@ Retrieve a list of product names and brand names based on the `<first_letter>` o
 * *product_id*: Product being recommended
 
 ##### Methods
+*get_recommendation_by_user_id(user_id)*
+
+*add_recommendation(user_id, product_id, rank)*
+
+*populate_new_user_recommendations(user_id)*
+
+*remove_recommendation(user_id)*
+
+*get_personal_recs(user_id)*
+
+*add_personal_rec(from_user_id, to_user_id, product_id)*
 
 #### Sites
 
@@ -359,6 +420,46 @@ Retrieve a list of product names and brand names based on the `<first_letter>` o
 * *comment*: User created comment about article/blog
 
 ##### Methods
+*remove_protocol(full_url)*
+
+*get_protocol(full_url)*
+
+*add_protocol(unsure_url)*
+
+*type_of(full_url)*
+
+*make_absolute(full_url, partial_url)*
+
+*fetch_html(full_url)*
+
+*get_host(full_url)*
+
+*get_description(html)*
+
+*get_image_ref(html, full_url)*
+
+*get_author(html)*
+
+*get_article_title(html)*
+
+*get_site_info(url)*
+
+*query_by_id_and_type(site_id, site_type)*
+
+*get_id_from_url(url)*
+
+*get_sites_by_user_id(user_id)*
+
+*add_or_update_site(info)*
+
+*add_user_to_site(user_id, site_id, site_type, comment)*
+
+*edit_user_to_site(id, comment)*
+
+*remove_user_from_site(id)*
+
+
+*get_comments(user_id, site_type, site_id)*
 
 #### Users
 
@@ -384,6 +485,21 @@ Retrieve a list of product names and brand names based on the `<first_letter>` o
 * *is_following*: ID of user being followed
 
 ##### Methods
+*make_new_user(u)*
+*verify_user(username, password)*
+*username_exists(username)*
+*userid_exists(userid)*
+*get_user_id(username)*
+*get_user_as_dictionary(id)*
+*create_session(response, user_id)*
+*verify_session(request)*
+
+# Remove the sessions
+*destroy_session(response)*
+
+*get_followings(user_id)*
+
+*get_followers(user_id)*
 
 ### Front-end Code
 
