@@ -202,7 +202,7 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
   $scope.addSite = function(site) {
     Sites.addSite(site)
       .then(function(addedSite) {
-        $scope.sites.push(addedSite);
+        $scope.sites.unshift(addedSite);
         resetFields();
       })
       .catch(function(error) {
