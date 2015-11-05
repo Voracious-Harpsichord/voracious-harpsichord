@@ -1,8 +1,9 @@
-var home = angular.module('beautystash.home', ['infinite-scroll', 'angularMoment'])
+var home = angular.module('beautystash.home', ['infinite-scroll', 'angularMoment', 'ui.router'])
 
-home.controller('HomeController', function($scope, Feed){
+home.controller('HomeController', function($scope, Feed, Auth, $state){
   $scope.items = [];
   $scope.hashItems = {}
+  var photoOptions = ['photo1.jpg', 'photo2.jpg', 'photo3.jpg', 'photo4.jpg', 'photo5.jpg', 'photo6.jpg', 'photo7.jpg', 'photo8.jpg', 'photo9.jpg', 'photo10.jpg', 'photo11.jpg', 'photo12.jpg', 'photo13.jpg', 'photo14.jpg', 'photo15.jpg', 'photo16.jpg', 'photo17.jpg', 'photo18.jpg', 'photo19.jpg', 'photo20.jpg', 'photo21.jpg', 'photo22.jpg', 'photo23.jpg', 'photo24.jpg', 'photo25.jpg', 'photo26.jpg', 'photo27.jpg', 'photo28.jpg' ]
 
   $scope.loadMore = function() {
     Feed.loadEvents()
@@ -13,10 +14,10 @@ home.controller('HomeController', function($scope, Feed){
           if (!$scope.hashItems.hasOwnProperty(data[i].time_stamp)) {
 
             $scope.hashItems[data[i].time_stamp] = data[i]
-            console.log(data[i])
+            var randomPhoto = photoOptions[Math.floor(Math.random()*photoOptions.length)]
 
             if (data[i].view_type === 'product') {
-              var imageUrl = (data[i].data.product_image_url ? '../photos/sample2.jpg' : data[i].data.product_image_url)
+              var imageUrl = (data[i].data.product_image_url ? '../photos/' + randomPhoto : data[i].data.product_image_url)
               $scope.items.unshift({
                 user_first: data[i].user.name_first,
                 user_last: data[i].user.name_last,
@@ -34,7 +35,7 @@ home.controller('HomeController', function($scope, Feed){
                 subheading5: data[i].data.product_status,
               })
             } else if (data[i].view_type === 'article') {
-              var imageArticle = (data[i].data.image ? '../photos/sample2.jpg' : data[i].data.image)
+              var imageArticle = (data[i].data.image === '' ? '../photos/' + randomPhoto : data[i].data.image)
               $scope.items.unshift({
                 user_first: data[i].user.name_first,
                 user_last: data[i].user.name_last,
@@ -48,7 +49,7 @@ home.controller('HomeController', function($scope, Feed){
                 subheading1: data[i].data.url
               })
             } else if (data[i].view_type === 'blog') {
-              var imageBlog = (data[i].data.image ? '../photos/sample2.jpg' : data[i].data.image)
+              var imageBlog = (data[i].data.image === '' ? '../photos/' + randomPhoto : data[i].data.image)
               $scope.items.unshift({
                 user_first: data[i].user.name_first,
                 user_last: data[i].user.name_last,
@@ -68,5 +69,14 @@ home.controller('HomeController', function($scope, Feed){
       .catch(function(error) {
         console.error('Error:', error)
       })
+  }
+
+  $scope.viewUser = function(user_id) {
+    if (Auth.userData.userid === user_id) {
+      $state.go('profile.stash');
+    }
+    else {
+      $state.go('user.stash', {userId: user_id});
+    }
   }
 }); 
