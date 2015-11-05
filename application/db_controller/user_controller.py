@@ -26,7 +26,7 @@ def make_new_user(u):
     # make new user entry
     # add new user entry to the table
     #__init__(self, created_at, username, pw_hash, email, name_title, name_first, name_last, gender, location, birthday)
-    session.add(User(str(datetime.datetime.now()), u['username'], hashed, u.get('email', ''), u.get('name_title', ''), u.get('name_first', ''), u.get('name_last', ''), u.get('gender', ''), u.get('location', ''), u.get('birthday', ''),u.get('skin_tone', '')))
+    session.add(User(str(datetime.datetime.now()), u['username'], hashed, u.get('email', ''), u.get('name_title', ''), u.get('name_first', ''), u.get('name_last', ''), u.get('profile_pic', ''), u.get('gender', ''), u.get('location', ''), u.get('birthday', ''),u.get('skin_tone', '')))
     session.commit()
     return None
 
@@ -66,10 +66,19 @@ def get_user_as_dictionary(id):
     # lookup user in table by usernamed
     # return user id of user
     u = session.query(User).filter(User.id == id).one()
-    return {'userid':u.id, 'created_at':u.created_at, 'username':u.username, 
-    'name_title':u.name_title, 'name_first':u.name_first, 'name_last':u.name_last, 
-    'gender':u.gender, 'location':u.location, 'birthday':u.birthday, 
-    'skin_tone':u.skin_tone}
+    return {
+        'userid':u.id,
+        'created_at':u.created_at,
+        'username':u.username, 
+        'name_title':u.name_title,
+        'name_first':u.name_first,
+        'name_last':u.name_last,
+        'profile_pic':u.profile_pic,
+        'gender':u.gender,
+        'location':u.location,
+        'birthday':u.birthday, 
+        'skin_tone':u.skin_tone
+    }
 
 # SESSIONS
 # Add a sessions cookie on to the
