@@ -270,9 +270,22 @@ Retrieve 100 most recent events from all user activities
 
 Retrieve a list of product names and brand names based on the `<first_letter>` of a brand for auto-completes.
 
-### Database
+### Database Controllers
 
-**TBD**
+#### Events
+**Tables:** Events
+
+#### Products
+**Tables:** Products, User_products
+
+#### Recommendations
+**Tables:** Recommendations, Personal_Recs
+
+#### Sites
+**Tables:** Articles, Blogs, User_sites
+
+#### Users
+**Tables:** 
 
 ### Front-end Code
 
