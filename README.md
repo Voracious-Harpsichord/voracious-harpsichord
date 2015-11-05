@@ -549,21 +549,39 @@ Retuns user-specific comments about an article/blog from the User_site table.
 * *is_following*: ID of user being followed
 
 ##### Methods
-*make_new_user(u)*
-*verify_user(username, password)*
-*username_exists(username)*
-*userid_exists(userid)*
-*get_user_id(username)*
-*get_user_as_dictionary(id)*
-*create_session(response, user_id)*
-*verify_session(request)*
 
-# Remove the sessions
-*destroy_session(response)*
+**make_new_user***(u)*
 
-*get_followings(user_id)*
+Crates new entry in User table with properties in u object.
 
-*get_followers(user_id)*
+**verify_user***(username, password)*
+
+Returns user object or False.
+
+**username_exists***(username)*
+
+Returns boolean if username is already in User table.
+
+**userid_exists***(userid)*
+
+Returns boolean, verifying if userid is in User table.
+
+**get_user_id***(username)*
+
+Returns unique ID for username.
+
+**get_user_as_dictionary***(id)*
+
+
+
+**create_session***(response, user_id)*
+**verify_session***(request)*
+
+**destroy_session***(response)*
+
+**get_followings***(user_id)*
+
+**get_followers***(user_id)*
 
 ### Front-end Code
 
