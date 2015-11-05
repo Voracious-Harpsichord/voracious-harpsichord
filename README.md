@@ -244,19 +244,17 @@ Remove an article or blog to `<user_id>`'s collection.
 
 ##### GET
 
-**Request Body:**
-```application/json
-{
-
-}
-```
+Retrive recommendend products for `<user_id>`.
 
 ##### POST
 
+Recommend products from `<user_id>` to user in request body.
+
 **Request Body:**
 ```application/json
 {
-
+    "to_user_id": <required>,
+    "product_id": <required>
 }
 ```
 
