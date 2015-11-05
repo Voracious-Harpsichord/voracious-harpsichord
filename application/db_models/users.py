@@ -9,12 +9,13 @@ class User(db.Model):
     name_title = db.Column(db.String(80))
     name_first = db.Column(db.String(80))
     name_last = db.Column(db.String(80))
+    profile_pic = db.Column(db.String(500))
     gender = db.Column(db.String(40))
     location = db.Column(db.String(80))
     birthday = db.Column(db.String(40))
     skin_tone = db.Column(db.String(100))
     
-    def __init__(self, created_at, username, pw_hash, email, name_title, name_first, name_last, gender, location, birthday, skin_tone):
+    def __init__(self, created_at, username, pw_hash, email, name_title, name_first, name_last, profile_pic, gender, location, birthday, skin_tone):
         self.created_at = created_at
         self.username = username
         self.pw_hash = pw_hash
@@ -22,6 +23,7 @@ class User(db.Model):
         self.name_title = name_title
         self.name_first = name_first
         self.name_last = name_last
+        self.profile_pic = profile_pic
         self.gender = gender
         self.location = location
         self.birthday = birthday
