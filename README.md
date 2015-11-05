@@ -76,8 +76,8 @@ Verify that user is logged in by checking username and password, and respond wit
 
 ```application/json
 {   
-    "username": required,
-    "password": required
+    "username": <required>,
+    "password": <required>
 }
 ```
 
@@ -93,18 +93,18 @@ Create new user account.
 
 **Request Body:**
 
-```json
+```application/json
 {   
-    "username": required,
-    "password": required,
-    "email": optional,
-    "name_title": optional,
-    "name_first": optional,
-    "name_last": optional,
-    "gender": optional,
-    "location": optional,
-    "birthday": optional,
-    "skin_tone": optional
+    "username": <required>,
+    "password": <required>,
+    "email": <optional>,
+    "name_title": <optional>,
+    "name_first": <optional>,
+    "name_last": <optional>,
+    "gender": <optional>,
+    "location": <optional>,
+    "birthday": <optional>,
+    "skin_tone": <optional>
 }
 ```
 
@@ -125,9 +125,9 @@ Retrieve users that `<user_id>` is following and a follower of.
 Add `<user_id>` as a follower of the user passed in request body.
 
 **Request Body:**
-```json
+```application/json
 {   
-    "userid": required,
+    "userid": <required>,
 }
 ```
 
@@ -136,9 +136,9 @@ Add `<user_id>` as a follower of the user passed in request body.
 Remove `<user_id>` as of follower of the user passed in request body.
 
 **Request Body:**
-```json
+```application/json
 {   
-    "userid": required,
+    "userid": <required>,
 }
 ```
 
@@ -152,15 +152,15 @@ Retrieve all the products in `<user_id`'s collection, with user specific informa
 Add a product to `<user_id`'s collection.
 
 **Request Body:**
-```json
+```application/json
 {   
-    "product_name": required,
-    "brand_name": required,
-    "product_category": optional,
-    "product_size": optional,
-    "product_status": optional,
-    "product_notes": optional,
-    "product_color": optional
+    "product_name": <required>,
+    "brand_name": <required>,
+    "product_category": <optional>,
+    "product_size": <optional>,
+    "product_status": <optional>,
+    "product_notes": <optional>,
+    "product_color": <optional>
 }
 ```
 
@@ -169,17 +169,17 @@ Add a product to `<user_id`'s collection.
 Edit a product in `<user_id>`'s collection.
 
 **Request Body:**
-```json
+```application/json
 {   
     "product": {
-        "product_name": required,
-        "brand_name": required,
+        "product_name": <required>,
+        "brand_name": <required>,
     },
-    "product_category": optional,
-    "product_size": optional,
-    "product_status": optional,
-    "product_notes": optional,
-    "product_color": optional
+    "product_category": <optional>,
+    "product_size": <optional>,
+    "product_status": <optional>,
+    "product_notes": <optional>,
+    "product_color": <optional>
 }
 ```
 ##### DELETE
@@ -187,9 +187,9 @@ Edit a product in `<user_id>`'s collection.
 Remove a product from `<user_id>`'s collection.
 
 **Request Body:**
-```json
+```application/json
 {
-    "prdouct_id" required
+    "prdouct_id" <required>
 }
 ```
 
@@ -210,10 +210,10 @@ Retrieve articles and blogs in `<user_id>`'s collection.
 Add an article or blog to `<user_id>`'s collection. 
 
 **Request Body:**
-```json
+```application/json
 {
-    "url": required,
-    "comment": optional
+    "url": <required>,
+    "comment": <optional>
 }
 ```
 
@@ -222,10 +222,10 @@ Add an article or blog to `<user_id>`'s collection.
 Edit comment on an article or blog to `<user_id>`'s collection.
 
 **Request Body:**
-```json
+```application/json
 {
-    "user_site_id": required,
-    "comment": optional
+    "user_site_id": <required>,
+    "comment": <optional>
 }
 ```
 
@@ -234,9 +234,9 @@ Edit comment on an article or blog to `<user_id>`'s collection.
 Remove an article or blog to `<user_id>`'s collection.
 
 **Request Body:**
-```json
+```application/json
 {
-    "user_site_id": required
+    "user_site_id": <required>
 }
 ```
 
@@ -245,7 +245,7 @@ Remove an article or blog to `<user_id>`'s collection.
 ##### GET
 
 **Request Body:**
-```json
+```application/json
 {
 
 }
@@ -254,7 +254,7 @@ Remove an article or blog to `<user_id>`'s collection.
 ##### POST
 
 **Request Body:**
-```json
+```application/json
 {
 
 }
@@ -265,7 +265,7 @@ Remove an article or blog to `<user_id>`'s collection.
 ##### GET
 
 **Request Body:**
-```json
+```application/json
 {
 
 }
