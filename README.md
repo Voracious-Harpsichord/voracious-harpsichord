@@ -193,7 +193,7 @@ Remove a product from `<user_id>`'s collection.
 }
 ```
 
-#### /api/**products**/<product_id>
+#### /api/**products**/`<product_id>`
 
 ##### GET
 
