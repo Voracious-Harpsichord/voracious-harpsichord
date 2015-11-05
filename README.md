@@ -584,11 +584,15 @@ Returns boolean if session cookie on request object is valid.
 
 **destroy_session***(response)*
 
-
+Middleware to destory session cookie on response object.
 
 **get_followings***(user_id)*
 
+Return list of user-info objects that user is following.
+
 **get_followers***(user_id)*
+
+returns list of user-info objects that are following user.
 
 ### Front-end Code
 
