@@ -54,12 +54,9 @@ bower install
 
 ###### GET
 
-**Description:**
 Verify that user is logged in through cookie data, and respond with user info.
 
 ###### POST
-
-**Description:**
 
 Verify that user is logged in by checking username and password, and respond with user info
 
@@ -74,14 +71,12 @@ Verify that user is logged in by checking username and password, and respond wit
 
 ###### DELETE
 
-**Description:**
 Destroy user session for logging out.
 
 ##### /api/newUser
 
 ###### POST
 
-**Description:**
 Create new user account.
 
 **Request Body:**
@@ -105,19 +100,16 @@ Create new user account.
 
 ###### GET
 
-**Description:**
-Retrieve simplified info about non-logged in users for viewing profiles.
+Retrieve simplified info about `<user_id` to display on a profile other than the logged in user's.
 
 ##### /api/follow/<user_id>
 
 ###### GET
 
-**Description:**
 Retrieve users that `<user_id>` is following and a follower of. 
 
 ###### POST
 
-**Description:**
 Add `<user_id>` as a follower of the user passed in request body.
 
 **Request Body:**
@@ -125,70 +117,91 @@ Add `<user_id>` as a follower of the user passed in request body.
 {   
     "userid": <required>,
 }
+```
 
 ###### DELETE
 
-**Description:**
+Remove `<user_id>` as of follower of the user passed in request body.
 
 **Request Body:**
+```json
+{   
+    "userid": <required>,
+}
+```
 
-##### /api/userProducts
+##### /api/userProducts/<user_id>
 
 ###### GET
-
-**Description:**
-
-**Request Body:**
+Retrieve all the products in `<user_id`'s collection, with user specific information included.
 
 ###### POST
 
-**Description:**
+Add a product to `<user_id`'s collection.
 
 **Request Body:**
+```json
+{   
+    "product_name": <required>,
+    "brand_name": <required>,
+    "product_category": <optional>,
+    "product_size": <optional>,
+    "product_status": <optional>,
+    "product_notes": <optional>,
+    "product_color": <optional>
+}
+```
 
 ###### PUT
 
-**Description:**
+Edit a product in `<user_id>`'s collection.
 
 **Request Body:**
-
+```json
+{   
+    "product": {
+        "product_name": <required>,
+        "brand_name": <required>,
+    },
+    "product_category": <optional>,
+    "product_size": <optional>,
+    "product_status": <optional>,
+    "product_notes": <optional>,
+    "product_color": <optional>
+}
+```
 ###### DELETE
 
-**Description:**
+Remove a product from `<user_id>`'s collection.
 
 **Request Body:**
+```json
+{
+    "prdouct_id" <required>
+}
+```
 
-##### /api/products
+##### /api/products/<product_id>
 
 ###### GET
 
-**Description:**
-
-**Request Body:**
+Retrieve non-user-specfic information about a specific product.
 
 ##### /api/sites
 
 ###### GET
 
-**Description:**
-
 **Request Body:**
 
 ###### POST
-
-**Description:**
 
 **Request Body:**
 
 ###### PUT
 
-**Description:**
-
 **Request Body:**
 
 ###### DELETE
-
-**Description:**
 
 **Request Body:**
 
@@ -196,13 +209,9 @@ Add `<user_id>` as a follower of the user passed in request body.
 
 ###### GET
 
-**Description:**
-
 **Request Body:**
 
 ###### POST
-
-**Description:**
 
 **Request Body:**
 
@@ -210,15 +219,11 @@ Add `<user_id>` as a follower of the user passed in request body.
 
 ###### GET
 
-**Description:**
-
 **Request Body:**
 
 ##### /api/brands
 
 ###### GET
-
-**Description:**
 
 **Request Body:**
 
