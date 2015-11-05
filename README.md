@@ -82,7 +82,6 @@ Destroy user session for logging out.
 ###### POST
 
 **Description:**
-
 Create new user account.
 
 **Request Body:**
@@ -102,28 +101,30 @@ Create new user account.
 }
 ```
 
-##### /api/profile
+##### /api/profile/<user_id>
 
 ###### GET
 
 **Description:**
-
-**Request Body:**
+Retrieve simplified info about non-logged in users for viewing profiles.
 
 ##### /api/follow/<user_id>
 
 ###### GET
 
 **Description:**
-Retrieve information about other users
-
-**Request Body:**
+Retrieve users that `<user_id>` is following and a follower of. 
 
 ###### POST
 
 **Description:**
+Add `<user_id>` as a follower of the user passed in request body.
 
 **Request Body:**
+```json
+{   
+    "userid": <required>,
+}
 
 ###### DELETE
 
