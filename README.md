@@ -74,7 +74,7 @@ Verify that user is logged in by checking username and password, and respond wit
 
 **Request Body:**
 
-```json
+```application/json
 {   
     "username": required,
     "password": required
