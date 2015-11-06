@@ -4,7 +4,7 @@
     <div>
       <span>{{user.name_first}} {{user.name_last}} </span>
       <span><button class='followButton' type='submit' ng-click='follow(user)' ng-show='!following'>Follow</button></span>
-      <span><button class='followButton' type='submit' ng-click='unfollow(user)' ng-show='following'>Unfollow</button></span>
+      <span><button class='followButton' id='un' type='submit' ng-click='unfollow(user)' ng-show='following'>Unfollow</button></span>
     </div>
     <h5> {{user.location}} | Member since {{membershipYear}}</h5>
   </div>
