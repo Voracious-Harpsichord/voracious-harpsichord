@@ -359,6 +359,9 @@ angular.module('beautystash.profileTree', [])
     };
     return labels 
   }
+  var beautifyText = function(d){
+    res = d.value[0].toUpperCase() + d.value.slice(1); return res.replace('_',' ')
+  }
 
   var buildLabeledRectangles = function(data,classed,fill){
     // build rectangles
@@ -383,7 +386,7 @@ angular.module('beautystash.profileTree', [])
       .attr("y", function(d) { return d.y})
       .attr("dy", ".8em")
       .attr('style','color:white;')
-      .text(function(d) {res = d.value[0].toUpperCase() + d.value.slice(1); return res.replace('_',' ')})
+      .text(function(d) {return beautifyText(d)})
     }
 
   var addHover = function(classed,opacity){
@@ -399,7 +402,7 @@ angular.module('beautystash.profileTree', [])
 
   var updateClassText = function(classed){
     var text = svg.selectAll('text'+classed)
-    text.text(function(d){return d.order !== null && d.value + ' ' + d.order || d.value})       
+    text.text(function(d){value = beautifyText(d); return d.order !== null && value + ' ' + (d.order + 1) || value})       
   }
 
   var addFilterOrder = function(classed,config_table,cb){
