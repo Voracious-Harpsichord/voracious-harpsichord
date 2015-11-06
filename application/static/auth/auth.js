@@ -13,7 +13,6 @@ angular.module('beautystash.auth', [])
         //Invoke signup function from Auth factory
         Auth.signup($scope.user)
         .then(function() {
-          console.log('user data', $scope.user);
           //Fetch user's products
           Products.getAllProducts();
 

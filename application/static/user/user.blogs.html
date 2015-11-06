@@ -21,7 +21,7 @@
                 <h2>Reads</h2>
                 <li class='col-sm-12' id= 'siteItem' ng-repeat='site in sites track by $index'>
                   <div class='row'>
-                    <img class='blogItemImage col-sm-4' src="{{site.image || photos/sample1.jpg}}">
+                    <img class='blogItemImage col-sm-4' ng-src="{{site.image || photos/sample1.jpg}}">
                     <div class='site-content col-sm-8'>
                       <a class='site-link' ng-href='{{site.url}}'>{{ site.article_name || site.site_name}}</a>
                       <div class='site-description'>{{site.description}}</div>

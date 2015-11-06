@@ -86,7 +86,6 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
     if (product.brand_name !== null && product.product_name !== null) {
       Products.addProduct(product)
       .then(function(addedProduct) {
-        console.log('addedProduct', addedProduct);
         $scope.products.unshift(addedProduct);
         resetFields();
       })

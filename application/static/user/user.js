@@ -6,14 +6,14 @@ var user = angular.module('beautystash.user', [
 ]);
 
 user.controller('UserController', function($scope, $window, $stateParams, User, Products, Follow, Auth, Rec) {
-  $scope.userId = $stateParams.userId
+  $scope.userId = $stateParams.userId;
   $scope.user;
   $scope.userProducts;
   $scope.userFollowing;
   $scope.userFollowers;
   $scope.membershipYear;
   $scope.location;
-  $scope.following = false
+  $scope.following = false;
   $scope.userRecs;
 
   $scope.tabs = [
@@ -47,35 +47,35 @@ user.controller('UserController', function($scope, $window, $stateParams, User, 
     $scope.newProduct.product_category = null;
   };
 
-  $scope.searchedBrandsWithProducts
-  $scope.searchedBrands = []
-  $scope.searchProducts = []
+  $scope.searchedBrandsWithProducts;
+  $scope.searchedBrands = [];
+  $scope.searchProducts = [];
 
   $scope.getBrands = function(firstLetter) {
     if (firstLetter.length === 1) {
       Products.getBrands(firstLetter)
         .then(function(brands) {
-          $scope.searchedBrands = Object.keys(brands)
-          $scope.searchedBrandsWithProducts = brands
+          $scope.searchedBrands = Object.keys(brands);
+          $scope.searchedBrandsWithProducts = brands;
         })
         .catch(function(error) {
-          console.log(error)
-        })
+          console.error(error);
+        });
     } else {
-      console.error('too many letters')
+      console.error('too many letters');
     }
-  }
+  };
 
   $scope.selectBrandProducts = function() {
-    var products = $scope.searchedBrandsWithProducts[$scope.newProduct.brand_name]
-    $scope.searchProducts = []
+    var products = $scope.searchedBrandsWithProducts[$scope.newProduct.brand_name];
+    $scope.searchProducts = [];
     for (var i=0; i < products.length; i++) {
-      $scope.searchProducts.push(products[i].product_name)
+      $scope.searchProducts.push(products[i].product_name);
     }
-  }
+  };
 
   $scope.addRecommendation = function(product) {
-    var userid = $scope.userId
+    var userid = $scope.userId;
     if (product.brand_name !== null && product.product_name !== null) {
       Rec.addRec(product, userid)
       .then(function(addedProduct) {
@@ -92,10 +92,9 @@ user.controller('UserController', function($scope, $window, $stateParams, User, 
   getUserRecs = function(userId) {
     Rec.loadUserRecs(userId)
       .then(function(data) {
-        console.log(data)
-        $scope.userRecs = data
-      })
-  }
+        $scope.userRecs = data;
+      });
+  };
 
   getUserData = function(userId) {
     User.getInfo($scope.userId)
@@ -105,9 +104,9 @@ user.controller('UserController', function($scope, $window, $stateParams, User, 
         $scope.membershipYear = $scope.user.created_at.substring(0, 4);
       })
       .catch(function(error) {
-        console.error(error)
-      })
-  }
+        console.error(error);
+      });
+  };
 
   getUserFollowingFollowers = function(userId) {
     Follow.getUserFollowersFollowing(userId)
@@ -116,24 +115,24 @@ user.controller('UserController', function($scope, $window, $stateParams, User, 
         $scope.userFollowers = data.followers;
         for (var i=0; i < $scope.userFollowers.length; i++) {
           if ($scope.userFollowers[i].userid === Auth.userData.userid) {
-            $scope.following = true
+            $scope.following = true;
           }
         }
       })
       .catch(function(error) {
-        console.error(error)
-      })
-  }
+        console.error(error);
+      });
+  };
 
-  getUserData($scope.userId)
-  getUserRecs($scope.userId)
-  getUserFollowingFollowers($scope.userId)
+  getUserData($scope.userId);
+  getUserRecs($scope.userId);
+  getUserFollowingFollowers($scope.userId);
 
   $scope.follow = function(user) {
     Follow.follow(user)
       .then(function(user) {
-        $scope.userFollowers.push(Auth.userData)
-        $scope.following = true
+        $scope.userFollowers.push(Auth.userData);
+        $scope.following = true;
       })
       .catch(function(error) {
         console.error('Error with following user:', error);
@@ -143,13 +142,13 @@ user.controller('UserController', function($scope, $window, $stateParams, User, 
   $scope.unfollow = function(user) {
     Follow.unfollow(user)
       .then(function(resp) {
-        $scope.following = false
+        $scope.following = false;
       })
       .catch(function(error) {
         console.error('Error with unfollowing user:', error);
       });
   };
-})
+});
 
 user.filter('wishlistFilter', function() {
   return function(input) {
