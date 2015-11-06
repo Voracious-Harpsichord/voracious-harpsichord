@@ -82,7 +82,8 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
     }
   };
 
-  var photoOptions = ['product1.jpg', 'product2.jpg', 'product3.jpg', 'product4.jpg', 'product5.jpg', 'product6.jpg', 'product7.jpg', 'product8.jpg'];
+  var photoOptions = ['product1.jpg', 'product2.jpg', 'product3.jpg', 'product4.jpg', 'product5.jpg', 'product6.jpg', 'product7.jpg', 'product8.jpg']
+  var photoOptionsBlogs = ['photo1.jpg', 'photo2.jpg', 'photo3.jpg', 'photo4.jpg', 'photo5.jpg', 'photo6.jpg', 'photo7.jpg', 'photo8.jpg', 'photo9.jpg', 'photo10.jpg', 'photo11.jpg', 'photo12.jpg', 'photo13.jpg', 'photo14.jpg', 'photo15.jpg', 'photo16.jpg', 'photo17.jpg', 'photo18.jpg', 'photo19.jpg', 'photo20.jpg', 'photo21.jpg', 'photo22.jpg', 'photo23.jpg', 'photo24.jpg', 'photo25.jpg', 'photo26.jpg', 'photo27.jpg', 'photo28.jpg'];
 
   $scope.addProduct = function(product) {
     if (product.brand_name !== null && product.product_name !== null) {
@@ -173,6 +174,7 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
     $scope.editMode = false;
     Products.deleteProduct(product.product)
       .then(function(response) {
+        console.log(response)
       })
       .catch(function(error) {
         console.error('Error with deleting product:', error);
@@ -203,7 +205,7 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
 
   $scope.sites = Sites.userSites;
   $scope.sites.forEach(function (site) {
-    site.image = site.image || '/photos/' + photoOptions[Math.floor(Math.random()*photoOptions.length)];
+    site.image = site.image || '/photos/' + photoOptionsBlogs[Math.floor(Math.random()*photoOptionsBlogs.length)];
   });
   $scope.site = {};
 
