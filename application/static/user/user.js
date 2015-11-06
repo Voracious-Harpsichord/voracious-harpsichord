@@ -2,7 +2,8 @@ var user = angular.module('beautystash.user', [
   'ui.bootstrap',
   'ui.bootstrap.tabs',
   'angularModalService',
-  'ngMessages'
+  'ngMessages',
+  'angularMoment'
 ]);
 
 user.controller('UserController', function($scope, $window, $stateParams, User, Products, Follow, Auth, Rec) {
@@ -13,8 +14,9 @@ user.controller('UserController', function($scope, $window, $stateParams, User, 
   $scope.userFollowers;
   $scope.membershipYear;
   $scope.location;
-  $scope.following = false;
-  $scope.userRecs;
+  $scope.following = false
+  $scope.userRecs_universal;
+  $scope.userRecs_personal = [];
 
   $scope.tabs = [
     {name: 'Stash', path: 'stash'},
@@ -59,15 +61,8 @@ user.controller('UserController', function($scope, $window, $stateParams, User, 
           $scope.searchedBrandsWithProducts = brands;
         })
         .catch(function(error) {
-<<<<<<< HEAD
           console.error(error);
         });
-    } else {
-      console.error('too many letters');
-=======
-          console.log(error);
-        });
->>>>>>> Bugs
     }
   };
 
@@ -99,9 +94,10 @@ user.controller('UserController', function($scope, $window, $stateParams, User, 
   getUserRecs = function(userId) {
     Rec.loadUserRecs(userId)
       .then(function(data) {
-        $scope.userRecs = data;
-      });
-  };
+        $scope.userRecs_universal = data.universal
+        $scope.userRecs_personal = data.personal
+      })
+  }
 
   getUserData = function(userId) {
     User.getInfo($scope.userId)

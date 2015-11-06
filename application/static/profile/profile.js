@@ -93,7 +93,6 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
         var product = addedProduct
         if (product.product_image_url === "") {
           product.product_image_url = '/photos/' + photoOptions[Math.floor(Math.random()*photoOptions.length)]
-          console.log(product.product_image_url)
         }
 >>>>>>> Fix photo randomization
         $scope.products.unshift(addedProduct);
@@ -203,6 +202,7 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
 
   $scope.universalRecs = Rec.recommendations.universal;
   $scope.personalRecs = Rec.recommendations.personal;
+  console.log($scope.personalRecs)
 
   //Blogs and Article Variable and Controllers
 
