@@ -74,6 +74,12 @@ button:focus {
     outline: 0 !important;
 }
 
+.magnifyGlass {
+    padding-bottom: 4px;
+    background-color: #fff;
+    border-color: #ccc;
+}
+
 .search {
     float: left;
     width: 500px;
@@ -320,6 +326,10 @@ button:focus {
 
 
 /*Followers*/
+
+.user-name {
+    cursor: pointer;
+}
 
 .friendProfilePic {
     float: left;
@@ -794,13 +804,17 @@ section.module.parallax-3 {
 .followButton {
     color: white;
     border-radius: 5px;
-    font-size: 50%;
-    padding: 5px;
+    font-size: medium;
+    margin-left: 5px;
+    padding: 4px;
     background-color: #707175;
     border: 1px solid #707175;
-    margin-left: 10px;
+    cursor: pointer;
 }
 
+#un {
+    background-color: #000;
+}
 
 /*Home feed*/
 
