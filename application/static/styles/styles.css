@@ -854,6 +854,11 @@ section.module.parallax-3 {
     box-shadow: 0 1px 3px rgba(0, 0, 0, .41);
 }
 
+#userRecImage {
+    height: 300px;
+    width: 300px;
+}
+
 .feedBox {
     margin-top: 25px;
     width: 1050px;
