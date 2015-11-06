@@ -52,25 +52,32 @@ user.controller('UserController', function($scope, $window, $stateParams, User, 
   $scope.searchProducts = [];
 
   $scope.getBrands = function(firstLetter) {
-    if (firstLetter.length === 1) {
+    if (firstLetter !== null) {
       Products.getBrands(firstLetter)
         .then(function(brands) {
           $scope.searchedBrands = Object.keys(brands);
           $scope.searchedBrandsWithProducts = brands;
         })
         .catch(function(error) {
+<<<<<<< HEAD
           console.error(error);
         });
     } else {
       console.error('too many letters');
+=======
+          console.log(error);
+        });
+>>>>>>> Bugs
     }
   };
 
   $scope.selectBrandProducts = function() {
-    var products = $scope.searchedBrandsWithProducts[$scope.newProduct.brand_name];
-    $scope.searchProducts = [];
-    for (var i=0; i < products.length; i++) {
-      $scope.searchProducts.push(products[i].product_name);
+    if ($scope.searchedBrandsWithProducts[$scope.newProduct.brand_name]) {
+      var products = $scope.searchedBrandsWithProducts[$scope.newProduct.brand_name]
+      $scope.searchProducts = []
+      for (var i=0; i < products.length; i++) {
+        $scope.searchProducts.push(products[i].product_name)
+      }
     }
   };
 

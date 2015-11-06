@@ -21,19 +21,23 @@
                             <ul class='list'>
                                 <h2>Products</h2>
                                 <li class='col-sm-12 product-item' ng-repeat='product in userProducts | stashFilter | filter : filter'>
-                                    <img class='productImage col-sm-3' src="photos/sample1.jpg">
-                                    <div class='col-sm-8 product-content'>
-                                        <div class='product-brand'>{{product.brand_name}}</div>
-                                        <span class='product-name'>{{product.product_name}}</span><br>
-                                        <span>Category: {{product.product_category}}</span><br>
-                                        <span>Size: {{product.product_size}}</span><br>
-                                        <span>Status: {{product.product_status}}</span><br>
-                                        <span>Color: {{product.product_color}}</span><br>
-                                        <span>Notes: {{product.product_notes}}</span>
-                                    </div>
-                                    <div class='col-sm-1'>
-                                        <button class='btn edit' ng-click='editProductModal(product)'>Edit</button>
-                                        <button class='btn edit-x' ng-click='deleteProductModal(product)'>x</button>
+                                    <div class='row'>
+                                        <img class='productImage col-sm-3' src="{{product.product_image_url}}">
+                                        <div class='col-sm-7 product-content'>
+                                            <div class='productHeading'>{{product.brand_name}}</div>
+                                            <div class='productSubheading1'>{{product.product_name}}</div>
+                                            <div class='productSubheading2'><span class='bold'>Category:</span> {{product.product_category}}</div>
+                                            <div class='productSubheading3'>
+                                                <span class='bold'>Size:</span><span class='spacing'> {{product.product_size}}</span>
+                                                <span class='bold'>Status:</span><span class='spacing'> {{product.product_status}}</span>
+                                                <span class='bold'>Color:</span><span class='spacing'> {{product.product_color}}</span>
+                                            </div>
+                                            <div class='productNotes'><span class='bold'>Notes:</span> {{product.product_notes}}</div>
+                                        </div>
+                                        <div class='col-sm-2 edit-btns'>
+                                            <button class='btn edit' ng-click='editProductModal(product)'>Edit</button>
+                                            <button class='btn edit-x' ng-click='deleteProductModal(product)'>x</button>
+                                        </div>
                                     </div>
                                 </li>
                             </ul>

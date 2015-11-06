@@ -1,5 +1,7 @@
 var services = angular.module('beautystash.services', []);
 
+var photoOptions = ['product1.jpg', 'product2.jpg', 'product3.jpg', 'product4.jpg', 'product5.jpg', 'product6.jpg', 'product7.jpg', 'product8.jpg']
+
 services.factory('Rec', function($http, Auth) {
   var recommendations = {
     'personal': [],
@@ -81,6 +83,11 @@ services.factory('User', function($http) {
       }
     })
     .then(function(resp) {
+      resp.data.userProducts.forEach(function(item) {
+        if (item.product_image_url === "") {
+          item.product_image_url = '/photos/' + photoOptions[Math.floor(Math.random()*photoOptions.length)]
+        }
+      })
       return resp.data;
     })
     .catch(function(error) {
@@ -268,7 +275,6 @@ services.factory('Products', function($http, Auth, $q) {
   };
 
   var userProducts = [];
-  var photoOptions = ['product1.jpg', 'product2.jpg', 'product3.jpg', 'product4.jpg', 'product5.jpg', 'product6.jpg', 'product7.jpg', 'product8.jpg']
   
   //Get all products for user
   var getAllProducts = function() {
