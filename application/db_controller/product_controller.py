@@ -166,6 +166,6 @@ def get_notes(user_id, product_id):
 
 #Delete a relationship between user and product
 def remove_user_from_product(product_id):
-    session.delete(session.query(User_product).filter(User_product.id == product_id).one())
+    session.delete(session.query(User_product).filter(User_product.product_id == product_id).one())
     session.commit()
     return None
