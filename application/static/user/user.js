@@ -84,7 +84,7 @@ user.controller('UserController', function ($scope, $window, $stateParams, User,
     if (product.brand_name !== null && product.product_name !== null) {
       Rec.addRec(product, userid)
       .then(function(addedProduct) {
-        $scope.userProducts.unshift(addedProduct);
+        $scope.userRecs_personal.unshift(addedProduct);
         resetFields();
       })
       .catch(function(error) {
