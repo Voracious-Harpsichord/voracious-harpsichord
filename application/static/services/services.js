@@ -79,8 +79,6 @@ services.factory('Rec', function($http, Auth) {
       recommendations.universal = userRecs.universal;
     });
 
-  loadRecs();
-
   return {
     recommendations: recommendations,
     loadUserRecs:loadUserRecs,
