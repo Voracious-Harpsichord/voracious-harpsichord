@@ -130,6 +130,10 @@ user.controller('UserController', function ($scope, $window, $stateParams, User,
       });
   };
 
+  $scope.addSiteModeFn = function(bool) {
+    $scope.addSiteMode = bool;
+  };
+
   getUserSites = function(userId) {
     Sites.getSitesWithID(userId)
       .then(function(data) {
