@@ -2,7 +2,8 @@ var user = angular.module('beautystash.user', [
   'ui.bootstrap',
   'ui.bootstrap.tabs',
   'angularModalService',
-  'ngMessages'
+  'ngMessages',
+  'angularMoment'
 ]);
 
 user.controller('UserController', function($scope, $window, $stateParams, User, Products, Follow, Auth, Rec) {
@@ -14,7 +15,8 @@ user.controller('UserController', function($scope, $window, $stateParams, User, 
   $scope.membershipYear;
   $scope.location;
   $scope.following = false;
-  $scope.userRecs;
+  $scope.userRecs_universal;
+  $scope.userRecs_personal = [];
 
   $scope.tabs = [
     {name: 'Stash', path: 'stash'},
@@ -52,7 +54,7 @@ user.controller('UserController', function($scope, $window, $stateParams, User, 
   $scope.searchProducts = [];
 
   $scope.getBrands = function(firstLetter) {
-    if (firstLetter.length === 1) {
+    if (firstLetter !== null) {
       Products.getBrands(firstLetter)
         .then(function(brands) {
           $scope.searchedBrands = Object.keys(brands);
@@ -61,16 +63,16 @@ user.controller('UserController', function($scope, $window, $stateParams, User, 
         .catch(function(error) {
           console.error(error);
         });
-    } else {
-      console.error('too many letters');
     }
   };
 
   $scope.selectBrandProducts = function() {
-    var products = $scope.searchedBrandsWithProducts[$scope.newProduct.brand_name];
-    $scope.searchProducts = [];
-    for (var i=0; i < products.length; i++) {
-      $scope.searchProducts.push(products[i].product_name);
+    if ($scope.searchedBrandsWithProducts[$scope.newProduct.brand_name]) {
+      var products = $scope.searchedBrandsWithProducts[$scope.newProduct.brand_name]
+      $scope.searchProducts = []
+      for (var i=0; i < products.length; i++) {
+        $scope.searchProducts.push(products[i].product_name)
+      }
     }
   };
 
@@ -92,9 +94,10 @@ user.controller('UserController', function($scope, $window, $stateParams, User, 
   getUserRecs = function(userId) {
     Rec.loadUserRecs(userId)
       .then(function(data) {
-        $scope.userRecs = data;
-      });
-  };
+        $scope.userRecs_universal = data.universal
+        $scope.userRecs_personal = data.personal
+      })
+  }
 
   getUserData = function(userId) {
     User.getInfo($scope.userId)

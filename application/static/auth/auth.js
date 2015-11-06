@@ -16,8 +16,6 @@ angular.module('beautystash.auth', [])
           //Fetch user's products
           Products.getAllProducts();
 
-          //Fetch user recommendations data
-          Rec.loadRecs();
           //Fetch user followers and following
           // Follow.getFollowers();
           // Follow.getFollowing();
@@ -46,9 +44,6 @@ angular.module('beautystash.auth', [])
           //Fetch user followers and following
           // Follow.getFollowers();
           // Follow.getFollowing();
-
-          //Fetch user recommendations data
-          Rec.loadRecs();
 
           //Fetch user sites data
           Sites.getSites();

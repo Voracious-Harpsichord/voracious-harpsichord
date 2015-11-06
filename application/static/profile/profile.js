@@ -13,7 +13,7 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
   $scope.searchProducts = [];
 
   $scope.getBrands = function(firstLetter) {
-    if (firstLetter.length === 1) {
+    if (firstLetter !== null) {
       Products.getBrands(firstLetter)
         .then(function(brands) {
           $scope.searchedBrands = Object.keys(brands);
@@ -22,16 +22,16 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
         .catch(function(error) {
           console.log(error);
         });
-    } else {
-      console.error('too many letters');
     }
   };
 
   $scope.selectBrandProducts = function() {
-    var products = $scope.searchedBrandsWithProducts[$scope.newProduct.brand_name];
-    $scope.searchProducts = [];
-    for (var i=0; i < products.length; i++) {
-      $scope.searchProducts.push(products[i].product_name);
+    if ($scope.searchedBrandsWithProducts[$scope.newProduct.brand_name]) {
+      var products = $scope.searchedBrandsWithProducts[$scope.newProduct.brand_name];
+      $scope.searchProducts = [];
+      for (var i=0; i < products.length; i++) {
+        $scope.searchProducts.push(products[i].product_name);
+      }
     }
   };
 
@@ -82,10 +82,16 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
     }
   };
 
+  var photoOptions = ['product1.jpg', 'product2.jpg', 'product3.jpg', 'product4.jpg', 'product5.jpg', 'product6.jpg', 'product7.jpg', 'product8.jpg']
+
   $scope.addProduct = function(product) {
     if (product.brand_name !== null && product.product_name !== null) {
       Products.addProduct(product)
       .then(function(addedProduct) {
+        var product = addedProduct
+        if (!(product.product_image_url)) {
+          product.product_image_url = '/photos/' + photoOptions[Math.floor(Math.random()*photoOptions.length)]
+        }
         $scope.products.unshift(addedProduct);
         resetFields();
       })
@@ -123,6 +129,9 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
 
   $scope.editProduct = function(product) {
     $scope.products[$scope.currentItemIndex] = angular.copy(product).product;
+    if ($scope.products[$scope.currentItemIndex].product_image_url === "") {
+      $scope.products[$scope.currentItemIndex].product_image_url = '/photos/' + photoOptions[Math.floor(Math.random()*photoOptions.length)]
+    }
     $scope.editMode = false;
     Products.editProduct(product)
       .then(function(editedProduct){
