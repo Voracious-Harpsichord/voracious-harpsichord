@@ -26,7 +26,7 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
   };
 
   $scope.selectBrandProducts = function() {
-    if ($scope.searchedBrandsWithProducts[$scope.newProduct.brand_name]) {
+    if ($scope.searchedBrandsWithProducts && $scope.searchedBrandsWithProducts[$scope.newProduct.brand_name]) {
       var products = $scope.searchedBrandsWithProducts[$scope.newProduct.brand_name];
       $scope.searchProducts = [];
       for (var i=0; i < products.length; i++) {
