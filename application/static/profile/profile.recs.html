@@ -12,7 +12,7 @@
           <ul class='list'>
             <h2>Recommended to You by Friends</h2>
             <li class='col-sm-12 product-item' ng-repeat='personalRec in personalRecs'>
-              <img class='productImage col-sm-3' src="photos/sample1.jpg">
+              <img class='productImage col-sm-3' ng-src="photos/sample1.jpg">
               <div class='col-sm-8 product-content'>
                 <div class='feedHeading'>{{personalRec.brand_name}}</div>
                 <div class='feedSubheading1'>{{personalRec.product_name}}</div><br>
@@ -35,7 +35,7 @@
           <ul class='list'>
             <h2>Recommended for You</h2>
             <li class='col-sm-12 product-item' ng-repeat='universalRec in universalRecs'>
-              <img class='productImage col-sm-3' src="{{universalRec.product_image_url}}">
+              <img class='productImage col-sm-3' ng-src="{{universalRec.product_image_url}}">
               <div class='col-sm-8 product-content'>
                 <div class='feedHeading'>{{universalRec.brand_name}}</div>
                 <div class='feedSubheading1'>{{universalRec.product_name}}</div><br>

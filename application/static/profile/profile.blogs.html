@@ -42,7 +42,7 @@
                 <span us-spinner="{radius:30, width:8, length: 16}" spinner-key="spinner-1"></span>
                 <li class='col-sm-12' id= 'siteItem' ng-repeat='site in sites | filter: filter'>
                   <div class='row'>
-                    <img class='blogItemImage col-sm-4' src="{{site.image}}">
+                    <img class='blogItemImage col-sm-4' ng-src="{{site.image}}">
                     <div class='site-content col-sm-8'>
                       <a class='site-link' ng-href='{{site.url}}'>{{ site.article_name || site.site_name}}</a>
                       <div class='site-description'>{{site.description}}</div>

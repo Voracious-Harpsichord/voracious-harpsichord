@@ -78,7 +78,7 @@
                                 <h2>My Products</h2>
                                 <li class='col-sm-12 product-item' ng-repeat='product in products | myStashFilter | filter : filter'>
                                     <div class='row'>
-                                        <img class='productImage col-sm-3' src="{{product.product_image_url}}">
+                                        <img class='productImage col-sm-3' ng-src="{{product.product_image_url}}">
                                         <div class='col-sm-7 product-content'>
                                             <div class='productHeading'>{{product.brand_name}}</div>
                                             <div class='productSubheading1'>{{product.product_name}}</div>
@@ -103,7 +103,7 @@
                                 <h2>Finished</h2>
                                 <li class='col-sm-12 product-item' ng-repeat='product in products | finishedFilter | filter : filter'>
                                     <div class='row'>
-                                        <img class='productImage col-sm-3' src="{{product.product_image_url}}">
+                                        <img class='productImage col-sm-3' ng-src="{{product.product_image_url}}">
                                         <div class='col-sm-7 product-content'>
                                             <div class='productHeading'>{{product.brand_name}}</div>
                                             <div class='productSubheading1'>{{product.product_name}}</div>

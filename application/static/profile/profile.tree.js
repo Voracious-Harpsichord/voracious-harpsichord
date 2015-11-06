@@ -197,7 +197,7 @@ angular.module('beautystash.profileTree', [])
         .attr("r", radius)
         .on('mouseenter',function(d){
           d3.select(this).attr('r',50)
-          console.log(this)
+          // console.log(this)
           d3.select(this).select('p').attr('width', 2 * 50 * Math.cos(Math.PI / 4)).attr('height', 2 * 50 * Math.cos(Math.PI / 4))
         })
         .on('mouseleave',function(d){
