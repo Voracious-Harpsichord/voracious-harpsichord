@@ -1,20 +1,39 @@
-<div class='container'>
-  <div class='row'>
-    <div class='col-md-10'>
-      <h1>Following</h1>
-      <div ng-repeat='user in userFollowing'>
-        <div class='col-md-10 following'>
-          <!-- <img class='userProfilePic' ng-src="{{user.profilePic}}" alt="Description"/> -->
-          <div class='user-name' ui-sref="user.stash({userId: {{user.userid}}})">{{user.name_first}} {{user.name_last}}</div>
+<div class="backgroundFill">
+  <div class='container' id='sites'>
+    <div class='row'>
+      <div class='col-md-10 col-md-offset-1 recs-tab'>
+        <tabset>
+        <!-- Following Tab -->
+        <tab heading='Following' select='addSiteModeFn(false)'>
+        </tab>
+        <!-- Followers Tab -->
+        <tab heading='Followers' select='addSiteModeFn(true)'>
+        <div class='col-md-12 wrapper'>
+          <ul class='list'>
+            <h1>Followers</h1>
+            <li ng-repeat='user in userFollowers'>
+              <div class='col-md-10 follower'>
+                <img class='col-sm-3 friendProfilePic' ng-src="{{user.profile_pic}}" alt="Description"/>
+                <div class='col-sm-4 user-name' ui-sref="user.stash({userId: {{user.userid}}})">{{user.name_first}} {{user.name_last}}</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        </tab>
+        </tabset>
+        <!-- Following tab -->
+        <div ng-hide='addSiteMode' class='col-md-12 wrapper'>
+          <ul class='list'>
+            <h1>Following</h1>
+            <li ng-repeat='user in userFollowing'>
+              <div class='col-md-10 following'>
+                <img class='col-sm-3 friendProfilePic' ng-src="{{user.profile_pic}}" alt="Description"/>
+                <div class='col-sm-4 user-name' ui-sref="user.stash({userId: {{user.userid}}})">{{user.name_first}} {{user.name_last}}</div>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
-    </div>
-    <div class='col-md-10'>
-  <h1>Followers</h1>
-  <div ng-repeat='user in userFollowers'>
-    <div class='col-md-10 follower'>
-      <!-- <img class='userProfilePic' ng-src="{{user.profilePic}}" alt="Description"/> -->
-      <div class='user-name' ui-sref="user.stash({userId: {{user.userid}}})">{{user.name_first}} {{user.name_last}}</div>
     </div>
   </div>
 </div>
