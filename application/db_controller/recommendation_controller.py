@@ -65,7 +65,10 @@ def get_personal_recs(user_id):
     return results
 
 #add personal rec
-def add_personal_rec(from_user_id, to_user_id, product_id):
+def add_personal_rec(from_user_id, to_user_id, p):
+    product_id = p_ctrl.verify_product_by_name_and_brand(p['product_name'], p['brand_name'])
+    if not product_id:
+        p_ctrl.add_product_to_products(p['product_name'], p['brand_name'], p.get('category',''))
     #check that rec doesn't already exists
     if session.query(Personal_Rec).filter(Personal_Rec.from_user_id == from_user_id, Personal_Rec.to_user_id == to_user_id, Personal_Rec.product_id == product_id).count() > 0:
         return None
