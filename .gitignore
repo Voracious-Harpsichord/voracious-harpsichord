@@ -12,6 +12,3 @@
 
 # config vars
 .env
-
-# production folders
-application/static/bower_components
