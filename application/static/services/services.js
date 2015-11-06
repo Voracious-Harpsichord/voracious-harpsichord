@@ -263,9 +263,9 @@ services.factory('Products', function($http, Auth, $q) {
       }
     })
     .then(function(resp) {
-      return resp.data
-    })
-  }
+      return resp.data;
+    });
+  };
 
   var userProducts = [];
   

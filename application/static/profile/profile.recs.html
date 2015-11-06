@@ -1,7 +1,7 @@
 <div class="backgroundFill">
   <div class='container' id='sites'>
     <div class='row'>
-      <div class='col-md-12 recs-tab'>
+      <div class='col-md-10 col-md-offset-1 recs-tab'>
         <tabset>
         <!-- Universal Tab -->
         <tab heading='BeautyStash Recommends' select='addSiteModeFn(false)'>
@@ -14,13 +14,13 @@
             <li class='col-sm-12 product-item' ng-repeat='personalRec in personalRecs'>
               <img class='productImage col-sm-3' src="photos/sample1.jpg">
               <div class='col-sm-8 product-content'>
-                <div class='product-brand'>{{personalRec.brand_name}}</div>
-                <span class='product-name'>{{personalRec.product_name}}</span><br>
-                <span>{{personalRec.product_category}}</span>
-                <span>{{personalRec.product_size}}</span>
-                <span>{{personalRec.product_status}}</span><br>
-                <span>{{personalRec.product_color}}</span>
-                <span>Message: {{personalRec.message}}</span>
+                <div class='feedHeading'>{{personalRec.brand_name}}</div>
+                <div class='feedSubheading1'>{{personalRec.product_name}}</div><br>
+                <div class='feedSubheading3'>{{personalRec.product_category}}</div>
+                <div>{{personalRec.product_size}}</div>
+                <div>{{personalRec.product_status}}</div><br>
+                <div>{{personalRec.product_color}}</div>
+                <div>Message: {{personalRec.message}}</div>
               </div>
               <div class='col-sm-1'>
                 <button class='btn edit' ng-click='addProduct(recommendation)'>Add to wishlist</button>
@@ -37,9 +37,10 @@
             <li class='col-sm-12 product-item' ng-repeat='universalRec in universalRecs'>
               <img class='productImage col-sm-3' src="{{universalRec.product_image_url}}">
               <div class='col-sm-8 product-content'>
-                <div class='product-brand'>{{universalRec.brand_name}}</div>
-                <span class='product-name'>{{universalRec.product_name}}</span><br>
-                <span>{{universalRec.product_category}}</span>
+                <div class='feedHeading'>{{universalRec.brand_name}}</div>
+                <div class='feedSubheading1'>{{universalRec.product_name}}</div><br>
+                <div class='feedSubheading2'>{{universalRec.product_description}}</div><br>
+                <div class='feedSubheading3'>{{universalRec.product_category}}</div>
               </div>
               <div class='col-sm-1'>
                 <button class='btn edit' ng-click='addProduct(universalRec)'>Add to wishlist</button>

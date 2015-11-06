@@ -1,24 +1,27 @@
 <div class='feed'>
     <div class='container'>
-        <ul infinite-scroll='loadMore()' infinite-scroll-distance='2'>
-            <li ng-repeat="i in items">
-                <div class='feedItem'>
-                    <img class='feedItemImage' src="{{i.image}}">
-                    <span class='feedBox'>
-                        <div>
-                            <span  class='feedUserName' ng-click="viewUser(i.user_id)">{{i.user_first}} {{i.user_last}} shared this {{i.type}}.</span>
+        <div class='row'>
+            <ul infinite-scroll='loadMore()' infinite-scroll-distance='2'>
+                <li ng-repeat="i in items">
+                    <div class='row'>
+                        <div class='feedItem'>
+                            <img class='feedItemImage' src="{{i.image}}">
+                            <div class='feedBox'>
+                                <img class='userProfilePic' src="{{i.user_photo}}">
+                                <div class='userAction'><span class='feedUserName' ng-click='viewUser(i.user_id)'>{{i.user_first}} {{i.user_last}} </span><span>shared this {{i.type}}.</span></div>
+                                <div class='timeLoc'><span am-time-ago="{{i}}.time_stamp"></span><span> | {{i.location}}</span></div>
+                                <div class='feedComments'>{{i.comments}}</div>
+                                <div class='feedHeading'>{{i.heading}}</div>
+                                <div class='feedSubheading1'>{{i.subheading1}}</div>
+                                <div class='feedSubheading2'>{{i.subheading2}}</div>
+                                <div class='feedSubheading3'>{{i.subheading3}}</div>
+                                <div class='feedSubheading4'>{{i.subheading4}}</div>
+                                <div class='feedSubheading5'>{{i.subheading5}}</div>
+                            </div>
                         </div>
-                        <span am-time-ago="{{i}}.time_stamp"></span><span> | {{i.location}}</span>
-                        <div class='feedComments'>{{i.comments}}</div>
-                        <div class='feedHeading'>{{i.heading}}</div>
-                        <div class='feedSubheading1'>{{i.subheading1}}</div>
-                        <div class='feedSubheading2'>{{i.subheading2}}</div>
-                        <div class='feedSubheading3'>{{i.subheading3}}</div>
-                        <div class='feedSubheading4'>{{i.subheading4}}</div>
-                        <div class='feedSubheading5'>{{i.subheading5}}</div>
-                    </span>
-                </div>
-            </li>
-        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>

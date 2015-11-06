@@ -8,32 +8,32 @@ var stash = angular.module('beautystash.profile', [
 
 stash.controller('ProfileController', function ($scope, $window, Products, Follow, Sites, Rec, $stateParams, Auth, ModalService) {
 
-  $scope.searchedBrandsWithProducts
-  $scope.searchedBrands = []
-  $scope.searchProducts = []
+  $scope.searchedBrandsWithProducts;
+  $scope.searchedBrands = [];
+  $scope.searchProducts = [];
 
   $scope.getBrands = function(firstLetter) {
     if (firstLetter.length === 1) {
       Products.getBrands(firstLetter)
         .then(function(brands) {
-          $scope.searchedBrands = Object.keys(brands)
-          $scope.searchedBrandsWithProducts = brands
+          $scope.searchedBrands = Object.keys(brands);
+          $scope.searchedBrandsWithProducts = brands;
         })
         .catch(function(error) {
-          console.log(error)
-        })
+          console.log(error);
+        });
     } else {
-      console.error('too many letters')
+      console.error('too many letters');
     }
-  }
+  };
 
   $scope.selectBrandProducts = function() {
-    var products = $scope.searchedBrandsWithProducts[$scope.newProduct.brand_name]
-    $scope.searchProducts = []
+    var products = $scope.searchedBrandsWithProducts[$scope.newProduct.brand_name];
+    $scope.searchProducts = [];
     for (var i=0; i < products.length; i++) {
-      $scope.searchProducts.push(products[i].product_name)
+      $scope.searchProducts.push(products[i].product_name);
     }
-  }
+  };
 
   $scope.user = Auth.userData;
   $scope.products = Products.userProducts;
@@ -79,13 +79,14 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
     $scope.addProductMode = bool;
     if ($scope.addProductMode === true) {
       $scope.filter = '';
-    };
+    }
   };
 
   $scope.addProduct = function(product) {
     if (product.brand_name !== null && product.product_name !== null) {
       Products.addProduct(product)
       .then(function(addedProduct) {
+        console.log('addedProduct', addedProduct);
         $scope.products.unshift(addedProduct);
         resetFields();
       })
@@ -202,7 +203,7 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
   $scope.addSite = function(site) {
     Sites.addSite(site)
       .then(function(addedSite) {
-        $scope.sites.push(addedSite);
+        $scope.sites.unshift(addedSite);
         resetFields();
       })
       .catch(function(error) {

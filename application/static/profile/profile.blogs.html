@@ -14,7 +14,7 @@
               <div class='row'>
                 <div class='col-sm-12 form-group' ng-form>
                   <label>Comments</label><br>
-                  <textarea class='form-control site-notes' rows='5' ng-model='site.comment'></textarea>
+                  <textarea class='form-control site-comments' rows='5' ng-model='site.comment'></textarea>
                   <label for='site-url'>Blog/Article url</label><br>
                   <input type='text' ng-model='site.url' id='site-url' class="form-control form-input-box" placeholder='Enter a blog or article' required />
                   <small class='site-error' ng-show='myForm.$invalid'>Missing blog/article url</small>
@@ -43,16 +43,16 @@
                 <li class='col-sm-12' id= 'siteItem' ng-repeat='site in sites | filter: filter'>
                   <div class='row'>
                     <img class='blogItemImage col-sm-4' src="{{site.image}}">
-                    <div class='site-content col-sm-7'>
+                    <div class='site-content col-sm-8'>
                       <a class='site-link' ng-href='{{site.url}}'>{{ site.article_name || site.site_name}}</a>
                       <div class='site-description'>{{site.description}}</div>
                       <div class='site-name'>{{site.site_name}}</div>
                       <div class='site-comments'>Comments: {{site.comment}}</div>
                     </div>
-                    <div class='col-sm-1 edit-btns'>
+<!--                     <div class='col-sm-2 edit-btns'>
                         <button class='btn edit' ng-click='editProductModal(product)'>Edit</button>
                         <button class='btn edit-x' ng-click='deleteProductModal(product)'>x</button>
-                    </div>
+                    </div> -->
                   </div>
                 </li>
               </ul>
