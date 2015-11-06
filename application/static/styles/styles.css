@@ -329,21 +329,25 @@ button:focus {
 
 .user-name {
     cursor: pointer;
+    font-family: 'Roboto Slab Bold', serif;
+    font-size: large;
+    padding-top: 60px;
+    float: left;
 }
 
 .friendProfilePic {
     float: left;
     height: 150px;
     width: 150px;
-    margin-top: 100px;
-    margin-left: 150px;
+    margin-top: 10px;
     margin-right: 25px;
+    margin-bottom: 15px;
     padding: 3px;
     border: 1px solid #E8E8E8;
     background-color: white;
-    /*border-radius: 150px;*/
-    /*-webkit-border-radius: 150px;*/
-    /*-moz-border-radius: 150px*/
+    border-radius: 150px;
+    -webkit-border-radius: 150px;
+    -moz-border-radius: 150px
 }
 
 
@@ -422,11 +426,20 @@ button:focus {
     font-size: 15px;
 }
 
+/*Explore Stash */
+#stashTree {
+    margin-top: 15px;
+}
+
+.title {
+    padding-top: 25px;
+}
+
 
 /* Profile Stash and Wishlist */
 
 #stash,
-#wishlist {
+#wishlist, #exploreStash {
     padding-bottom: 25px;
     background-color: #F2F2F2;
 }
@@ -913,10 +926,7 @@ section.module.parallax-3 {
     height: 50px;
     width: 50px;
     margin-right: 10px;
-/*    margin-top: 20px;
-    margin-right: 30px;
-    margin-bottom: 10px;
-*/    padding: 3px;
+    padding: 3px;
     border: 1px solid #E8E8E8;
     background-color: white;
     border-radius: 150px;
