@@ -202,6 +202,9 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
   //Blogs and Article Variable and Controllers
 
   $scope.sites = Sites.userSites;
+  $scope.sites.forEach(function (site) {
+    site.image = site.image || '/photos/' + photoOptions[Math.floor(Math.random()*photoOptions.length)];
+  });
   $scope.site = {};
 
   $scope.addSiteModeFn = function(bool) {
