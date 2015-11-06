@@ -54,6 +54,8 @@ user.controller('UserController', function ($scope, $window, $stateParams, User,
   $scope.searchedBrands = [];
   $scope.searchProducts = [];
 
+  var photoOptions = ['product1.jpg', 'product2.jpg', 'product3.jpg', 'product4.jpg', 'product5.jpg', 'product6.jpg', 'product7.jpg', 'product8.jpg']
+
   $scope.getBrands = function(firstLetter) {
     if (firstLetter !== null) {
       Products.getBrands(firstLetter)
@@ -132,6 +134,9 @@ user.controller('UserController', function ($scope, $window, $stateParams, User,
     Sites.getSitesWithID(userId)
       .then(function(data) {
         $scope.sites = data.sites;
+        $scope.sites.forEach(function (site) {
+          site.image = site.image || '/photos/' + photoOptions[Math.floor(Math.random()*photoOptions.length)];
+        });
       })
       .catch(function(error) {
         console.error(error);
