@@ -29,8 +29,7 @@ services.factory('Rec', function($http, Auth) {
         item.recommender_first = item.from_user.name_first,
         item.recommender_last = item.from_user.name_last,
         item.recommender_id = item.from_user.userid,
-        // user_photo = item.from_user.user.profile_pic,
-        item.recommender_photo = 'photos/cynthia.jpg',
+        user_photo = item.from_user.user.profile_pic,
         item.location = item.from_user.location,
         item.time_stamp = item.from_user.created_at,
         item.comments = item.from_user.comments,
@@ -77,7 +76,7 @@ services.factory('Rec', function($http, Auth) {
     .then(function(userRecs) {
       recommendations.personal = userRecs.personal;
       recommendations.universal = userRecs.universal;
-    })
+    });
 
   return {
     recommendations: recommendations,
