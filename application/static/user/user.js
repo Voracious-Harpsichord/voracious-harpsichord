@@ -14,7 +14,7 @@ user.controller('UserController', function($scope, $window, $stateParams, User, 
   $scope.userFollowers;
   $scope.membershipYear;
   $scope.location;
-  $scope.following = false
+  $scope.following = false;
   $scope.userRecs_universal;
   $scope.userRecs_personal = [];
 

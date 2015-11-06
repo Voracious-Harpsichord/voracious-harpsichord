@@ -88,13 +88,10 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
     if (product.brand_name !== null && product.product_name !== null) {
       Products.addProduct(product)
       .then(function(addedProduct) {
-<<<<<<< HEAD
-=======
         var product = addedProduct
-        if (product.product_image_url === "") {
+        if (!(product.product_image_url)) {
           product.product_image_url = '/photos/' + photoOptions[Math.floor(Math.random()*photoOptions.length)]
         }
->>>>>>> Fix photo randomization
         $scope.products.unshift(addedProduct);
         resetFields();
       })
@@ -134,7 +131,6 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
     $scope.products[$scope.currentItemIndex] = angular.copy(product).product;
     if ($scope.products[$scope.currentItemIndex].product_image_url === "") {
       $scope.products[$scope.currentItemIndex].product_image_url = '/photos/' + photoOptions[Math.floor(Math.random()*photoOptions.length)]
-      console.log(product.product_image_url)
     }
     $scope.editMode = false;
     Products.editProduct(product)
@@ -202,7 +198,6 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
 
   $scope.universalRecs = Rec.recommendations.universal;
   $scope.personalRecs = Rec.recommendations.personal;
-  console.log($scope.personalRecs)
 
   //Blogs and Article Variable and Controllers
 

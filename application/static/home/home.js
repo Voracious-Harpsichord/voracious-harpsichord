@@ -17,7 +17,7 @@ home.controller('HomeController', function($scope, Feed, Auth, $state){
             var randomPhoto = photoOptions[Math.floor(Math.random()*photoOptions.length)];
 
             if (data[i].view_type === 'product') {
-              var imageUrl = '../photos/' + randomPhoto
+              var imageUrl = '../photos/' + randomPhoto;
               $scope.items.unshift({
                 user_first: data[i].user.name_first,
                 user_last: data[i].user.name_last,

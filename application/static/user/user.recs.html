@@ -9,13 +9,8 @@
         <div ng-hide='addSiteMode' class='col-md-12 wrapper'>
         <h2>Recommended by BeautyStash for {{user.name_first}}</h2>
           <ul class='list'>
-<<<<<<< HEAD
-            <li class='col-sm-12 product-item' ng-repeat='universalRec in userRecs.universal'>
-              <img class='productImage col-sm-3' ng-src="{{universalRec.product_image_url}}">
-=======
             <li class='col-sm-12 product-item' ng-repeat='universalRec in userRecs_universal'>
-              <img class='productImage col-sm-3' src="{{universalRec.product_image_url}}">
->>>>>>> Recs done and photos added
+              <img class='productImage col-sm-3' ng-src="{{universalRec.product_image_url}}">
               <div class='col-sm-8 product-content'>
                 <div class='product-brand'>{{universalRec.brand_name}}</div>
                 <span class='product-name'>{{universalRec.product_name}}</span><br>
