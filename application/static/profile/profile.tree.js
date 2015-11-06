@@ -195,21 +195,41 @@ angular.module('beautystash.profileTree', [])
     dx = radius - side / 2;
     nodeEnter.append("circle")
         .attr("r", radius)
-        .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; })
+        .on('mouseenter',function(d){
+          d3.select(this).attr('r',50)
+          console.log(this)
+          d3.select(this).select('p').attr('width', 2 * 50 * Math.cos(Math.PI / 4)).attr('height', 2 * 50 * Math.cos(Math.PI / 4))
+        })
+        .on('mouseleave',function(d){
+          d3.select(this).attr('r',35)
+        })
+        .style("fill", function(d) { return d._children ? "#E7D5AA" : "#707175"; })
         // add tooltip
         .append("svg:title")
         .append("text")
         .text(function(d, i) { return JSON.stringify(d.value) });
+
+    nodeEnter.append("text")
+      .attr("dx", function(d){return -22})
+        // .5/4*JSON.stringify(d.value).length})
+      .text(function(d){return d.value ? d.value.split(' ')[0] :null})
+      .attr('style','font-size:15px;text-align:center;padding:2px;margin:2px;color:#707175;')
     // container for wrapped text
-    nodeEnter.append('foreignObject')
-        .attr('x', -side/2)
-        .attr('y', -side/2)
-        .attr('width', side)
-        .attr('height', side)
-        .attr('color', 'light-blue')
-        .append('xhtml:p')
-        .text(function(d){return d.value})
-        .attr('style','text-align:center;padding:2px;margin:2px;')
+    // nodeEnter.append('foreignObject')
+    //     .attr('x', -side/2)
+    //     .attr('y', -side/2)
+    //     .attr('width', side)
+    //     .attr('height', side)
+    //     .on('mouseenter',function(d){
+    //     })
+    //     .on('mouseleave',function(d){
+    //       d3.select(this).attr('width', side).attr('height', side)
+    //     })
+    //     // .attr('color', 'light-blue')
+    //     .appenbd('xhtml:p')
+    //     .text(function(d){return d.value})
+    //     .attr('style','text-align:center;padding:2px;margin:2px;color:#707175;')
+        // .attr('style',function(d){return d._children ? "color:#707175;":"color:#E8E8E8;";})
 
 
 
@@ -234,7 +254,7 @@ angular.module('beautystash.profileTree', [])
 
     nodeUpdate.select("circle")
         .attr("r", radius)
-        .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+        .style("fill", function(d) { return d._children ? "#E7D5AA" : "#E7D5AA"; });
 
     nodeUpdate.select("text")
         .style("fill-opacity", 1);
@@ -333,6 +353,7 @@ angular.module('beautystash.profileTree', [])
         height:height,
         width:length,
         value:key || 'name',
+        name: key ? key.split('_').join(' ') : key,
         depth:labels.length+1
       })
     };
@@ -351,7 +372,7 @@ angular.module('beautystash.profileTree', [])
       .attr("y", function(d) { return d.y-10})
       .attr("width", function(d) { return d.width})
       .attr("height", function(d) { return d.height})
-      .attr("fill",fill||"#00C78C")
+      .attr("fill",fill||"#707175")
     // build text 
     svg.selectAll(classed)
       .data(data)
@@ -361,6 +382,7 @@ angular.module('beautystash.profileTree', [])
       .attr("x", function(d) { return d.x})
       .attr("y", function(d) { return d.y})
       .attr("dy", ".8em")
+      .attr('style','color:white;')
       .text(function(d) { return d.value})
   }
 
@@ -444,8 +466,8 @@ angular.module('beautystash.profileTree', [])
     // render labels and buttons
 
     buildLabeledRectangles(labels,'label')
-    buildLabeledRectangles(options_table,'options_table','darksalmon')
-    buildLabeledRectangles([buildButton],'build','lightblue')
+    buildLabeledRectangles(options_table,'options_table','#707175')
+    buildLabeledRectangles([buildButton],'build','#707175')
 
     //*********** add events to classes *************
     // change global filter order
