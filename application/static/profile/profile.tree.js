@@ -348,7 +348,7 @@ angular.module('beautystash.profileTree', [])
       var height = Math.sqrt(pathY.length-i)*size
       var y = pathY[i] 
       labels.push({
-        x:0 ,
+        x:-100 ,
         y:y,
         height:height,
         width:length,
@@ -382,10 +382,11 @@ angular.module('beautystash.profileTree', [])
       .enter()
       .append("text")
       .classed(classed,true)
-      .attr("x", function(d) { return d.x})
+      .attr("x", function(d) {var size = beautifyText(d).length*6.75;var margin=(150-size)/2 ;return d.x+17})
       .attr("y", function(d) { return d.y})
       .attr("dy", ".8em")
-      .attr('style','color:white;')
+      .attr('style','color:white;text-align:center;')
+
       .text(function(d) {return beautifyText(d)})
     }
 
