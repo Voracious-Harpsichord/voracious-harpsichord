@@ -243,6 +243,23 @@ services.factory('Sites', function($http, Auth) {
     }
   };
 
+  var getSitesWithID = function(userid) {
+    //check if userid exists first
+    if (userid) {
+      //Send GET request to /userSites/:user_id
+      return $http({
+        method: 'GET',
+        url: '/api/sites/' + userid,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(function(resp) {
+        return resp.data;
+      });
+    }
+  };
+
   Auth.checkCookie()
   .then(function(resp) {
     if (resp.status === 200) {
@@ -268,7 +285,8 @@ services.factory('Sites', function($http, Auth) {
   return {
     getSites: getSites,
     addSite: addSite,
-    userSites: userSites
+    userSites: userSites,
+    getSitesWithID: getSitesWithID
   };
 });
 
