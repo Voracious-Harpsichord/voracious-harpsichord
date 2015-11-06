@@ -21,7 +21,6 @@ user.controller('UserController', function ($scope, $window, $stateParams, User,
 
   $scope.tabs = [
     {name: 'Stash', path: 'stash'},
-    {name: 'Explore Products', path: 'explore'},
     {name: 'Friends', path: 'friends'},
     {name: 'Wishlist', path: 'wishlist'},
     {name: 'Recommendations', path: 'recs'},
