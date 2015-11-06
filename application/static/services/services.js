@@ -77,7 +77,9 @@ services.factory('Rec', function($http, Auth) {
     .then(function(userRecs) {
       recommendations.personal = userRecs.personal;
       recommendations.universal = userRecs.universal;
-    })
+    });
+
+  loadRecs();
 
   return {
     recommendations: recommendations,
