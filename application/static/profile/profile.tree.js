@@ -383,8 +383,8 @@ angular.module('beautystash.profileTree', [])
       .attr("y", function(d) { return d.y})
       .attr("dy", ".8em")
       .attr('style','color:white;')
-      .text(function(d) { return d.value})
-  }
+      .text(function(d) {res = d.value[0].toUpperCase() + d.value.slice(1); return res.replace('_',' ')})
+    }
 
   var addHover = function(classed,opacity){
     opacity = opacity || 0.6
