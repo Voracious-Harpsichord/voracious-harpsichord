@@ -82,10 +82,20 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
     }
   };
 
+  var photoOptions = ['product1.jpg', 'product2.jpg', 'product3.jpg', 'product4.jpg', 'product5.jpg', 'product6.jpg', 'product7.jpg', 'product8.jpg']
+
   $scope.addProduct = function(product) {
     if (product.brand_name !== null && product.product_name !== null) {
       Products.addProduct(product)
       .then(function(addedProduct) {
+<<<<<<< HEAD
+=======
+        var product = addedProduct
+        if (product.product_image_url === "") {
+          product.product_image_url = '/photos/' + photoOptions[Math.floor(Math.random()*photoOptions.length)]
+          console.log(product.product_image_url)
+        }
+>>>>>>> Fix photo randomization
         $scope.products.unshift(addedProduct);
         resetFields();
       })

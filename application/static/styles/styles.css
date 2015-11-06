@@ -962,3 +962,9 @@ section.module.parallax-3 {
     background: #666;
     color: #fff;
 }
+
+.recAddHeader {
+    font-size: 125%;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
