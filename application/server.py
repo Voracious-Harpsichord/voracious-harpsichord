@@ -167,13 +167,18 @@ def userProducts(user_id):
             #Add product if not
             product_id = p_ctrl.add_product_to_products(body['product_name'], body['brand_name'], body['product_category'])
         #create db relationship between user and product
+        print("body", body)
         response = jsonify(p_ctrl.add_user_to_product(
             user_id, 
             product_id, 
-            body['product_size'],
-            body['product_status'],
-            body['product_notes'],
-            body['product_color']
+            body.get('product_size'),
+            body.get('product_status'),
+            body.get('product_notes'),
+            body.get('product_color'),
+            body.get('stars'),
+            body.get('review'),
+            body.get('product_image_url'),
+            body.get('product_category')
         ))
         e_ctrl.add_event(user_id, "added a product", "product", product_id)
         return response, 201
@@ -183,12 +188,16 @@ def userProducts(user_id):
         product = body['product']
         product_id = p_ctrl.verify_product_by_name_and_brand(product['product_name'], product['brand_name'])
         response = jsonify(p_ctrl.edit_user_to_product(
-            user_id,
-            product_id,
-            product['product_size'], 
-            product['product_status'],
-            product['product_notes'],
-            product['product_color']
+            user_id, 
+            product_id, 
+            body.get('product_size'),
+            body.get('product_status'),
+            body.get('product_notes'),
+            body.get('product_color'),
+            body.get('stars'),
+            body.get('review'),
+            body.get('product_image_url'),
+            body.get('product_category')
         ))
         return response, 202
 
