@@ -16,19 +16,17 @@
                                     <label class='control-label' for='Brand'>Brand</label>
                                     <autocomplete data='searchedBrands' on-type='getBrands' class='brand-box' ng-model='newProduct.brand_name' attr-placeholder="Search brands..." required>
                                     </autocomplete>
-
                                     <label class='control-label' for='email'>Product</label>
                                     <autocomplete data='searchProducts' on-type='selectBrandProducts' class='brand-box' ng-model='newProduct.product_name' attr-placeholder="Search products..." required>
                                     </autocomplete>
-
-<!--                                     <small class='stash-error' ng-show='myForm.$invalid'>Missing brand and/or product name</small>
- -->                                </div>
+                                    <!--                                     <small class='stash-error' ng-show='myForm.$invalid'>Missing brand and/or product name</small>
+                                -->                                </div>
                             </div>
                             <div class='row'>
                                 <div class='searchBoxes col-sm-5 form-group'>
                                     <label for='category'>Category</label><br>
-                                    <select class='productSelect' name='category' ng-model='newProduct.product_category'>
-                                        <option  value='Makeup'>Makeup</option>
+                                    <select name='category' ng-model='newProduct.product_category'>
+                                        <option value='Makeup'>Makeup</option>
                                         <option value='Skin Care'>Skin Care</option>
                                         <option value='Hair'>Hair</option>
                                         <option value='Bath and Body'>Bath and Body</option>
@@ -53,7 +51,7 @@
                                 </div>
                                 <div class='searchBoxes col-sm-5 col-sm-offset-1 form-group'>
                                     <label>Color</label><br>
-                                    <input type='text' class='form-control' ng-model='newProduct.product_color'/>
+                                    <input type='text' class='form-control color-box' ng-model='newProduct.product_color'/>
                                 </div>
                                 <div class='searchBoxes col-sm-12 form-group'>
                                     <label>Notes</label><br>
@@ -78,16 +76,18 @@
                                 <li class='col-sm-12 product-item' ng-repeat='product in products | wishlistFilter | filter : filter'>
                                     <div class='row'>
                                         <img class='productImage col-sm-3' src="{{product.product_image_url}}">
-                                        <div class='col-sm-8 product-content'>
-                                            <div class='product-brand'> {{product.brand_name}}</div>
-                                            <span class='product-name'> {{product.product_name}}</span><br>
-                                            <span>Category: {{product.product_category}}</span>
-                                            <span>Size: {{product.product_size}}</span>
-                                            <span>Status: {{product.product_status}}</span><br>
-                                            <span>Color: {{product.product_color}}</span>
-                                            <span>Notes: {{product.product_notes}}</span>
+                                        <div class='col-sm-7 product-content'>
+                                            <div class='productHeading'>{{product.brand_name}}</div>
+                                            <div class='productSubheading1'>{{product.product_name}}</div>
+                                            <div class='productSubheading2'><span class='bold'>Category:</span> {{product.product_category}}</div>
+                                            <div class='productSubheading3'>
+                                                <span class='bold'>Size:</span><span class='spacing'> {{product.product_size}}</span>
+                                                <span class='bold'>Status:</span><span class='spacing'> {{product.product_status}}</span>
+                                                <span class='bold'>Color:</span><span class='spacing'> {{product.product_color}}</span>
+                                            </div>
+                                            <div class='productNotes'><span class='bold'>Notes:</span> {{product.product_notes}}</div>
                                         </div>
-                                        <div class='col-sm-1 edit-btns'>
+                                        <div class='col-sm-2 edit-btns'>
                                             <button class='btn edit' ng-click='editProductModal(product)'>Edit</button>
                                             <button class='btn edit-x' ng-click='deleteProductModal(product)'>x</button>
                                         </div>
