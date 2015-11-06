@@ -13,7 +13,7 @@
             <h1>Followers</h1>
             <li ng-repeat='user in profileFollowers'>
               <div class='col-md-10 follower'>
-                <img class='col-sm-3 friendProfilePic' ng-src="photos/cynthia.jpg" alt="Description"/>
+                <img class='col-sm-3 friendProfilePic' ng-src="{{user.profile_pic}}" alt="Description"/>
                 <div class='col-sm-4 user-name' ui-sref="user.stash({userId: {{user.userid}}})">{{user.name_first}} {{user.name_last}}</div>
               </div>
             </li>
@@ -27,7 +27,7 @@
             <h1>Following</h1>
             <li ng-repeat='user in profileFollowing'>
               <div class='col-md-10 following'>
-                <img class='col-sm-3 friendProfilePic' ng-src="photos/cynthia.jpg" alt="Description"/>
+                <img class='col-sm-3 friendProfilePic' ng-src="{{user.profile_pic}" alt="Description"/>
                 <div class='col-sm-4 user-name' ui-sref="user.stash({userId: {{user.userid}}})">{{user.name_first}} {{user.name_last}}</div>
               </div>
             </li>
