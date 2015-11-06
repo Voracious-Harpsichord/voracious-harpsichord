@@ -25,11 +25,10 @@ services.factory('Rec', function($http, Auth) {
         if (item.product.product_image_url === "") {
           item.product_image_url = '/photos/' + photoOptions[Math.floor(Math.random()*photoOptions.length)]
         }
-        
         item.recommender_first = item.from_user.name_first,
         item.recommender_last = item.from_user.name_last,
         item.recommender_id = item.from_user.userid,
-        user_photo = item.from_user.user.profile_pic,
+        user_photo = item.from_user.profile_pic,
         item.location = item.from_user.location,
         item.time_stamp = item.from_user.created_at,
         item.comments = item.from_user.comments,
