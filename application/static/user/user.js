@@ -6,7 +6,7 @@ var user = angular.module('beautystash.user', [
   'angularMoment'
 ]);
 
-user.controller('UserController', function($scope, $window, $stateParams, User, Products, Follow, Auth, Rec) {
+user.controller('UserController', function ($scope, $window, $stateParams, User, Products, Follow, Auth, Rec, Sites) {
   $scope.userId = $stateParams.userId;
   $scope.user;
   $scope.userProducts;
@@ -17,6 +17,7 @@ user.controller('UserController', function($scope, $window, $stateParams, User, 
   $scope.following = false;
   $scope.userRecs_universal;
   $scope.userRecs_personal = [];
+  $scope.sites = [];
 
   $scope.tabs = [
     {name: 'Stash', path: 'stash'},
@@ -94,10 +95,10 @@ user.controller('UserController', function($scope, $window, $stateParams, User, 
   getUserRecs = function(userId) {
     Rec.loadUserRecs(userId)
       .then(function(data) {
-        $scope.userRecs_universal = data.universal
-        $scope.userRecs_personal = data.personal
-      })
-  }
+        $scope.userRecs_universal = data.universal;
+        $scope.userRecs_personal = data.personal;
+      });
+  };
 
   getUserData = function(userId) {
     User.getInfo($scope.userId)
@@ -127,9 +128,20 @@ user.controller('UserController', function($scope, $window, $stateParams, User, 
       });
   };
 
+  getUserSites = function(userId) {
+    Sites.getSitesWithID(userId)
+      .then(function(data) {
+        $scope.sites = data.sites;
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
+  };
+
   getUserData($scope.userId);
   getUserRecs($scope.userId);
   getUserFollowingFollowers($scope.userId);
+  getUserSites($scope.userId);
 
   $scope.follow = function(user) {
     Follow.follow(user)
