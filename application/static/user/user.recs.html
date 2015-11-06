@@ -12,9 +12,10 @@
             <li class='col-sm-12 product-item' ng-repeat='universalRec in userRecs_universal'>
               <img class='productImage col-sm-3' ng-src="{{universalRec.product_image_url}}">
               <div class='col-sm-8 product-content'>
-                <div class='product-brand'>{{universalRec.brand_name}}</div>
-                <span class='product-name'>{{universalRec.product_name}}</span><br>
-                <span>{{universalRec.product_category}}</span>
+                <div class='feedHeading'>{{universalRec.brand_name}}</div>
+                <div class='feedSubheading1'>{{universalRec.product_name}}</div>
+                <div class='feedSubheading2'>{{universalRec.product_description}}</div>
+                <div class='feedSubheading3'>{{universalRec.product_category}}</div>
               </div>
             </li>
           </ul>
@@ -22,7 +23,7 @@
         </tab>
         <!-- Personal Tab -->
         <tab heading="{{user.name_first}}'s Friends Recommend" select="addSiteModeFn(true)">
-<div class='row'>
+        <div class='row'>
             <div class='col-md-3'>
                 <form novalidate class='simple-form' name='myForm'>
                     <div class='row'>
@@ -78,13 +79,17 @@
                     <ul class='list'>
                         <h2>Products</h2>
                         <li class='col-sm-12 product-item' ng-repeat='i in userRecs_personal'>
-                            <div class='feedBox'>
-                                <img class='feedItemImage' ng-src="{{i.product.product_image_url}}">
-                                <img class='userProfilePic' ng-src="{{recommender.user_photo}}">
-                                <div class='userAction'><span class='feedUserName' ng-click='viewUser(i.user_id)'>{{i.recommender_first}} {{i.recommender_last}} </span><span>recomends this {{i.type}}.</span></div>
-                                <div class='timeLoc'><span am-time-ago="{{i}}.time_stamp"></span><span> | {{i.location}}</span></div>
-                                <div class='feedComments'>{{i.comments}}</div>
-                                <div class='col-sm-7 product-content'>
+                            <div class='feedBox' id='userRecBox'>
+                                <div class='row'>
+                                    <div class='col-sm-5 userAction'>
+                                        <img class='userProfilePic' ng-src="{{recommender.user_photo}}">
+                                        <div><span class='feedUserName' ng-click='viewUser(i.user_id)'>{{i.recommender_first}} {{i.recommender_last}} </span><span>recomends this {{i.type}}</span></div>
+                                        <div class='timeLoc'><span am-time-ago="{{i}}.time_stamp"></span><span> | {{i.location}}</span></div>
+                                    </div>
+                                </div>
+                                <img class='productImage' id='userRec' ng-src="{{i.product.product_image_url}}">
+                                <!-- <div class='feedComments'>{{i.notes}}</div> -->
+                                <div class='col-sm-5 product-content'>
                                     <div class='productHeading'>{{i.brand_name}}</div>
                                     <div class='productSubheading1'>{{i.product_name}}</div>
                                     <div class='productSubheading2'><span class='bold'>Category:</span> {{i.product_category}}</div>

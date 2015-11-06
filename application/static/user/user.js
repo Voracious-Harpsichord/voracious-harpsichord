@@ -84,7 +84,7 @@ user.controller('UserController', function ($scope, $window, $stateParams, User,
     if (product.brand_name !== null && product.product_name !== null) {
       Rec.addRec(product, userid)
       .then(function(addedProduct) {
-        $scope.userProducts.unshift(addedProduct);
+        $scope.userRecs_personal.unshift(addedProduct);
         resetFields();
       })
       .catch(function(error) {
@@ -128,6 +128,10 @@ user.controller('UserController', function ($scope, $window, $stateParams, User,
       .catch(function(error) {
         console.error(error);
       });
+  };
+
+  $scope.addSiteModeFn = function(bool) {
+    $scope.addSiteMode = bool;
   };
 
   getUserSites = function(userId) {
