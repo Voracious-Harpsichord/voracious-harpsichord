@@ -167,7 +167,6 @@ def userProducts(user_id):
             #Add product if not
             product_id = p_ctrl.add_product_to_products(body['product_name'], body['brand_name'], body['product_category'])
         #create db relationship between user and product
-        print("body", body)
         response = jsonify(p_ctrl.add_user_to_product(
             user_id, 
             product_id, 

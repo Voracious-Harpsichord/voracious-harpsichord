@@ -129,7 +129,7 @@ def add_user_to_product(user_id, product_id, size='Full', status='Own', notes=''
         'product_user_product_image_url': product_user.user_product_image_url
     }
 
-def edit_user_to_product(user_id, product_id, size='full', status='own', notes='', color='', stars='', review='', user_product_image_url=''):
+def edit_user_to_product(user_id, product_id, size='full', status='own', notes='', color='', stars='', review='', user_product_image_url='', category=''):
     session.query(User_product).\
         filter(User_product.product_id == product_id).\
         update({
