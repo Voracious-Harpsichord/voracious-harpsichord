@@ -66,7 +66,7 @@ def get_personal_recs(user_id):
 
 #add personal rec
 def add_personal_rec(from_user_id, to_user_id, p):
-    product_id = verify_product_by_name_and_brand(p['product_name'], p['brand_name'])
+    product_id = p_ctrl.verify_product_by_name_and_brand(p['product_name'], p['brand_name'])
     if not product_id:
         p_ctrl.add_product_to_products(p['product_name'], p['brand_name'], p.get('category',''))
     #check that rec doesn't already exists
