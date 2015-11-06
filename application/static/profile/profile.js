@@ -20,7 +20,7 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
           $scope.searchedBrandsWithProducts = brands;
         })
         .catch(function(error) {
-          console.log(error);
+          console.error(error);
         });
     }
   };

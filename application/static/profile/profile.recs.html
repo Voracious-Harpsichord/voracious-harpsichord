@@ -13,7 +13,7 @@
             <h2>Recommended to You by Friends</h2>
             <li class='col-sm-12 product-item' ng-repeat='i in personalRecs'>
                 <div class='feedBox'>
-                    <img class='feedItemImage' ng-src="{{i.product_image_url}}">
+                    <img class='feedItemImage' ng-src="{{i.product.product_image_url}}">
                     <img class='userProfilePic' ng-src="{{recommender.user_photo}}">
                     <div class='userAction'><span class='feedUserName' ng-click='viewUser(i.user_id)'>{{i.recommender_first}} {{i.recommender_last}} </span><span>recomends this {{i.type}}.</span></div>
                     <div class='timeLoc'><span am-time-ago="{{i}}.time_stamp"></span><span> | {{i.location}}</span></div>
