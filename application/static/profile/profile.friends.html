@@ -11,23 +11,30 @@
         <div class='col-md-12 wrapper'>
           <ul class='list'>
             <h1>Followers</h1>
-            <div ng-repeat='user in profileFollowers'>
+            <li ng-repeat='user in profileFollowers'>
               <div class='col-md-10 follower'>
-                <img class='userProfilePic' ng-src="{{user.profilePic}}" alt="Description"/>
-                <div class='user-name' ui-sref="user.stash({userId: {{user.userid}}})">{{user.name_first}} {{user.name_last}}</div>
+                <img class='col-sm-3 friendProfilePic' ng-src="photos/cynthia.jpg" alt="Description"/>
+                <div class='col-sm-4 user-name' ui-sref="user.stash({userId: {{user.userid}}})">{{user.name_first}} {{user.name_last}}</div>
               </div>
-            </div>
-      <h1>Following</h1>
-      <div ng-repeat='user in profileFollowing'>
-        <div class='col-md-10 following'>
-          <!-- <img class='userProfilePic' ng-src="{{user.profilePic}}" alt="Description"/> -->
-          <div class='user-name' ui-sref="user.stash({userId: {{user.userid}}})">{{user.name_first}} {{user.name_last}}</div>
+            </li>
+          </ul>
+        </div>
+        </tab>
+        </tabset>
+        <!-- Following tab -->
+        <div ng-hide='addSiteMode' class='col-md-12 wrapper'>
+          <ul class='list'>
+            <h1>Following</h1>
+            <li ng-repeat='user in profileFollowing'>
+              <div class='col-md-10 following'>
+                <img class='col-sm-3 friendProfilePic' ng-src="photos/cynthia.jpg" alt="Description"/>
+                <div class='col-sm-4 user-name' ui-sref="user.stash({userId: {{user.userid}}})">{{user.name_first}} {{user.name_last}}</div>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
-    <div class='col-md-10'>
-
-
+  </div>
 </div>
 
-<!-- <div class='user-name' ui-sref="user({ userId: {{user_id}} })">{{user.name_first}} {{user.name_last}}</div> -->
