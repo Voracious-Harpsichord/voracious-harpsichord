@@ -155,7 +155,7 @@ angular.module('beautystash.profileTree', [])
 
   function update(source,root) {
     // Compute the new tree layout, don't render root
-    var d3tree = d3.layout.tree().size([width-20,height]);
+    var d3tree = d3.layout.tree().size([width+20,height]);
     var nodes = d3tree.nodes(root).slice(1),
         links = d3tree.links(nodes);
     // the d3 tree class dynamically calculates new d.y d.x, so if want to make them
@@ -348,7 +348,7 @@ angular.module('beautystash.profileTree', [])
       var height = Math.sqrt(pathY.length-i)*size
       var y = pathY[i] 
       labels.push({
-        x:width ,
+        x:0 ,
         y:y,
         height:height,
         width:length,
