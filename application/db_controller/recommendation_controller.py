@@ -26,7 +26,7 @@ def get_recommendation_by_user_id(user_id):
     
 
 def add_recommendation(user_id, product_id, rank):
-    recommendation = Recommendation(user_id,product_id,rank)
+    recommendation = Recommendation(int(user_id),int(product_id),int(rank))
     session.add(recommendation)
     session.commit()
     return {
