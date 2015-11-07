@@ -5,7 +5,7 @@ class Recommendation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer)
     product_id = db.Column(db.Integer)
-    rank = db.Column(db.String(20))
+    rank = db.Column(db.Integer)
 
     def __init__(self, user_id, product_id, rank):
         self.user_id = user_id
