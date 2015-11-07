@@ -1,3 +1,4 @@
+
 *.log
 *.DS_Store
 
@@ -13,5 +14,4 @@
 # config vars
 .env
 
-# production folders
-application/static/bower_components
+./application/static/bower_components
