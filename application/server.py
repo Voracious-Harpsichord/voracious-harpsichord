@@ -20,9 +20,6 @@ from db_controller import recommendation_controller as r_ctrl
 from db_controller import sites_controller as s_ctrl
 from db_controller import user_controller as u_ctrl
 
-# async jobs
-from workers import work_queue
-
 @app.route('/')
 def send_index():
     return send_from_directory('static', 'index.html')

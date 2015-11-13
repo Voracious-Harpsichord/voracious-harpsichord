@@ -14,4 +14,4 @@
 # config vars
 .env
 
-./application/static/bower_components
+application/static/bower_components
