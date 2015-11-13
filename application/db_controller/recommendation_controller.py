@@ -2,7 +2,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from config import SQLALCHEMY_DATABASE_URI
-from random import randint
 
 engine = create_engine(SQLALCHEMY_DATABASE_URI)
 session = sessionmaker(bind=engine)()
@@ -10,43 +9,10 @@ session._model_changes = {}
 
 #import tables
 # tested on my machine
-from db_models.recommendations import Recommendation, Personal_Rec
+from db_models.recommendations import Personal_Rec
 
 from db_controller import product_controller as p_ctrl
 from db_controller import user_controller as u_ctrl
-
-def get_recommendation_by_user_id(user_id):
-    recommendations = session.query(Recommendation).filter(Recommendation.user_id == user_id).all()
-    results = []
-    for r in recommendations:
-        results.append(
-            p_ctrl.get_product_as_dictionary(r.product_id)
-            )
-    return results
-    
-
-def add_recommendation(user_id, product_id, rank):
-    recommendation = Recommendation(int(user_id),int(product_id),int(rank))
-    session.add(recommendation)
-    session.commit()
-    return {
-        'user_id':user_id,
-        'product_id':product_id,
-        'rank':rank
-    }
-# improve this later
-def populate_new_user_recommendations(user_id):
-    for i in range(1,6):
-        product_id = randint(1, 100)
-        rank = i
-        add_recommendation(user_id, product_id, rank)
-
-#Delete all recommendations a user has
-def remove_recommendation(user_id):
-    session.query(Recommendation).filter(Recommendation.user_id == user_id).delete()
-
-    session.commit()
-    return None
 
 #PERSONALS
 

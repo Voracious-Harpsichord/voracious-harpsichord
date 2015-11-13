@@ -89,16 +89,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
     }
   });
 
-  $stateProvider.state('profile.explore', {
-    url: '/explore',
-    views: {
-      'subview': {
-        templateUrl: 'profile/profile.exploreStash.html',
-        controller: 'ProfileTreeController'
-      }
-    }
-  });
-
   $stateProvider.state('profile.recs', {
     url: '/recs',
     views: {

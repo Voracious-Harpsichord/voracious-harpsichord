@@ -88,8 +88,6 @@ def newUser():
         #add session-cookie to response
         response = u_ctrl.create_session(response, user_id)
         #return user object with a 201
-        # when creating a new user save some mock recommendations
-        r_ctrl.populate_new_user_recommendations(user_id)
         # work_queue.enqueue("find_prob",[user_id])
 
         return response, 201
