@@ -51,7 +51,6 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
 
   $scope.tabs = [
     {name: 'Stash', path: 'stash'},
-    {name: 'Explore Your Products', path: 'explore'},
     {name: 'Friends', path: 'friends'},
     {name: 'Wishlist', path: 'wishlist'},
     {name: 'Recommendations', path: 'recs'},
@@ -197,8 +196,6 @@ stash.controller('ProfileController', function ($scope, $window, Products, Follo
   getFollowersFollowing();
 
   //Recommendations
-
-  $scope.universalRecs = Rec.recommendations.universal;
   $scope.personalRecs = Rec.recommendations.personal;
 
   //Blogs and Article Variable and Controllers

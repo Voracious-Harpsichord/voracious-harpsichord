@@ -1,6 +1,6 @@
 var services = angular.module('beautystash.services', []);
 
-var photoOptions = ['product1.jpg', 'product2.jpg', 'product3.jpg', 'product4.jpg', 'product5.jpg', 'product6.jpg', 'product7.jpg', 'product8.jpg']
+var photoOptions = ['product1.jpg', 'product2.jpg', 'product3.jpg', 'product4.jpg', 'product5.jpg', 'product6.jpg', 'product7.jpg', 'product8.jpg'];
 var photoOptionsBlogs = ['photo1.jpg', 'photo2.jpg', 'photo3.jpg', 'photo4.jpg', 'photo5.jpg', 'photo6.jpg', 'photo7.jpg', 'photo8.jpg', 'photo9.jpg', 'photo10.jpg', 'photo11.jpg', 'photo12.jpg', 'photo13.jpg', 'photo14.jpg', 'photo15.jpg', 'photo16.jpg', 'photo17.jpg', 'photo18.jpg', 'photo19.jpg', 'photo20.jpg', 'photo21.jpg', 'photo22.jpg', 'photo23.jpg', 'photo24.jpg', 'photo25.jpg', 'photo26.jpg', 'photo27.jpg', 'photo28.jpg'];
 
 services.factory('Rec', function($http, Auth) {
@@ -14,38 +14,30 @@ services.factory('Rec', function($http, Auth) {
       }
     })
     .then(function(resp) {
-      var userRecs = {}
-
-      resp.data.universal.forEach(function(item) {
-        if (item.product_image_url === "") {
-          item.product_image_url = '/photos/' + photoOptions[Math.floor(Math.random()*photoOptions.length)]
-        }
-      })
+      var userRecs = {};
 
       resp.data.personal.forEach(function(item) {
         if (item.product.product_image_url === "") {
-          item.product_image_url = '/photos/' + photoOptions[Math.floor(Math.random()*photoOptions.length)]
+          item.product_image_url = '/photos/' + photoOptions[Math.floor(Math.random()*photoOptions.length)];
         }
-        item.recommender_first = item.from_user.name_first,
-        item.recommender_last = item.from_user.name_last,
-        item.recommender_id = item.from_user.userid,
-        user_photo = item.from_user.profile_pic,
-        item.location = item.from_user.location,
-        item.time_stamp = item.from_user.created_at,
-        item.comments = item.from_user.comments,
-        item.image = item.product.imageUrl,
-        item.product_id = item.product.product_id,
-        item.product_name = item.product.product_name,
-        item.brand_name = item.product.brand_name,
-        item.product_size = item.product.product_size,
-        item.product_notes = item.product.product_notes,
-        item.product_color = item.product.product_color,
-        item.product_category = item.product.product_category
-
-      })
+        item.recommender_first = item.from_user.name_first;
+        item.recommender_last = item.from_user.name_last;
+        item.recommender_id = item.from_user.userid;
+        user_photo = item.from_user.profile_pic;
+        item.location = item.from_user.location;
+        item.time_stamp = item.from_user.created_at;
+        item.comments = item.from_user.comments;
+        item.image = item.product.imageUrl;
+        item.product_id = item.product.product_id;
+        item.product_name = item.product.product_ame;
+        item.brand_name = item.product.brand_name;
+        item.product_size = item.product.product_size;
+        item.product_notes = item.product.product_notes;
+        item.product_color = item.product.product_color;
+        item.product_category = item.product.product_category;
+      });
 
       userRecs.personal = resp.data.personal;
-      userRecs.universal = resp.data.universal;
       return userRecs;
     })
     .catch(function(error) {
@@ -75,7 +67,6 @@ services.factory('Rec', function($http, Auth) {
   loadUserRecs(Auth.userData.userid)
     .then(function(userRecs) {
       recommendations.personal = userRecs.personal;
-      recommendations.universal = userRecs.universal;
     });
 
   return {
@@ -98,9 +89,9 @@ services.factory('User', function($http) {
     .then(function(resp) {
       resp.data.userProducts.forEach(function(item) {
         if (item.product_image_url === "") {
-          item.product_image_url = '/photos/' + photoOptions[Math.floor(Math.random()*photoOptions.length)]
+          item.product_image_url = '/photos/' + photoOptions[Math.floor(Math.random()*photoOptions.length)];
         }
-      })
+      });
       return resp.data;
     })
     .catch(function(error) {
@@ -277,9 +268,9 @@ services.factory('Sites', function($http, Auth) {
       data: site
     })
     .then(function(resp) {
-      console.log(resp.data)
+      console.log(resp.data);
       if (resp.data.image === '' || undefined) {
-       resp.data.image = '/photos/' + photoOptionsBlogs[Math.floor(Math.random()*photoOptionsBlogs.length)] 
+       resp.data.image = '/photos/' + photoOptionsBlogs[Math.floor(Math.random()*photoOptionsBlogs.length)];
       }
       return resp.data;
     });
@@ -327,7 +318,7 @@ services.factory('Products', function($http, Auth, $q) {
         while(userProducts.length) {userProducts.pop();}
         resp.data.userProducts.forEach(function(item) {
           if (item.product_image_url === "") {
-            item.product_image_url = '/photos/' + photoOptions[Math.floor(Math.random()*photoOptions.length)]
+            item.product_image_url = '/photos/' + photoOptions[Math.floor(Math.random()*photoOptions.length)];
           }
           userProducts.unshift(item);
         });

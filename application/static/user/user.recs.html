@@ -3,23 +3,6 @@
     <div class='row'>
       <div class='col-md-12 recs-tab'>
         <tabset>
-        <!-- Universal Tab -->
-        <tab heading='BeautyStash Recommends' select='addSiteModeFn(false)'>
-        <!-- Universal tab -->
-        <div ng-hide='addSiteMode' class='col-md-12 wrapper'>
-        <h2>Recommended by BeautyStash for {{user.name_first}}</h2>
-          <ul class='list'>
-            <li class='col-sm-12 product-item' ng-repeat='universalRec in userRecs_universal'>
-              <img class='productImage col-sm-3' ng-src="{{universalRec.product_image_url}}">
-              <div class='col-sm-8 product-content'>
-                <div class='feedHeading'>{{universalRec.brand_name}}</div>
-                <div class='feedSubheading1'>{{universalRec.product_name}}</div>
-                <div class='feedSubheading2'>{{universalRec.product_description}}</div>
-                <div class='feedSubheading3'>{{universalRec.product_category}}</div>
-              </div>
-            </li>
-          </ul>
-        </div>
         </tab>
         <!-- Personal Tab -->
         <tab heading="{{user.name_first}}'s Friends Recommend" select="addSiteModeFn(true)">

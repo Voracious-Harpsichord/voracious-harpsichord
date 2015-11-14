@@ -5,7 +5,6 @@
   'beautystash.auth',
   'beautystash.settings',
   'beautystash.profile',
-  'beautystash.profileTree',
   'beautystash.user',
   'ui.router',
   'ui.bootstrap',
@@ -195,16 +194,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
     views: {
       'subview': {
         templateUrl: 'user/user.stash.html',
-        controller: 'UserController'
-      }
-    }
-  });
-
-  $stateProvider.state('user.explore', {
-    url: '/explore',
-    views: {
-      'subview': {
-        templateUrl: 'user/user.exploreStash.html',
         controller: 'UserController'
       }
     }
